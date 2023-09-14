@@ -1,5 +1,5 @@
 ## 🙋‍♂️ Sobre mim 
-Olá! Sou Gabriel Almir, Técnico de Sistemas na CTC, com formação em Informática pelo Senac Itapira e cursando Desenvolvimento de Software Multiplataforma na Fatec Itapira. Apaixonado por tecnologia desde criança, tenho experiência em desenvolvimento web com foco em  Node.js, Java e Spring Boot. 💻🚀
+Olá! Sou Gabriel Almir, Técnico de Sistemas na CTC, com formação em Informática pelo Senac Itapira e cursando Desenvolvimento de Software Multiplataforma na Fatec Itapira. Apaixonado por tecnologia desde criança, tenho conhecimento em desenvolvimento web com foco em  Node.js, Java e Spring Boot. 💻🚀
 
 ## 👨‍💼 Experiência Profissional 
 - **Técnico de Sistemas** na CTC *(ago de 2023 - atualmente)*
