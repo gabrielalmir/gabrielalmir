@@ -7,13 +7,12 @@ HTML, CSS, Bootstrap, JavaScript, TypeScript, jQuery, React.js, Node.js, NestJS,
 ## 👨‍💼 Experiência Profissional 
 - **Técnico de Sistemas** na CTC *(ago de 2023 - atualmente)*
   - Sou um Técnico em Desenvolvimento de Sistemas na área de Tecnologia da Informação, formado pela CTC, onde desempenho um papel fundamental na manutenção de sistemas satélites. Além disso, eu lidero o desenvolvimento responsável pela criação de um middleware que extrai dados de APIs ODATA de sistemas SAP, os quais são integrados aos relatórios analíticos do Power BI explorando conceitos do Domain Driven Design.
-  - Competências: JavaScript, React.js, Node.js, NestJS, TypeScript, PHP, HTML, CSS, Microsoft SQL Server, CodeIgniter, Vue.js
+  - Competências: Spring Boot · JavaScript · Node.js · NestJS · TypeScript · PHP · Git · Microsoft SQL Server · CodeIgniter
 
 - **Estagiário de TI** no Laboratório Cristália *(5 meses)*
-  - Desenvolvimento e manutenção de sistemas satélites.
-  - Monitoramento de sistemas de backup e infraestrutura.
+  - Desenvolvimento e manutenção de sistemas satélites. Competências: Desenvolvimento de front-end · Desenvolvimento de back-end · JavaScript · HTML5 · SQL · PHP · HTML · CSS · JQuery · Microsoft Office · JIRA · Bootstrap · Microsoft SQL Server · CodeIgniter · SOAP · REST · Vue.js. 
+  - Monitoramento de sistemas de backup e infraestrutura. Competências: Windows PowerShell · Microsoft Office · JIRA
 
-## 🏆 Contribuições Relevantes 
 - **Desenvolvedor Web Front-End** no Diolinux *(3 anos 4 meses)*
   - Aprimoramento de sistemas legados e otimização técnica para SEO.
   - Desenvolvimento Back-End em Python.
