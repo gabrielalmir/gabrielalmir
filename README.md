@@ -2,7 +2,7 @@
 Olá! Sou Gabriel Almir, Técnico de Sistemas na CTC, com formação em Informática pelo Senac Itapira e cursando Desenvolvimento de Software Multiplataforma na Fatec Itapira. Apaixonado por tecnologia desde criança, tenho experiência em desenvolvimento web com foco em Node.js & Java Spring Boot. Em 2023, conquistei o 1° lugar na Maratona de Programação InterFatecs em Mogi Mirim, 23° entre os 53 classificados na primeira fase. Estou sempre em busca de novos desafios e inovações tecnológicas. 💻🚀
 
 Experiência em tecnologias: 
-HTML, CSS, Bootstrap, JavaScript, TypeScript, jQuery, React.js, Node.js, Nest.js, Java, Spring Boot, Python, Django, PHP, Laravel, Git, Docker, Amazon SES e Microsoft SQL Server
+HTML, CSS, Bootstrap, JavaScript, TypeScript, jQuery, React.js, Node.js, NestJS, Java, Spring Boot, Python, Django, PHP, Laravel, Git, Docker, Amazon SES, MySQL e Microsoft SQL Server
 
 ## 👨‍💼 Experiência Profissional 
 - **Técnico de Sistemas** na CTC *(ago de 2023 - atualmente)*
