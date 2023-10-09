@@ -10,7 +10,7 @@ Ferramentas: Git, Docker, Amazon SES e Redis
 
 ## 👨‍💼 Experiência Profissional 
 - **Técnico de Sistemas** na CTC *(ago de 2023 - atualmente)*
-  - Sou um Técnico em Desenvolvimento de Sistemas na área de Tecnologia da Informação, formado pela CTC, onde desempenho um papel fundamental na manutenção de sistemas satélites. Além disso, eu lidero o desenvolvimento responsável pela criação de um middleware que extrai dados de APIs ODATA de sistemas SAP, os quais são integrados aos relatórios analíticos do Power BI explorando conceitos do Domain Driven Design.
+  - Sou um Técnico em Desenvolvimento de Sistemas na área de Tecnologia da Informação, formado pela CTC, onde desempenho um papel fundamental na manutenção de sistemas satélites. Além disso, eu lidero o desenvolvimento responsável pela criação de um middleware que extrai dados de APIs ODATA de sistemas SAP, os quais são integrados aos relatórios analíticos do Power BI.
   - Competências: JavaScript · Node.js · NestJS · TypeScript · PHP · Git · Microsoft SQL Server · CodeIgniter
 
 - **Estagiário de TI** no Laboratório Cristália *(5 meses)*
