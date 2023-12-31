@@ -1,31 +1,55 @@
-## 🙋‍♂️ Sobre mim 
-Olá! Sou Gabriel Almir, Técnico de Sistemas na CTC, com formação em Informática pelo Senac Itapira e cursando Desenvolvimento de Software Multiplataforma na Fatec Itapira. Apaixonado por tecnologia desde criança, tenho experiência em desenvolvimento backend com foco em Node.js. Em 2023, conquistei o 1° lugar na Maratona de Programação InterFatecs em Mogi Mirim, 23° entre os 53 classificados na primeira fase. Estou sempre em busca de novos desafios e inovações tecnológicas. 💻🚀
+# Gabriel Almir
+**Desenvolvedor de Software Backend**  
+*Itapira, São Paulo, Brasil*
 
-Experiência em tecnologias: 
-Linguagens de Programação: JavaScript, TypeScript, Python e Java
-Tecnologias Front-End: Bootstrap, jQuery e React.js
-Tecnologias Back-End: Node.js, Django e Spring Boot
-Banco de Dados: MySQL, Microsoft SQL Server e SQLite
-Ferramentas: Git, Docker, Amazon SES e Redis
+## Resumo
+Desenvolvedor de software backend experiente com mais de 6 anos de experiência em desenvolvimento de software. Proficiente em Java, Spring Boot, Hibernate, JPA, Python e Node.js. Também possui certificações relevantes, incluindo Django Essential Training, Software Architecture Foundations e Versionamento de Código com Git e GitHub. Atualmente, trabalha como Técnico de Sistemas na CTC, onde é responsável pela manutenção de sistemas satélites e pelo desenvolvimento de um middleware que integra dados de APIs ODATA do sistema SAP com relatórios analíticos no Power BI. Apaixonado por tecnologia e sempre em busca de novos desafios e aprendizados. Tem como missão contribuir para projetos que exigem suas habilidades técnicas e seu conhecimento em desenvolvimento de software, criando soluções eficazes e inovadoras.
 
-## 👨‍💼 Experiência Profissional 
-- **Técnico de Sistemas** na CTC *(ago de 2023 - atualmente)*
-  - Sou um Técnico em Desenvolvimento de Sistemas na área de Tecnologia da Informação, formado pela CTC, onde desempenho um papel fundamental na manutenção de sistemas satélites. Além disso, eu lidero o desenvolvimento responsável pela criação de um middleware que extrai dados de APIs ODATA de sistemas SAP, os quais são integrados aos relatórios analíticos do Power BI.
-  - Competências: JavaScript · Node.js · NestJS · TypeScript · PHP · Git · Microsoft SQL Server · CodeIgniter
+## Experiência
+### CTC
+**Técnico de Sistemas | Desenvolvedor Backend em Node.js e PHP** *(agosto de 2023 - presente)*
+- Liderou o desenvolvimento de um middleware que integra dados de APIs ODATA do sistema SAP com relatórios analíticos no Power BI.
+- Responsável por desenvolver e manter sistemas satélites.
+- Monitorou sistemas de backup e aprimorou seus conhecimentos sobre serviços de infraestrutura.
 
-- **Estagiário de TI** no Laboratório Cristália *(5 meses)*
-  - Desenvolvimento e manutenção de sistemas satélites. Competências: Desenvolvimento de front-end · Desenvolvimento de back-end · JavaScript · HTML5 · SQL · PHP · HTML · CSS · JQuery · Microsoft Office · JIRA · Bootstrap · Microsoft SQL Server · CodeIgniter · SOAP · REST · Vue.js. 
-  - Monitoramento de sistemas de backup e infraestrutura. Competências: Windows PowerShell · Microsoft Office · JIRA
+### Laboratório Cristália
+**Estagiário de TI - Sistemas | Desenvolvedor de Software** *(maio de 2023 - agosto de 2023)*
+- Responsável por desenvolver e manter sistemas satélites.
 
-- **Desenvolvedor Web Front-End** no Diolinux *(3 anos 4 meses)*
-  - Aprimoramento de sistemas legados e otimização técnica para SEO.
-  - Desenvolvimento Back-End em Python.
-  - Competências: JavaScript, HTML5, SQL, Python, Git, Linux, HTML, CSS, JQuery, Suporte técnico, Blogger, Django
+### Autônomo
+**Desenvolvedor Freelancer | Node.js, React.js e Python** *(outubro de 2016 - março de 2023)*
+- Desenvolveu soluções digitais de alto desempenho com foco em Node.js, React.js e Python.
 
-## 🎓 Formação 
-- **Desenvolvimento de Sistemas Multiplataforma** na Fatec Itapira
-  - Cursando - Desenvolvimento multiplataforma, projetos, segurança, IA.
+### Diolinux
+**Desenvolvedor Front-End | SEO e Otimização Técnica** *(maio de 2013 - agosto de 2016)*
+- Aprimorou sistemas legados e otimizados para motores de busca (SEO).
 
-- **Técnico de Informática** no Senac-SP
-  - Graduado - 1200 horas.
-  - Competências: Microsoft Office, HTML, CSS, JavaScript, WordPress, C#, SQL Server, Redes, Hardware.
+## Formação acadêmica
+- **Faculdade de Tecnologia de São Paulo - FATEC-SP**
+  - Ensino Superior, DESENVOLVIMENTO DE SOFTWARE MULTIPLATAFORMA *(agosto de 2022 - agosto de 2025)*
+
+- **Senac Brasil**
+  - Ensino Técnico, Tecnologia da Informação *(agosto de 2014 - junho de 2016)*
+
+## Habilidades
+### Tecnologias
+- Java
+- Spring Boot
+- Hibernate
+- JPA
+- Python
+- Node.js
+- React.js
+
+### Certificações
+- Django Essential Training
+- Software Architecture Foundations
+- Versionamento de Código com Git e GitHub
+
+### Outras habilidades
+- Paixão por tecnologia
+- Aprendizado contínuo
+- Trabalho em equipe
+- Comunicação
+- Resolução de problemas
+- Autonomia
