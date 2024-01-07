@@ -1,5 +1,5 @@
 # Gabriel Almir
-**Desenvolvedor de Software Backend**  
+**Desenvolvedor de Software**  
 *Itapira, São Paulo, Brasil*
 
 ## ✍️ Resumo
