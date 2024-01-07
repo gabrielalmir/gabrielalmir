@@ -4,7 +4,9 @@
 
 ## ✍️ Resumo
 Desenvolvedor Full-Stack com foco em aplicações web e APIs. Experiência de mais de 6 anos em desenvolvimento de software, com foco em Java & Go. Formado em Tecnologia da Informação pelo Senac Brasil e cursando Desenvolvimento de Software Multiplataforma na Fatec-SP.
+
 Na CTC, liderei o desenvolvimento de um middleware que integra dados de APIs ODATA do sistema SAP com relatórios analíticos no Power BI, usando Node.js.
+
 Apaixonado por tecnologia e sempre em busca de novos desafios e aprendizados. Tenho como missão contribuir para projetos que exigem minhas habilidades técnicas e meu conhecimento em desenvolvimento de software, criando soluções eficazes e inovadoras.
 
 ## 💼 Experiência
