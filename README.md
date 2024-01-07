@@ -3,7 +3,10 @@
 *Itapira, São Paulo, Brasil*
 
 ## ✍️ Resumo
-Desenvolvedor de software backend experiente com mais de 6 anos de experiência em desenvolvimento de software. Proficiente em Java, Spring Boot, Hibernate, JPA, Python e Node.js. Também possui certificações relevantes, incluindo Django Essential Training, Software Architecture Foundations e Versionamento de Código com Git e GitHub. Atualmente, trabalha como Técnico de Sistemas na CTC, onde é responsável pela manutenção de sistemas satélites e pelo desenvolvimento de um middleware que integra dados de APIs ODATA do sistema SAP com relatórios analíticos no Power BI. Apaixonado por tecnologia e sempre em busca de novos desafios e aprendizados. Tem como missão contribuir para projetos que exigem suas habilidades técnicas e seu conhecimento em desenvolvimento de software, criando soluções eficazes e inovadoras.
+Desenvolvedor Full-Stack com foco em aplicações web e APIs. Experiência de mais de 6 anos em desenvolvimento de software, com foco em Java, Golang, Node.js, React.js, SQL, Git e Docker.
+Formado em Tecnologia da Informação pelo Senac Brasil e cursando Desenvolvimento de Software Multiplataforma na Fatec-SP.
+Na CTC, liderei o desenvolvimento de um middleware que integra dados de APIs ODATA do sistema SAP com relatórios analíticos no Power BI, usando Node.js.
+Apaixonado por tecnologia e sempre em busca de novos desafios e aprendizados. Tenho como missão contribuir para projetos que exigem minhas habilidades técnicas e meu conhecimento em desenvolvimento de software, criando soluções eficazes e inovadoras.
 
 ## 💼 Experiência
 ### CTC
