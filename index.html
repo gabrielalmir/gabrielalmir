@@ -87,7 +87,7 @@
     <main class="container flex flex-col items-center justify-center mx-auto py-8 flex-grow">
         <img src="https://github.com/gabrielalmir.png" alt="Gabriel Almir"
             class="my-4 w-48 h-48 rounded-full border-4 border-white">
-        <h1 class="text-4xl lg:text-6xl font-bold mb-4">Olá, sou Gabriel Almir.</h1>
+        <h1 class="text-4xl lg:text-6xl font-bold mb-4">Olá, sou <span id="title">Gabriel Almir</span>.</h1>
         <p class="text-lg w-4/5 text-center">
             Desenvolvedor focado em aplicações web e APIs. Mais de 6 anos de experiência em desenvolvimento de software,
             <strong>especializado em Node.js & Java</strong>. Graduado em Tecnologia da Informação pelo Senac Brasil e
@@ -115,6 +115,42 @@
     <footer class="container mx-auto p-6 text-center">
         <p>&copy; 2024 Gabriel Almir. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        async function deleting() {
+            const title = document.getElementById('title');
+            const phrase = title.textContent;
+
+            // animation of deleting the title
+            for (let i = phrase.length; i >= 0; i--) {
+                title.textContent = phrase.slice(0, i);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+
+        async function typing(phrase) {
+            const title = document.getElementById('title');
+            // deleting the title
+            await deleting();
+
+            // animation of typing the title
+            for (let i = 0; i < phrase.length; i++) {
+                title.textContent = phrase.slice(0, i + 1);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+
+        async function typePhrases() {
+            const phrases = ['Desenvoledor Backend', 'Analista de Sistemas'];
+
+            for (const phrase of phrases) {
+                await typing(phrase);
+            }
+        }
+
+        setTimeout(typePhrases, 5000);
+    </script>
 </body>
 
 </html>
