@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -8,23 +8,44 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-        body { font-family: 'Open Sans', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            color: #e0e0e0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+        }
+
+        .btn {
+            background-color: #1a1a1a;
+            border: 1px solid #e0e0e0;
+            color: #e0e0e0;
+        }
+
+        .btn:hover {
+            background-color: #333333;
+            border-color: #ffffff;
+        }
     </style>
 </head>
 
-<body class="bg-gradient-to-r from-gray-100 to-slate-100 text-gray-900 h-screen flex flex-col justify-between">
+<body class="h-screen flex flex-col justify-between">
     <header class="container mx-auto p-6">
         <nav class="flex justify-between items-center">
             <ul class="flex space-x-6">
-                <a href="https://linkedin.com/in/gabrielalmir" target="_blank" class="hover:text-gray-500"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="https://github.com/gabrielalmir" target="_blank" class="hover:text-gray-500"><i class="fab fa-github fa-2x"></i></a>
-                <a href="https://instagram.com/momentoalmir" target="_blank" class="hover:text-gray-500"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://linkedin.com/in/gabrielalmir" target="_blank" class="hover:text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://github.com/gabrielalmir" target="_blank" class="hover:text-white"><i class="fab fa-github fa-2x"></i></a>
+                <a href="https://instagram.com/momentoalmir" target="_blank" class="hover:text-white"><i class="fab fa-instagram fa-2x"></i></a>
             </ul>
             <div class="flex space-x-6 items-center">
-                <!-- <a href="#blog" class="hover:text-gray-500 hover:underline">Blog</a> -->
-                <a href="https://github.com/gabrielalmir?tab=repositories" class="hover:text-gray-500 hover:underline" target="_blank">Projetos</a>
-                <a href="https://linkedin.com/in/gabrielalmir" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" target="_blank">
+                <a href="https://github.com/gabrielalmir?tab=repositories" class="hover:text-white underline" target="_blank">Projetos</a>
+                <a href="https://linkedin.com/in/gabrielalmir" class="btn px-4 py-2 rounded" target="_blank">
                     Contate-me
                 </a>
             </div>
@@ -32,12 +53,12 @@
     </header>
 
     <main class="container flex flex-col items-center justify-center mx-auto py-8 flex-grow">
-        <img src="https://github.com/gabrielalmir.png" alt="Gabriel Almir" class="my-4 w-48 h-48 rounded-full">
-        <h1 class="text-4xl lg:text-6xl text-gray-500 font-bold mb-4">Olá, sou Gabriel Almir.</h1>
+        <img src="https://github.com/gabrielalmir.png" alt="Gabriel Almir" class="my-4 w-48 h-48 rounded-full border-4 border-white">
+        <h1 class="text-4xl lg:text-6xl font-bold mb-4">Olá, sou Gabriel Almir.</h1>
         <p class="text-lg mb-6 w-4/5 text-center">
             Desenvolvedor focado em aplicações web e APIs. Mais de 6 anos de experiência em desenvolvimento de software, <strong>especializado em Node.js & Java</strong>. Graduado em Tecnologia da Informação pelo Senac Brasil e atualmente estudando Desenvolvimento de Software Multiplataforma na Fatec-SP. No CTC, liderei o desenvolvimento de um middleware que integra dados de APIs SAP ODATA com relatórios analíticos no Power BI, utilizando Node.js.
         </p>
-        <a href="https://drive.google.com/file/d/1AGFobk6q_L88woDWJ09mHUWuT1CIZVOY/view?usp=sharing" class="inline-block bg-gray-500 text-white px-4 py-2 mt-4 rounded hover:bg-gray-600" target="_blank">
+        <a href="https://drive.google.com/file/d/1AGFobk6q_L88woDWJ09mHUWuT1CIZVOY/view?usp=sharing" class="btn px-4 py-2 mt-4 rounded hover:bg-opacity-80" target="_blank">
             Baixar CV
         </a>
     </main>
