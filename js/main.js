@@ -5,7 +5,7 @@ async function deleting() {
     // animation of deleting the title
     for (let i = phrase.length; i >= 0; i--) {
         title.textContent = phrase.slice(0, i);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 50));
     }
 }
 
@@ -17,7 +17,7 @@ async function typing(phrase) {
     // animation of typing the title
     for (let i = 0; i < phrase.length; i++) {
         title.textContent = phrase.slice(0, i + 1);
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise(resolve => setTimeout(resolve, 50));
     }
     await new Promise(resolve => setTimeout(resolve, 5000));
 }
