@@ -25,8 +25,7 @@ async function typing(phrase) {
 async function typePhrases() {
     const phrases = [
         'Desenvoledor Backend', 'Analista de Sistemas',
-        'Desenvolvedor Node.js', 'Desenvolvedor Golang',
-        'Gabriel Almir'
+        'Desenvolvedor Node.js', 'Gabriel Almir'
     ];
 
     for (const phrase of phrases) {
