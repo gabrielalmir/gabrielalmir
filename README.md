@@ -1,8 +1,37 @@
 <h2 align="left">Hi! I'm Gabriel Almir, a Systems Analyst | Backend @ CTC</h2>
 
-Developer focused on web applications and APIs. Over 6 years of experience in software development, specializing in Node.js. Graduated in Information Technology from Senac Brazil and currently studying Multiplatform Software Development at Fatec-SP. At CTC, I led the development of middleware that integrates data from SAP ODATA APIs with analytical reports in Power BI, using Node.js.
+Developer focused on web applications and APIs. Over 6 years of experience in software development, specializing in Node.js. Graduated in Information Technology from Senac Brazil and currently studying Multiplatform Software Development at Fatec-SP.
 
-My mission is to contribute to projects that require my technical skills and knowledge in software development, creating effective and innovative solutions.
+At CTC Tech, a company specialized in providing IT services, I work as a Systems Analyst, playing a key role in middleware development.
+
+My main responsibilities include:
+- Integrating ODATA APIs from SAP systems with Power BI to enhance data analysis.
+- Systems maintenance and technical leadership on integration projects.
+- Using Node.js to optimize business processes.
+
+My commitment to excellence is reflected in my collaboration to develop innovative solutions that facilitate strategic decision-making. I am motivated by the challenge - continuous in software architecture, with the aim of optimizing the performance and reliability of systems, contributing directly to the company's operational efficiency.
+
+Main contributions and skills:
+
+- Middleware Development: Creating solutions that integrate SAP and Power BI systems.
+- Systems Maintenance: Ensuring the continuous and efficient operation of existing systems.
+- Technical Leadership: Architecture and implementation of integration projects.
+- Process Optimization: Using advanced Node.js features to improve the efficiency of business processes.
+- Innovative Solutions: Development of solutions that support strategic decision-making.
+
+Technical knowledge:
+- Programming languages: JavaScript, Node.js, TypeScript, SQL, Java & Go.
+- Frameworks: Fastify, Express, NestJS, Spring Boot & Gin.
+- Databases: MySQL, PostgreSQL, MongoDB & Redis.
+- Tools: RabbitMQ, Vitest, Jest, JUnit, Go Testing, Git, Docker, Kubernetes, Jira, LocalStack & AWS.
+- Methodologies: Scrum & notions of DevOps.
+- Languages: Intermediate English.
+
+Soft-skills:
+- Flexibility and adaptability.
+- Autonomy and proactivity.
+- Teamwork
+- Continuous learning.
 
 ###
 
