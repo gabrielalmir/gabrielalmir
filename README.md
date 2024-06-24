@@ -23,7 +23,7 @@ Technical knowledge:
 - Programming languages: JavaScript, Node.js, TypeScript, SQL & Go.
 - Frameworks: Fastify, Express, NestJS & Gin.
 - Databases: MySQL, PostgreSQL, MongoDB & Redis.
-- Tools: RabbitMQ, SQLx, Vitest, Jest, JUnit, Go Testing, Git, Docker, Kubernetes, Jira, LocalStack & AWS.
+- Tools: RabbitMQ, Vitest, Jest, JUnit, Go Testing, Git, Docker, Kubernetes, Jira, LocalStack & AWS.
 - Methodologies: Scrum & notions of DevOps.
 - Languages: Intermediate English.
 
