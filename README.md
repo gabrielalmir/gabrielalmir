@@ -20,7 +20,7 @@ Main contributions and skills:
 - Innovative Solutions: Development of solutions that support strategic decision-making.
 
 Technical knowledge:
-- Programming languages: JavaScript, Node.js, TypeScript, SQL, Java & Go.
+- Programming languages: JavaScript, Node.js, TypeScript, SQL & Java.
 - Frameworks: Fastify, Express, NestJS & Spring Boot.
 - Databases: MySQL, PostgreSQL, MongoDB & Redis.
 - Tools: RabbitMQ, JUnit, Vitest, Jest,Git, Docker, Kubernetes, Jira, LocalStack & AWS.
@@ -47,8 +47,6 @@ Soft-skills:
   <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=go" height="30" alt="go logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
   <img width="12" />
