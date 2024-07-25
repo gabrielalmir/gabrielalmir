@@ -1,3 +1,5 @@
+<img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
+
 <h2 align="left">Hi! I'm Gabriel Almir, a Systems Analyst | Backend @ CTC</h2>
 
 Developer focused on web applications and APIs. Over 6 years of experience in software development, specializing in Node.js. Graduated in Information Technology from Senac Brazil and currently studying Multiplatform Software Development at Fatec-SP.
