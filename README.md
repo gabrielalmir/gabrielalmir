@@ -1,7 +1,7 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir, a Systems Analyst | Backend @ CTC</h2>
-<h3 align="left">Desenvolvedor Backend | JavaScript/TypeScript, Node.js, NestJS, React.js, AWS & Docker</h3>
+<h3 align="left">Backend Developer | JavaScript/TypeScript, Node.js, NestJS, Java, AWS & Docker | +10 years of experience in JavaScript</h3>
 
 Developer focused on web applications and APIs. Over 6 years of experience in software development, specializing in Node.js. Graduated in Information Technology from Senac Brazil and currently studying Multiplatform Software Development at Fatec-SP.
 
@@ -23,8 +23,8 @@ Main contributions and skills:
 - Innovative Solutions: Development of solutions that support strategic decision-making.
 
 Technical knowledge:
-- Programming languages: JavaScript, Node.js, TypeScript, SQL & Go.
-- Frameworks: Fastify, Express, NestJS.
+- Programming languages: JavaScript, Node.js, TypeScript, SQL & Java.
+- Frameworks: Fastify, Express, NestJS & Spring Boot.
 - Databases: MySQL, PostgreSQL, MongoDB & Redis.
 - Tools: RabbitMQ, Vitest, Jest, Git, Docker, Kubernetes, Jira, LocalStack & AWS.
 - Methodologies: Scrum & notions of DevOps.
@@ -47,7 +47,9 @@ Soft-skills:
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=go" height="30" alt="go logo"  />
+  <img src="https://skillicons.dev/icons?i=go" height="30" alt="java logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=go" height="30" alt="spring logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
   <img width="12" />
