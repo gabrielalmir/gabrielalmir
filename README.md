@@ -1,13 +1,13 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir, a Systems Analyst | Backend @ CTC</h2>
-<h3 align="left">Backend Developer | Java, Spring Boot, Node.js | +10 anos de experiência em JavaScript e Node.js</h3>
+<h3 align="left">Backend Developer | Node.js, TypeScript, NestJS | 10+ years of experience in JavaScript and Node.js</h3>
 
-I'm a Backend Developer specialized in building applications using Java and Node.js, with a solid foundation in microservices architecture and system integration. With over 10 years of experience in the JavaScript ecosystem (Node.js, TypeScript) and a recent focus on Java technologies (Spring Boot), I am currently transitioning to expand my knowledge and skills in backend development with Java.
+I'm a Backend Developer specialized in building applications using Node.js, TypeScript, and NestJS, with over 10 years of experience in the JavaScript ecosystem. My expertise includes designing microservices architectures, building RESTful APIs, and integrating with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis).
 
-I have extensive experience in designing and implementing RESTful APIs, as well as working with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis). I follow development practices based on SOLID principles and clean architecture, emphasizing the creation of modular and maintainable code. I also have experience with Docker, Kubernetes, and AWS for application deployment and scalability.
+I have extensive experience in implementing scalable and resilient solutions, following clean architecture and SOLID principles, with a focus on creating modular and maintainable code. Additionally, I have strong knowledge in messaging systems (RabbitMQ, Redis), containerization (Docker, Kubernetes), and cloud infrastructure (AWS), ensuring the delivery of efficient and scalable solutions.
 
-Currently, I am focused on solidifying my role as a Java developer, integrating my expertise in JavaScript to deliver robust and scalable backend solutions.
+Throughout my career, I have led projects involving systems and data integration, consistently adopting best development practices to guarantee high performance and quality in deliverables.
 
 ###
 
@@ -19,10 +19,6 @@ Currently, I am focused on solidifying my role as a Java developer, integrating 
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
   <img width="12" />
