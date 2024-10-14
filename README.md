@@ -1,40 +1,13 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir, a Systems Analyst | Backend @ CTC</h2>
-<h3 align="left">Backend Developer | JavaScript/TypeScript, Node.js, NestJS, Java, Go, AWS & Docker | +10 years of experience in JavaScript</h3>
+<h3 align="left">Backend Developer | Java, Spring Boot, Node.js | +10 anos de experiência em JavaScript e Node.js</h3>
 
-Developer focused on web applications and APIs. Over 6 years of experience in software development, specializing in Node.js. Graduated in Information Technology from Senac Brazil and currently studying Multiplatform Software Development at Fatec-SP.
+I'm a Backend Developer specialized in building applications using Java and Node.js, with a solid foundation in microservices architecture and system integration. With over 10 years of experience in the JavaScript ecosystem (Node.js, TypeScript) and a recent focus on Java technologies (Spring Boot), I am currently transitioning to expand my knowledge and skills in backend development with Java.
 
-At CTC Tech, a company specialized in providing IT services, I work as a Systems Analyst, playing a key role in middleware development.
+I have extensive experience in designing and implementing RESTful APIs, as well as working with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis). I follow development practices based on SOLID principles and clean architecture, emphasizing the creation of modular and maintainable code. I also have experience with Docker, Kubernetes, and AWS for application deployment and scalability.
 
-My main responsibilities include:
-- Integrating ODATA APIs from SAP systems with Power BI to enhance data analysis.
-- Systems maintenance and technical leadership on integration projects.
-- Using Node.js to optimize business processes.
-
-My commitment to excellence is reflected in my collaboration to develop innovative solutions that facilitate strategic decision-making. I am motivated by the challenge - continuous in software architecture, with the aim of optimizing the performance and reliability of systems, contributing directly to the company's operational efficiency.
-
-Main contributions and skills:
-
-- Middleware Development: Creating solutions that integrate SAP and Power BI systems.
-- Systems Maintenance: Ensuring the continuous and efficient operation of existing systems.
-- Technical Leadership: Architecture and implementation of integration projects.
-- Process Optimization: Using advanced Node.js features to improve the efficiency of business processes.
-- Innovative Solutions: Development of solutions that support strategic decision-making.
-
-Technical knowledge:
-- Programming languages: JavaScript, Node.js, TypeScript, SQL, Java & Go.
-- Frameworks: Fastify, Express, NestJS & Spring Boot.
-- Databases: MySQL, PostgreSQL, MongoDB & Redis.
-- Tools: RabbitMQ, Vitest, Jest, Git, Docker, Kubernetes, Jira, LocalStack & AWS.
-- Methodologies: Scrum & notions of DevOps.
-- Languages: English.
-
-Soft-skills:
-- Flexibility and adaptability.
-- Autonomy and proactivity.
-- Teamwork
-- Continuous learning.
+Currently, I am focused on solidifying my role as a Java developer, integrating my expertise in JavaScript to deliver robust and scalable backend solutions.
 
 ###
 
