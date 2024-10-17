@@ -1,7 +1,7 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Olá! Eu sou Gabriel Almir!</h2>
-<h3 align="left">Desenvolvedor Backend | Node.js, TypeScript, NestJS | SQL, NoSQL, Docker</h3>
+<h3 align="left">Desenvolvedor Backend | Java, Spring Boot, Node.js, AWS e MongoDB</h3>
 
 Sou um Desenvolvedor Backend com mais de 10 anos de experiência no ecossistema JavaScript e atualmente em transição para tecnologias Java, focando no desenvolvimento com Spring Boot. Especializado em Node.js, TypeScript e NestJS, tenho ampla experiência na criação de arquiteturas de microsserviços, design de APIs RESTful e integração com bancos de dados relacionais (PostgreSQL, MySQL) e NoSQL (MongoDB, Redis).
 
