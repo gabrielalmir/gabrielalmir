@@ -1,21 +1,17 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
-<h2 align="left">Olá! Eu sou Gabriel Almir!</h2>
-<h3 align="left">Desenvolvedor Backend | Java, Spring Boot, Node.js, AWS e MongoDB</h3>
+<h2 align="left">Hi! I'm Gabriel Almir!</h2>
+<h3 align="left">Backend Developer | Node.js, TypeScript, NestJS, AWS e MongoDB</h3>
 
-Sou um Desenvolvedor Backend com mais de 10 anos de experiência no ecossistema JavaScript e atualmente em transição para tecnologias Java, focando no desenvolvimento com Spring Boot. Especializado em Node.js, TypeScript e NestJS, tenho ampla experiência na criação de arquiteturas de microsserviços, design de APIs RESTful e integração com bancos de dados relacionais (PostgreSQL, MySQL) e NoSQL (MongoDB, Redis).
+ I'm a Backend Developer with over 10 years of experience in the JavaScript ecosystem. Specializing in Node.js, TypeScript, and NestJS, I have extensive experience in building microservices architectures, designing RESTful APIs, and integrating with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis).
 
-Tenho profunda experiência na implementação de soluções escaláveis e resilientes, seguindo princípios de arquitetura limpa e SOLID, com foco na criação de código modular e de fácil manutenção.
+I have deep expertise in implementing scalable and resilient solutions, following clean architecture principles and SOLID practices, with a focus on creating modular and maintainable code.
 
-Ao longo da minha carreira, liderei projetos que envolvem a integração de sistemas e dados, sempre adotando as melhores práticas de desenvolvimento e garantindo alta performance e qualidade nas entregas.
+Throughout my career, I have led projects involving system and data integration, always adopting best development practices and ensuring high performance and quality in deliveries.
 
 ###
 
 <div align="left">
-  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring logo"  />
-  <img width="12" />
   <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=ts" height="30" alt="typescript logo"  />
@@ -23,6 +19,8 @@ Ao longo da minha carreira, liderei projetos que envolvem a integração de sist
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=rust" height="30" alt="rust logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
   <img width="12" />
