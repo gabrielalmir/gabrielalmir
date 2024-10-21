@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Almir - Desenvolvedor Back-end Java e Node.js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="h-screen flex flex-col justify-between">
+    <header class="container mx-auto p-6">
+        <nav class="flex justify-between items-center">
+            <ul class="flex space-x-6">
+                <a href="https://linkedin.com/in/gabrielalmir" target="_blank" class="hover:text-white"><i
+                        class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://github.com/gabrielalmir" target="_blank" class="hover:text-white"><i
+                        class="fab fa-github fa-2x"></i></a>
+                <a href="https://instagram.com/momentoalmir" target="_blank" class="hover:text-white"><i
+                        class="fab fa-instagram fa-2x"></i></a>
+            </ul>
+            <div class="relative flex space-x-6 items-center">
+                <a href="https://github.com/gabrielalmir?tab=repositories" class="hover:text-white underline"
+                    target="_blank">Projetos</a>
+                <a href="https://linkedin.com/in/gabrielalmir" class="btn px-4 py-2 rounded" target="_blank">
+                    <span>Contate-me</span>
+                </a>
+                <button id="menu-btn" class="md:hidden px-4 py-2 rounded bg-gray-700 text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div id="dropdown-menu"
+                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
+                    <a href="https://github.com/gabrielalmir?tab=repositories"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Projetos</a>
+                    <a href="https://linkedin.com/in/gabrielalmir"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Contate-me</a>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="container flex flex-col items-center justify-center mx-auto p-8 flex-grow">
+        <img src="https://github.com/gabrielalmir.png" alt="Gabriel Almir"
+            class="my-4 w-48 h-48 rounded-full border-4 border-white">
+        <h1 class="text-4xl lg:text-6xl font-bold mb-4 text-center">Olá, sou <span id="title">Gabriel Almir</span>.</h1>
+        <p class="text-lg w-3/4 lg:w-1/2 text-justify">
+            Desenvolvedor Backend focado em aplicações web e APIs, com mais de 10 anos de experiência em desenvolvimento de software.
+            <strong>Especializado em Node.js, TypeScript e NestJS</strong>. Ao longo da minha carreira, liderei projetos envolvendo o desenvolvimento de APIs escaláveis e integrações de sistemas,
+            incluindo uma solução de middleware que integra APIs SAP ODATA com relatórios analíticos no Power BI, utilizando Node.js.
+        </p>
+        <div class="space-x-6 m-4 flex-wrap icons">
+            <i class="devicon-nodejs-plain colored"></i>
+            <i class="devicon-typescript-plain colored"></i>
+            <i class="devicon-javascript-plain colored"></i>
+            <i class="devicon-nestjs-plain colored"></i>
+            <i class="devicon-rust-plain colored"></i>
+            <i class="devicon-docker-plain colored"></i>
+            <i class="devicon-kubernetes-plain colored"></i>
+            <i class="devicon-git-plain colored"></i>
+        </div>
+        <a href="https://drive.google.com/file/d/1AGFobk6q_L88woDWJ09mHUWuT1CIZVOY/view?usp=sharing"
+            class="btn px-4 py-2 mt-4 rounded hover:bg-opacity-80" target="_blank">
+            <span>Baixar CV</span>
+        </a>
+    </main>
+
+    <footer class="container mx-auto p-6 text-center">
+        <p>&copy; 2024 Gabriel Almir. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
