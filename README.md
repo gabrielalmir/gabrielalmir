@@ -18,6 +18,8 @@ Throughout my career, I have led projects involving system and data integration,
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo"  />
   <img width="12" />
+  <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo"  />
+  <img width="12" />
   <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=rust" height="30" alt="rust logo"  />
