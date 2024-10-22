@@ -1,9 +1,9 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
-<h3 align="left">Backend Developer | Node.js, TypeScript, NestJS, AWS e MongoDB</h3>
+<h3 align="left">Full Stack Developer | Java, Spring, Node.js, TypeScript, NestJS, AWS e MongoDB</h3>
 
- I'm a Backend Developer with over 10 years of experience in the JavaScript ecosystem. Specializing in Node.js, TypeScript, and NestJS, I have extensive experience in building microservices architectures, designing RESTful APIs, and integrating with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis).
+ I'm a Full Stack Developer with over 10 years of experience in the JavaScript ecosystem. Specializing in Java, Node.js, TypeScript, and NestJS, I have extensive experience in building microservices architectures, designing RESTful APIs, and integrating with relational databases (PostgreSQL, MySQL) and NoSQL databases (MongoDB, Redis).
 
 I have deep expertise in implementing scalable and resilient solutions, following clean architecture principles and SOLID practices, with a focus on creating modular and maintainable code.
 
