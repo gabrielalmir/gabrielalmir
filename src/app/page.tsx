@@ -107,8 +107,8 @@ export default function Component() {
               {[
                 { icon: Linkedin, href: "https://linkedin.com/in/gabrielalmir" },
                 { icon: Github, href: "https://github.com/gabrielalmir" },
-                { icon: Twitter, href: "#" },
-                { icon: Instagram, href: "#" },
+                { icon: Twitter, href: "https://x.com/momentoalmir" },
+                { icon: Instagram, href: "https://instagram.com/momentoalmir" },
                 { icon: MailIcon, href: "mailto:gabr.almir@gmail.com" },
               ].map((social, index) => (
                 <Link key={index} href={social.href} target="_blank">
