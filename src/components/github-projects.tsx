@@ -11,12 +11,23 @@ async function fetchGitHubProjects(username: string) {
   return response.json()
 }
 
+interface GitHubProject {
+  id: number
+  name: string
+  description: string
+  topics: string[]
+  stargazers_count: number
+  forks_count: number
+  watchers_count: number
+  html_url: string
+}
+
 export default async function GitHubProjects({ username }: { username: string }) {
   const projects = await fetchGitHubProjects(username)
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((project: any) => (
+      {projects.map((project: GitHubProject) => (
         <Card key={project.id} className="flex flex-col">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">{project.name}</CardTitle>
