@@ -41,10 +41,10 @@ export default function Component() {
               GABRIEL ALMIR
             </h1>
             <p className="text-zinc-600 text-lg leading-relaxed">
-              A backend developer with over 10 years of experience in the JavaScript ecosystem, specializing in building robust and scalable applications.
+              I'm a Backend Developer with over 10 years of experience, specializing in Node.js and expanding my expertise in Java and Spring Boot. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
-              {["nodejs", "typescript", "javascript", "react", "fastify", "nestjs", "mongodb", "docker", "kubernetes"].map((tech) => (
+              {["java", "spring", "nodejs", "typescript", "javascript", "nestjs", "postgresql", "mongodb", "docker"].map((tech) => (
                 <div key={tech} className="bg-white p-2 rounded-lg shadow-sm">
                   <i className={`devicon-${tech}-plain colored text-2xl`}></i>
                 </div>
@@ -84,7 +84,10 @@ export default function Component() {
           <h2 className="text-3xl font-bold mb-8 text-center text-zinc-800">ABOUT ME</h2>
           <div className="max-w-3xl mx-auto space-y-6 text-zinc-600 leading-relaxed">
             <p>
-              As a Backend Developer with over a decade of experience in the JavaScript ecosystem, I've honed my skills in Node.js, JavaScript, and TypeScript. My expertise lies in crafting microservices architectures, designing RESTful APIs, and seamlessly integrating both relational (PostgreSQL, MySQL) and NoSQL (MongoDB, Redis) databases.
+              As a Backend Developer with over 10 years of experience, I specialize in Node.js and have expanded my expertise to include Java and Spring Boot. My core strengths are in building microservices architectures, designing RESTful APIs, and integrating databases (SQL and NoSQL), including PostgreSQL, MySQL, MongoDB, and Redis.
+            </p>
+            <p>
+              I am committed to creating scalable, high-performance solutions, guided by SOLID principles, Design Patterns, and Clean Architecture. I am proficient in Docker containerization and cloud technologies like AWS, ensuring reliability, maintainability, and efficiency in every project.
             </p>
             <p>
               Throughout my career, I've been dedicated to creating scalable and resilient solutions. I'm a strong advocate for clean architecture and SOLID principles, ensuring that the code I produce is not only modular but also easy to maintain. I thrive on leading complex projects, particularly those involving intricate system and data integrations. My commitment to adopting best practices guarantees high performance and quality in every project I undertake.

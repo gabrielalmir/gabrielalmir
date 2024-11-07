@@ -1,32 +1,30 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
-<h3 align="left">Node.js Backend Developer | JavaScript | TypeScript | SQL | MongoDB | Docker | AWS</h3>
+<h3 align="left">Backend Developer | Node.js & Java | Spring Boot | Microservices, RESTful APIs, and Clean Architecture</h3>
 
-Backend Developer with over 10 years of experience in the JavaScript ecosystem, focusing on technologies such as Node.js, JavaScript, TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and integration with databases, both relational (PostgreSQL, MySQL) and NoSQL (MongoDB, Redis).
-
-Throughout my career, I have worked to create scalable and resilient solutions, always following clean architecture and SOLID principles to keep the code modular and easy to maintain. I enjoy leading complex projects, especially those involving system and data integration, and I make a point to adopt best practices to ensure high performance and quality in every delivery.
+I'm a Backend Developer with over 10 years of experience, specializing in Node.js and expanding my expertise in Java and Spring Boot. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions. My work is guided by SOLID principles, Design Patterns, and Clean Architecture, and I am proficient with Docker containerization and cloud platforms like AWS. I am passionate about creating scalable, high-performance solutions that meet industry best practices for reliability and efficiency.
 
 ###
 
 <div align="left">
+  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring logo"  />
+  <img width="12" />
   <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=ts" height="30" alt="typescript logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=fastify" height="30" alt="fastify logo"  />
-  <img width="12" />
   <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=mongodb" height="30" alt="mongodb logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
+  <img src="https://skillicons.dev/icons?i=postgresql" height="30" alt="postgresql logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=kubernetes" height="30" alt="kubernetes logo"  />
+  <img src="https://skillicons.dev/icons?i=docker" height="30" alt="docker logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=git" height="30" alt="git logo"  />
 </div>
