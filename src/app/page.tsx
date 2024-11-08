@@ -5,7 +5,7 @@ import Link from "next/link"
 import GitHubProjects from "@/components/github-projects"
 import { Button } from "@/components/ui/button"
 
-export default function Component() {
+export default function Home() {
   return (
     <div className="texture min-h-screen bg-gradient-to-br text-zinc-900">
       <header className="container mx-auto px-4 py-6">
