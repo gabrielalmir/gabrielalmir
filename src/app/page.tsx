@@ -44,7 +44,7 @@ export default function Home() {
               I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions. Currently, I am expanding my skills in the Go ecosystem.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
-              {["nodejs", "typescript", "javascript", "nestjs", "react", "nextjs", "go", "postgresql", "mongodb", "docker"].map((tech) => (
+              {["nodejs", "typescript", "javascript", "nestjs", "react", "nextjs", "go", "rust", "postgresql", "mongodb", "docker"].map((tech) => (
                 <div key={tech} className="bg-white p-2 rounded-lg shadow-sm">
                   <i className={`devicon-${tech}-plain colored text-2xl`}></i>
                 </div>
