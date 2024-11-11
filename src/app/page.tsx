@@ -51,16 +51,22 @@ export default function Home() {
               ))}
             </div>
             <div className="flex gap-4">
-              <Button className="bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors">
-                <MailIcon className="h-4 w-4 mr-2" />
-                CONTACT ME
-              </Button>
-              <Button variant="outline" size="icon" className="text-blue-600 border-blue-600 hover:bg-blue-50">
-                <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon" className="text-blue-600 border-blue-600 hover:bg-blue-50">
-                <Github className="h-4 w-4" />
-              </Button>
+              <Link href="mailto:gabr.almir@gmail.com">
+                <Button className="bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors">
+                  <MailIcon className="h-4 w-4 mr-2" />
+                  CONTACT ME
+                </Button>
+              </Link>
+              <Link href="https://linkedin.com/in/gabrielalmir" target="_blank">
+                <Button variant="outline" size="icon" className="text-blue-600 border-blue-600 hover:bg-blue-50">
+                  <Linkedin className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="https://github.com/gabrielalmir" target="_blank">
+                <Button variant="outline" size="icon" className="text-blue-600 border-blue-600 hover:bg-blue-50">
+                  <Github className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="relative">
