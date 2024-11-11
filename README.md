@@ -22,6 +22,8 @@ I'm a Backend Developer with over 10 years of experience, specializing in Node.j
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=go" height="30" alt="go logo"  />
   <img width="12" />
+  <img src="https://skillicons.dev/icons?i=rust" height="30" alt="rust logo"  />
+  <img width="12" />
   <img src="https://skillicons.dev/icons?i=mongodb" height="30" alt="mongodb logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=postgresql" height="30" alt="postgresql logo"  />
