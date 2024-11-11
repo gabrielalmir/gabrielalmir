@@ -3,7 +3,7 @@
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
 <h3 align="left">Backend Developer | Node.js, TypeScript & NestJS | Microservices, RESTful APIs, and Clean Architecture</h3>
 
-I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions. My work is guided by SOLID principles, Design Patterns, and Clean Architecture, and I am proficient with Docker containerization and cloud platforms like AWS. I am passionate about creating scalable, high-performance solutions that meet industry best practices for reliability and efficiency.
+I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript, with solid expertise in NestJS. Currently, I am expanding my skills in the Go ecosystem. My background includes a strong foundation in microservices architecture, RESTful API design, and integration with SQL and NoSQL databases. I follow SOLID principles, Design Patterns, and Clean Architecture, with experience in containerization using Docker and familiarity with cloud platforms like AWS. I'm deeply committed to developing scalable and high-performance solutions, applying best practices to ensure reliable and efficient software.
 
 ###
 
@@ -19,6 +19,8 @@ I'm a Backend Developer with over 10 years of experience, specializing in Node.j
   <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nextjs" height="30" alt="nextjs logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=go" height="30" alt="go logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=mongodb" height="30" alt="mongodb logo"  />
   <img width="12" />
