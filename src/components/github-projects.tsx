@@ -4,7 +4,7 @@ import { Eye, GitFork, Star } from "lucide-react"
 import Link from "next/link"
 
 async function fetchGitHubProjects(username: string) {
-  const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=9`, { next: { revalidate: 3600 } })
+  const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=9&direction=asc`, { next: { revalidate: 3600 } })
   if (!response.ok) {
     throw new Error('Failed to fetch projects')
   }
