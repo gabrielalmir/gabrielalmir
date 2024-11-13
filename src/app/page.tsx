@@ -41,7 +41,7 @@ export default function Home() {
               GABRIEL ALMIR
             </h1>
             <p className="text-zinc-600 text-lg leading-relaxed">
-              I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions. Currently expanding my knowledge to Java & Spring ecosystem.
+              I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
               {["nodejs", "typescript", "javascript", "nestjs", "react", "nextjs", "postgresql", "mongodb", "docker"].map((tech) => (
