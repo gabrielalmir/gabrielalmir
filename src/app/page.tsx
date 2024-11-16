@@ -4,6 +4,7 @@ import Link from "next/link"
 
 import GitHubProjects from "@/components/github-projects"
 import { Button } from "@/components/ui/button"
+import { DockerPlain, JavascriptPlain, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
@@ -44,11 +45,15 @@ export default function Home() {
               I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
-              {["nodejs", "typescript", "javascript", "nestjs", "react", "nextjs", "postgresql", "mongodb", "docker"].map((tech) => (
-                <div key={tech} className="bg-white p-2 rounded-lg shadow-sm">
-                  <i className={`devicon-${tech}-plain colored text-2xl`}></i>
-                </div>
-              ))}
+              <NodejsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <TypescriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <JavascriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <NestjsOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <ReactOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <NextjsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <PostgresqlPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <MongodbPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <DockerPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
             </div>
             <div className="flex gap-4">
               <Link href="mailto:gabr.almir@gmail.com">
