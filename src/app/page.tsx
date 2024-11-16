@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import GitHubProjects from "@/components/github-projects"
 import { Button } from "@/components/ui/button"
-import { DockerPlain, JavascriptPlain, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, TypescriptPlain } from "devicons-react"
+import { DockerPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
@@ -47,7 +47,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 my-6">
               <NodejsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <TypescriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
-              <JavascriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <JavascriptOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NestjsOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <ReactOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NextjsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
