@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import GitHubProjects from "@/components/github-projects"
 import { Button } from "@/components/ui/button"
-import { DockerPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, TypescriptPlain } from "devicons-react"
+import { DockerPlain, JavaPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, SpringOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
@@ -42,9 +42,11 @@ export default function Home() {
               GABRIEL ALMIR
             </h1>
             <p className="text-zinc-600 text-lg leading-relaxed">
-              I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript. I have a strong foundation in microservices architecture, RESTful API design, and database integration with both SQL and NoSQL solutions.
+              I'm a Full Stack Developer with over 10 years of experience, specializing in Java, Spring Boot, Node.js, and TypeScript. I excel in microservices architecture, RESTful API design, and database integration (SQL and NoSQL). I adhere to SOLID principles, Design Patterns, and Clean Architecture, with expertise in Docker and AWS. My focus is on creating scalable, high-performance solutions.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
+              <JavaPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <SpringOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NodejsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <TypescriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <JavascriptOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
@@ -95,7 +97,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center text-zinc-800">ABOUT ME</h2>
           <div className="max-w-3xl mx-auto space-y-6 text-zinc-600 leading-relaxed">
             <p>
-              As a Backend Developer with over 10 years of experience, I specialize in Node.js and have expanded my expertise to include Java and Spring Boot. My core strengths are in building microservices architectures, designing RESTful APIs, and integrating databases (SQL and NoSQL), including PostgreSQL, MySQL, MongoDB, and Redis.
+              As a Full Stack Developer with over 10 years of experience, I specialize in Java and Spring Boot, with solid expertise in Node.js and TypeScript. My core strengths are in building microservices architectures, designing RESTful APIs, and integrating databases (SQL and NoSQL), including PostgreSQL, MySQL, MongoDB, and Redis.
             </p>
             <p>
               I am committed to creating scalable, high-performance solutions, guided by SOLID principles, Design Patterns, and Clean Architecture. I am proficient in Docker containerization and cloud technologies like AWS, ensuring reliability, maintainability, and efficiency in every project.

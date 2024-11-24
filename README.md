@@ -1,23 +1,25 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
-<h3 align="left">Backend Developer | Node.js, TypeScript, NestJS</h3>
+<h3 align="left">Full Stack Developer | Java, Spring Boot, React, TypeScript, Node.js, Next.js</h3>
 <h4 align="left">Microservices, RESTful APIs, and Clean Architecture</h4>
 
-I'm a Backend Developer with over 10 years of experience, specializing in Node.js and TypeScript, with solid expertise in NestJS. My background includes a strong foundation in microservices architecture, RESTful API design, and integration with SQL and NoSQL databases. I follow SOLID principles, Design Patterns, and Clean Architecture, with experience in containerization using Docker and familiarity with cloud platforms like AWS. I'm deeply committed to developing scalable and high-performance solutions, applying best practices to ensure reliable and efficient software.
+I'm a Full Stack Developer with over 10 years of experience, now specializing in Java and Spring Boot, with solid expertise in Node.js and TypeScript. My background includes a strong foundation in microservices architecture, RESTful API design, and integration with SQL and NoSQL databases. I follow SOLID principles, Design Patterns, and Clean Architecture, with experience in containerization using Docker and familiarity with cloud platforms like AWS. I'm deeply committed to developing scalable and high-performance solutions, applying best practices to ensure reliable and efficient software.
 
 ###
 
 <div align="left">
-  <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo"  />
+  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring boot logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=ts" height="30" alt="typescript logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo"  />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=nestjs" height="30" alt="nestjs logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo"  />
+  <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nextjs" height="30" alt="nextjs logo"  />
   <img width="12" />
