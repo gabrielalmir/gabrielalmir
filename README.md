@@ -1,10 +1,12 @@
 <img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
 
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
-<h3 align="left">Full Stack Developer | Node.js, TypeScript, React.js, Next.js & NestJS</h3>
-<h4 align="left">Microservices, RESTful APIs, and Clean Architecture</h4>
+<h3 align="left">Backend Developer | Node.js, TypeScript, Fastify & NestJS</h3>
+<h4 align="left">Microsserviços, Clean Architecture, Docker</h4>
 
-I'm a Full Stack Developer with over 10 years of experience, specializing in JavaScript, with solid expertise in Node.js and TypeScript. My background includes a strong foundation in microservices architecture, RESTful API design, and integration with SQL and NoSQL databases. I follow SOLID principles, Design Patterns, and Clean Architecture, with experience in containerization using Docker and familiarity with cloud platforms like AWS. I'm deeply committed to developing scalable and high-performance solutions, applying best practices to ensure reliable and efficient software.
+Backend Developer specialized in the JavaScript/TypeScript ecosystem. My main focus is on backend development using Node.js, Fastify, Express and NestJS. I have a solid background in microservices architecture, RESTful APIs and integration with SQL and NoSQL databases.
+
+I focus on creating scalable and high-performance solutions, always applying the best development practices, including SOLID principles, Design Patterns and Clean Architecture. I have experience with containerization using Docker, ensuring the delivery of efficient and easy-to-maintain software.
 
 ###
 
