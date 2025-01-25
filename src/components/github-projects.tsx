@@ -74,7 +74,7 @@ export default async function GitHubProjects({ username }: { username: string })
               target="_blank"
               className="text-terminal-green/80 hover:text-terminal-green font-medium transition-colors"
             >
-              <span className="terminal-prompt">&gt; View</span>
+              <span className="terminal-prompt">&gt; Ver</span>
             </Link>
           </CardFooter>
         </Card>
