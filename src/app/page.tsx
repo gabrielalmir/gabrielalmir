@@ -144,9 +144,18 @@ export default function Home() {
             </h2>
           </div>
           <GitHubProjects username="gabrielalmir" />
+
+          {/* See more (green retro button) */}
+          <div className="text-center mt-10">
+            <Link href="https://github.com/gabrielalmir?tab=repositories" target="_blank">
+              <Button size="lg" className="terminal-button">
+                <span className="terminal-prompt">&gt; VER MAIS PROJETOS</span>
+              </Button>
+            </Link>
+          </div>
         </section>
 
-        <section id="sobre" className="py-20 my-20">
+        <section id="sobre" className="py-10 my-10">
           <div className="terminal-window border border-terminal-green/20 p-8 md:p-12">
             <h2 className="text-2xl font-bold mb-8">
               <span className="terminal-prompt">&gt; SOBRE_</span>
