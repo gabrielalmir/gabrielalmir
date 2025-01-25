@@ -126,7 +126,7 @@ export default function Home() {
 
         <section id="sobre" className="py-20 my-20">
           <div className="bg-zinc-900/50 rounded-2xl shadow-2xl p-8 md:p-12 relative overflow-hidden border border-zinc-800/50 backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-600/10 to-transparent opacity-50" />
             <div className="relative z-10">
               <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
                 SOBRE MIM
@@ -155,7 +155,7 @@ export default function Home() {
 
         <section id="contato" className="py-20 text-center">
           <div className="bg-zinc-900/50 rounded-2xl shadow-2xl p-8 md:p-12 relative overflow-hidden border border-zinc-800/50 backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-600/10 to-transparent opacity-50" />
             <div className="relative z-10">
               <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
                 VAMOS CONVERSAR
@@ -193,7 +193,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-gradient-to-b from-zinc-900 to-zinc-950 text-zinc-100 mt-20 border-t border-zinc-800">
+      <footer className="bg-zinc-900/50 text-zinc-100 mt-20 border-t border-zinc-800">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="mb-2">© 2024 Gabriel Almir</p>

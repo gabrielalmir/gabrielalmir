@@ -74,7 +74,7 @@ export default async function GitHubProjects({ username }: { username: string })
               target="_blank"
               className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
             >
-              View Project
+              Ver Projeto
             </Link>
           </CardFooter>
         </Card>
