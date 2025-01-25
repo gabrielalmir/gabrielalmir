@@ -45,7 +45,7 @@ export default function Home() {
       </header>
 
       <main className="container mx-auto px-4 sm:container-sm xs:container-sm">
-        <section className="py-20 md:py-32 grid md:grid-cols-2 gap-10 items-center">
+        <section className="py-20 md:py-10 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 animate-fade-in">
             <div className="inline-block px-4 py-2 border border-terminal-green/20 terminal-window">
               <TypingEffect text="Olá, meu nome é" className="text-terminal-green" />
