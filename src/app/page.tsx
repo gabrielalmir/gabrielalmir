@@ -44,7 +44,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="container mx-auto px-4 sm:container-sm xs:container-sm">
+      <main className="container mx-auto px-4">
         <section className="py-20 md:py-10 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 animate-fade-in">
             <div className="inline-block px-4 py-2 border border-terminal-green/20 terminal-window">

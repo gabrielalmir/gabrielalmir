@@ -98,7 +98,3 @@ body {
   transform: scaleX(1);
   transform-origin: left;
 }
-
-.container-sm {
-  width: 120vw !important;
-}
