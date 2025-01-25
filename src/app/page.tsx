@@ -4,11 +4,11 @@ import Link from "next/link"
 
 import GitHubProjects from "@/components/github-projects"
 import { Button } from "@/components/ui/button"
-import { DockerPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, TypescriptPlain } from "devicons-react"
+import { AmazonwebservicesOriginalWordmark, DockerPlain, JavaOriginal, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsPlain, NodejsPlain, PostgresqlPlain, ReactOriginal, SpringOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
-    <div className="texture min-h-screen bg-gradient-to-br text-zinc-900">
+    <div className="min-h-screen bg-zinc-100 text-zinc-900">
       <header className="container mx-auto px-4 py-6">
         <nav className="flex justify-between items-center">
           <Link href="/" className="text-xl font-bold flex items-center gap-2 text-blue-600">
@@ -42,19 +42,23 @@ export default function Home() {
               GABRIEL ALMIR
             </h1>
             <p className="text-zinc-600 text-lg leading-relaxed">
-              I'm a Full Stack Developer with over 10 years of experience, specializing in Node.js, TypeScript, React.js, Next.js & NestJS. I excel in microservices architecture, RESTful API design, and database integration (SQL and NoSQL). I adhere to SOLID principles, Design Patterns, and Clean Architecture, with expertise in Docker and AWS. My focus is on creating scalable, high-performance solutions.
+              I am a Backend Developer with a strong foundation in building scalable, high-performance solutions using <strong>Node.js</strong> and <strong>Java</strong>. My expertise lies in creating clean, maintainable, and efficient systems, leveraging modern development practices such as <strong>Clean Architecture</strong>, <strong>SOLID principles</strong>, and <strong>Design Patterns</strong>.
+
+              With extensive experience in microservices, RESTful APIs, and database integration (<strong>SQL</strong> and <strong>NoSQL</strong>), I focus on delivering solutions that meet business goals while ensuring technical excellence. Additionally, I have hands-on experience with containerization using <strong>Docker</strong> and cloud services like <strong>AWS</strong>, enabling efficient deployment and scalability.
             </p>
             <div className="flex flex-wrap gap-4 my-6">
+              <JavaOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <SpringOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NodejsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <TypescriptPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <JavascriptOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NestjsOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <ReactOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <NextjsPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
-              <NestjsOriginal size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <PostgresqlPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <MongodbPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
               <DockerPlain size={40} className="bg-white p-2 rounded-lg shadow-sm" />
+              <AmazonwebservicesOriginalWordmark size={40} className="bg-white p-2 rounded-lg shadow-sm" />
             </div>
             <div className="flex gap-4">
               <Link href="mailto:gabr.almir@gmail.com">
@@ -78,7 +82,7 @@ export default function Home() {
           <div className="relative">
             <div className="absolute inset-0 bg-blue-200 rounded-full transform -rotate-6"></div>
             <Image
-              src="/me.png"
+              src="/me.jpg"
               alt="Gabriel Almir"
               height={400}
               width={400}
@@ -96,13 +100,13 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center text-zinc-800">ABOUT ME</h2>
           <div className="max-w-3xl mx-auto space-y-6 text-zinc-600 leading-relaxed">
             <p>
-              As a Full Stack Developer with over 10 years of experience, I specialize in JavaScript, with solid expertise in Node.js and TypeScript. My core strengths are in building microservices architectures, designing RESTful APIs, and integrating databases (SQL and NoSQL), including PostgreSQL, MySQL, MongoDB, and Redis.
+              As a Backend Developer with a strong foundation in building scalable, high-performance solutions using <strong>Node.js</strong> and <strong>Java</strong>, my expertise lies in creating clean, maintainable, and efficient systems. I leverage modern development practices such as <strong>Clean Architecture</strong>, <strong>SOLID principles</strong>, and <strong>Design Patterns</strong>.
             </p>
             <p>
-              I am committed to creating scalable, high-performance solutions, guided by SOLID principles, Design Patterns, and Clean Architecture. I am proficient in Docker containerization and cloud technologies like AWS, ensuring reliability, maintainability, and efficiency in every project.
+              With extensive experience in microservices, RESTful APIs, and database integration (<strong>SQL</strong> and <strong>NoSQL</strong>), I focus on delivering solutions that meet business goals while ensuring technical excellence. Additionally, I have hands-on experience with containerization using <strong>Docker</strong> and cloud services like <strong>AWS</strong>, enabling efficient deployment and scalability.
             </p>
             <p>
-              Throughout my career, I've been dedicated to creating scalable and resilient solutions. I'm a strong advocate for clean architecture and SOLID principles, ensuring that the code I produce is not only modular but also easy to maintain. I thrive on leading complex projects, particularly those involving intricate system and data integrations. My commitment to adopting best practices guarantees high performance and quality in every project I undertake.
+              Currently, I work at <strong>CTC</strong> as a <strong>Node.js Backend Developer</strong>, building backend solutions using <strong>Node.js</strong> and <strong>TypeScript</strong>. My role involves the creation of middleware integrated with <strong>ODATA</strong> and <strong>Power BI APIs</strong>.
             </p>
             <div className="text-center mt-8">
               <Link href="https://linkedin.com/in/gabrielalmir" target="_blank">

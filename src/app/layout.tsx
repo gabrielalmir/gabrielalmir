@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata = {
-  title: "Gabriel Almir - Full Stack Developer",
-  description: "Full Stack Developer with over 10 years of experience, specializing in Node.js, TypeScript, React.js, Next.js & NestJS. Expertise in microservices, RESTful APIs, and Clean Architecture.",
+  title: "Gabriel Almir - Backend Developer",
+  description: "Backend Developer focused on building scalable, high-performance solutions using Node.js and Java. Expertise in creating clean, maintainable, and efficient systems, leveraging modern development practices such as Clean Architecture, SOLID principles, and Design Patterns.",
 };
 
 export default function RootLayout({
