@@ -8,18 +8,12 @@
   }
 }
 
-@font-face {
-  font-family: "VT323";
-  src: url("/fonts/VT323-Regular.ttf") format("truetype");
-  font-display: swap;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: "VT323", monospace;
+  font-family: monospace;
 }
 
 ::selection {
