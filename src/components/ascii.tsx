@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils"
 
 interface AsciiProps {
-  text: string
   className?: string
 }
 
-export function Ascii({ text, className }: AsciiProps) {
+export function Ascii({ className }: AsciiProps) {
   return (
     <pre className={cn("text-xs sm:text-sm md:text-base lg:text-lg font-mono whitespace-pre", className)}>
       {`

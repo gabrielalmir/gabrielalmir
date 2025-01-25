@@ -52,7 +52,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-4">
-              <Ascii text="GABRIEL ALMIR" className="text-terminal-green leading-none" />
+              <Ascii className="text-terminal-green leading-none" />
               <div className="h-px bg-terminal-green/20" />
             </div>
 
