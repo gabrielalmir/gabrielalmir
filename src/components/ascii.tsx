@@ -6,7 +6,7 @@ interface AsciiProps {
 
 export function Ascii({ className }: AsciiProps) {
   return (
-    <pre className={cn("text-xs sm:text-sm md:text-base lg:text-lg font-mono whitespace-pre", className)}>
+    <pre className={cn("text-[0.5rem] sm:text-sm md:text-base lg:text-lg font-mono whitespace-pre", className)}>
       {`
  ██████╗  █████╗ ██████╗ ██████╗ ██╗███████╗██╗
 ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██║██╔════╝██║
