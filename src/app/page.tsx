@@ -63,7 +63,7 @@ export default function Home() {
               />
               <p className="text-terminal-green/80 leading-relaxed">
                 Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> e <strong className="text-terminal-green">Java</strong>.
-                Especializado em criar sistemas limpos e eficientes com <strong className="text-terminal-green">Clean Architecture</strong>,
+                Especializado em criar sistemas limpos e eficientes com <strong className="text-terminal-green">Clean Architecture</strong>,&nbsp;
                 <strong className="text-terminal-green">SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
               </p>
             </div>
