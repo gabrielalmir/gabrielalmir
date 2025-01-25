@@ -223,7 +223,7 @@ export default function Home() {
       <footer className="border-t border-terminal-green/20 mt-20">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <p className="mb-2 terminal-prompt">&gt; © 2024 Gabriel Almir</p>
+            <p className="mb-2 terminal-prompt">&gt; © 2024-{new Date().getFullYear()} Gabriel Almir</p>
             <p className="text-terminal-green/60 terminal-prompt">&gt; Desenvolvido com Next.js e Tailwind CSS</p>
           </div>
         </div>
