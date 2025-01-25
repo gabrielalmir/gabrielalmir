@@ -32,13 +32,13 @@ export default async function GitHubProjects({ username }: { username: string })
       {projects.map((project: GitHubProject) => (
         <Card
           key={project.id}
-          className="flex flex-col group hover:scale-105 transition-all duration-300 bg-zinc-800/50 border-zinc-800/50 backdrop-blur-sm hover:bg-zinc-800/50"
+          className="terminal-window border border-terminal-green/20 bg-zinc-950 group hover:border-terminal-green transition-all duration-300"
         >
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-zinc-100 group-hover:text-blue-400 transition-colors">
-              {project.name}
+            <CardTitle className="text-lg font-bold group-hover:text-terminal-green transition-colors">
+              <span className="terminal-prompt">&gt; {project.name}</span>
             </CardTitle>
-            <CardDescription className="text-sm text-zinc-400 line-clamp-2">
+            <CardDescription className="text-sm text-terminal-green/60">
               {project.description || "No description provided"}
             </CardDescription>
           </CardHeader>
@@ -47,15 +47,15 @@ export default async function GitHubProjects({ username }: { username: string })
               {project.topics.map((topic: string) => (
                 <Badge
                   key={topic}
-                  variant="secondary"
-                  className="text-xs bg-blue-950/50 text-blue-400 hover:bg-blue-900/50 border border-blue-800/50"
+                  variant="outline"
+                  className="text-xs border-terminal-green/20 text-terminal-green/80 hover:text-terminal-green hover:border-terminal-green transition-colors"
                 >
-                  {topic}
+                  <span className="terminal-prompt">&gt; {topic}</span>
                 </Badge>
               ))}
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between items-center text-sm text-zinc-400 border-t border-zinc-800/50 pt-4">
+          <CardFooter className="flex justify-between items-center text-sm text-terminal-green/60 border-t border-terminal-green/20 pt-4">
             <div className="flex items-center gap-4">
               {[
                 { Icon: Star, count: project.stargazers_count, label: "stars" },
@@ -63,8 +63,8 @@ export default async function GitHubProjects({ username }: { username: string })
                 { Icon: Eye, count: project.watchers_count, label: "watchers" },
               ].map(({ Icon, count, label }) => (
                 <span key={label} className="flex items-center gap-1 group/stat">
-                  <Icon className="h-4 w-4 group-hover/stat:text-blue-400 transition-colors" />
-                  <span className="group-hover/stat:text-blue-400 transition-colors">{count}</span>
+                  <Icon className="h-4 w-4 group-hover/stat:text-terminal-green transition-colors" />
+                  <span className="group-hover/stat:text-terminal-green transition-colors">{count}</span>
                   <span className="sr-only">{label}</span>
                 </span>
               ))}
@@ -72,9 +72,9 @@ export default async function GitHubProjects({ username }: { username: string })
             <Link
               href={project.html_url}
               target="_blank"
-              className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+              className="text-terminal-green/80 hover:text-terminal-green font-medium transition-colors"
             >
-              Ver Projeto
+              <span className="terminal-prompt">&gt; View</span>
             </Link>
           </CardFooter>
         </Card>
@@ -82,4 +82,3 @@ export default async function GitHubProjects({ username }: { username: string })
     </div>
   )
 }
-
