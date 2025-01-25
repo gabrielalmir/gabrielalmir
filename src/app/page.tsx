@@ -17,12 +17,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-glow"></div>
       </div>
 
-      <header className="sticky top-0 z-50 w-full border-b border-terminal-green/20 bg-zinc-950/80 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60">
+      <header className="sticky top-0 z-50 w-screen border-b border-terminal-green/20 bg-zinc-950/80 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60">
         <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors">
               <CoffeeIcon className="h-6 w-6" />
-              <span className="terminal-prompt">&gt; gabrielalmir</span>
+              <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
             </Link>
             <div className="space-x-6">
               {[
@@ -44,7 +44,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-4 sm:container-sm xs:container-sm">
         <section className="py-20 md:py-32 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 animate-fade-in">
             <div className="inline-block px-4 py-2 border border-terminal-green/20 terminal-window">
