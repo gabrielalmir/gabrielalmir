@@ -22,7 +22,7 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors">
               <CoffeeIcon className="h-6 w-6" />
-              <span className="terminal-prompt">&gt; gabriel_almir</span>
+              <span className="terminal-prompt">&gt; gabrielalmir</span>
             </Link>
             <div className="space-x-6">
               {[
