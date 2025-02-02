@@ -70,16 +70,16 @@ export default function Home() {
 
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
               {[
-                { Icon: JavaOriginal, label: "Java" },
-                { Icon: SpringOriginal, label: "Spring" },
                 { Icon: NodejsPlain, label: "Node.js" },
                 { Icon: TypescriptPlain, label: "TypeScript" },
                 { Icon: JavascriptOriginal, label: "JavaScript" },
                 { Icon: NestjsOriginal, label: "NestJS" },
+                { Icon: JavaOriginal, label: "Java" },
+                { Icon: SpringOriginal, label: "Spring" },
                 { Icon: ReactOriginal, label: "React" },
-                { Icon: ApacheKafkaIcon, label: "Apache Kafka" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbPlain, label: "MongoDB" },
+                { Icon: ApacheKafkaIcon, label: "Apache Kafka" },
                 { Icon: DockerPlain, label: "Docker" },
                 { Icon: AmazonwebservicesPlainWordmark, label: "AWS" },
               ].map(({ Icon, label }) => (
