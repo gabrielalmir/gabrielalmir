@@ -4,16 +4,12 @@
 <h3 align="left">Software Engineer | Backend Developer</h3>
 <h4 align="left">Node.js, Java, TypeScript, Spring Boot, Docker & AWS</h4>
 
-I am a Backend Developer with a strong foundation in building scalable, high-performance solutions using **Node.js** and **Java**. My expertise lies in creating clean, maintainable, and efficient systems, leveraging modern development practices such as **Clean Architecture**, **SOLID principles**, and **Design Patterns**.
+I am a Backend Developer with a strong foundation in building scalable, high-performance solutions using **Node.js**. My expertise lies in creating clean, maintainable, and efficient systems, leveraging modern development practices such as **Clean Architecture**, **SOLID principles**, and **Design Patterns**.
 
 With extensive experience in microservices, RESTful APIs, and database integration (**SQL** and **NoSQL**), I focus on delivering solutions that meet business goals while ensuring technical excellence. Additionally, I have hands-on experience with containerization using **Docker** and cloud services like **AWS**, enabling efficient deployment and scalability.
 
 ### **Technologies I Work With**
 <div align="left">
-  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo" />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring logo" />
-  <img width="12" />
   <img src="https://skillicons.dev/icons?i=ts" height="30" alt="typescript logo" />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=js" height="30" alt="javascript logo" />

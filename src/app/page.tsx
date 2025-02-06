@@ -5,9 +5,10 @@ import Link from "next/link"
 import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
 import ApacheKafkaIcon from '@/components/icons/apache-kafka'
+import { FastifyIcon } from '@/components/icons/fastify'
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
-import { AmazonwebservicesPlainWordmark, DockerPlain, JavaOriginal, JavascriptOriginal, MongodbPlain, NestjsOriginal, NodejsPlain, PostgresqlOriginal, ReactOriginal, SpringOriginal, TypescriptPlain } from "devicons-react"
+import { AmazonwebservicesPlainWordmark, DockerPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NodejsPlain, PostgresqlOriginal, RabbitmqOriginal, ReactOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
@@ -58,11 +59,11 @@ export default function Home() {
 
             <div className="terminal-window border border-terminal-green/20 p-4 space-y-4">
               <TypingEffect
-                text="Desenvolvedor Backend especializado em Node.js e Java"
+                text="Desenvolvedor Backend especializado em Node.js"
                 className="text-lg"
               />
               <p className="text-terminal-green/80 leading-relaxed">
-                Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> e <strong className="text-terminal-green">Java</strong>.
+                Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong>.
                 Especializado em criar sistemas limpos e eficientes com <strong className="text-terminal-green">Clean Architecture</strong>,&nbsp;
                 <strong className="text-terminal-green">SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
               </p>
@@ -73,12 +74,12 @@ export default function Home() {
                 { Icon: NodejsPlain, label: "Node.js" },
                 { Icon: TypescriptPlain, label: "TypeScript" },
                 { Icon: JavascriptOriginal, label: "JavaScript" },
+                { Icon: FastifyIcon, label: "Fastify" },
                 { Icon: NestjsOriginal, label: "NestJS" },
-                { Icon: JavaOriginal, label: "Java" },
-                { Icon: SpringOriginal, label: "Spring" },
                 { Icon: ReactOriginal, label: "React" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbPlain, label: "MongoDB" },
+                { Icon: RabbitmqOriginal, label: "RabbitMQ" },
                 { Icon: ApacheKafkaIcon, label: "Apache Kafka" },
                 { Icon: DockerPlain, label: "Docker" },
                 { Icon: AmazonwebservicesPlainWordmark, label: "AWS" },
@@ -162,7 +163,7 @@ export default function Home() {
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-terminal-green/80">
               <p>
-                Sou Desenvolvedor Backend com uma base sólida na construção de soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> e <strong className="text-terminal-green">Java</strong>. Minha especialidade é criar sistemas limpos, manuteníveis e eficientes, aproveitando práticas modernas de desenvolvimento como <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">princípios SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
+                Sou Desenvolvedor Backend com uma base sólida na construção de soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong>. Minha especialidade é criar sistemas limpos, manuteníveis e eficientes, aproveitando práticas modernas de desenvolvimento como <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">princípios SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
