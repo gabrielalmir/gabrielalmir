@@ -2,7 +2,7 @@
 
 <h2 align="left">Hi! I'm Gabriel Almir!</h2>
 <h3 align="left">Software Engineer | Backend Developer</h3>
-<h4 align="left">Node.js, Java, TypeScript, Spring Boot, Docker & AWS</h4>
+<h4 align="left">Node.js, TypeScript, Spring Boot, Docker & AWS</h4>
 
 I am a Backend Developer with a strong foundation in building scalable, high-performance solutions using **Node.js**. My expertise lies in creating clean, maintainable, and efficient systems, leveraging modern development practices such as **Clean Architecture**, **SOLID principles**, and **Design Patterns**.
 
