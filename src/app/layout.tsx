@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Gabriel Almir - Backend Developer",
-  description: "Backend Developer focused on building scalable, high-performance solutions using Node.js. Expertise in creating clean, maintainable, and efficient systems, leveraging modern development practices such as Clean Architecture, SOLID principles, and Design Patterns.",
+  description: "Backend Developer focused on building scalable, high-performance solutions using Node.js, Java & Spring. Expertise in creating clean, maintainable, and efficient systems, leveraging modern development practices such as Clean Architecture, SOLID principles, and Design Patterns.",
 };
 
 export default function RootLayout({
