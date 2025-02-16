@@ -2,9 +2,9 @@
 
 ## Hi! I'm Gabriel Almir!
 ### Software Engineer | Backend Developer
-#### Node.js, TypeScript, NestJS, Java & Spring Boot, Docker & AWS
+#### Node.js, TypeScript, NestJS, Fastify, Next.js, React.js, Docker & AWS
 
-I am a Backend Developer with extensive experience in **Node.js** and **Java (Spring Boot)**, specializing in building scalable, high-performance, and maintainable systems. I thrive on developing clean and efficient architectures, following best practices such as **Clean Architecture, SOLID principles, and Design Patterns**.
+I am a Backend Developer with extensive experience in **Node.js**, specializing in building scalable, high-performance, and maintainable systems. I thrive on developing clean and efficient architectures, following best practices such as **Clean Architecture, SOLID principles, and Design Patterns**.
 
 With a strong background in **microservices, RESTful APIs, and database integrations (SQL & NoSQL)**, I am passionate about delivering business-driven solutions while ensuring technical excellence. I also have hands-on experience with **containerization (Docker, Kubernetes) and cloud computing (AWS, Terraform)**, enabling optimized deployments and seamless scalability.
 
@@ -18,9 +18,9 @@ With a strong background in **microservices, RESTful APIs, and database integrat
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo" />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=java" height="30" alt="java logo" />
+  <img src="https://skillicons.dev/icons?i=nextjs" height="30" alt="nextjs logo" />
   <img width="12" />
-  <img src="https://skillicons.dev/icons?i=spring" height="30" alt="spring boot logo" />
+  <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo" />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=postgresql" height="30" alt="postgresql logo" />
   <img width="12" />
