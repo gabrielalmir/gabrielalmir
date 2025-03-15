@@ -5,10 +5,9 @@ import Link from "next/link"
 import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
 import ApacheKafkaIcon from '@/components/icons/apache-kafka'
-import { FastifyIcon } from '@/components/icons/fastify'
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
-import { AmazonwebservicesPlainWordmark, DockerPlain, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsOriginal, NodejsPlain, PostgresqlOriginal, ReactOriginal, TypescriptPlain } from "devicons-react"
+import { AmazonwebservicesPlainWordmark, DockerPlain, GoOriginal, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsOriginal, NodejsPlain, PostgresqlOriginal, ReactOriginal, TypescriptPlain } from "devicons-react"
 
 export default function Home() {
   return (
@@ -59,11 +58,11 @@ export default function Home() {
 
             <div className="terminal-window border border-terminal-green/20 p-4 space-y-4">
               <TypingEffect
-                text="Desenvolvedor Backend especializado em Node.js"
+                text="Desenvolvedor Backend especializado em Node.js & Go"
                 className="text-lg"
               />
               <p className="text-terminal-green/80 leading-relaxed">
-                Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong>.
+                Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> & <strong className="text-terminal-green">Go</strong>.
                 Especializado em criar sistemas limpos e eficientes com <strong className="text-terminal-green">Clean Architecture</strong>,&nbsp;
                 <strong className="text-terminal-green">SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
               </p>
@@ -75,9 +74,9 @@ export default function Home() {
                 { Icon: TypescriptPlain, label: "TypeScript" },
                 { Icon: JavascriptOriginal, label: "JavaScript" },
                 { Icon: NestjsOriginal, label: "NestJS" },
-                { Icon: FastifyIcon, label: "Fastify" },
                 { Icon: NextjsOriginal, label: "Next.js" },
                 { Icon: ReactOriginal, label: "React" },
+                { Icon: GoOriginal, label: "Go" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbPlain, label: "MongoDB" },
                 { Icon: ApacheKafkaIcon, label: "Apache Kafka" },
@@ -163,7 +162,7 @@ export default function Home() {
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-terminal-green/80">
               <p>
-                Sou Desenvolvedor Backend com uma base sólida na construção de soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong>. Minha especialidade é criar sistemas limpos, manuteníveis e eficientes, aproveitando práticas modernas de desenvolvimento como <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">princípios SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
+                Sou Desenvolvedor Backend com uma base sólida na construção de soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> & <strong className="text-terminal-green">Go</strong>. Minha especialidade é criar sistemas limpos, manuteníveis e eficientes, aproveitando práticas modernas de desenvolvimento como <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">princípios SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
@@ -171,7 +170,7 @@ export default function Home() {
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
-                Atualmente, trabalho no <strong className="text-terminal-green">CTC</strong> como <strong className="text-terminal-green">Desenvolvedor Backend Node.js</strong>, desenvolvendo soluções backend utilizando <strong className="text-terminal-green">Node.js</strong> e <strong className="text-terminal-green">TypeScript</strong>. Minha função inclui a criação de middlewares integrados com <strong className="text-terminal-green">ODATA</strong> e APIs do <strong className="text-terminal-green">Power BI</strong>.
+                Atualmente, trabalho no <strong className="text-terminal-green">CTC</strong> como <strong className="text-terminal-green">Desenvolvedor Backend</strong>, desenvolvendo soluções backend utilizando <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">TypeScript</strong> & <strong className="text-terminal-green">Go</strong>. Minha função inclui a criação de middlewares integrados com <strong className="text-terminal-green">ODATA</strong> e APIs do <strong className="text-terminal-green">Power BI</strong>.
               </p>
               <div className="text-center mt-8">
                 <Link href="https://linkedin.com/in/gabrielalmir" target="_blank">
