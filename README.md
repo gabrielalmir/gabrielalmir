@@ -22,6 +22,8 @@ With a strong background in **microservices, RESTful APIs, and database integrat
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=react" height="30" alt="react logo" />
   <img width="12" />
+  <img src="https://skillicons.dev/icons?i=go" height="30" alt="go logo" />
+  <img width="12" />
   <img src="https://skillicons.dev/icons?i=postgresql" height="30" alt="postgresql logo" />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=mongodb" height="30" alt="mongodb logo" />
