@@ -1,4 +1,4 @@
-<img width="100%" src="https://i.imgur.com/VzVjAzh.png" />
+<img width="100%" src="./docs/cover.png" />
 
 ## Hi! I'm Gabriel Almir!
 ### Software Engineer | Backend Developer
