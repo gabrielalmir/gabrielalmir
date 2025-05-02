@@ -4,7 +4,20 @@
 
 @layer base {
   :root {
-    --terminal-green: 95 255 135;
+    --terminal-green: 153 255 228; /* brightGreen */
+    --background: 16 16 16; /* background */
+    --foreground: 255 255 255; /* foreground */
+    --primary: 143 185 159; /* green */
+    --primary-foreground: 255 255 255; /* foreground */
+    --secondary: 186 174 218; /* brightBlue */
+    --secondary-foreground: 255 255 255; /* foreground */
+    --destructive: 245 161 145; /* red */
+    --destructive-foreground: 255 255 255; /* foreground */
+    --muted: 160 160 160; /* brightCyan */
+    --muted-foreground: 255 255 255; /* foreground */
+    --accent: 236 170 214; /* brightPurple */
+    --accent-foreground: 255 255 255; /* foreground */
+    --selection-background: 50 50 50; /* selectionBackground */
   }
 }
 

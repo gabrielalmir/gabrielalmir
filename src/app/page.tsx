@@ -1,4 +1,4 @@
-import { Code2Icon, CoffeeIcon, Github, Instagram, Linkedin, MailIcon, Twitter, User2Icon } from 'lucide-react'
+import { Code2Icon, CoffeeIcon, Github, GithubIcon, Instagram, Linkedin, LinkedinIcon, MailIcon, Twitter, User2Icon } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 
@@ -28,6 +28,8 @@ export default function Home() {
                 { href: "#projetos", icon: Code2Icon, label: "projetos" },
                 { href: "#sobre", icon: User2Icon, label: "sobre" },
                 { href: "#contato", icon: MailIcon, label: "contato" },
+                { href: 'https://linkedin.com/in/gabrielalmir', icon: LinkedinIcon, label: 'LinkedIn'},
+                { href: 'https://github.com/gabrielalmir', icon: GithubIcon, label: 'GitHub'},
               ].map(({ href, icon: Icon, label }) => (
                 <Link
                   key={href}
@@ -57,14 +59,12 @@ export default function Home() {
 
             <div className="terminal-window border border-terminal-green/20 p-4 space-y-4">
               <TypingEffect
-                text="Desenvolvedor Backend especializado em Node.js & Java (Spring Boot)"
+                text="Desenvolvedor Backend especializado em Node.js & Java"
                 className="text-lg"
               />
-              <p className="text-terminal-green/80 leading-relaxed">
-                Construo soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> & <strong className="text-terminal-green">Java (Spring Boot)</strong>.
-                Especializado em criar sistemas limpos e eficientes com <strong className="text-terminal-green">Clean Architecture</strong>,&nbsp;
-                <strong className="text-terminal-green">SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
-              </p>
+                <p className="text-terminal-green/80 leading-relaxed">
+                Sou engenheiro de software backend com mais de 6 anos de experiência em sistemas distribuídos, apaixonado por performance, arquitetura limpa e tecnologias que resolvem problemas reais. Atuo principalmente com <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">Java (Spring Boot)</strong> e <strong className="text-terminal-green">AWS</strong>, e mantenho projetos open-source voltados para escalabilidade, design e automação.
+                </p>
             </div>
 
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
