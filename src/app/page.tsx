@@ -6,7 +6,7 @@ import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
-import { AmazonwebservicesPlainWordmark, DockerPlain, JavaOriginal, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsOriginal, NodejsPlain, PostgresqlOriginal, ReactOriginal, SpringOriginal, TypescriptPlain } from "devicons-react"
+import { AmazonwebservicesPlainWordmark, DockerOriginal, JavaOriginal, JavascriptOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, ReactOriginal, SpringOriginal, TypescriptOriginal } from "devicons-react"
 
 export default function Home() {
   return (
@@ -69,8 +69,8 @@ export default function Home() {
 
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
               {[
-                { Icon: NodejsPlain, label: "Node.js" },
-                { Icon: TypescriptPlain, label: "TypeScript" },
+                { Icon: NodejsOriginal, label: "Node.js" },
+                { Icon: TypescriptOriginal, label: "TypeScript" },
                 { Icon: JavascriptOriginal, label: "JavaScript" },
                 { Icon: NestjsOriginal, label: "NestJS" },
                 { Icon: NextjsOriginal, label: "Next.js" },
@@ -78,8 +78,8 @@ export default function Home() {
                 { Icon: JavaOriginal, label: "Java" },
                 { Icon: SpringOriginal, label: "Spring Boot" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
-                { Icon: MongodbPlain, label: "MongoDB" },
-                { Icon: DockerPlain, label: "Docker" },
+                { Icon: MongodbOriginal, label: "MongoDB" },
+                { Icon: DockerOriginal, label: "Docker" },
                 { Icon: AmazonwebservicesPlainWordmark, label: "AWS" },
               ].map(({ Icon, label }) => (
                 <div
