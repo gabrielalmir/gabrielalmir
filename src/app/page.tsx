@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
-import ApacheKafkaIcon from '@/components/icons/apache-kafka'
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
 import { AmazonwebservicesPlainWordmark, DockerPlain, JavaOriginal, JavascriptOriginal, MongodbPlain, NestjsOriginal, NextjsOriginal, NodejsPlain, PostgresqlOriginal, ReactOriginal, SpringOriginal, TypescriptPlain } from "devicons-react"
@@ -80,7 +79,6 @@ export default function Home() {
                 { Icon: SpringOriginal, label: "Spring Boot" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbPlain, label: "MongoDB" },
-                { Icon: ApacheKafkaIcon, label: "Apache Kafka" },
                 { Icon: DockerPlain, label: "Docker" },
                 { Icon: AmazonwebservicesPlainWordmark, label: "AWS" },
               ].map(({ Icon, label }) => (
