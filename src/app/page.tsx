@@ -28,8 +28,8 @@ export default function Home() {
                 { href: "#projetos", icon: Code2Icon, label: "projetos" },
                 { href: "#sobre", icon: User2Icon, label: "sobre" },
                 { href: "#contato", icon: MailIcon, label: "contato" },
-                { href: 'https://linkedin.com/in/gabrielalmir', icon: LinkedinIcon, label: 'LinkedIn'},
-                { href: 'https://github.com/gabrielalmir', icon: GithubIcon, label: 'GitHub'},
+                { href: 'https://linkedin.com/in/gabrielalmir', icon: LinkedinIcon, label: 'LinkedIn' },
+                { href: 'https://github.com/gabrielalmir', icon: GithubIcon, label: 'GitHub' },
               ].map(({ href, icon: Icon, label }) => (
                 <Link
                   key={href}
@@ -62,9 +62,9 @@ export default function Home() {
                 text="Desenvolvedor Backend especializado em Node.js & Java"
                 className="text-lg"
               />
-                <p className="text-terminal-green/80 leading-relaxed">
+              <p className="text-terminal-green/80 leading-relaxed">
                 Sou engenheiro de software backend com mais de 6 anos de experiência em sistemas distribuídos, apaixonado por performance, arquitetura limpa e tecnologias que resolvem problemas reais. Atuo principalmente com <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">Java (Spring Boot)</strong> e <strong className="text-terminal-green">AWS</strong>, e mantenho projetos open-source voltados para escalabilidade, design e automação.
-                </p>
+              </p>
             </div>
 
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
@@ -161,15 +161,24 @@ export default function Home() {
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-terminal-green/80">
               <p>
-                Sou Desenvolvedor Backend com uma base sólida na construção de soluções escaláveis e de alto desempenho utilizando <strong className="text-terminal-green">Node.js</strong> & <strong className="text-terminal-green">Java (Spring Boot)</strong>. Minha especialidade é criar sistemas limpos, manuteníveis e eficientes, aproveitando práticas modernas de desenvolvimento como <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">princípios SOLID</strong> e <strong className="text-terminal-green">Design Patterns</strong>.
+                Engenheiro de Software com mais de 6 anos de experiência em desenvolvimento backend com foco em escalabilidade, arquitetura limpa e sistemas distribuídos. Especialista em <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">TypeScript</strong>, <strong className="text-terminal-green">NestJS</strong>, <strong className="text-terminal-green">Java (Spring Boot)</strong>, atuo com projetos baseados em <strong className="text-terminal-green">AWS</strong> (<strong className="text-terminal-green">Lambda</strong>, <strong className="text-terminal-green">S3</strong>, <strong className="text-terminal-green">SQS</strong>, <strong className="text-terminal-green">RDS</strong>, <strong className="text-terminal-green">DynamoDB</strong>) utilizando práticas modernas como <strong className="text-terminal-green">TDD</strong>, <strong className="text-terminal-green">DDD</strong>, <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">CI/CD</strong> com <strong className="text-terminal-green">GitHub Actions</strong> e análise estática com <strong className="text-terminal-green">SonarQube</strong>.
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
-                Com ampla experiência em microsserviços, APIs RESTful e integração com bancos de dados (<strong className="text-terminal-green">SQL</strong> e <strong className="text-terminal-green">NoSQL</strong>), foco em entregar soluções que atendam aos objetivos de negócios garantindo excelência técnica. Além disso, tenho experiência prática com containerização usando <strong className="text-terminal-green">Docker</strong> e serviços em nuvem como <strong className="text-terminal-green">AWS</strong>, possibilitando implantações eficientes e escalabilidade.
+                Tenho experiência com mensageria (<strong className="text-terminal-green">RabbitMQ</strong>, <strong className="text-terminal-green">SQS</strong>), caching com <strong className="text-terminal-green">Redis</strong>, bancos <strong className="text-terminal-green">SQL</strong> e <strong className="text-terminal-green">NoSQL</strong>, além de integração com APIs internas e externas. Já desenvolvi middlewares, sistemas de gestão documental e aplicações voltadas a dados com foco em rastreabilidade, performance e automação.
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
-                Atualmente, trabalho no <strong className="text-terminal-green">CTC</strong> como <strong className="text-terminal-green">Desenvolvedor Backend</strong>, desenvolvendo soluções backend utilizando <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">TypeScript</strong> & <strong className="text-terminal-green">Java (Spring Boot)</strong>. Minha função inclui a criação de middlewares integrados com <strong className="text-terminal-green">ODATA</strong> e APIs do <strong className="text-terminal-green">Power BI</strong>.
+                Atualmente, meu foco está em construir soluções resilientes, com arquitetura orientada a eventos, segurança e observabilidade. Estou em constante evolução técnica, sempre buscando entregar valor ao negócio com soluções bem pensadas e sustentáveis.
+              </p>
+              <div className="h-px bg-terminal-green/20" />
+              <p>
+                <strong className="text-terminal-green">Stack Atual:</strong> Node.js, TypeScript, NestJS, React, PostgreSQL, Java, Spring Boot, Redis, Docker <br />
+                <strong className="text-terminal-green">Cloud:</strong> AWS (Lambda, S3, SQS, DynamoDB, RDS, API Gateway) <br />
+                <strong className="text-terminal-green">Mensageria:</strong> RabbitMQ, SQS, (estudando Kafka) <br />
+                <strong className="text-terminal-green">Infra:</strong> Docker, GitHub Actions, SonarQube, CI/CD <br />
+                <strong className="text-terminal-green">Boas Práticas:</strong> Clean Architecture, SOLID, TDD, DDD, Lint, ESLint/Prettier <br />
+                <strong className="text-terminal-green">Ferramentas:</strong> GitHub, Jira, Figma, Postman, Swagger
               </p>
               <div className="text-center mt-8">
                 <Link href="https://linkedin.com/in/gabrielalmir" target="_blank">
