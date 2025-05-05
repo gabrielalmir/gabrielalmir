@@ -6,7 +6,7 @@ import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
-import { AmazonwebservicesPlainWordmark, DockerOriginal, JavaOriginal, JavascriptOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, ReactOriginal, SpringOriginal, TypescriptOriginal } from "devicons-react"
+import { AmazonwebservicesPlainWordmark, DockerOriginal, JavascriptOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, ReactOriginal, TypescriptOriginal } from "devicons-react"
 
 export default function Home() {
   return (
@@ -59,11 +59,11 @@ export default function Home() {
 
             <div className="terminal-window border border-terminal-green/20 p-4 space-y-4">
               <TypingEffect
-                text="Desenvolvedor Backend especializado em Node.js & Java"
+                text="Desenvolvedor Backend especializado em Node.js"
                 className="text-lg"
               />
               <p className="text-terminal-green/80 leading-relaxed">
-                Sou engenheiro de software backend com mais de 6 anos de experiência em sistemas distribuídos, apaixonado por performance, arquitetura limpa e tecnologias que resolvem problemas reais. Atuo principalmente com <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">Java (Spring Boot)</strong> e <strong className="text-terminal-green">AWS</strong>, e mantenho projetos open-source voltados para escalabilidade, design e automação.
+                Sou engenheiro de software backend com mais de 6 anos de experiência em sistemas distribuídos, apaixonado por performance, arquitetura limpa e tecnologias que resolvem problemas reais. Atuo principalmente com <strong className="text-terminal-green">Node.js</strong> e <strong className="text-terminal-green">AWS</strong>, e mantenho projetos open-source voltados para escalabilidade, design e automação.
               </p>
             </div>
 
@@ -75,8 +75,6 @@ export default function Home() {
                 { Icon: NestjsOriginal, label: "NestJS" },
                 { Icon: NextjsOriginal, label: "Next.js" },
                 { Icon: ReactOriginal, label: "React" },
-                { Icon: JavaOriginal, label: "Java" },
-                { Icon: SpringOriginal, label: "Spring Boot" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbOriginal, label: "MongoDB" },
                 { Icon: DockerOriginal, label: "Docker" },
@@ -161,7 +159,7 @@ export default function Home() {
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-terminal-green/80">
               <p>
-                Engenheiro de Software com mais de 6 anos de experiência em desenvolvimento backend com foco em escalabilidade, arquitetura limpa e sistemas distribuídos. Especialista em <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">TypeScript</strong>, <strong className="text-terminal-green">NestJS</strong>, <strong className="text-terminal-green">Java (Spring Boot)</strong>, atuo com projetos baseados em <strong className="text-terminal-green">AWS</strong> (<strong className="text-terminal-green">Lambda</strong>, <strong className="text-terminal-green">S3</strong>, <strong className="text-terminal-green">SQS</strong>, <strong className="text-terminal-green">RDS</strong>, <strong className="text-terminal-green">DynamoDB</strong>) utilizando práticas modernas como <strong className="text-terminal-green">TDD</strong>, <strong className="text-terminal-green">DDD</strong>, <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">CI/CD</strong> com <strong className="text-terminal-green">GitHub Actions</strong> e análise estática com <strong className="text-terminal-green">SonarQube</strong>.
+                Engenheiro de Software com mais de 6 anos de experiência em desenvolvimento backend com foco em escalabilidade, arquitetura limpa e sistemas distribuídos. Especialista em <strong className="text-terminal-green">Node.js</strong>, <strong className="text-terminal-green">TypeScript</strong>, <strong className="text-terminal-green">NestJS</strong>, atuo com projetos baseados em <strong className="text-terminal-green">AWS</strong> (<strong className="text-terminal-green">Lambda</strong>, <strong className="text-terminal-green">S3</strong>, <strong className="text-terminal-green">SQS</strong>, <strong className="text-terminal-green">RDS</strong>, <strong className="text-terminal-green">DynamoDB</strong>) utilizando práticas modernas como <strong className="text-terminal-green">TDD</strong>, <strong className="text-terminal-green">DDD</strong>, <strong className="text-terminal-green">Clean Architecture</strong>, <strong className="text-terminal-green">CI/CD</strong> com <strong className="text-terminal-green">GitHub Actions</strong> e análise estática com <strong className="text-terminal-green">SonarQube</strong>.
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
@@ -173,7 +171,7 @@ export default function Home() {
               </p>
               <div className="h-px bg-terminal-green/20" />
               <p>
-                <strong className="text-terminal-green">Stack Atual:</strong> Node.js, TypeScript, NestJS, React, PostgreSQL, Java, Spring Boot, Redis, Docker <br />
+                <strong className="text-terminal-green">Stack Atual:</strong> Node.js, TypeScript, NestJS, React, PostgreSQL, Redis, Docker <br />
                 <strong className="text-terminal-green">Cloud:</strong> AWS (Lambda, S3, SQS, DynamoDB, RDS, API Gateway) <br />
                 <strong className="text-terminal-green">Mensageria:</strong> RabbitMQ, SQS, (estudando Kafka) <br />
                 <strong className="text-terminal-green">Infra:</strong> Docker, GitHub Actions, SonarQube, CI/CD <br />
