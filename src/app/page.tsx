@@ -6,7 +6,7 @@ import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
-import { AmazonwebservicesPlainWordmark, DockerOriginal, JavascriptOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, ReactOriginal, TypescriptOriginal } from "devicons-react"
+import { AmazonwebservicesPlainWordmark, DockerOriginal, JavascriptOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react"
 
 export default function Home() {
   return (
@@ -75,6 +75,8 @@ export default function Home() {
                 { Icon: NestjsOriginal, label: "NestJS" },
                 { Icon: NextjsOriginal, label: "Next.js" },
                 { Icon: ReactOriginal, label: "React" },
+                { Icon: RedisOriginal, label: "Redis" },
+                { Icon: RabbitmqOriginal, label: "RabbitMQ" },
                 { Icon: PostgresqlOriginal, label: "PostgreSQL" },
                 { Icon: MongodbOriginal, label: "MongoDB" },
                 { Icon: DockerOriginal, label: "Docker" },
