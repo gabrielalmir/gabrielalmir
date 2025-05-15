@@ -1,4 +1,4 @@
-<img width="100%" src="./docs/cover.png" />
+<img width="100%" src="./docs/cover.jpg" />
 
 ## Hi! I'm Gabriel Almir!
 ### Software Engineer | Backend Developer
