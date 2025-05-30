@@ -35,6 +35,7 @@ export default function Home() {
                   key={href}
                   href={href}
                   className="hover:text-terminal-green/80 transition-colors inline-flex items-center gap-2 terminal-link"
+                  aria-label={label}
                 >
                   <Icon className="h-4 w-4" />
                   <span className="hidden sm:inline terminal-prompt">&gt; {label}</span>
@@ -96,7 +97,7 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-4">
               <Link href="mailto:gabr.almir@gmail.com">
-                <Button size="lg" className="terminal-button">
+                <Button size="lg" className="terminal-button min-w-12 min-h-12 flex items-center justify-center">
                   <MailIcon className="h-4 w-4 mr-2" />
                   <span className="terminal-prompt">&gt; CONTATO</span>
                 </Button>
@@ -110,7 +111,7 @@ export default function Home() {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="terminal-button-outline"
+                      className="terminal-button-outline min-w-12 min-h-12 flex items-center justify-center"
                     >
                       <Icon className="h-4 w-4" />
                       <span className="sr-only">{label}</span>
