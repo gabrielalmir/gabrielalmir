@@ -15,10 +15,12 @@ Specializing in **microservices architecture**, **event-driven systems**, and **
 ## 🚀 Impact & Results
 
 **CTC** • *Backend Engineer* • Aug 2023 - Present
-- **90% faster** customer relationship system (Node.js + NestJS)
-- **98% time reduction** in document processing via Python AI automation
-- **Zero-downtime** CI/CD pipeline for pharmaceutical compliance systems
-- **Event-driven architecture** for real-time data synchronization
+- Developed middleware and REST/ODATA APIs using Node.js, NestJS, and TypeScript, integrating ERP systems and analytical tools
+- Implemented customer relationship system using Node.js and SQL Server, reducing loading time by 90%
+- Created document control system for regulated pharmaceutical industry, ensuring compliance and traceability
+- Structured CI/CD for critical modular monolith using GitHub Actions, ensuring consistent deployments across multiple environments
+- Led strategic projects focused on process optimization and automation, with data-driven decisions
+- Developed Python service for intelligent package insert mapping, integrating SAP and Totvs ERP with string comparison heuristics, reducing search time by 98% (from ~1min to instant access)
 
 **Key Technologies:** Node.js, NestJS, TypeScript, Python, AWS, PostgreSQL, RabbitMQ
 
@@ -29,20 +31,28 @@ Specializing in **microservices architecture**, **event-driven systems**, and **
 </div>
 
 **Core:** Node.js • TypeScript • Python • NestJS • React
+
 **Cloud:** AWS (Lambda, S3, SQS, RDS) • Docker • Terraform
+
 **Data:** PostgreSQL • MongoDB • Redis • RabbitMQ
+
 **AI/ML:** LangChain • LLMs • RAG • Pandas • Scikit-learn
+
 **Practices:** Clean Architecture • SOLID • TDD • Event-Driven Design
 
 ## 📈 Experience Highlights
 
-**Laboratório Cristália** • *Node.js Developer* • Apr-Aug 2023
+### **Laboratório Cristália** • *Node.js Developer* • Apr-Aug 2023
 Architecture modernization • Enhanced testing practices
 
-**Freelancer** • *Full Stack Developer* • 2016-2023
+
+### **Freelancer** • *Full Stack Developer* • 2016-2023
+
 REST APIs • JWT Auth • RabbitMQ • Redis optimization
 
-**Diolinux** • *Full Stack Developer* • 2013-2016
+
+### **Diolinux** • *Full Stack Developer* • 2013-2016
+
 Legacy system modernization • Performance optimization
 
 ## 🎓 Education
