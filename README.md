@@ -122,5 +122,5 @@ Currently studying **applied AI with Python**, focusing on LLMs, RAG, and intell
 ---
 
 <div align="center">
-  <i>"Always striving to deliver resilient, performant solutions aligned with business needs."</i>
+  <i>"I don't read books about the world. I go out there and see it for myself." - Ezreal</i>
 </div>
