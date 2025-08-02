@@ -1,10 +1,10 @@
-import { Code2Icon, CoffeeIcon, ExternalLink, Filter, Github, GithubIcon, Instagram, Linkedin, LinkedinIcon, MailIcon, Twitter, User2Icon } from 'lucide-react'
+import { Code2Icon, CoffeeIcon, ExternalLink, Filter, Github, GithubIcon, Heart, Instagram, Linkedin, LinkedinIcon, MailIcon, Twitter, User2Icon } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 
 import { Ascii } from '@/components/ascii'
 import GitHubProjects from "@/components/github-projects"
-import { ModernResumeSection } from '@/components/ModernResumeSection'
+import { ModernResumeSection } from '@/components/modern-resume-section'
 import { TypingEffect } from '@/components/typing-effect'
 import { Button } from "@/components/ui/button"
 import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react"
@@ -22,10 +22,12 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors" aria-label='logo gabrielalmir'>
               <CoffeeIcon className="h-6 w-6" />
-              <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
+              <span className="terminal-prompt terminal-prompt-circle hidden sm:block">&gt; gabrielalmir</span>
             </Link>
             <div className="space-x-6">
               {[
+                { href: "/blog", icon: Code2Icon, label: "blog" },
+                { href: "/case-studies", icon: User2Icon, label: "case studies" },
                 { href: "#projetos", icon: Code2Icon, label: "projetos" },
                 { href: "#sobre", icon: User2Icon, label: "sobre" },
                 { href: "#contato", icon: MailIcon, label: "contato" },
@@ -37,6 +39,7 @@ export default function Home() {
                   href={href}
                   className="hover:text-terminal-green/80 transition-colors inline-flex items-center gap-2 terminal-link"
                   aria-label={label}
+                  target={href.startsWith('http') ? '_blank' : undefined}
                 >
                   <Icon className="h-4 w-4" />
                   <span className="hidden sm:inline terminal-prompt">&gt; {label}</span>
@@ -88,7 +91,7 @@ export default function Home() {
                 Lidero adoção de práticas modernas que reduzem tempo de resposta e aumentam confiabilidade de aplicações críticas.
               </p>
               <p className="text-terminal-green/80 leading-relaxed">
-                Atualmente explorando <strong className="text-terminal-green">IA generativa</strong> e <strong className="text-terminal-green">otimização</strong>
+                Atualmente explorando <strong className="text-terminal-green">IA generativa</strong> e <strong className="text-terminal-green">otimização</strong>{' '}
                 para integrar inteligência aos produtos, combinando Node.js/AWS com Python/ML.
               </p>
             </div>
@@ -256,7 +259,7 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="mb-2 terminal-prompt">&gt; © 2024-{new Date().getFullYear()} Gabriel Almir</p>
-            <p className="text-terminal-green/60 terminal-prompt">&gt; Desenvolvido com Next.js e Tailwind CSS</p>
+            <p className="text-terminal-green/60 terminal-prompt">&gt; Feito com amor, código e café <Heart className="inline-block w-4 h-4 text-red-500 animate-pulse" /></p>
           </div>
         </div>
       </footer>

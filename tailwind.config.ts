@@ -5,6 +5,12 @@ const config = {
 	content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
 	theme: {
 		extend: {
+			fontFamily: {
+				'jetbrains': ['var(--font-jetbrains)', 'JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
+				'space': ['var(--font-space)', 'Space Mono', 'Consolas', 'Monaco', 'monospace'],
+				'fira': ['var(--font-fira)', 'Fira Code', 'Consolas', 'Monaco', 'monospace'],
+				'mono': ['var(--font-jetbrains)', 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', 'monospace'],
+			},
 			colors: {
 				"terminal-green": "rgb(var(--terminal-green) / <alpha-value>)",
 				border: "hsl(var(--border))",

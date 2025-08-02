@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Globe, Server, Cloud, Bot, BarChart, Wrench, GraduationCap, MapPin, Calendar } from 'lucide-react';
+import { BarChart, Bot, Calendar, Cloud, Code, Database, Globe, GraduationCap, MapPin, Server, Wrench } from 'lucide-react';
+import React from 'react';
 
 interface TerminalWindowProps {
   children: React.ReactNode;
@@ -33,7 +33,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children, title }) => (
 );
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ title, company, period, description }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -117,7 +117,7 @@ export const ModernResumeSection: React.FC = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="terminal-window border border-terminal-green/20 p-4 mb-12"
@@ -126,12 +126,12 @@ export const ModernResumeSection: React.FC = () => {
             <span className="terminal-prompt">&gt; RESUMO PROFISSIONAL_</span>
           </h2>
         </motion.div>
-        
+
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           <TerminalWindow title="~/summary.txt">
             <p className="leading-relaxed">{resumeData.summary}</p>
           </TerminalWindow>
-          
+
           <TerminalWindow title="~/education.md">
             <div className="space-y-4">
               {resumeData.education.map((edu, i) => (
@@ -168,7 +168,7 @@ export const ModernResumeSection: React.FC = () => {
             </div>
           </TerminalWindow>
         </div>
-        
+
         <div className="grid lg:grid-cols-2 gap-8">
           <TerminalWindow title="~/skills.json">
             <div className="space-y-4">
@@ -183,7 +183,7 @@ export const ModernResumeSection: React.FC = () => {
               ))}
             </div>
           </TerminalWindow>
-          
+
           <TerminalWindow title="~/languages.ini">
             <div className="space-y-3">
               {resumeData.languages.map((lang, i) => (

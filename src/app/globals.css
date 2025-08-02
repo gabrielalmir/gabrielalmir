@@ -26,9 +26,12 @@ html {
 }
 
 body {
-  font-family: monospace;
+  font-family: var(--font-jetbrains), 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
   overflow-x: hidden;
   min-width: 100%;
+  font-feature-settings: "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -148,7 +151,7 @@ body {
 }
 
 .terminal-button-outline {
-  @apply border-terminal-green/20 text-terminal-green hover:bg-terminal-green/10 hover:border-terminal-green transition-all;
+  @apply border border-terminal-green/40 text-terminal-green hover:bg-terminal-green/10 transition-all;
   position: relative;
   overflow: hidden;
 }
@@ -166,6 +169,207 @@ body {
 
 .terminal-button-outline:hover::before {
   left: 100%;
+}
+
+/* Font family utilities */
+.font-jetbrains {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+}
+
+.font-space {
+  font-family: var(--font-space), 'Space Mono', 'Consolas', 'Monaco', monospace;
+}
+
+.font-fira {
+  font-family: var(--font-fira), 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* Blog and Case Studies specific styles */
+.prose-terminal {
+  color: rgb(var(--terminal-green) / 0.9);
+  font-family: var(--font-space), 'Space Mono', 'Consolas', 'Monaco', monospace;
+  line-height: 1.7;
+  letter-spacing: 0.025em;
+}
+
+.prose-terminal h1,
+.prose-terminal h2,
+.prose-terminal h3,
+.prose-terminal h4 {
+  color: rgb(var(--terminal-green));
+  font-weight: bold;
+}
+
+.prose-terminal code {
+  background-color: rgb(var(--terminal-green) / 0.1);
+  color: rgb(var(--terminal-green));
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: var(--font-fira), 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.prose-terminal pre {
+  background-color: rgb(24 24 27);
+  border: 1px solid rgb(var(--terminal-green) / 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose-terminal pre code {
+  background: none;
+  padding: 0;
+  color: rgb(var(--terminal-green) / 0.9);
+  font-family: var(--font-fira), 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-feature-settings: "liga" 1, "calt" 1;
+  line-height: 1.6;
+}
+
+.prose-terminal blockquote {
+  border-left: 4px solid rgb(var(--terminal-green) / 0.4);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: rgb(var(--terminal-green) / 0.8);
+}
+
+.prose-terminal ul,
+.prose-terminal ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.prose-terminal li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-terminal li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: rgb(var(--terminal-green));
+}
+
+.prose-terminal a {
+  color: rgb(var(--terminal-green));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--terminal-green) / 0.4);
+  transition: all 0.3s ease;
+}
+
+.prose-terminal a:hover {
+  text-decoration-color: rgb(var(--terminal-green));
+  text-shadow: 0 0 5px rgb(var(--terminal-green) / 0.5);
+}
+
+/* Terminal link styles */
+.terminal-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.terminal-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: rgb(var(--terminal-green));
+  transition: width 0.3s ease;
+}
+
+.terminal-link:hover::after {
+  width: 100%;
+}
+
+/* Terminal prompt styles */
+.terminal-prompt {
+  font-family: var(--font-jetbrains), 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 600;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.terminal-prompt-circle::before {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: rgb(var(--terminal-green));
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  animation: blink 1.5s infinite;
+}
+
+/* Loading skeleton for better UX */
+.loading-skeleton {
+  background: linear-gradient(90deg,
+    rgb(var(--terminal-green) / 0.1) 25%,
+    rgb(var(--terminal-green) / 0.2) 50%,
+    rgb(var(--terminal-green) / 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .terminal-window {
+    padding: 1rem;
+  }
+
+  .prose-terminal {
+    font-size: 0.875rem;
+  }
+
+  .prose-terminal h1 {
+    font-size: 1.5rem;
+  }
+
+  .prose-terminal h2 {
+    font-size: 1.25rem;
+  }
+
+  .prose-terminal h3 {
+    font-size: 1.125rem;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(24 24 27);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--terminal-green) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--terminal-green) / 0.5);
 }
 
 .terminal-prompt {
