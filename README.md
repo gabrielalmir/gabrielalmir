@@ -30,6 +30,8 @@ Specializing in **microservices architecture**, **event-driven systems**, and **
   <img src="https://skillicons.dev/icons?i=nodejs,ts,python,nestjs,react,nextjs,aws,docker,postgresql,redis" height="40" />
 </div>
 
+#### 🔧 Tools
+
 **Core:** Node.js • TypeScript • Python • NestJS • React
 
 **Cloud:** AWS (Lambda, S3, SQS, RDS) • Docker • Terraform
