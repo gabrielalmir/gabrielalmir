@@ -1,9 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, Tag, Share2, Github, ExternalLink, Coffee, Terminal, Code2, BookOpen, User } from 'lucide-react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { ArrowLeft, BookOpen, Calendar, Clock, Code2, Coffee, ExternalLink, Github, Share2, Terminal, User } from 'lucide-react';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
 
@@ -82,7 +82,7 @@ import { CircuitBreaker } from 'opossum';
 
 class ServiceClient {
   private breaker: CircuitBreaker;
-  
+
   constructor(private baseURL: string) {
     this.breaker = new CircuitBreaker(this.makeRequest.bind(this), {
       timeout: 3000,
@@ -90,7 +90,7 @@ class ServiceClient {
       resetTimeout: 30000
     });
   }
-  
+
   async makeRequest(path: string, data?: any) {
     return axios.post(\`\${this.baseURL}\${path}\`, data, {
       timeout: 3000,
@@ -107,7 +107,7 @@ import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 
 class EventPublisher {
   constructor(private sqsClient: SQSClient) {}
-  
+
   async publishEvent(eventType: string, payload: any) {
     const message = {
       eventType,
@@ -115,7 +115,7 @@ class EventPublisher {
       timestamp: new Date().toISOString(),
       correlationId: generateCorrelationId()
     };
-    
+
     await this.sqsClient.send(new SendMessageCommand({
       QueueUrl: process.env.EVENT_QUEUE_URL,
       MessageBody: JSON.stringify(message)
@@ -136,10 +136,10 @@ import { v4 as uuidv4 } from 'uuid';
 export function tracingMiddleware(req: Request, res: Response, next: NextFunction) {
   const traceId = req.headers['x-trace-id'] || uuidv4();
   const spanId = uuidv4();
-  
+
   req.traceContext = { traceId, spanId };
   res.setHeader('x-trace-id', traceId);
-  
+
   // Log estruturado
   console.log(JSON.stringify({
     level: 'info',
@@ -150,7 +150,7 @@ export function tracingMiddleware(req: Request, res: Response, next: NextFunctio
     path: req.path,
     timestamp: new Date().toISOString()
   }));
-  
+
   next();
 }
 \`\`\`
@@ -220,7 +220,7 @@ interface BlogPostPageProps {
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = use(params);
   const post = blogPosts[id];
-  
+
   if (!post) {
     notFound();
   }
@@ -263,7 +263,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Back Button */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -278,7 +278,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         </motion.div>
 
         {/* Article Header */}
-        <motion.header 
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -295,7 +295,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <h1 className="text-3xl md:text-4xl font-bold text-terminal-green mb-4 leading-tight">
               {post.title}
             </h1>
-            
+
             <p className="text-xl text-terminal-green/80 mb-6 leading-relaxed">
               {post.excerpt}
             </p>
@@ -344,7 +344,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         </motion.header>
 
         {/* Article Content */}
-        <motion.article 
+        <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -355,12 +355,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               <Terminal className="h-5 w-5 text-terminal-green" />
               <span className="terminal-prompt">&gt; cat article.md</span>
             </div>
-            
+
             <div className="prose prose-invert prose-terminal max-w-none">
               <div className="text-terminal-green/90 leading-relaxed space-y-6">
                 {post.content.split('\n').map((paragraph, index) => {
                   if (paragraph.trim() === '') return null;
-                  
+
                   // Handle headers
                   if (paragraph.startsWith('# ')) {
                     return (
@@ -369,7 +369,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </h1>
                     );
                   }
-                  
+
                   if (paragraph.startsWith('## ')) {
                     return (
                       <h2 key={index} className="text-xl font-bold text-terminal-green mt-6 mb-3">
@@ -377,7 +377,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </h2>
                     );
                   }
-                  
+
                   if (paragraph.startsWith('### ')) {
                     return (
                       <h3 key={index} className="text-lg font-bold text-terminal-green mt-4 mb-2">
@@ -385,7 +385,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </h3>
                     );
                   }
-                  
+
                   // Handle code blocks
                   if (paragraph.startsWith('```')) {
                     return (
@@ -396,7 +396,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </div>
                     );
                   }
-                  
+
                   // Handle lists
                   if (paragraph.startsWith('- ')) {
                     return (
@@ -408,7 +408,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </ul>
                     );
                   }
-                  
+
                   if (paragraph.match(/^\d+\./)) {
                     return (
                       <ol key={index} className="list-none space-y-2 my-4">
@@ -419,17 +419,17 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       </ol>
                     );
                   }
-                  
+
                   // Handle bold text
                   const processedParagraph = paragraph
                     .replace(/\*\*(.*?)\*\*/g, '<strong class="text-terminal-green font-bold">$1</strong>')
                     .replace(/\*(.*?)\*/g, '<em class="text-terminal-green/80 italic">$1</em>')
                     .replace(/`(.*?)`/g, '<code class="bg-terminal-green/10 text-terminal-green px-1 py-0.5 rounded text-sm">$1</code>');
-                  
+
                   // Regular paragraphs
                   return (
-                    <p 
-                      key={index} 
+                    <p
+                      key={index}
                       className="text-terminal-green/90 leading-relaxed mb-4"
                       dangerouslySetInnerHTML={{ __html: processedParagraph }}
                     />
@@ -441,7 +441,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         </motion.article>
 
         {/* Author Bio */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -452,7 +452,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               <User className="h-5 w-5 text-terminal-green" />
               <span className="terminal-prompt">&gt; author.info()</span>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-full bg-terminal-green/10 border border-terminal-green/20 flex items-center justify-center">
                 <User className="h-8 w-8 text-terminal-green" />
@@ -469,7 +469,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         </motion.section>
 
         {/* Navigation */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -481,7 +481,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 <span className="terminal-prompt">&gt; mais posts</span>
               </Button>
             </Link>
-            
+
             <Link href="/case-studies">
               <Button variant="outline" className="terminal-button-outline group">
                 <span className="terminal-prompt">&gt; ver case studies</span>
