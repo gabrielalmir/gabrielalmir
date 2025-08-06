@@ -15,7 +15,7 @@
     --destructive-foreground: 255 255 255; /* foreground */
     --muted: 160 160 160; /* brightCyan */
     --muted-foreground: 255 255 255; /* foreground */
-    --accent: 236 170 214; /* brightPurple */
+    --accent: 39 39 42; /* zinc-800 - darker neutral color */
     --accent-foreground: 255 255 255; /* foreground */
     --selection-background: 50 50 50; /* selectionBackground */
   }
