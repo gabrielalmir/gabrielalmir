@@ -96,44 +96,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Enhanced Tech Stack */}
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
-              {[
-                // Backend Technologies
-                { Icon: NodejsOriginal, label: "Node.js", category: "backend" },
-                { Icon: TypescriptOriginal, label: "TypeScript", category: "backend" },
-                { Icon: NestjsOriginal, label: "NestJS", category: "backend" },
-                { Icon: PythonOriginal, label: "Python", category: "backend" },
-
-                // Cloud & Infrastructure
-                { Icon: AmazonwebservicesPlainWordmark, label: "AWS", category: "cloud" },
-                { Icon: DockerOriginal, label: "Docker", category: "devops" },
-
-                // Databases
-                { Icon: PostgresqlOriginal, label: "PostgreSQL", category: "database" },
-                { Icon: MongodbOriginal, label: "MongoDB", category: "database" },
-                { Icon: RedisOriginal, label: "Redis", category: "database" },
-
-                // Message Queue
-                { Icon: RabbitmqOriginal, label: "RabbitMQ", category: "messaging" },
-
-                // Frontend Technologies
-                { Icon: ReactOriginal, label: "React", category: "frontend" },
-                { Icon: NextjsOriginal, label: "Next.js", category: "frontend" },
-              ].map(({ Icon, label, category }) => (
-                <div
-                  key={label}
-                  className="terminal-window border border-terminal-green/20 p-3 hover:border-terminal-green transition-all duration-300 group relative hover:scale-105"
-                >
-                  <Icon size={40} className="text-terminal-green group-hover:scale-110 transition-transform" />
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 border border-terminal-green/20 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 whitespace-nowrap z-10">
-                    <span className="terminal-prompt">&gt; {label}</span>
-                    <div className="text-terminal-green/60 text-xs">{category}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* Enhanced CTA Buttons */}
             <div className="flex flex-wrap gap-4">
               <Link href="mailto:gabr.almir@gmail.com">
@@ -176,6 +138,57 @@ export default function Home() {
                 priority
               />
               <div className="absolute inset-0 bg-terminal-green/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          </div>
+        </section>
+
+        {/* Enhanced Tech Stack */}
+        <section id="habilidades" className="py-20">
+          <div className="terminal-window border border-terminal-green/20 p-6 mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-3xl font-bold">
+                <span className="terminal-prompt">&gt; HABILIDADES TÉCNICAS_</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-4 lg:grid-cols-6 gap-4 my-6">
+              {[
+                // Backend Technologies
+                { Icon: NodejsOriginal, label: "Node.js", category: "backend", description: "Runtime JavaScript para construção de APIs e aplicações backend." },
+                { Icon: TypescriptOriginal, label: "TypeScript", category: "backend", description: "Superset de JavaScript que adiciona tipagem estática." },
+                { Icon: NestjsOriginal, label: "NestJS", category: "backend", description: "Framework para construção de aplicações server-side eficientes e escaláveis." },
+                { Icon: PythonOriginal, label: "Python", category: "backend", description: "Linguagem de programação poderosa e versátil." },
+
+                // Cloud & Infrastructure
+                { Icon: AmazonwebservicesPlainWordmark, label: "AWS", category: "cloud", description: "Plataforma de computação em nuvem oferecendo uma ampla gama de serviços." },
+                { Icon: DockerOriginal, label: "Docker", category: "devops", description: "Plataforma para criação, implantação e execução de contêineres." },
+
+                // Databases
+                { Icon: PostgresqlOriginal, label: "PostgreSQL", category: "database", description: "Sistema de gerenciamento de banco de dados relacional." },
+                { Icon: MongodbOriginal, label: "MongoDB", category: "database", description: "Banco de dados NoSQL orientado a documentos." },
+                { Icon: RedisOriginal, label: "Redis", category: "database", description: "Banco de dados em memória utilizado para caching e sessões." },
+
+                // Message Queue
+                { Icon: RabbitmqOriginal, label: "RabbitMQ", category: "messaging", description: "Fila de mensagens distribuída para comunicação assíncrona." },
+
+                // Frontend Technologies
+                { Icon: ReactOriginal, label: "React", category: "frontend", description: "Biblioteca JavaScript para construção de interfaces de usuário." },
+                { Icon: NextjsOriginal, label: "Next.js", category: "frontend", description: "Framework React para construção de aplicações web." },
+              ].map(({ Icon, label, category, description }) => (
+                <div
+                  key={label}
+                  className="flex gap-3 terminal-window border border-terminal-green/20 p-3 hover:border-terminal-green transition-all duration-300 group relative hover:scale-105"
+                >
+                  <Icon size={40} className="text-terminal-green group-hover:scale-110 transition-transform" />
+                  <div className="text-left">
+                    <div className="text-lg font-bold">{label}</div>
+                    <div className="text-terminal-green/60 text-xs">{category}</div>
+                  </div>
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 border border-terminal-green/20 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 whitespace-nowrap z-10">
+                    <div className="text-terminal-green/60 text-xs">{description}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
