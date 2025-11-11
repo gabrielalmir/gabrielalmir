@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import type { BlogPost } from '@/lib/blog';
 import { motion } from 'framer-motion';
 import { ArrowLeft, BookOpen, Calendar, Clock, Code2, Coffee, ExternalLink, Share2, Terminal, User, Video } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -318,7 +319,12 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
 
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-full bg-vesper-orange/10 border border-vesper-orange/20 flex items-center justify-center overflow-hidden">
-                <User className="h-8 w-8 text-vesper-orange" />
+                <Image
+                  src={'/me.jpg'}
+                  alt={'Gabriel Almir'}
+                  layout="fill"
+                  objectFit="cover"
+                />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-vesper-orange">{post.author || 'Gabriel Almir'}</h3>
