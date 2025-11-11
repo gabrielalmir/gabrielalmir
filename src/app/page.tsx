@@ -11,16 +11,16 @@ import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, Nestjs
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-terminal-green font-mono selection:bg-terminal-green selection:text-zinc-950">
+    <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black">
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-5"></div>
         <div className="absolute inset-0 bg-glow"></div>
       </div>
 
-      <header className="sticky top-0 z-50 w-screen border-b border-terminal-green/20 bg-zinc-950/80 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60">
+      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors" aria-label='logo gabrielalmir'>
+            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-vesper-orange hover:text-vesper-orange-light transition-colors" aria-label='logo gabrielalmir'>
               <CoffeeIcon className="h-6 w-6" />
               <span className="terminal-prompt terminal-prompt-circle hidden sm:block">&gt; gabrielalmir</span>
             </Link>
@@ -37,7 +37,7 @@ export default function Home() {
                 <Link
                   key={href}
                   href={href}
-                  className="hover:text-terminal-green/80 transition-colors inline-flex items-center gap-2 terminal-link"
+                  className="hover:text-vesper-orange-light transition-colors inline-flex items-center gap-2 terminal-link"
                   aria-label={label}
                   target={href.startsWith('http') ? '_blank' : undefined}
                 >
@@ -54,44 +54,44 @@ export default function Home() {
         {/* Enhanced Hero Section */}
         <section className="py-20 md:py-10 grid md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 animate-fade-in">
-            <div className="inline-block px-4 py-2 border border-terminal-green/20 terminal-window">
-              <TypingEffect text="Olá, meu nome é" className="text-terminal-green" />
+            <div className="inline-block px-4 py-2 border border-vesper-orange/20 terminal-window">
+              <TypingEffect text="Olá, meu nome é" className="text-vesper-cyan" />
             </div>
 
             <div className="space-y-4">
-              <Ascii className="text-terminal-green leading-none" />
-              <div className="h-px bg-terminal-green/20" />
+              <Ascii className="text-vesper-orange leading-none" />
+              <div className="h-px bg-vesper-orange/20" />
             </div>
 
             {/* Enhanced Headline */}
-            <div className="terminal-window border border-terminal-green/20 p-6 space-y-4">
+            <div className="terminal-window border border-vesper-orange/20 p-6 space-y-4">
               <TypingEffect
                 text="Engenheiro Backend"
-                className="text-xl font-bold text-terminal-green leading-tight"
+                className="text-xl font-bold text-vesper-orange leading-tight"
               />
               <TypingEffect
                 text="Transformando ideias em soluções robustas e escaláveis"
-                className="text-xl text-terminal-green/80"
+                className="text-xl text-vesper-cyan/80"
               />
-              <div className="flex items-center gap-2 text-xs text-terminal-green/60">
+              <div className="flex items-center gap-2 text-xs text-vesper-gray">
                 <span className="terminal-prompt">$</span>
                 <span>cat sobre.txt</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-terminal-green/80">
+              <div className="flex items-center gap-2 text-sm text-foreground/80">
                 <span className="terminal-prompt">&gt;</span>
                 <span>6+ anos | Node.js, TypeScript, AWS | Arquitetura Limpa & Microsserviços</span>
               </div>
             </div>
 
             {/* Enhanced Bio */}
-            <div className="terminal-window border border-terminal-green/20 p-4 space-y-4">
-              <p className="text-terminal-green/90 leading-relaxed">
-                Especialista em <strong className="text-terminal-green">sistemas distribuídos</strong> e <strong className="text-terminal-green">arquitetura de microsserviços</strong>,
+            <div className="terminal-window border border-vesper-orange/20 p-4 space-y-4">
+              <p className="text-foreground/90 leading-relaxed">
+                Especialista em <strong className="text-vesper-orange">sistemas distribuídos</strong> e <strong className="text-vesper-orange">arquitetura de microsserviços</strong>,
                 com experiência comprovada em projetar e implementar soluções que atendem milhares de usuários.
                 Lidero adoção de práticas modernas que reduzem tempo de resposta e aumentam confiabilidade de aplicações críticas.
               </p>
-              <p className="text-terminal-green/80 leading-relaxed">
-                Atualmente explorando <strong className="text-terminal-green">IA generativa</strong> e <strong className="text-terminal-green">otimização</strong>{' '}
+              <p className="text-foreground/80 leading-relaxed">
+                Atualmente explorando <strong className="text-vesper-cyan">IA generativa</strong> e <strong className="text-vesper-cyan">otimização</strong>{' '}
                 para integrar inteligência aos produtos, combinando Node.js/AWS com Python/ML.
               </p>
             </div>
@@ -126,9 +126,9 @@ export default function Home() {
 
           {/* Enhanced Image Section */}
           <div className="relative animate-fade-in">
-            <div className="absolute inset-0 bg-terminal-green/20 rounded-lg transform -rotate-6 transition-transform hover:rotate-0 blur-2xl" />
-            <div className="absolute inset-0 bg-terminal-green/10 rounded-lg transform -rotate-6 transition-transform hover:rotate-0" />
-            <div className="terminal-window border border-terminal-green/20 p-2 relative z-10 group">
+            <div className="absolute inset-0 bg-vesper-orange/20 rounded-lg transform -rotate-6 transition-transform hover:rotate-0 blur-2xl" />
+            <div className="absolute inset-0 bg-vesper-orange/10 rounded-lg transform -rotate-6 transition-transform hover:rotate-0" />
+            <div className="terminal-window border border-vesper-orange/20 p-2 relative z-10 group">
               <Image
                 src="/me.jpg"
                 alt="Gabriel Almir - Backend Engineer"
@@ -137,14 +137,14 @@ export default function Home() {
                 className="rounded-lg grayscale hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 priority
               />
-              <div className="absolute inset-0 bg-terminal-green/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-vesper-orange/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           </div>
         </section>
 
         {/* Enhanced Tech Stack */}
         <section id="habilidades" className="py-20">
-          <div className="terminal-window border border-terminal-green/20 p-6 mb-12">
+          <div className="terminal-window border border-vesper-orange/20 p-6 mb-12">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-3xl font-bold">
                 <span className="terminal-prompt">&gt; HABILIDADES TÉCNICAS_</span>
@@ -177,15 +177,15 @@ export default function Home() {
               ].map(({ Icon, label, category, description }) => (
                 <div
                   key={label}
-                  className="flex gap-3 terminal-window border border-terminal-green/20 p-3 hover:border-terminal-green transition-all duration-300 group relative hover:scale-105"
+                  className="flex gap-3 terminal-window border border-vesper-orange/20 p-3 hover:border-vesper-orange transition-all duration-300 group relative hover:scale-105"
                 >
-                  <Icon size={40} className="text-terminal-green group-hover:scale-110 transition-transform" />
+                  <Icon size={40} className="text-vesper-cyan group-hover:scale-110 transition-transform" />
                   <div className="text-left">
                     <div className="text-lg font-bold">{label}</div>
-                    <div className="text-terminal-green/60 text-xs">{category}</div>
+                    <div className="text-vesper-gray text-xs">{category}</div>
                   </div>
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 border border-terminal-green/20 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 whitespace-nowrap z-10">
-                    <div className="text-terminal-green/60 text-xs">{description}</div>
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 border border-vesper-orange/20 text-xs opacity-0 group-hover:opacity-100 transition-opacity bg-background whitespace-nowrap z-10">
+                    <div className="text-vesper-gray text-xs">{description}</div>
                   </div>
                 </div>
               ))}
@@ -195,17 +195,17 @@ export default function Home() {
 
         {/* Enhanced Projects Section */}
         <section id="projetos" className="py-20">
-          <div className="terminal-window border border-terminal-green/20 p-6 mb-12">
+          <div className="terminal-window border border-vesper-orange/20 p-6 mb-12">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-3xl font-bold">
                 <span className="terminal-prompt">&gt; PROJETOS EM DESTAQUE_</span>
               </h2>
-              <div className="flex items-center gap-2 text-sm text-terminal-green/60">
+              <div className="flex items-center gap-2 text-sm text-vesper-gray">
                 <Filter className="h-4 w-4" />
                 <span>Ordenados por relevância</span>
               </div>
             </div>
-            <p className="text-terminal-green/80 leading-relaxed">
+            <p className="text-foreground/80 leading-relaxed">
               Seleção dos projetos mais significativos que demonstram expertise em arquitetura backend,
               cloud computing e soluções escaláveis para problemas reais de negócio.
             </p>
@@ -221,7 +221,7 @@ export default function Home() {
                 <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
               </Button>
             </Link>
-            <p className="text-terminal-green/60 text-sm mt-3">
+            <p className="text-vesper-gray text-sm mt-3">
               Explore todos os repositórios no GitHub para ver a evolução técnica completa
             </p>
           </div>
@@ -232,12 +232,12 @@ export default function Home() {
         </section>
 
         <section id="contato" className="py-20 text-center">
-          <div className="terminal-window border border-terminal-green/20 p-8 md:p-12">
+          <div className="terminal-window border border-vesper-orange/20 p-8 md:p-12">
             <h2 className="text-2xl font-bold mb-8">
               <span className="terminal-prompt">&gt; CONTATO_</span>
             </h2>
             <div className="max-w-2xl mx-auto">
-              <p className="text-terminal-green/80 mb-8 text-lg">
+              <p className="text-foreground/80 mb-8 text-lg">
                 Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato comigo para qualquer consulta ou apenas para dizer oi!
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
@@ -256,7 +256,7 @@ export default function Home() {
                     >
                       <Icon className="h-5 w-5 group-hover:scale-110 transition-transform" />
                       <span className="sr-only">{label}</span>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 border border-terminal-green/20 text-sm opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-950 whitespace-nowrap">
+                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 border border-vesper-orange/20 text-sm opacity-0 group-hover:opacity-100 transition-opacity bg-background whitespace-nowrap">
                         <span className="terminal-prompt">&gt; {label}</span>
                       </span>
                     </Button>
@@ -268,11 +268,11 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-terminal-green/20 mt-20">
+      <footer className="border-t border-vesper-orange/20 mt-20">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="mb-2 terminal-prompt">&gt; © 2024-{new Date().getFullYear()} Gabriel Almir</p>
-            <p className="text-terminal-green/60 terminal-prompt">&gt; Feito com amor, código e café <Heart className="inline-block w-4 h-4 text-red-500 animate-pulse" /></p>
+            <p className="text-vesper-gray terminal-prompt">&gt; Feito com amor, código e café <Heart className="inline-block w-4 h-4 text-vesper-red animate-pulse" /></p>
           </div>
         </div>
       </footer>

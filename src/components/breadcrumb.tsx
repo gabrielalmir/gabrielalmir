@@ -20,12 +20,12 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="flex items-center space-x-2 text-sm text-terminal-green/60 mb-6"
+      className="flex items-center space-x-2 text-sm text-vesper-orange/60 mb-6"
       aria-label="Breadcrumb"
     >
       <Link 
         href="/" 
-        className="flex items-center hover:text-terminal-green transition-colors"
+        className="flex items-center hover:text-vesper-orange transition-colors"
         aria-label="Home"
       >
         <Home className="h-4 w-4" />
@@ -33,18 +33,18 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       
       {items.map((item, index) => (
         <div key={index} className="flex items-center space-x-2">
-          <ChevronRight className="h-3 w-3 text-terminal-green/40" />
+          <ChevronRight className="h-3 w-3 text-vesper-orange/40" />
           {item.href && !item.current ? (
             <Link 
               href={item.href}
-              className="hover:text-terminal-green transition-colors terminal-prompt"
+              className="hover:text-vesper-orange transition-colors terminal-prompt"
             >
               {item.label}
             </Link>
           ) : (
             <span 
               className={`terminal-prompt ${
-                item.current ? 'text-terminal-green' : 'text-terminal-green/60'
+                item.current ? 'text-vesper-orange' : 'text-vesper-orange/60'
               }`}
             >
               {item.label}

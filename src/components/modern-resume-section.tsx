@@ -17,16 +17,16 @@ interface ExperienceCardProps {
 }
 
 const TerminalWindow: React.FC<TerminalWindowProps> = ({ children, title }) => (
-  <div className="terminal-window border border-terminal-green/20 p-4 font-mono text-terminal-green shadow-lg shadow-terminal-green/10">
-    <div className="flex justify-between items-center mb-3 pb-2 border-b border-terminal-green/20">
+  <div className="terminal-window border border-vesper-orange/20 p-4 font-mono text-foreground shadow-lg shadow-vesper-orange/10">
+    <div className="flex justify-between items-center mb-3 pb-2 border-b border-vesper-orange/20">
       <span className="text-sm terminal-prompt">&gt; {title}</span>
       <div className="flex space-x-2">
-        <div className="w-3 h-3 rounded-full bg-red-500/60" />
+        <div className="w-3 h-3 rounded-full bg-vesper-red/60" />
         <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-        <div className="w-3 h-3 rounded-full bg-terminal-green" />
+        <div className="w-3 h-3 rounded-full bg-vesper-cyan" />
       </div>
     </div>
-    <div className="text-terminal-green/90">
+    <div className="text-foreground/90">
       {children}
     </div>
   </div>
@@ -40,17 +40,17 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ title, company, period,
     className="mb-6 last:mb-0"
   >
     <div className="flex items-start gap-3 mb-2">
-      <div className="w-2 h-2 rounded-full bg-terminal-green mt-2 flex-shrink-0" />
+      <div className="w-2 h-2 rounded-full bg-vesper-orange mt-2 flex-shrink-0" />
       <div className="flex-1">
-        <h3 className="text-lg font-bold text-terminal-green">{title}</h3>
-        <p className="text-terminal-green/80 font-medium">{company}</p>
-        <p className="text-sm text-terminal-green/60 flex items-center gap-1">
+        <h3 className="text-lg font-bold text-vesper-orange">{title}</h3>
+        <p className="text-foreground/80 font-medium">{company}</p>
+        <p className="text-sm text-vesper-gray flex items-center gap-1">
           <Calendar className="w-3 h-3" />
           {period}
         </p>
       </div>
     </div>
-    <p className="text-terminal-green/80 leading-relaxed ml-5">{description}</p>
+    <p className="text-foreground/80 leading-relaxed ml-5">{description}</p>
   </motion.div>
 );
 
@@ -120,7 +120,7 @@ export const ModernResumeSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="terminal-window border border-terminal-green/20 p-4 mb-12"
+          className="terminal-window border border-vesper-orange/20 p-4 mb-12"
         >
           <h2 className="text-2xl font-bold">
             <span className="terminal-prompt">&gt; RESUMO PROFISSIONAL_</span>
@@ -136,11 +136,11 @@ export const ModernResumeSection: React.FC = () => {
             <div className="space-y-4">
               {resumeData.education.map((edu, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <GraduationCap className="w-5 h-5 mt-1 text-terminal-green flex-shrink-0" />
+                  <GraduationCap className="w-5 h-5 mt-1 text-vesper-cyan flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-terminal-green">{edu.degree}</h4>
-                    <p className="text-terminal-green/80">{edu.institution}</p>
-                    <div className="flex items-center gap-4 text-sm text-terminal-green/60">
+                    <h4 className="font-bold text-vesper-orange">{edu.degree}</h4>
+                    <p className="text-foreground/80">{edu.institution}</p>
+                    <div className="flex items-center gap-4 text-sm text-vesper-gray">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
                         {edu.period}
@@ -174,10 +174,10 @@ export const ModernResumeSection: React.FC = () => {
             <div className="space-y-4">
               {resumeData.skills.map((skill, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <skill.icon className="w-5 h-5 mt-0.5 text-terminal-green flex-shrink-0" />
+                  <skill.icon className="w-5 h-5 mt-0.5 text-vesper-cyan flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-terminal-green mb-1">{skill.category}</h4>
-                    <p className="text-terminal-green/80 text-sm leading-relaxed">{skill.items}</p>
+                    <h4 className="font-bold text-vesper-orange mb-1">{skill.category}</h4>
+                    <p className="text-foreground/80 text-sm leading-relaxed">{skill.items}</p>
                   </div>
                 </div>
               ))}
@@ -188,8 +188,8 @@ export const ModernResumeSection: React.FC = () => {
             <div className="space-y-3">
               {resumeData.languages.map((lang, i) => (
                 <div key={i} className="flex items-center justify-between">
-                  <span className="text-terminal-green font-medium">{lang.language}</span>
-                  <span className="text-terminal-green/70 text-sm">{lang.level}</span>
+                  <span className="text-vesper-orange font-medium">{lang.language}</span>
+                  <span className="text-vesper-gray text-sm">{lang.level}</span>
                 </div>
               ))}
             </div>

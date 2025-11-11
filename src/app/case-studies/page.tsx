@@ -77,7 +77,7 @@ export default function CaseStudiesPage() {
   const featuredStudies = caseStudies.filter(study => study.featured);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-terminal-green font-mono selection:bg-terminal-green selection:text-zinc-950">
+    <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-5"></div>
@@ -85,18 +85,18 @@ export default function CaseStudiesPage() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 w-screen border-b border-terminal-green/20 bg-zinc-950/80 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60">
+      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors">
+            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-vesper-orange hover:text-vesper-orange/80 transition-colors">
               <Coffee className="h-6 w-6" />
               <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
             </Link>
             <div className="space-x-6">
-              <Link href="/" className="hover:text-terminal-green/80 transition-colors terminal-link">
+              <Link href="/" className="hover:text-vesper-orange/80 transition-colors terminal-link">
                 <span className="terminal-prompt">&gt; home</span>
               </Link>
-              <Link href="/blog" className="hover:text-terminal-green/80 transition-colors terminal-link">
+              <Link href="/blog" className="hover:text-vesper-orange/80 transition-colors terminal-link">
                 <span className="terminal-prompt">&gt; blog</span>
               </Link>
             </div>
@@ -112,30 +112,30 @@ export default function CaseStudiesPage() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="terminal-window border border-terminal-green/20 p-8">
+          <div className="terminal-window border border-vesper-orange/20 p-8">
             <div className="flex items-center gap-2 mb-4">
-              <Shield className="h-6 w-6 text-terminal-green" />
+              <Shield className="h-6 w-6 text-vesper-orange" />
               <span className="terminal-prompt text-lg">&gt; case_studies.load()</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-terminal-green mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-vesper-orange mb-4">
               Case Studies
             </h1>
-            <p className="text-xl text-terminal-green/80 leading-relaxed mb-6">
+            <p className="text-xl text-vesper-orange/80 leading-relaxed mb-6">
               Projetos reais que demonstram expertise técnica, resolução de problemas complexos
               e impacto mensurável nos negócios.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-green-400" />
-                <span className="text-terminal-green/80">Resultados Mensuráveis</span>
+                <span className="text-vesper-orange/80">Resultados Mensuráveis</span>
               </div>
               <div className="flex items-center gap-2">
                 <Code2 className="h-4 w-4 text-blue-400" />
-                <span className="text-terminal-green/80">Soluções Técnicas</span>
+                <span className="text-vesper-orange/80">Soluções Técnicas</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-purple-400" />
-                <span className="text-terminal-green/80">Impacto no Negócio</span>
+                <span className="text-vesper-orange/80">Impacto no Negócio</span>
               </div>
             </div>
           </div>
@@ -148,13 +148,13 @@ export default function CaseStudiesPage() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <div className="terminal-window border border-terminal-green/20 p-6 mb-8">
+          <div className="terminal-window border border-vesper-orange/20 p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <Tag className="h-5 w-5 text-terminal-green" />
+              <Tag className="h-5 w-5 text-vesper-orange" />
               <span className="terminal-prompt">&gt; featured_projects.highlight()</span>
             </div>
-            <h2 className="text-2xl font-bold text-terminal-green mb-2">Projetos em Destaque</h2>
-            <p className="text-terminal-green/80">Casos de maior impacto e complexidade técnica</p>
+            <h2 className="text-2xl font-bold text-vesper-orange mb-2">Projetos em Destaque</h2>
+            <p className="text-vesper-orange/80">Casos de maior impacto e complexidade técnica</p>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2">
@@ -166,27 +166,27 @@ export default function CaseStudiesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="terminal-window border border-terminal-green/20 p-6 hover:border-terminal-green/40 transition-all duration-300 group"
+                  className="terminal-window border border-vesper-orange/20 p-6 hover:border-vesper-orange/40 transition-all duration-300 group"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <CategoryIcon className={`h-5 w-5 ${categories[study.category].color}`} />
-                      <span className="text-sm text-terminal-green/60 uppercase tracking-wider">
+                      <span className="text-sm text-vesper-orange/60 uppercase tracking-wider">
                         {categories[study.category].label}
                       </span>
                     </div>
-                    <div className="px-2 py-1 bg-terminal-green/10 border border-terminal-green/20 rounded text-xs text-terminal-green/80">
+                    <div className="px-2 py-1 bg-vesper-orange/10 border border-vesper-orange/20 rounded text-xs text-vesper-orange/80">
                       Featured
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-terminal-green mb-2 group-hover:text-terminal-green/80 transition-colors">
+                  <h3 className="text-xl font-bold text-vesper-orange mb-2 group-hover:text-vesper-orange/80 transition-colors">
                     {study.title}
                   </h3>
-                  <p className="text-terminal-green/60 font-medium mb-4">
+                  <p className="text-vesper-orange/60 font-medium mb-4">
                     {study.subtitle}
                   </p>
-                  <p className="text-terminal-green/80 mb-6 leading-relaxed">
+                  <p className="text-vesper-orange/80 mb-6 leading-relaxed">
                     {study.description}
                   </p>
 
@@ -194,10 +194,10 @@ export default function CaseStudiesPage() {
                   <div className="grid grid-cols-3 gap-4 mb-6">
                     {study.metrics.map((metric, idx) => (
                       <div key={idx} className="text-center">
-                        <div className="text-lg font-bold text-terminal-green">
+                        <div className="text-lg font-bold text-vesper-orange">
                           {metric.value}
                         </div>
-                        <div className="text-xs text-terminal-green/60">
+                        <div className="text-xs text-vesper-orange/60">
                           {metric.label}
                         </div>
                         <div className="text-xs text-green-400">
@@ -212,13 +212,13 @@ export default function CaseStudiesPage() {
                     {study.technologies.slice(0, 4).map(tech => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs bg-terminal-green/10 text-terminal-green/80 border border-terminal-green/20 rounded"
+                        className="px-2 py-1 text-xs bg-vesper-orange/10 text-vesper-orange/80 border border-vesper-orange/20 rounded"
                       >
                         {tech}
                       </span>
                     ))}
                     {study.technologies.length > 4 && (
-                      <span className="px-2 py-1 text-xs text-terminal-green/60">
+                      <span className="px-2 py-1 text-xs text-vesper-orange/60">
                         +{study.technologies.length - 4}
                       </span>
                     )}
@@ -243,9 +243,9 @@ export default function CaseStudiesPage() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-12"
         >
-          <div className="terminal-window border border-terminal-green/20 p-6">
+          <div className="terminal-window border border-vesper-orange/20 p-6">
             <div className="flex items-center gap-2 mb-6">
-              <Terminal className="h-5 w-5 text-terminal-green" />
+              <Terminal className="h-5 w-5 text-vesper-orange" />
               <span className="terminal-prompt">&gt; filter.apply()</span>
             </div>
 
@@ -273,7 +273,7 @@ export default function CaseStudiesPage() {
                 ))}
               </div>
 
-              <div className="border-l border-terminal-green/20 pl-4">
+              <div className="border-l border-vesper-orange/20 pl-4">
                 <Button
                   variant={showFeaturedOnly ? 'default' : 'outline'}
                   size="sm"
@@ -303,16 +303,16 @@ export default function CaseStudiesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="terminal-window border border-terminal-green/20 p-6 hover:border-terminal-green/40 transition-all duration-300 group"
+                  className="terminal-window border border-vesper-orange/20 p-6 hover:border-vesper-orange/40 transition-all duration-300 group"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <CategoryIcon className={`h-4 w-4 ${categories[study.category].color}`} />
-                      <span className="text-xs text-terminal-green/60 uppercase tracking-wider">
+                      <span className="text-xs text-vesper-orange/60 uppercase tracking-wider">
                         {categories[study.category].label}
                       </span>
                     </div>
-                    <div className="flex items-center gap-4 text-xs text-terminal-green/60">
+                    <div className="flex items-center gap-4 text-xs text-vesper-orange/60">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         <span>{study.duration}</span>
@@ -324,13 +324,13 @@ export default function CaseStudiesPage() {
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-terminal-green mb-2 group-hover:text-terminal-green/80 transition-colors">
+                  <h3 className="text-lg font-bold text-vesper-orange mb-2 group-hover:text-vesper-orange/80 transition-colors">
                     {study.title}
                   </h3>
-                  <p className="text-terminal-green/60 text-sm font-medium mb-3">
+                  <p className="text-vesper-orange/60 text-sm font-medium mb-3">
                     {study.subtitle}
                   </p>
-                  <p className="text-terminal-green/80 mb-4 leading-relaxed text-sm">
+                  <p className="text-vesper-orange/80 mb-4 leading-relaxed text-sm">
                     {study.description}
                   </p>
 
@@ -338,13 +338,13 @@ export default function CaseStudiesPage() {
                     {study.technologies.slice(0, 3).map(tech => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs bg-terminal-green/10 text-terminal-green/80 border border-terminal-green/20 rounded"
+                        className="px-2 py-1 text-xs bg-vesper-orange/10 text-vesper-orange/80 border border-vesper-orange/20 rounded"
                       >
                         {tech}
                       </span>
                     ))}
                     {study.technologies.length > 3 && (
-                      <span className="px-2 py-1 text-xs text-terminal-green/60">
+                      <span className="px-2 py-1 text-xs text-vesper-orange/60">
                         +{study.technologies.length - 3}
                       </span>
                     )}
@@ -365,19 +365,19 @@ export default function CaseStudiesPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="terminal-window border border-terminal-green/20 p-8 text-center"
+              className="terminal-window border border-vesper-orange/20 p-8 text-center"
             >
-              <Terminal className="h-12 w-12 text-terminal-green/40 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-terminal-green/80 mb-2">
+              <Terminal className="h-12 w-12 text-vesper-orange/40 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-vesper-orange/80 mb-2">
                 Nenhum case study encontrado
               </h3>
-              <p className="text-terminal-green/60">
+              <p className="text-vesper-orange/60">
                 Tente ajustar os filtros selecionados.
               </p>
-              <div className="mt-4 text-terminal-green/40 text-sm">
+              <div className="mt-4 text-vesper-orange/40 text-sm">
                 <span className="terminal-prompt">$</span> find ./case-studies -type f | grep "{selectedCategory}" | wc -l
                 <br />
-                <span className="text-terminal-green/60">0</span>
+                <span className="text-vesper-orange/60">0</span>
               </div>
             </motion.div>
           )}

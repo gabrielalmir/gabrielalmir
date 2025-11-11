@@ -77,15 +77,15 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
 
   return (
     <Card
-      className={`terminal-window border group hover:border-terminal-green transition-all duration-300 relative overflow-hidden ${
+      className={`terminal-window border group hover:border-vesper-orange transition-all duration-300 relative overflow-hidden ${
         isFeatured
-          ? 'border-terminal-green/40 bg-terminal-green/5 ring-1 ring-terminal-green/20'
-          : 'border-terminal-green/20 bg-zinc-950'
+          ? 'border-vesper-orange/40 bg-vesper-orange/5 ring-1 ring-vesper-orange/20'
+          : 'border-vesper-orange/20 bg-background'
       }`}
     >
       {isFeatured && (
         <div className="absolute top-2 right-2 z-10">
-          <Badge className="bg-terminal-green/20 text-terminal-green border-terminal-green/40 text-xs">
+          <Badge className="bg-vesper-orange/20 text-vesper-orange border-vesper-orange/40 text-xs">
             <Award className="h-3 w-3 mr-1" />
             Destaque
           </Badge>
@@ -95,14 +95,14 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
-            <IconComponent className="h-5 w-5 text-terminal-green" />
-            <CardTitle className="text-lg font-bold group-hover:text-terminal-green transition-colors">
+            <IconComponent className="h-5 w-5 text-vesper-orange" />
+            <CardTitle className="text-lg font-bold group-hover:text-vesper-orange transition-colors">
               <span className="terminal-prompt">&gt; {project.name}</span>
             </CardTitle>
           </div>
         </div>
 
-        <CardDescription className="text-sm text-terminal-green/80 leading-relaxed">
+        <CardDescription className="text-sm text-vesper-orange/80 leading-relaxed">
           {featuredInfo?.impact || project.description || "No description provided"}
         </CardDescription>
 
@@ -112,7 +112,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
               <Badge
                 key={highlight}
                 variant="outline"
-                className="text-xs border-terminal-green/30 text-terminal-green/90 bg-terminal-green/10"
+                className="text-xs border-vesper-orange/30 text-vesper-orange/90 bg-vesper-orange/10"
               >
                 {highlight}
               </Badge>
@@ -127,26 +127,26 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
             <Badge
               key={topic}
               variant="outline"
-              className="text-xs border-terminal-green/20 text-terminal-green/70 hover:text-terminal-green hover:border-terminal-green transition-colors"
+              className="text-xs border-vesper-orange/20 text-vesper-orange/70 hover:text-vesper-orange hover:border-vesper-orange transition-colors"
             >
               <span className="terminal-prompt">&gt; {topic}</span>
             </Badge>
           ))}
           {project.topics.length > 4 && (
-            <Badge variant="outline" className="text-xs border-terminal-green/20 text-terminal-green/50">
+            <Badge variant="outline" className="text-xs border-vesper-orange/20 text-vesper-orange/50">
               +{project.topics.length - 4}
             </Badge>
           )}
         </div>
 
         {project.language && (
-          <div className="mt-3 text-xs text-terminal-green/60">
+          <div className="mt-3 text-xs text-vesper-orange/60">
             <span className="terminal-prompt">&gt; {project.language}</span>
           </div>
         )}
       </CardContent>
 
-      <CardFooter className="flex justify-between items-center text-sm text-terminal-green/60 border-t border-terminal-green/20 pt-4">
+      <CardFooter className="flex justify-between items-center text-sm text-vesper-orange/60 border-t border-vesper-orange/20 pt-4">
         <div className="flex items-center gap-4">
           {[
             { Icon: Star, count: project.stargazers_count, label: "stars" },
@@ -154,8 +154,8 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
             { Icon: Eye, count: project.watchers_count, label: "watchers" },
           ].map(({ Icon, count, label }) => (
             <span key={label} className="flex items-center gap-1 group/stat">
-              <Icon className="h-4 w-4 group-hover/stat:text-terminal-green transition-colors" />
-              <span className="group-hover/stat:text-terminal-green transition-colors">{count}</span>
+              <Icon className="h-4 w-4 group-hover/stat:text-vesper-orange transition-colors" />
+              <span className="group-hover/stat:text-vesper-orange transition-colors">{count}</span>
               <span className="sr-only">{label}</span>
             </span>
           ))}
@@ -164,7 +164,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
         <Link
           href={project.html_url}
           target="_blank"
-          className="flex items-center gap-1 text-terminal-green/80 hover:text-terminal-green font-medium transition-colors group/link"
+          className="flex items-center gap-1 text-vesper-orange/80 hover:text-vesper-orange font-medium transition-colors group/link"
         >
           <span className="terminal-prompt">&gt; Ver</span>
           <ExternalLink className="h-3 w-3 group-hover/link:scale-110 transition-transform" />
@@ -278,14 +278,14 @@ export default function GitHubProjects({ username }: { username: string }) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="terminal-window border border-terminal-green/20 p-6 animate-pulse">
-            <div className="h-4 bg-terminal-green/20 rounded mb-2"></div>
-            <div className="h-3 bg-terminal-green/10 rounded mb-4"></div>
+          <div key={i} className="terminal-window border border-vesper-orange/20 p-6 animate-pulse">
+            <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
+            <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
             <div className="flex gap-2 mb-4">
-              <div className="h-5 bg-terminal-green/10 rounded w-16"></div>
-              <div className="h-5 bg-terminal-green/10 rounded w-20"></div>
+              <div className="h-5 bg-vesper-orange/10 rounded w-16"></div>
+              <div className="h-5 bg-vesper-orange/10 rounded w-20"></div>
             </div>
-            <div className="h-8 bg-terminal-green/10 rounded"></div>
+            <div className="h-8 bg-vesper-orange/10 rounded"></div>
           </div>
         ))}
       </div>
@@ -304,8 +304,8 @@ export default function GitHubProjects({ username }: { username: string }) {
             onClick={() => setActiveFilter(id)}
             className={`terminal-button-outline group ${
               activeFilter === id
-                ? 'bg-terminal-green/20 border-terminal-green text-terminal-green'
-                : 'hover:border-terminal-green hover:text-terminal-green'
+                ? 'bg-vesper-orange/20 border-vesper-orange text-vesper-orange'
+                : 'hover:border-vesper-orange hover:text-vesper-orange'
             }`}
           >
             <Icon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
@@ -345,7 +345,7 @@ export default function GitHubProjects({ username }: { username: string }) {
       )}
 
       {/* Results Summary */}
-      <div className="text-center text-terminal-green/60 text-sm">
+      <div className="text-center text-vesper-orange/60 text-sm">
         <span className="terminal-prompt">
           &gt; Exibindo {displayedProjects.length} de {filteredProjects.length} projetos
           {activeFilter !== 'all' && ` na categoria "${categoryFilters.find(f => f.id === activeFilter)?.label}"`}

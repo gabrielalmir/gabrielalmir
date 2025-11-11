@@ -22,7 +22,7 @@ export function LoadingSkeleton({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
-            className={`terminal-window border border-terminal-green/20 p-6 ${className}`}
+            className={`terminal-window border border-vesper-orange/20 p-6 ${className}`}
           >
             <div className="space-y-4">
               {/* Header */}
@@ -139,7 +139,7 @@ export function ArticleSkeleton() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Header */}
-      <div className="terminal-window border border-terminal-green/20 p-8">
+      <div className="terminal-window border border-vesper-orange/20 p-8">
         <div className="space-y-6">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 loading-skeleton rounded" />
@@ -163,7 +163,7 @@ export function ArticleSkeleton() {
       </div>
       
       {/* Content */}
-      <div className="terminal-window border border-terminal-green/20 p-8">
+      <div className="terminal-window border border-vesper-orange/20 p-8">
         <div className="space-y-6">
           <div className="flex items-center gap-2 mb-6">
             <div className="w-5 h-5 loading-skeleton rounded" />
@@ -172,7 +172,7 @@ export function ArticleSkeleton() {
           
           <LoadingSkeleton variant="text" count={8} className="mb-4" />
           
-          <div className="bg-zinc-900 border border-terminal-green/20 rounded p-4">
+          <div className="bg-card border border-vesper-orange/20 rounded p-4">
             <LoadingSkeleton variant="text" count={4} />
           </div>
           

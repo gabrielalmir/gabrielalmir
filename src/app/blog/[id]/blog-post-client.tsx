@@ -26,31 +26,31 @@ const categories = {
 // Markdown component definitions (moved outside main component for performance)
 // Content is provided dynamically by ReactMarkdown library
 const MarkdownH1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h1 className="text-3xl font-bold text-terminal-green mt-8 mb-4 border-b border-terminal-green/20 pb-2" {...props} />
+  <h1 className="text-3xl font-bold text-vesper-orange mt-8 mb-4 border-b border-vesper-orange/20 pb-2" {...props} />
 );
 
 const MarkdownH2 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h2 className="text-2xl font-bold text-terminal-green mt-6 mb-3" {...props} />
+  <h2 className="text-2xl font-bold text-vesper-orange mt-6 mb-3" {...props} />
 );
 
 const MarkdownH3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h3 className="text-xl font-bold text-terminal-green mt-4 mb-2" {...props} />
+  <h3 className="text-xl font-bold text-vesper-orange mt-4 mb-2" {...props} />
 );
 
 const MarkdownH4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h4 className="text-lg font-bold text-terminal-green mt-3 mb-2" {...props} />
+  <h4 className="text-lg font-bold text-vesper-orange mt-3 mb-2" {...props} />
 );
 
 const MarkdownP = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-  <p className="text-terminal-green/90 leading-relaxed mb-4" {...props} />
+  <p className="text-vesper-orange/90 leading-relaxed mb-4" {...props} />
 );
 
 const MarkdownUl = (props: React.HTMLAttributes<HTMLUListElement>) => (
-  <ul className="list-disc pl-6 my-4 text-terminal-green/90 space-y-2" {...props} />
+  <ul className="list-disc pl-6 my-4 text-vesper-orange/90 space-y-2" {...props} />
 );
 
 const MarkdownOl = (props: React.HTMLAttributes<HTMLOListElement>) => (
-  <ol className="list-decimal list-inside space-y-2 my-4 text-terminal-green/90" {...props} />
+  <ol className="list-decimal list-inside space-y-2 my-4 text-vesper-orange/90" {...props} />
 );
 
 const MarkdownLi = ({ children, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
@@ -63,7 +63,7 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
   const isInline = !className;
   if (isInline) {
     return (
-      <code className="bg-terminal-green/10 text-terminal-green px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+      <code className="bg-vesper-orange/10 text-vesper-orange px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
         {children}
       </code>
     );
@@ -76,18 +76,18 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
 };
 
 const MarkdownPre = ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-  <pre className="bg-zinc-900 border border-terminal-green/20 rounded-lg p-4 my-4 overflow-x-auto" {...props}>
-    <code className="text-terminal-green/90 text-sm font-mono block">{children}</code>
+  <pre className="bg-zinc-900 border border-vesper-orange/20 rounded-lg p-4 my-4 overflow-x-auto" {...props}>
+    <code className="text-vesper-orange/90 text-sm font-mono block">{children}</code>
   </pre>
 );
 
 const MarkdownBlockquote = (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-  <blockquote className="border-l-4 border-terminal-green/40 pl-4 my-4 italic text-terminal-green/80" {...props} />
+  <blockquote className="border-l-4 border-vesper-orange/40 pl-4 my-4 italic text-vesper-orange/80" {...props} />
 );
 
 const MarkdownA = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
   <a
-    className="text-terminal-green underline hover:text-terminal-green/80 transition-colors"
+    className="text-vesper-orange underline hover:text-vesper-orange/80 transition-colors"
     target="_blank"
     rel="noopener noreferrer"
     {...props}
@@ -97,14 +97,14 @@ const MarkdownA = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
 /* eslint-enable jsx-a11y/anchor-has-content */
 
 const MarkdownStrong = (props: React.HTMLAttributes<HTMLElement>) => (
-  <strong className="text-terminal-green font-bold" {...props} />
+  <strong className="text-vesper-orange font-bold" {...props} />
 );
 
 const MarkdownEm = (props: React.HTMLAttributes<HTMLElement>) => (
-  <em className="text-terminal-green/80 italic" {...props} />
+  <em className="text-vesper-orange/80 italic" {...props} />
 );
 
-const MarkdownHr = () => <hr className="border-terminal-green/20 my-8" />;
+const MarkdownHr = () => <hr className="border-vesper-orange/20 my-8" />;
 
 // Markdown components configuration
 const markdownComponents = {
@@ -149,7 +149,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-terminal-green font-mono selection:bg-terminal-green selection:text-zinc-950">
+    <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-5"></div>
@@ -157,18 +157,18 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 w-screen border-b border-terminal-green/20 bg-zinc-950/80 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60">
+      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-terminal-green hover:text-terminal-green/80 transition-colors">
+            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-vesper-orange hover:text-vesper-orange/80 transition-colors">
               <Coffee className="h-6 w-6" />
               <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
             </Link>
             <div className="space-x-6">
-              <Link href="/blog" className="hover:text-terminal-green/80 transition-colors terminal-link">
+              <Link href="/blog" className="hover:text-vesper-orange/80 transition-colors terminal-link">
                 <span className="terminal-prompt">&gt; blog</span>
               </Link>
-              <Link href="/case-studies" className="hover:text-terminal-green/80 transition-colors terminal-link">
+              <Link href="/case-studies" className="hover:text-vesper-orange/80 transition-colors terminal-link">
                 <span className="terminal-prompt">&gt; case studies</span>
               </Link>
             </div>
@@ -199,24 +199,24 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <div className="terminal-window border border-terminal-green/20 p-8">
+          <div className="terminal-window border border-vesper-orange/20 p-8">
             <div className="flex items-center gap-2 mb-6">
               <CategoryIcon className={`h-5 w-5 ${categories[post.category].color}`} />
-              <span className="text-sm text-terminal-green/60 uppercase tracking-wider">
+              <span className="text-sm text-vesper-orange/60 uppercase tracking-wider">
                 {categories[post.category].label}
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-terminal-green mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-vesper-orange mb-4 leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-xl text-terminal-green/80 mb-6 leading-relaxed">
+            <p className="text-xl text-vesper-orange/80 mb-6 leading-relaxed">
               {post.excerpt}
             </p>
 
             {/* Meta Information */}
-            <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-terminal-green/60">
+            <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-vesper-orange/60">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
@@ -233,7 +233,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               )}
               {post.videoUrl && (
                 <Link href={post.videoUrl} target="_blank" rel="noopener noreferrer">
-                  <div className="flex items-center gap-2 hover:text-terminal-green transition-colors">
+                  <div className="flex items-center gap-2 hover:text-vesper-orange transition-colors">
                     <Video className="h-4 w-4" />
                     <span>Vídeo no YouTube</span>
                   </div>
@@ -246,7 +246,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               {post.tags.map(tag => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-sm bg-terminal-green/10 text-terminal-green/80 border border-terminal-green/20 rounded"
+                  className="px-3 py-1 text-sm bg-vesper-orange/10 text-vesper-orange/80 border border-vesper-orange/20 rounded"
                 >
                   #{tag}
                 </span>
@@ -255,7 +255,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
 
             {/* Share Buttons */}
             <div className="flex items-center gap-4">
-              <span className="text-sm text-terminal-green/60">Compartilhar:</span>
+              <span className="text-sm text-vesper-orange/60">Compartilhar:</span>
               <div className="flex gap-2">
                 <Button
                   size="sm"
@@ -285,9 +285,9 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-12"
         >
-          <div className="terminal-window border border-terminal-green/20 p-8">
+          <div className="terminal-window border border-vesper-orange/20 p-8">
             <div className="flex items-center gap-2 mb-6">
-              <Terminal className="h-5 w-5 text-terminal-green" />
+              <Terminal className="h-5 w-5 text-vesper-orange" />
               <span className="terminal-prompt">&gt; cat article.md</span>
             </div>
 
@@ -310,20 +310,20 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-12"
         >
-          <div className="terminal-window border border-terminal-green/20 p-6">
+          <div className="terminal-window border border-vesper-orange/20 p-6">
             <div className="flex items-center gap-2 mb-4">
-              <User className="h-5 w-5 text-terminal-green" />
+              <User className="h-5 w-5 text-vesper-orange" />
               <span className="terminal-prompt">&gt; author.info()</span>
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-terminal-green/10 border border-terminal-green/20 flex items-center justify-center overflow-hidden">
-                <User className="h-8 w-8 text-terminal-green" />
+              <div className="w-16 h-16 rounded-full bg-vesper-orange/10 border border-vesper-orange/20 flex items-center justify-center overflow-hidden">
+                <User className="h-8 w-8 text-vesper-orange" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-terminal-green">{post.author || 'Gabriel Almir'}</h3>
-                <p className="text-terminal-green/80">Backend Software Engineer</p>
-                <p className="text-sm text-terminal-green/60 mt-1">
+                <h3 className="text-lg font-bold text-vesper-orange">{post.author || 'Gabriel Almir'}</h3>
+                <p className="text-vesper-orange/80">Backend Software Engineer</p>
+                <p className="text-sm text-vesper-orange/60 mt-1">
                   6+ anos desenvolvendo sistemas backend escaláveis com Node.js, TypeScript e AWS.
                 </p>
               </div>
