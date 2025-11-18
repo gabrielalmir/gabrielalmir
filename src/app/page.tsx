@@ -82,8 +82,8 @@ export default function Home() {
                 </div>
 
                 {/* Main headline - much larger and prominent */}
-                <div className="space-y-4">
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                <div className="space-y-4 text-justify">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-pretty">
                     <span className="text-foreground">Olá, sou</span>
                     <br />
                     <span className="text-vesper-orange">Gabriel Almir</span>
@@ -118,29 +118,29 @@ export default function Home() {
 
                 {/* Short bio - concise and scannable */}
                 <div className="space-y-3 text-foreground/80 max-w-2xl">
-                  <p className="text-base leading-relaxed">
+                  <p className="text-base leading-relaxed text-justify text-pretty sm:text-left">
                     Especialista em <strong className="text-vesper-orange font-semibold">sistemas distribuídos</strong> e <strong className="text-vesper-orange font-semibold">arquitetura de microsserviços</strong>,
                     com experiência comprovada em soluções que atendem milhares de usuários.
                   </p>
                 </div>
 
                 {/* CTA Buttons - clear hierarchy */}
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <Link href="#contato">
-                    <Button size="lg" className="terminal-button group">
-                      <MailIcon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                      <span>Entrar em contato</span>
-                    </Button>
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-4">
+                  <Link href="#contato" className="w-full sm:w-auto">
+                  <Button size="lg" className="terminal-button group w-full sm:w-auto">
+                    <MailIcon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
+                    <span>Entrar em contato</span>
+                  </Button>
                   </Link>
-                  <Link href="#projetos">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="terminal-button-outline group"
-                    >
-                      <span>Ver projetos</span>
-                      <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
-                    </Button>
+                  <Link href="#projetos" className="w-full sm:w-auto">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="terminal-button-outline group w-full sm:w-auto"
+                  >
+                    <span>Ver projetos</span>
+                    <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
+                  </Button>
                   </Link>
                 </div>
 
