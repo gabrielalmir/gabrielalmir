@@ -352,8 +352,21 @@ body {
 .prose-terminal {
   color: rgb(var(--foreground) / 0.9);
   font-family: var(--font-space), 'Space Mono', 'Consolas', 'Monaco', monospace;
-  line-height: 1.8;
-  letter-spacing: 0.015em;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  font-size: 1.125rem;
+}
+
+@media (min-width: 640px) {
+  .prose-terminal {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .prose-terminal {
+    font-size: 1.375rem;
+  }
 }
 
 .prose-terminal h1,

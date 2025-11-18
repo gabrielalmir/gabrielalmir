@@ -28,35 +28,35 @@ const categories = {
 // Markdown component definitions (moved outside main component for performance)
 // Content is provided dynamically by ReactMarkdown library
 const MarkdownH1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h1 className="text-2xl sm:text-3xl font-bold text-vesper-orange mt-8 sm:mt-10 mb-4 sm:mb-5 border-b border-vesper-orange/20 pb-2 sm:pb-3 leading-tight break-words" {...props} />
+  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-vesper-orange mt-10 sm:mt-12 md:mt-14 mb-5 sm:mb-6 md:mb-7 border-b border-vesper-orange/20 pb-3 sm:pb-4 leading-[1.2] break-words tracking-tight" {...props} />
 );
 
 const MarkdownH2 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h2 className="text-xl sm:text-2xl font-bold text-vesper-orange mt-6 sm:mt-8 mb-3 sm:mb-4 leading-snug break-words" {...props} />
+  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-vesper-orange mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 leading-[1.25] break-words tracking-tight" {...props} />
 );
 
 const MarkdownH3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h3 className="text-lg sm:text-xl font-bold text-vesper-orange mt-5 sm:mt-6 mb-2 sm:mb-3 leading-normal break-words" {...props} />
+  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-vesper-orange mt-7 sm:mt-8 md:mt-10 mb-3 sm:mb-4 md:mb-5 leading-[1.3] break-words tracking-tight" {...props} />
 );
 
 const MarkdownH4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h4 className="text-base sm:text-lg font-bold text-vesper-orange mt-4 sm:mt-5 mb-2 leading-normal break-words" {...props} />
+  <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-vesper-orange mt-6 sm:mt-7 md:mt-8 mb-3 sm:mb-4 leading-[1.35] break-words tracking-tight" {...props} />
 );
 
 const MarkdownP = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-  <p className="text-vesper-orange/90 leading-[1.8] mb-4 sm:mb-5 text-sm sm:text-base break-words" {...props} />
+  <p className="text-foreground/90 leading-[1.85] mb-5 sm:mb-6 md:mb-7 text-base sm:text-lg md:text-xl break-words font-light" {...props} />
 );
 
 const MarkdownUl = (props: React.HTMLAttributes<HTMLUListElement>) => (
-  <ul className="list-disc pl-4 sm:pl-6 my-4 sm:my-5 text-vesper-orange/90 space-y-2 sm:space-y-3" {...props} />
+  <ul className="list-disc pl-5 sm:pl-7 md:pl-8 my-5 sm:my-6 md:my-7 text-foreground/90 space-y-3 sm:space-y-4" {...props} />
 );
 
 const MarkdownOl = (props: React.HTMLAttributes<HTMLOListElement>) => (
-  <ol className="list-decimal list-inside space-y-2 sm:space-y-3 my-4 sm:my-5 text-vesper-orange/90" {...props} />
+  <ol className="list-decimal list-inside space-y-3 sm:space-y-4 my-5 sm:my-6 md:my-7 text-foreground/90 pl-2 sm:pl-3" {...props} />
 );
 
 const MarkdownLi = ({ children, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-  <li className="leading-[1.8] text-sm sm:text-base break-words" {...props}>
+  <li className="leading-[1.85] text-base sm:text-lg md:text-xl break-words mb-2 font-light" {...props}>
     {children}
   </li>
 );
@@ -65,7 +65,7 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
   const isInline = !className;
   if (isInline) {
     return (
-      <code className="bg-vesper-orange/10 text-vesper-orange px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm font-mono break-words" {...props}>
+      <code className="bg-vesper-orange/15 text-vesper-orange px-2 sm:px-2.5 py-1 rounded text-sm sm:text-base font-mono break-words border border-vesper-orange/20" {...props}>
         {children}
       </code>
     );
@@ -78,18 +78,18 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
 };
 
 const MarkdownPre = ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-  <pre className="bg-zinc-900 border border-vesper-orange/20 rounded-lg p-3 sm:p-5 my-4 sm:my-6 overflow-x-auto" {...props}>
-    <code className="text-vesper-orange/90 text-xs sm:text-sm font-mono block leading-relaxed">{children}</code>
+  <pre className="bg-zinc-900/80 border border-vesper-orange/30 rounded-lg p-4 sm:p-6 md:p-8 my-6 sm:my-8 md:my-10 overflow-x-auto shadow-lg" {...props}>
+    <code className="text-vesper-cyan/90 text-sm sm:text-base font-mono block leading-relaxed">{children}</code>
   </pre>
 );
 
 const MarkdownBlockquote = (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-  <blockquote className="border-l-2 sm:border-l-4 border-vesper-orange/40 pl-3 sm:pl-5 py-1 my-4 sm:my-6 italic text-vesper-orange/80 bg-vesper-orange/5 text-sm sm:text-base break-words" {...props} />
+  <blockquote className="border-l-4 border-vesper-orange/50 pl-5 sm:pl-7 md:pl-8 py-3 sm:py-4 my-6 sm:my-8 md:my-10 italic text-foreground/85 bg-vesper-orange/5 rounded-r-lg text-base sm:text-lg md:text-xl break-words leading-[1.8] font-light" {...props} />
 );
 
 const MarkdownA = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
   <a
-    className="text-vesper-orange underline hover:text-vesper-orange/80 transition-colors break-words text-sm sm:text-base"
+    className="text-vesper-orange underline underline-offset-2 hover:text-vesper-orange/80 transition-colors break-words text-base sm:text-lg md:text-xl font-medium"
     target="_blank"
     rel="noopener noreferrer"
     {...props}
@@ -99,18 +99,18 @@ const MarkdownA = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
 /* eslint-enable jsx-a11y/anchor-has-content */
 
 const MarkdownStrong = (props: React.HTMLAttributes<HTMLElement>) => (
-  <strong className="text-vesper-orange font-bold" {...props} />
+  <strong className="text-vesper-orange font-bold text-base sm:text-lg md:text-xl" {...props} />
 );
 
 const MarkdownEm = (props: React.HTMLAttributes<HTMLElement>) => (
-  <em className="text-vesper-orange/90 italic" {...props} />
+  <em className="text-foreground/90 italic text-base sm:text-lg md:text-xl" {...props} />
 );
 
-const MarkdownHr = () => <hr className="border-vesper-orange/20 my-6 sm:my-10" />;
+const MarkdownHr = () => <hr className="border-vesper-orange/20 my-8 sm:my-12 md:my-16" />;
 
 const MarkdownTable = (props: React.HTMLAttributes<HTMLTableElement>) => (
-  <div className="overflow-x-auto my-4 sm:my-6 -mx-4 sm:mx-0">
-    <table className="w-full min-w-full border border-vesper-orange/20 text-sm sm:text-base" {...props} />
+  <div className="overflow-x-auto my-6 sm:my-8 md:my-10 -mx-4 sm:mx-0">
+    <table className="w-full min-w-full border border-vesper-orange/20 text-base sm:text-lg md:text-xl" {...props} />
   </div>
 );
 
@@ -127,11 +127,11 @@ const MarkdownTr = (props: React.HTMLAttributes<HTMLTableRowElement>) => (
 );
 
 const MarkdownTh = (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-  <th className="text-left p-2 sm:p-3 text-vesper-orange font-bold text-xs sm:text-sm break-words" {...props} />
+  <th className="text-left p-3 sm:p-4 md:p-5 text-vesper-orange font-bold text-sm sm:text-base md:text-lg break-words" {...props} />
 );
 
 const MarkdownTd = (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-  <td className="p-2 sm:p-3 text-vesper-orange/90 text-xs sm:text-sm break-words" {...props} />
+  <td className="p-3 sm:p-4 md:p-5 text-foreground/90 text-sm sm:text-base md:text-lg break-words" {...props} />
 );
 
 // Markdown components configuration
@@ -202,7 +202,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
       {/* Header */}
       <Header />
 
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-4xl w-full">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -225,19 +225,19 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           transition={{ duration: 0.6 }}
           className="mb-8 sm:mb-12"
         >
-          <div className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 md:p-8">
-            <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <div className="terminal-window border border-vesper-orange/20 p-5 sm:p-6 md:p-8 lg:p-10">
+            <div className="flex items-center gap-2 mb-5 sm:mb-6 md:mb-7">
               <CategoryIcon className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${categories[post.category].color}`} />
               <span className="text-xs sm:text-sm text-vesper-orange/60 uppercase tracking-wider">
                 {categories[post.category].label}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-vesper-orange mb-4 sm:mb-5 leading-tight break-words">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-vesper-orange mb-5 sm:mb-6 md:mb-7 leading-[1.1] break-words tracking-tight">
               {post.title}
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-vesper-orange/80 mb-4 sm:mb-6 leading-[1.6] break-words">
+            <p className="text-lg sm:text-xl md:text-2xl text-vesper-orange/85 mb-6 sm:mb-7 md:mb-8 leading-[1.7] break-words font-light">
               {post.excerpt}
             </p>
 
@@ -338,8 +338,8 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           transition={{ duration: 0.6, delay: youtubeVideoId ? 0.4 : 0.2 }}
           className="mb-8 sm:mb-12"
         >
-          <div className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 md:p-8 lg:p-10 overflow-x-hidden">
-            <div className="flex items-center gap-2 mb-6 sm:mb-8">
+          <div className="terminal-window border border-vesper-orange/20 p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 overflow-x-hidden">
+            <div className="flex items-center gap-2 mb-8 sm:mb-10 md:mb-12">
               <Terminal className="h-4 w-4 sm:h-5 sm:w-5 text-vesper-orange flex-shrink-0" />
               <span className="terminal-prompt text-sm sm:text-base">&gt; cat article.md</span>
             </div>

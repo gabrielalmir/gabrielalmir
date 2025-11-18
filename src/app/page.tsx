@@ -1,10 +1,10 @@
-import { ExternalLink, Github, GithubIcon, Heart, Instagram, Linkedin, LinkedinIcon, MailIcon, Twitter } from 'lucide-react'
+import { ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 
 import { CoffeeSplash } from '@/components/coffee-splash'
 import GitHubProjects from "@/components/github-projects"
-import { ModernLogo } from '@/components/modern-logo'
+import { Header } from '@/components/header'
 import { ModernResumeSection } from '@/components/modern-resume-section'
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -27,53 +27,7 @@ export default function Home() {
       </div>
 
       {/* Compact modern header */}
-      <header className="sticky top-0 z-[60] border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="hover:opacity-80 transition-opacity" aria-label='logo gabrielalmir'>
-              <ModernLogo />
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
-              {[
-                { href: "#sobre", label: "Sobre" },
-                { href: "#habilidades", label: "Skills" },
-                { href: "#projetos", label: "Projetos" },
-                { href: "/blog", label: "Blog" },
-                { href: "#contato", label: "Contato" },
-              ].map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-sm text-foreground/70 hover:text-vesper-orange transition-colors relative group"
-                >
-                  {label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-vesper-orange group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              ))}
-            </div>
-
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
-              {[
-                { href: 'https://linkedin.com/in/gabrielalmir', icon: LinkedinIcon, label: 'LinkedIn' },
-                { href: 'https://github.com/gabrielalmir', icon: GithubIcon, label: 'GitHub' },
-              ].map(({ href, icon: Icon, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-foreground/60 hover:text-vesper-orange transition-colors"
-                  aria-label={label}
-                  target="_blank"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main className="w-full overflow-x-hidden max-w-full">
         {/* Hero Section - Redesigned with better hierarchy */}

@@ -6,7 +6,7 @@ import { ModernLogo } from './modern-logo';
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-screen border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex justify-between items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity" aria-label='logo gabrielalmir'>
