@@ -78,7 +78,7 @@ export default function Home() {
                 {/* Greeting tag */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5">
                   <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse"></span>
-                  <span className="text-sm text-vesper-cyan">Disponível para novas oportunidades</span>
+                  <span className="text-sm text-vesper-cyan">Quero fazer você se apaixonar por programação!</span>
                 </div>
 
                 {/* Main headline - much larger and prominent */}
