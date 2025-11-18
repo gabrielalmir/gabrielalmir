@@ -8,6 +8,7 @@ import { ModernLogo } from '@/components/modern-logo'
 import { ModernResumeSection } from '@/components/modern-resume-section'
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { VesperDecorations } from '@/components/vesper-decorations'
 import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react"
 
 export default function Home() {
@@ -15,6 +16,10 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
       {/* Coffee Splash Animation */}
       <CoffeeSplash />
+
+      {/* Vesper Theme Decorations */}
+      <VesperDecorations />
+
       {/* Subtle background effects - reduced opacity */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
@@ -22,7 +27,7 @@ export default function Home() {
       </div>
 
       {/* Compact modern header */}
-      <header className="sticky top-0 z-50 border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
+      <header className="sticky top-0 z-[60] border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex justify-between items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity" aria-label='logo gabrielalmir'>
