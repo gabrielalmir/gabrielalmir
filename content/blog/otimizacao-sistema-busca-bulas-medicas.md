@@ -102,26 +102,26 @@ Esse projeto me ensinou várias lições valiosas sobre otimização e arquitetu
 
 A solução final é elegantemente simples:
 
-```
-┌─────────────────┐
-│   Cron Job      │  ← Executa a cada hora
-│   (Scheduler)   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Sync Service   │◄──── Redis Cache (dados quentes)
-│    (Python)     │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    ▼         ▼
-┌───────┐ ┌───────┐
-│ ERP 1 │ │ ERP 2 │  ← Consultas paralelas
-└───────┘ └───────┘
+```text
+┌─────────────────────┐
+│     Cron Job        │  ← Executa a cada hora
+│    (Scheduler)      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   Sync Service      │◄──── Redis Cache (dados quentes)
+│     (Python)        │
+└──────────┬──────────┘
+           │
+      ┌────┴────┐
+      ▼         ▼
+┌─────────┐ ┌─────────┐
+│  ERP 1  │ │  ERP 2  │  ← Consultas paralelas
+└─────────┘ └─────────┘
 ```
 
-Simples, eficiente, escalável.
+**Simples, eficiente, escalável.**
 
 ## O Impacto Real
 
