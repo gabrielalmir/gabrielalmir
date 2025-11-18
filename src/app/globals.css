@@ -4,33 +4,32 @@
 
 @layer base {
   :root {
-    /* Vesper Theme Colors - Refined */
-    --vesper-orange: 255 199 153; /* #FFC799 - Primary accent */
-    --vesper-orange-light: 255 207 168; /* #FFCFA8 - Hover state */
-    --vesper-cyan: 153 255 228; /* #99FFE4 - Secondary accent (peppermint) */
-    --vesper-red: 255 128 128; /* #FF8080 - Error/destructive */
-    --vesper-gray: 160 160 160; /* #A0A0A0 - Muted text */
+    --vesper-orange: 255 199 153;
+    --vesper-orange-light: 255 207 168;
+    --vesper-cyan: 153 255 228;
+    --vesper-red: 255 128 128;
+    --vesper-gray: 160 160 160;
 
-    --background: 16 16 16; /* #101010 - Main background */
-    --foreground: 255 255 255; /* #FFF - Main text */
-    --primary: 255 199 153; /* vesper-orange */
-    --primary-foreground: 0 0 0; /* Black text on orange */
-    --secondary: 153 255 228; /* vesper-cyan */
-    --secondary-foreground: 0 0 0; /* Black text on cyan */
-    --destructive: 255 128 128; /* vesper-red */
-    --destructive-foreground: 255 255 255; /* White text on red */
-    --muted: 160 160 160; /* vesper-gray */
-    --muted-foreground: 255 255 255; /* White text */
-    --accent: 35 35 35; /* #232323 - Slightly lighter than bg */
-    --accent-foreground: 255 255 255; /* White text */
-    --selection-background: 255 255 255 0.15; /* 15% white opacity */
-    --border: 40 40 40; /* #282828 - Border color */
-    --input: 28 28 28; /* #1C1C1C - Input background */
-    --ring: 255 199 153; /* vesper-orange for focus rings */
-    --card: 22 22 22; /* #161616 - Card background */
-    --card-foreground: 255 255 255; /* White text */
-    --popover: 16 16 16; /* Same as background */
-    --popover-foreground: 255 255 255; /* White text */
+    --background: 16 16 16;
+    --foreground: 255 255 255;
+    --primary: 255 199 153;
+    --primary-foreground: 0 0 0;
+    --secondary: 153 255 228;
+    --secondary-foreground: 0 0 0;
+    --destructive: 255 128 128;
+    --destructive-foreground: 255 255 255;
+    --muted: 160 160 160;
+    --muted-foreground: 255 255 255;
+    --accent: 35 35 35;
+    --accent-foreground: 255 255 255;
+    --selection-background: 255 255 255 0.15;
+    --border: 40 40 40;
+    --input: 28 28 28;
+    --ring: 255 199 153;
+    --card: 22 22 22;
+    --card-foreground: 255 255 255;
+    --popover: 16 16 16;
+    --popover-foreground: 255 255 255;
   }
 }
 
@@ -65,13 +64,11 @@ body {
   color: rgb(0 0 0);
 }
 
-/* Reduced scanline effect */
 .bg-scanline {
   background: linear-gradient(to bottom, transparent 0%, rgba(var(--vesper-orange), 0.03) 50%, transparent 100%);
   background-size: 100% 4px;
 }
 
-/* Subtle background glow */
 .bg-glow {
   background: radial-gradient(circle at 50% 0%, rgba(var(--vesper-orange), 0.06) 0%, transparent 60%);
 }
@@ -131,7 +128,6 @@ body {
   animation: glow-pulse 3s ease-in-out infinite;
 }
 
-/* Button styles - cleaner with less glow */
 .terminal-button {
   background-color: rgb(var(--vesper-orange));
   color: rgb(0 0 0);
@@ -142,10 +138,61 @@ body {
   font-weight: 600;
 }
 
+.terminal-button-emphasis {
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-button-emphasis::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  animation: button-shine 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes button-shine {
+  0%, 80%, 100% {
+    opacity: 0;
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  2%, 8% {
+    opacity: 1;
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+  10% {
+    opacity: 0;
+    transform: translateX(200%) translateY(200%) rotate(45deg);
+  }
+}
+
 .terminal-button:hover {
   background-color: rgb(var(--vesper-orange-light));
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(var(--vesper-orange), 0.3);
+}
+
+.terminal-button-emphasis:hover::after {
+  animation: none;
+  opacity: 0;
+}
+
+.terminal-button-emphasis:hover {
+  box-shadow:
+    0 0 0 4px rgba(var(--vesper-orange), 0.3),
+    0 6px 20px rgba(var(--vesper-orange), 0.5);
+  transform: translateY(-1px) scale(1.03);
 }
 
 .terminal-button::before {
@@ -194,7 +241,6 @@ body {
   left: 100%;
 }
 
-/* Font family utilities */
 .font-space {
   font-family: var(--font-space), 'Space Mono', 'Consolas', 'Monaco', monospace;
 }
@@ -209,7 +255,6 @@ body {
   letter-spacing: -0.015em;
 }
 
-/* Terminal window - subtle styling */
 .terminal-window {
   background-color: rgb(var(--background));
   backdrop-filter: blur(4px);
@@ -219,7 +264,6 @@ body {
 .noise-layer {
   position: absolute;
   inset: -40px;
-  /* CRT Scanlines effect */
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -228,7 +272,6 @@ body {
       rgba(var(--vesper-cyan), 0.03) 2px,
       rgba(var(--vesper-cyan), 0.03) 4px
     ),
-    /* CRT phosphor grid pattern */
     repeating-linear-gradient(
       90deg,
       transparent,
@@ -236,7 +279,6 @@ body {
       rgba(var(--vesper-orange), 0.02) 2px,
       rgba(var(--vesper-orange), 0.02) 4px
     ),
-    /* Retro terminal noise */
     url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
   opacity: 0.15;
   mix-blend-mode: overlay;
@@ -348,7 +390,6 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* Blog and Case Studies specific styles */
 .prose-terminal {
   color: rgb(var(--foreground) / 0.9);
   font-family: var(--font-space), 'Space Mono', 'Consolas', 'Monaco', monospace;
@@ -424,14 +465,12 @@ body {
   text-decoration-color: rgb(var(--vesper-orange));
 }
 
-/* Enhanced focus states for accessibility */
 .terminal-button:focus-visible,
 .terminal-button-outline:focus-visible {
   outline: 2px solid rgb(var(--vesper-orange));
   outline-offset: 2px;
 }
 
-/* Custom scrollbar - beautiful and visible */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -475,13 +514,11 @@ body {
   );
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--vesper-orange), 0.6) rgb(16 16 16);
 }
 
-/* Responsive improvements */
 @media (max-width: 768px) {
   .prose-terminal {
     font-size: 0.9375rem;
@@ -501,9 +538,18 @@ body {
   }
 }
 
-/* Smooth scrolling for reduced motion users */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
+}
+
+.image-balanced {
+  filter: brightness(0.95) contrast(1.05) saturate(0.85);
+  mix-blend-mode: normal;
+}
+
+.image-balanced:hover {
+  filter: brightness(1) contrast(1.1) saturate(1);
+  transform: scale(1.02);
 }

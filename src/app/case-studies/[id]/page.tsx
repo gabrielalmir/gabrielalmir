@@ -113,17 +113,17 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
-      {/* Background Effects */}
+      
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
         <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
-      {/* Header */}
+      
       <Header />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        {/* Back Button */}
+        
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -138,7 +138,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           </Link>
         </motion.div>
 
-        {/* Case Study Header */}
+        
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,7 +172,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               {study.description}
             </p>
 
-            {/* Project Meta */}
+            
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
               <div className="text-center">
                 <Calendar className="h-6 w-6 text-vesper-orange mx-auto mb-2" />
@@ -196,7 +196,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               </div>
             </div>
 
-            {/* Technologies */}
+            
             <div className="flex flex-wrap gap-2">
               {study.technologies.map(tech => (
                 <span
@@ -210,7 +210,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </motion.header>
 
-        {/* Metrics Grid */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </motion.section>
 
-        {/* Challenge & Solution */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           className="mb-12"
         >
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Challenge */}
+            
             <div className="terminal-window border border-vesper-orange/20 p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Target className="h-5 w-5 text-red-400" />
@@ -282,7 +282,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
               </div>
             </div>
 
-            {/* Solution */}
+            
             <div className="terminal-window border border-vesper-orange/20 p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Lightbulb className="h-5 w-5 text-yellow-400" />
@@ -306,7 +306,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </motion.section>
 
-        {/* Results */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -338,7 +338,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </motion.section>
 
-        {/* Navigation */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

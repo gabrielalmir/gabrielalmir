@@ -31,7 +31,6 @@ interface GitHubProject {
   updated_at: string
 }
 
-// Featured projects with enhanced descriptions and impact metrics
 const featuredProjects = {
   'manuvi': {
     priority: 1,
@@ -97,7 +96,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
           : 'border border-vesper-orange/20 bg-background hover:border-vesper-orange/40 hover:bg-vesper-orange/5'
       }`}
     >
-      {/* Featured badge and glow effect */}
+
       {isFeatured && (
         <>
           <div className="absolute top-0 right-0 w-24 h-24 bg-vesper-orange/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
@@ -111,7 +110,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
       )}
 
       <CardHeader className="pb-4 space-y-3">
-        {/* Icon and Title - Enhanced */}
+
         <div className="flex items-start gap-3">
           <div className={`p-2 rounded-lg transition-all ${
             isFeatured
@@ -136,14 +135,14 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
           </div>
         </div>
 
-        {/* Description - More prominent */}
+
         <CardDescription className={`text-sm leading-relaxed min-h-[3rem] ${
           isFeatured ? 'text-foreground/90' : 'text-foreground/70'
         }`}>
           {featuredInfo?.impact || project.description || "Projeto sem descrição"}
         </CardDescription>
 
-        {/* Highlights badges - Only for featured */}
+
         {isFeatured && featuredInfo?.highlights && (
           <div className="flex flex-wrap gap-1.5">
             {featuredInfo.highlights.map((highlight) => (
@@ -160,7 +159,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
       </CardHeader>
 
       <CardContent className="flex-grow pb-4">
-        {/* Topics - Cleaner display */}
+
         {project.topics.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {project.topics.slice(0, isFeatured ? 5 : 4).map((topic: string) => (
@@ -184,7 +183,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
       <CardFooter className={`flex justify-between items-center text-sm border-t pt-4 ${
         isFeatured ? 'border-vesper-orange/30' : 'border-vesper-orange/20'
       }`}>
-        {/* Stats - Better spacing and hierarchy */}
+
         <div className="flex items-center gap-3">
           {[
             { Icon: Star, count: project.stargazers_count, label: "stars" },
@@ -207,7 +206,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
           ))}
         </div>
 
-        {/* View link - More prominent */}
+
         <Link
           href={project.html_url}
           target="_blank"
@@ -231,7 +230,6 @@ export default function GitHubProjects({ username }: { username: string }) {
   const [activeFilter, setActiveFilter] = useState('all');
   const [showAll, setShowAll] = useState(false);
 
-  // Fetch projects on component mount
   useEffect(() => {
     fetchGitHubProjects(username)
       .then(setProjects)
@@ -239,35 +237,29 @@ export default function GitHubProjects({ username }: { username: string }) {
       .finally(() => setLoading(false));
   }, [username]);
 
-  // Filter and sort projects
   const filteredProjects = useMemo(() => {
     let filtered = projects;
 
-    // Apply category filter
     if (activeFilter !== 'all') {
       filtered = projects.filter(project => {
         const featuredInfo = featuredProjects[project.name as keyof typeof featuredProjects];
 
-        // Check if project is in featured list with matching category
         if (featuredInfo?.category === activeFilter) {
           return true;
         }
 
-        // For opensource filter, also check topics and other indicators
         if (activeFilter === 'opensource') {
           const opensourceIndicators = [
             'open-source', 'opensource', 'sdk', 'library', 'framework',
             'tool', 'cli', 'api', 'package', 'npm', 'typescript', 'javascript'
           ];
 
-          // Check if project has opensource-related topics
           const hasOpensourceTopics = project.topics.some(topic =>
             opensourceIndicators.some(indicator =>
               topic.toLowerCase().includes(indicator.toLowerCase())
             )
           );
 
-          // Check if project name or description suggests it's a library/tool
           const nameIndicatesOpensource = /-sdk$|-api$|-lib$|-cli$|-tool$/.test(project.name.toLowerCase());
           const descriptionIndicatesOpensource = project.description &&
             opensourceIndicators.some(indicator =>
@@ -277,7 +269,6 @@ export default function GitHubProjects({ username }: { username: string }) {
           return hasOpensourceTopics || nameIndicatesOpensource || descriptionIndicatesOpensource;
         }
 
-        // For other categories, check topics for relevant keywords
         if (activeFilter === 'backend') {
           const backendKeywords = ['api', 'backend', 'server', 'node', 'express', 'fastapi', 'nest'];
           return project.topics.some(topic =>
@@ -309,7 +300,6 @@ export default function GitHubProjects({ username }: { username: string }) {
       });
     }
 
-    // Sort by priority (featured first), then by stars
     return filtered.sort((a, b) => {
       const aFeatured = featuredProjects[a.name as keyof typeof featuredProjects];
       const bFeatured = featuredProjects[b.name as keyof typeof featuredProjects];
@@ -322,7 +312,6 @@ export default function GitHubProjects({ username }: { username: string }) {
     });
   }, [projects, activeFilter]);
 
-  // Limit displayed projects
   const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
 
   if (loading) {
@@ -345,7 +334,7 @@ export default function GitHubProjects({ username }: { username: string }) {
 
   return (
     <div className="space-y-6 sm:space-y-8 w-full">
-      {/* Filter Buttons - Enhanced visual hierarchy */}
+
       <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
         {categoryFilters.map(({ id, label, icon: Icon }) => (
           <Button
@@ -365,7 +354,7 @@ export default function GitHubProjects({ username }: { username: string }) {
         ))}
       </div>
 
-      {/* Projects Grid - Improved spacing */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {displayedProjects.map((project: GitHubProject) => {
           const isFeatured = project.name in featuredProjects;
@@ -379,7 +368,7 @@ export default function GitHubProjects({ username }: { username: string }) {
         })}
       </div>
 
-      {/* Show More/Less Button - Better prominence */}
+
       {filteredProjects.length > 6 && (
         <div className="text-center pt-4">
           <Button
@@ -396,7 +385,7 @@ export default function GitHubProjects({ username }: { username: string }) {
         </div>
       )}
 
-      {/* Results Summary - Subtle but informative */}
+
       <div className="text-center text-vesper-orange/50 text-sm font-mono">
         {displayedProjects.length} de {filteredProjects.length} projetos
         {activeFilter !== 'all' && ` · ${categoryFilters.find(f => f.id === activeFilter)?.label}`}

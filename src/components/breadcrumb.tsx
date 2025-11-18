@@ -16,33 +16,33 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className="flex items-center space-x-2 text-sm text-vesper-orange/60 mb-6"
       aria-label="Breadcrumb"
     >
-      <Link 
-        href="/" 
+      <Link
+        href="/"
         className="flex items-center hover:text-vesper-orange transition-colors"
         aria-label="Home"
       >
         <Home className="h-4 w-4" />
       </Link>
-      
+
       {items.map((item, index) => (
         <div key={index} className="flex items-center space-x-2">
           <ChevronRight className="h-3 w-3 text-vesper-orange/40" />
           {item.href && !item.current ? (
-            <Link 
+            <Link
               href={item.href}
               className="hover:text-vesper-orange transition-colors terminal-prompt"
             >
               {item.label}
             </Link>
           ) : (
-            <span 
+            <span
               className={`terminal-prompt ${
                 item.current ? 'text-vesper-orange' : 'text-vesper-orange/60'
               }`}
@@ -56,26 +56,25 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
   );
 }
 
-// Hook para gerar breadcrumbs automaticamente baseado na rota
 export function useBreadcrumbs(pathname: string, customLabels?: Record<string, string>) {
   const segments = pathname.split('/').filter(Boolean);
-  
+
   const defaultLabels: Record<string, string> = {
     blog: 'Blog',
     'case-studies': 'Case Studies',
     ...customLabels
   };
-  
+
   const items: BreadcrumbItem[] = segments.map((segment, index) => {
     const href = '/' + segments.slice(0, index + 1).join('/');
     const isLast = index === segments.length - 1;
-    
+
     return {
       label: defaultLabels[segment] || segment,
       href: isLast ? undefined : href,
       current: isLast
     };
   });
-  
+
   return items;
 }

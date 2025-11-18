@@ -25,8 +25,6 @@ const categories = {
 
 /* eslint-disable jsx-a11y/heading-has-content */
 /* eslint-disable jsx-a11y/anchor-has-content */
-// Markdown component definitions (moved outside main component for performance)
-// Content is provided dynamically by ReactMarkdown library
 const MarkdownH1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-vesper-orange mt-10 sm:mt-12 md:mt-14 mb-5 sm:mb-6 md:mb-7 border-b border-vesper-orange/20 pb-3 sm:pb-4 leading-[1.2] break-words tracking-tight" {...props} />
 );
@@ -134,7 +132,6 @@ const MarkdownTd = (props: React.HTMLAttributes<HTMLTableCellElement>) => (
   <td className="p-3 sm:p-4 md:p-5 text-foreground/90 text-sm sm:text-base md:text-lg break-words" {...props} />
 );
 
-// Markdown components configuration
 const markdownComponents = {
   h1: MarkdownH1,
   h2: MarkdownH2,
@@ -162,7 +159,6 @@ const markdownComponents = {
 export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) {
   const CategoryIcon = categories[post.category].icon;
 
-  // Extract YouTube video ID from URL
   const getYouTubeVideoId = (url: string): string | null => {
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     const match = url.match(regExp);
@@ -178,7 +174,6 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
         text: post.excerpt,
         url: globalThis.location.href,
       }).catch(() => {
-        // Silently fail if user cancels
       });
     }
   };
@@ -193,17 +188,17 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
 
   return (
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
-      {/* Background Effects */}
+
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
         <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
-      {/* Header */}
+
       <Header />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
-        {/* Back Button */}
+
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -218,7 +213,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </Link>
         </motion.div>
 
-        {/* Article Header */}
+
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -241,7 +236,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               {post.excerpt}
             </p>
 
-            {/* Meta Information */}
+
             <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-4 sm:mb-6 text-xs sm:text-sm text-vesper-orange/60">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
@@ -267,7 +262,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               )}
             </div>
 
-            {/* Tags */}
+
             <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
               {post.tags.map(tag => (
                 <span
@@ -279,7 +274,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               ))}
             </div>
 
-            {/* Share Buttons */}
+
             <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <span className="text-xs sm:text-sm text-vesper-orange/60">Compartilhar:</span>
               <div className="flex gap-2">
@@ -304,7 +299,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </div>
         </motion.header>
 
-        {/* YouTube Video Embed */}
+
         {youtubeVideoId && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -331,7 +326,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </motion.section>
         )}
 
-        {/* Article Content */}
+
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -356,7 +351,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </div>
         </motion.article>
 
-        {/* Author Bio */}
+
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -391,7 +386,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </div>
         </motion.section>
 
-        {/* Navigation */}
+
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

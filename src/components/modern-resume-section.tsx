@@ -151,7 +151,7 @@ export const ModernResumeSection: React.FC = () => {
 
   return (
     <section className="w-full max-w-6xl mx-auto">
-      {/* Section header */}
+      
       <div className="text-center mb-12 sm:mb-16">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
           Resumo Profissional
@@ -163,7 +163,7 @@ export const ModernResumeSection: React.FC = () => {
 
       <div className="space-y-8 sm:space-y-12">
 
-        {/* Summary */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,10 +174,10 @@ export const ModernResumeSection: React.FC = () => {
           <p className="text-sm sm:text-base text-foreground/80 leading-relaxed break-words">{resumeData.summary}</p>
         </motion.div>
 
-        {/* Two column layout for desktop */}
+        
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
 
-          {/* Experience */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,7 @@ export const ModernResumeSection: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Education */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -240,7 +240,7 @@ export const ModernResumeSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Skills - organized by category */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -273,7 +273,7 @@ export const ModernResumeSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Certifications */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -302,7 +302,7 @@ export const ModernResumeSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Projects */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

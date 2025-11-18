@@ -1,49 +1,52 @@
-import { ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react'
-import Image from "next/image"
-import Link from "next/link"
+'use client';
 
-import { CoffeeSplash } from '@/components/coffee-splash'
-import GitHubProjects from "@/components/github-projects"
-import { Header } from '@/components/header'
-import { ModernResumeSection } from '@/components/modern-resume-section'
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { VesperDecorations } from '@/components/vesper-decorations'
-import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react"
+import { ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+
+import { CoffeeSplash } from '@/components/coffee-splash';
+import { ContactButton } from '@/components/contact-button';
+import GitHubProjects from "@/components/github-projects";
+import { Header } from '@/components/header';
+import { ModernResumeSection } from '@/components/modern-resume-section';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { VesperDecorations } from '@/components/vesper-decorations';
+import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
-      {/* Coffee Splash Animation */}
+
       <CoffeeSplash />
 
-      {/* Vesper Theme Decorations */}
+
       <VesperDecorations />
 
-      {/* Subtle background effects - reduced opacity */}
+
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
         <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
-      {/* Compact modern header */}
+
       <Header />
 
       <main className="w-full overflow-x-hidden max-w-full">
-        {/* Hero Section - Redesigned with better hierarchy */}
+
         <section className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 w-full max-w-full">
           <div className="container mx-auto max-w-7xl w-full">
             <div className="grid lg:grid-cols-[1.5fr,1fr] gap-12 lg:gap-16 items-center w-full max-w-full">
 
-              {/* Left Column - Content (prioritized) */}
+
               <div className="space-y-6 md:space-y-8 w-full max-w-full overflow-hidden">
-                {/* Greeting tag */}
+
                 <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5 max-w-full">
                   <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse flex-shrink-0"></span>
                   <span className="text-xs sm:text-sm text-vesper-cyan truncate">Quero fazer você se apaixonar por programação!</span>
                 </div>
 
-                {/* Main headline - much larger and prominent */}
+
                 <div className="space-y-3 md:space-y-4 w-full max-w-full">
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words w-full">
                     <span className="text-foreground">Olá, sou</span>
@@ -60,7 +63,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Key highlights - clean bullet format */}
+
                 <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
                     '6+ anos de experiência',
@@ -78,21 +81,16 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* Short bio - concise and scannable */}
+
                 <div className="space-y-3 text-foreground/80 max-w-2xl w-full">
                     <p className="text-base leading-relaxed break-words w-full">
                     Engenheiro de Software Backend com sólida experiência em <strong className="text-vesper-orange font-semibold">Node.js</strong> e <strong className="text-vesper-orange font-semibold">Python</strong>, atuando no desenvolvimento de APIs escaláveis, integrações entre sistemas e soluções de <strong className="text-vesper-orange font-semibold">machine learning</strong> aplicadas a problemas de negócio. Foco em <strong className="text-vesper-orange font-semibold">arquitetura limpa</strong>, <strong className="text-vesper-orange font-semibold">boas práticas (SOLID, Design Patterns)</strong>, <strong className="text-vesper-orange font-semibold">observabilidade (OpenTelemetry)</strong> e <strong className="text-vesper-orange font-semibold">automação com CI/CD</strong> em ambientes <strong className="text-vesper-orange font-semibold">AWS</strong>.
                     </p>
                 </div>
 
-                {/* CTA Buttons - clear hierarchy */}
+
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full max-w-full">
-                  <Link href="#contato" className="w-full sm:w-auto">
-                  <Button size="lg" className="terminal-button group w-full sm:w-auto">
-                    <MailIcon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                    <span>Entrar em contato</span>
-                  </Button>
-                  </Link>
+                  <ContactButton href="#contato" label="Entrar em contato" />
                   <Link href="#projetos" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
@@ -105,7 +103,7 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Social proof */}
+
                 <div className="flex items-center gap-4 sm:gap-6 pt-4 justify-center sm:justify-start w-full max-w-full flex-wrap">
                   {[
                     { Icon: Linkedin, href: "https://linkedin.com/in/gabrielalmir", label: "LinkedIn" },
@@ -125,12 +123,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column - Image (smaller, balanced) */}
+
               <div className="relative lg:justify-self-end">
-                {/* Subtle glow effect */}
+
                 <div className="absolute inset-0 bg-vesper-orange/10 rounded-2xl blur-3xl opacity-50" />
 
-                {/* Image container */}
+
                 <div className="relative w-full max-w-sm lg:max-w-md mx-auto">
                   <div className="aspect-square rounded-2xl overflow-hidden border border-vesper-orange/20 bg-gradient-to-br from-vesper-orange/5 to-vesper-cyan/5">
                     <Image
@@ -138,7 +136,7 @@ export default function Home() {
                       alt="Gabriel Almir - Engenheiro de Software Backend"
                       width={400}
                       height={400}
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      className="w-full h-full object-cover image-balanced transition-all duration-700"
                       priority
                     />
                   </div>
@@ -148,10 +146,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills Section - Reorganized with categories */}
+
         <section id="habilidades" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
           <div className="container mx-auto max-w-7xl w-full">
-            {/* Section header */}
+
             <div className="text-center mb-12 sm:mb-16 w-full max-w-full px-4">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
                 Habilidades Técnicas
@@ -161,10 +159,10 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Skills organized by category */}
+
             <div className="space-y-12 w-full max-w-full">
 
-              {/* Primary Skills - Backend */}
+
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-vesper-orange rounded-full flex-shrink-0"></div>
@@ -202,7 +200,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Cloud & DevOps */}
+
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-vesper-cyan rounded-full flex-shrink-0"></div>
@@ -233,7 +231,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Databases & Messaging */}
+
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-foreground/40 rounded-full flex-shrink-0"></div>
@@ -266,7 +264,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* IA & Machine Learning */}
+
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-vesper-orange/60 rounded-full flex-shrink-0"></div>
@@ -281,7 +279,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Frontend (Secondary) */}
+
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-foreground/30 rounded-full flex-shrink-0"></div>
@@ -312,10 +310,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Projects Section - Simplified and focused */}
+
         <section id="projetos" className="py-16 md:py-24 bg-gradient-to-b from-background to-vesper-orange/5 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
           <div className="container mx-auto max-w-6xl w-full">
-            {/* Section header */}
+
             <div className="text-center mb-12 sm:mb-16 w-full max-w-full px-4">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
                 Projetos em Destaque
@@ -325,10 +323,10 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Projects grid */}
+
             <GitHubProjects username="gabrielalmir" />
 
-            {/* CTA */}
+
             <div className="text-center mt-12">
               <Link href="https://github.com/gabrielalmir?tab=repositories" target="_blank">
                 <Button size="lg" variant="outline" className="terminal-button-outline group">
@@ -340,14 +338,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About/Resume Section */}
+
         <section id="sobre" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
           <div className="container mx-auto max-w-7xl w-full">
           <ModernResumeSection />
           </div>
         </section>
 
-        {/* Contact Section - Clean and inviting */}
+
         <section id="contato" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
           <div className="container mx-auto max-w-4xl text-center w-full">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6 break-words px-4">
@@ -358,7 +356,7 @@ export default function Home() {
               Entre em contato através dos canais abaixo.
             </p>
 
-            {/* Contact methods */}
+
             <div className="flex flex-wrap gap-3 sm:gap-4 justify-center mb-8 sm:mb-12">
               <Link href="mailto:gabr.almir@gmail.com" className="w-full sm:w-auto">
                 <Button size="lg" className="terminal-button group w-full sm:w-auto">
@@ -368,7 +366,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Social links */}
+
             <div className="flex gap-4 sm:gap-6 justify-center items-center flex-wrap">
               {[
                 { Icon: Linkedin, href: "https://linkedin.com/in/gabrielalmir", label: "LinkedIn" },
@@ -395,7 +393,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer - Minimal and clean */}
+
       <footer className="border-t border-vesper-orange/10 py-6 sm:py-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">

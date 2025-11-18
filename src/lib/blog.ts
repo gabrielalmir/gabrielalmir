@@ -18,7 +18,6 @@ export interface BlogPost {
 }
 
 export function getAllPosts(): BlogPost[] {
-    // Verificar se o diretório existe
     if (!fs.existsSync(postsDirectory)) {
         return [];
     }
@@ -27,17 +26,13 @@ export function getAllPosts(): BlogPost[] {
     const allPostsData = fileNames
         .filter((fileName) => fileName.endsWith('.md'))
         .map((fileName) => {
-            // Remove ".md" from file name to get id
             const id = fileName.replace(/\.md$/, '');
 
-            // Read markdown file as string
             const fullPath = path.join(postsDirectory, fileName);
             const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-            // Use gray-matter to parse the post metadata section
             const { data, content } = matter(fileContents);
 
-            // Combine the data with the id and content
             return {
                 id,
                 content,
@@ -52,7 +47,6 @@ export function getAllPosts(): BlogPost[] {
             } as BlogPost;
         });
 
-    // Sort posts by date
     return allPostsData.sort((a, b) => {
         if (new Date(a.date) < new Date(b.date)) {
             return 1;

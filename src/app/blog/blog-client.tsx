@@ -37,17 +37,17 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
 
   return (
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
-      {/* Background Effects */}
+      
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
         <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
-      {/* Header */}
+      
       <Header />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
-        {/* Hero Section */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
           </div>
         </motion.section>
 
-        {/* Filters */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
               <span className="terminal-prompt text-sm sm:text-base">&gt; filters.apply()</span>
             </div>
 
-            {/* Search */}
+            
             <div className="mb-4 sm:mb-6">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-vesper-orange/60" />
@@ -102,7 +102,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
               </div>
             </div>
 
-            {/* Category Filter */}
+            
             <div className="mb-3 sm:mb-4">
               <div className="block text-xs sm:text-sm text-vesper-orange/80 mb-2">
                 <span className="terminal-prompt">&gt; categoria:</span>
@@ -131,7 +131,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
               </div>
             </div>
 
-            {/* Tag Filter */}
+            
             <div>
               <div className="block text-xs sm:text-sm text-vesper-orange/80 mb-2">
                 <span className="terminal-prompt">&gt; tags:</span>
@@ -162,7 +162,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
           </div>
         </motion.section>
 
-        {/* Blog Posts Grid */}
+        
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

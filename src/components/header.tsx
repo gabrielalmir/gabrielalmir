@@ -13,7 +13,7 @@ export const Header = () => {
             <ModernLogo />
           </Link>
 
-          {/* Desktop Navigation */}
+          
           <div className="hidden md:flex items-center gap-6">
             {[
               { href: "/#sobre", label: "Sobre" },
@@ -33,7 +33,7 @@ export const Header = () => {
             ))}
           </div>
 
-          {/* Social Links */}
+          
           <div className="flex items-center gap-3">
             {[
               { href: 'https://linkedin.com/in/gabrielalmir', icon: LinkedinIcon, label: 'LinkedIn' },

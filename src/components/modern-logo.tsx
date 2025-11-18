@@ -12,7 +12,7 @@ export const ModernLogo = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="relative w-8 h-8 flex items-center justify-center">
-        {/* Hexagon background */}
+        
         <svg
           className="absolute w-full h-full"
           viewBox="0 0 100 100"

@@ -32,7 +32,7 @@ export function SEO({
   const siteUrl = 'https://gabrielalmir.com.br';
   const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
   const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
-  
+
   const allKeywords = [
     'Gabriel Almir',
     'Backend Developer',
@@ -47,7 +47,7 @@ export function SEO({
 
   return (
     <Head>
-      {/* Basic Meta Tags */}
+
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={allKeywords} />
@@ -55,8 +55,8 @@ export function SEO({
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={fullUrl} />
-      
-      {/* Open Graph / Facebook */}
+
+
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
@@ -64,15 +64,15 @@ export function SEO({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:site_name" content={siteTitle} />
       <meta property="og:locale" content="pt_BR" />
-      
-      {/* Twitter Card */}
+
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImage} />
       <meta name="twitter:creator" content="@gabrielalmir" />
-      
-      {/* Article specific meta tags */}
+
+
       {type === 'article' && (
         <>
           <meta property="article:author" content={author} />
@@ -90,8 +90,8 @@ export function SEO({
           ))}
         </>
       )}
-      
-      {/* JSON-LD Structured Data */}
+
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -126,22 +126,21 @@ export function SEO({
           })
         }}
       />
-      
-      {/* Favicon and App Icons */}
+
+
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="manifest" href="/site.webmanifest" />
-      
-      {/* Theme Color */}
+
+
       <meta name="theme-color" content="#99ffe4" />
       <meta name="msapplication-TileColor" content="#99ffe4" />
     </Head>
   );
 }
 
-// Hook para gerar meta tags automaticamente para blog posts
 export function useBlogPostSEO(post: {
   title: string;
   excerpt: string;
@@ -162,7 +161,6 @@ export function useBlogPostSEO(post: {
   };
 }
 
-// Hook para gerar meta tags automaticamente para case studies
 export function useCaseStudySEO(study: {
   title: string;
   subtitle: string;

@@ -8,10 +8,10 @@ interface LoadingSkeletonProps {
   count?: number;
 }
 
-export function LoadingSkeleton({ 
-  variant = 'card', 
-  className = '', 
-  count = 1 
+export function LoadingSkeleton({
+  variant = 'card',
+  className = '',
+  count = 1
 }: LoadingSkeletonProps) {
   const skeletons = Array.from({ length: count }, (_, index) => {
     switch (variant) {
@@ -25,7 +25,7 @@ export function LoadingSkeleton({
             className={`terminal-window border border-vesper-orange/20 p-6 ${className}`}
           >
             <div className="space-y-4">
-              {/* Header */}
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 loading-skeleton rounded" />
@@ -33,33 +33,33 @@ export function LoadingSkeleton({
                 </div>
                 <div className="w-16 h-3 loading-skeleton rounded" />
               </div>
-              
-              {/* Title */}
+
+
               <div className="w-3/4 h-6 loading-skeleton rounded" />
-              
-              {/* Subtitle */}
+
+
               <div className="w-1/2 h-4 loading-skeleton rounded" />
-              
-              {/* Content */}
+
+
               <div className="space-y-2">
                 <div className="w-full h-3 loading-skeleton rounded" />
                 <div className="w-5/6 h-3 loading-skeleton rounded" />
                 <div className="w-4/5 h-3 loading-skeleton rounded" />
               </div>
-              
-              {/* Tags */}
+
+
               <div className="flex gap-2">
                 <div className="w-16 h-6 loading-skeleton rounded" />
                 <div className="w-20 h-6 loading-skeleton rounded" />
                 <div className="w-14 h-6 loading-skeleton rounded" />
               </div>
-              
-              {/* Button */}
+
+
               <div className="w-full h-10 loading-skeleton rounded" />
             </div>
           </motion.div>
         );
-        
+
       case 'text':
         return (
           <motion.div
@@ -74,7 +74,7 @@ export function LoadingSkeleton({
             <div className="w-4/5 h-4 loading-skeleton rounded" />
           </motion.div>
         );
-        
+
       case 'avatar':
         return (
           <motion.div
@@ -91,7 +91,7 @@ export function LoadingSkeleton({
             </div>
           </motion.div>
         );
-        
+
       case 'button':
         return (
           <motion.div
@@ -102,7 +102,7 @@ export function LoadingSkeleton({
             className={`w-32 h-10 loading-skeleton rounded ${className}`}
           />
         );
-        
+
       default:
         return (
           <div
@@ -112,11 +112,10 @@ export function LoadingSkeleton({
         );
     }
   });
-  
+
   return <>{skeletons}</>;
 }
 
-// Componente específico para loading de blog posts
 export function BlogPostSkeleton({ count = 6 }: { count?: number }) {
   return (
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -125,7 +124,6 @@ export function BlogPostSkeleton({ count = 6 }: { count?: number }) {
   );
 }
 
-// Componente específico para loading de case studies
 export function CaseStudySkeleton({ count = 4 }: { count?: number }) {
   return (
     <div className="grid gap-6 md:grid-cols-2">
@@ -134,26 +132,24 @@ export function CaseStudySkeleton({ count = 4 }: { count?: number }) {
   );
 }
 
-// Componente para loading de artigo completo
 export function ArticleSkeleton() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      {/* Header */}
       <div className="terminal-window border border-vesper-orange/20 p-8">
         <div className="space-y-6">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 loading-skeleton rounded" />
             <div className="w-20 h-4 loading-skeleton rounded" />
           </div>
-          
+
           <div className="w-4/5 h-8 loading-skeleton rounded" />
           <div className="w-3/5 h-6 loading-skeleton rounded" />
-          
+
           <div className="space-y-2">
             <div className="w-full h-4 loading-skeleton rounded" />
             <div className="w-5/6 h-4 loading-skeleton rounded" />
           </div>
-          
+
           <div className="flex gap-2">
             <div className="w-16 h-6 loading-skeleton rounded" />
             <div className="w-20 h-6 loading-skeleton rounded" />
@@ -161,21 +157,20 @@ export function ArticleSkeleton() {
           </div>
         </div>
       </div>
-      
-      {/* Content */}
+
       <div className="terminal-window border border-vesper-orange/20 p-8">
         <div className="space-y-6">
           <div className="flex items-center gap-2 mb-6">
             <div className="w-5 h-5 loading-skeleton rounded" />
             <div className="w-32 h-4 loading-skeleton rounded" />
           </div>
-          
+
           <LoadingSkeleton variant="text" count={8} className="mb-4" />
-          
+
           <div className="bg-card border border-vesper-orange/20 rounded p-4">
             <LoadingSkeleton variant="text" count={4} />
           </div>
-          
+
           <LoadingSkeleton variant="text" count={6} />
         </div>
       </div>
@@ -183,20 +178,16 @@ export function ArticleSkeleton() {
   );
 }
 
-// Hook para simular loading state
 export function useLoadingState(duration: number = 1500) {
   const [isLoading, setIsLoading] = React.useState(true);
-  
+
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, duration);
-    
+
     return () => clearTimeout(timer);
   }, [duration]);
-  
+
   return isLoading;
 }
-
-// Importação do React para o hook
-import React from 'react';

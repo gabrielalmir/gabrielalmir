@@ -4,7 +4,6 @@ import type { MetadataRoute } from 'next';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://gabrielalmir.com';
 
-    // Páginas estáticas
     const staticPages: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
@@ -26,7 +25,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // Posts do blog
     const posts = getAllPosts();
     const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
         url: `${baseUrl}/blog/${post.id}`,

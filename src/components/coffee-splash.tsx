@@ -1,18 +1,81 @@
 'use client';
 
+import { ArchlinuxPlain } from 'devicons-react';
 import { motion } from 'framer-motion';
+import { Terminal as TerminalIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function CoffeeSplash() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
+  const [currentTyping, setCurrentTyping] = useState({ line: 0, text: '', index: 0 });
+  const [showFastfetch, setShowFastfetch] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShow(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
+    const hasSeenSplash = localStorage.getItem('vesper-splash-seen');
+    if (!hasSeenSplash) {
+      setShow(true);
+      localStorage.setItem('vesper-splash-seen', 'true');
+    }
   }, []);
+
+  const terminalLines = [
+    '[INFO] Booting Arch Linux kernel...',
+    '[OK] Loading systemd services...',
+    '[OK] Starting Node.js runtime...',
+    '[OK] TypeScript compiler initialized',
+    '[OK] Python interpreter ready',
+    '[OK] Rust toolchain loaded',
+    '[OK] Git repository initialized',
+    '[OK] All systems operational',
+  ];
+
+  useEffect(() => {
+    if (!show) return;
+
+    const timers: NodeJS.Timeout[] = [];
+    const intervals: NodeJS.Timeout[] = [];
+    let lineStartTime = 100;
+
+    terminalLines.forEach((line, lineIndex) => {
+      const startTimer = setTimeout(() => {
+        let charIndex = 0;
+        const typingInterval = setInterval(() => {
+          if (charIndex < line.length) {
+            setCurrentTyping({
+              line: lineIndex,
+              text: line.substring(0, charIndex + 1),
+              index: charIndex + 1,
+            });
+            charIndex++;
+          } else {
+            clearInterval(typingInterval);
+            setDisplayedLines(prev => [...prev, line]);
+            setCurrentTyping({ line: lineIndex + 1, text: '', index: 0 });
+          }
+        }, 15);
+        intervals.push(typingInterval);
+      }, lineStartTime);
+
+      timers.push(startTimer);
+      lineStartTime += line.length * 15 + 200;
+    });
+
+    const fastfetchTimer = setTimeout(() => {
+      setShowFastfetch(true);
+    }, lineStartTime + 100);
+
+    const hideTimer = setTimeout(() => {
+      setShow(false);
+    }, lineStartTime + 1500);
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+      intervals.forEach(interval => clearInterval(interval));
+      clearTimeout(fastfetchTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [show]);
 
   return show && (
     <motion.div
@@ -20,178 +83,130 @@ export function CoffeeSplash() {
       animate={{ opacity: 1 }}
       exit={{
         opacity: 0,
+        transition: { duration: 0.3 }
       }}
-      transition={{ duration: 0.1 }}
+      transition={{ duration: 0.15 }}
       className="fixed inset-0 z-[100] bg-background flex items-center justify-center overflow-hidden"
     >
-      {/* Coffee cup container */}
-      <div className="relative w-40 h-48 sm:w-48 sm:h-56 flex flex-col items-center justify-center">
-        {/* Coffee cup */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.05 }}
-          className="relative w-full h-full flex items-center justify-center"
-        >
-          {/* Cup body - realistic shape */}
-          <div className="relative w-24 h-32 sm:w-28 sm:h-36">
-            {/* Cup outer shape - trapezoid/truncated cone */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2"
-              style={{
-                width: '100%',
-                height: '85%',
-                clipPath: 'polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%)',
-                background: 'linear-gradient(to bottom, rgba(160, 82, 45, 0.85), rgba(139, 69, 19, 0.95), rgba(101, 67, 33, 1))',
-                borderRadius: '0 0 10px 10px',
-                border: '2px solid rgba(139, 69, 19, 0.7)',
-                boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)',
-              }}
-            >
-              {/* Cup rim - top border (thicker, more visible) */}
-              <div
-                className="absolute top-0 left-0 right-0 h-3"
-                style={{
-                  background: 'linear-gradient(to bottom, rgba(205, 133, 63, 0.9), rgba(160, 82, 45, 0.95), rgba(139, 69, 19, 0.9))',
-                  borderRadius: '3px 3px 0 0',
-                  boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.1)',
-                }}
-              />
+      <div
+        className="absolute inset-0 pointer-events-none z-[101]"
+        style={{
+          background: 'repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08) 1px, transparent 1px, transparent 3px)',
+          opacity: 0.15,
+        }}
+      />
 
-              {/* Inner rim shadow */}
-              <div
-                className="absolute top-3 left-1/2 -translate-x-1/2 w-[88%] h-0.5"
-                style={{
-                  background: 'rgba(0, 0, 0, 0.2)',
-                }}
-              />
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        className="relative w-full max-w-2xl mx-auto px-6 sm:px-8 z-[102]"
+      >
+        <div className="bg-background border-2 border-vesper-orange/30 rounded-lg shadow-2xl overflow-hidden relative">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(135deg, rgba(153, 255, 228, 0.02) 0%, rgba(255, 199, 153, 0.02) 100%)',
+              borderRadius: 'inherit',
+            }}
+          />
 
-              {/* Coffee liquid */}
+          <div className="bg-vesper-orange/10 border-b border-vesper-orange/20 px-4 py-2 flex items-center gap-2 relative">
+            <TerminalIcon className="w-4 h-4 text-vesper-orange" />
+            <span className="text-xs text-vesper-orange/80 font-mono">gabrielalmir v2.8</span>
+            <div className="ml-auto flex gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-vesper-orange/40" />
+              <div className="w-2 h-2 rounded-full bg-vesper-orange/20" />
+              <div className="w-2 h-2 rounded-full bg-vesper-orange/10" />
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8 font-mono text-xs sm:text-sm relative">
+            {!showFastfetch ? (
+              <div className="space-y-2 text-vesper-cyan/90">
+                {displayedLines.map((line, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-vesper-orange/60">&gt;</span>
+                    <span style={{ textShadow: '0 0 2px rgba(153, 255, 228, 0.3)' }}>{line}</span>
+                  </motion.div>
+                ))}
+
+                {currentTyping.text && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-vesper-orange/60">&gt;</span>
+                    <span className="text-vesper-cyan/90" style={{ textShadow: '0 0 2px rgba(153, 255, 228, 0.3)' }}>{currentTyping.text}</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.6, repeat: Infinity }}
+                      className="w-2 h-4 bg-vesper-orange inline-block ml-1"
+                    />
+                  </motion.div>
+                )}
+              </div>
+            ) : (
               <motion.div
-                initial={{ height: '60%' }}
-                animate={{ height: '75%' }}
-                transition={{ duration: 0.3, delay: 0.5, ease: 'easeOut' }}
-                className="absolute bottom-0 left-0 right-0 overflow-hidden"
-                style={{
-                  clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)',
-                  background: 'linear-gradient(to bottom, rgba(184, 134, 11, 0.9), rgba(139, 69, 19, 0.95))',
-                  borderRadius: '0 0 6px 6px',
-                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="text-vesper-cyan/90"
               >
-                {/* Coffee surface highlight */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-1"
-                  style={{
-                    background: 'linear-gradient(to right, transparent, rgba(255, 215, 0, 0.3), transparent)',
-                  }}
-                />
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="text-vesper-cyan/90 leading-[1.1] font-mono text-3xl sm:text-xs whitespace-pre flex items-center gap-2">
+                    <ArchlinuxPlain size={64} />
+                  </div>
 
-                {/* Ripple effect when drop hits */}
+                  <div className="space-y-0.5 text-vesper-cyan/90 text-xs sm:text-sm">
+                    <div><span className="text-vesper-orange/70">OS:</span> Arch Linux</div>
+                    <div><span className="text-vesper-orange/70">Kernel:</span> Linux 6.x</div>
+                    <div><span className="text-vesper-orange/70">Shell:</span> zsh</div>
+                    <div><span className="text-vesper-orange/70">Node:</span> v20.x</div>
+                    <div><span className="text-vesper-orange/70">TypeScript:</span> 5.x</div>
+                    <div><span className="text-vesper-orange/70">Python:</span> 3.12</div>
+                    <div><span className="text-vesper-orange/70">Rust:</span> 1.75</div>
+                    <div><span className="text-vesper-orange/70">Git:</span> 2.42</div>
+                  </div>
+                </div>
+
                 <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{
-                    scale: [0, 2, 0],
-                    opacity: [0, 0.4, 0]
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    delay: 0.5,
-                    times: [0, 0.5, 1]
-                  }}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 border-amber-500/50"
-                />
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-4 pt-4 border-t border-vesper-orange/20"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-vesper-orange/60">&gt;</span>
+                    <span className="text-vesper-cyan/90" style={{ textShadow: '0 0 2px rgba(153, 255, 228, 0.3)' }}>Welcome to Gabriel Almir's Portfolio</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.6, repeat: Infinity }}
+                      className="w-2 h-4 bg-vesper-orange inline-block ml-1"
+                    />
+                  </div>
+                </motion.div>
               </motion.div>
-            </div>
-
-            {/* Cup handle - more realistic */}
-            <div
-              className="absolute right-[-4px] top-1/3 -translate-y-1/2"
-              style={{
-                width: '18px',
-                height: '36px',
-                border: '4px solid rgba(139, 69, 19, 0.8)',
-                borderRadius: '0 14px 14px 0',
-                background: 'transparent',
-                boxShadow: 'inset -3px 0 6px rgba(0, 0, 0, 0.4), 2px 0 4px rgba(0, 0, 0, 0.2)',
-              }}
-            />
-
-            {/* Cup base shadow */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-1"
-              style={{
-                background: 'radial-gradient(ellipse, rgba(0, 0, 0, 0.4), transparent)',
-                borderRadius: '50%',
-              }}
-            />
+            )}
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Coffee drop */}
-        <motion.div
-          initial={{ y: -80, opacity: 0, scale: 0.3 }}
-          animate={{
-            y: [0, 45, 45],
-            opacity: [0, 1, 0],
-            scale: [0.3, 1.1, 0.9]
-          }}
-          transition={{
-            duration: 0.4,
-            delay: 0.1,
-            times: [0, 0.75, 1],
-            ease: [0.34, 1.56, 0.64, 1] // Bounce effect
-          }}
-          className="absolute top-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="relative w-4 h-6 sm:w-5 sm:h-7">
-            <div className="w-full h-full bg-gradient-to-b from-amber-500 via-amber-600 to-amber-800 rounded-full shadow-lg">
-              {/* Drop highlight */}
-              <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-2 bg-amber-300/60 rounded-full blur-[1px]" />
-              {/* Drop shine */}
-              <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-1 h-1.5 bg-white/40 rounded-full" />
-            </div>
-            {/* Drop trail */}
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{
-                opacity: [0, 0.3, 0],
-                scaleY: [0, 1, 0]
-              }}
-              transition={{
-                duration: 0.15,
-                delay: 0.1,
-                times: [0, 0.5, 1]
-              }}
-              className="absolute -top-2 left-1/2 -translate-x-1/2 w-0.5 h-4 bg-amber-400/30"
-            />
-          </div>
-        </motion.div>
-
-        {/* Splash effect when drop hits */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{
-            scale: [0, 1.5, 0],
-            opacity: [0, 0.6, 0]
-          }}
-          transition={{
-            duration: 0.2,
-            delay: 0.5,
-            times: [0, 0.5, 1]
-          }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 w-16 h-16 sm:w-20 sm:h-20"
-        >
-          <div className="absolute inset-0 rounded-full border-2 border-amber-600/40" />
-          <div className="absolute inset-0 rounded-full border border-amber-500/30 scale-75" />
-        </motion.div>
-      </div>
-
-      {/* Subtle background glow */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-transparent to-amber-950/20 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(255, 199, 153, 0.05), transparent)',
+        }}
       />
     </motion.div>
   )

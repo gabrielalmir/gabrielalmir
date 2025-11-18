@@ -9,7 +9,6 @@ export function VesperDecorations() {
   const [coffeeBeans, setCoffeeBeans] = useState<Array<{ id: number; x: number; y: number; delay: number; size: number }>>([]);
   const [rainDrops, setRainDrops] = useState<Array<{ id: number; x: number; delay: number; duration: number }>>([]);
 
-  // Generate random positions only on client side to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
     setCoffeeBeans(
@@ -31,7 +30,6 @@ export function VesperDecorations() {
     );
   }, []);
 
-  // Terminal code lines
   const terminalLines = [
     { text: '> npm install coffee', delay: 0 },
     { text: '> brew coffee --fresh', delay: 0.5 },
@@ -39,14 +37,13 @@ export function VesperDecorations() {
     { text: '✓ Coffee ready!', delay: 1.5 },
   ];
 
-  // Don't render until mounted to avoid hydration mismatch
   if (!mounted) {
     return null;
   }
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Coffee Beans - floating */}
+
       {coffeeBeans.map((bean) => (
         <motion.div
           key={bean.id}
@@ -74,7 +71,7 @@ export function VesperDecorations() {
         </motion.div>
       ))}
 
-      {/* Rain Drops - falling (coffee themed) */}
+
       {rainDrops.map((drop) => (
         <motion.div
           key={drop.id}
@@ -100,7 +97,7 @@ export function VesperDecorations() {
         </motion.div>
       ))}
 
-      {/* Terminal Windows - corner decorations */}
+
       <div className="absolute top-20 right-8 hidden lg:block">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -128,7 +125,7 @@ export function VesperDecorations() {
         </motion.div>
       </div>
 
-      {/* Coffee Steam - subtle */}
+
       <div className="absolute bottom-32 left-1/4 hidden md:block">
         {[0, 1, 2].map((i) => (
           <motion.div
@@ -153,7 +150,7 @@ export function VesperDecorations() {
         ))}
       </div>
 
-      {/* Terminal Cursor Blink - bottom left */}
+
       <div className="absolute bottom-8 left-8 hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
@@ -175,7 +172,7 @@ export function VesperDecorations() {
         </motion.div>
       </div>
 
-      {/* Coffee Code Snippets - scattered */}
+
       <div className="absolute top-1/3 left-8 hidden xl:block">
         <motion.div
           initial={{ opacity: 0 }}
@@ -189,7 +186,7 @@ export function VesperDecorations() {
         </motion.div>
       </div>
 
-      {/* Terminal ASCII Art - bottom right */}
+
       <div className="absolute bottom-20 right-12 hidden 2xl:block">
         <motion.div
           initial={{ opacity: 0 }}
@@ -205,7 +202,7 @@ export function VesperDecorations() {
         </motion.div>
       </div>
 
-      {/* Floating Coffee Particles */}
+
       <div className="absolute top-1/2 right-1/4 hidden lg:block">
         {[0, 1, 2, 3].map((i) => (
           <motion.div
@@ -231,7 +228,7 @@ export function VesperDecorations() {
         ))}
       </div>
 
-      {/* Terminal Grid Pattern - subtle */}
+
       <div className="absolute inset-0 opacity-[0.01]">
         <div
           className="w-full h-full"

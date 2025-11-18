@@ -79,17 +79,17 @@ export default function CaseStudiesPage() {
 
   return (
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
-      {/* Background Effects */}
+      
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
         <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
-      {/* Header */}
+      
       <Header />
 
       <main className="container mx-auto px-4 py-12">
-        {/* Hero Section */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export default function CaseStudiesPage() {
           </div>
         </motion.section>
 
-        {/* Featured Projects */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -174,7 +174,7 @@ export default function CaseStudiesPage() {
                     {study.description}
                   </p>
 
-                  {/* Metrics */}
+                  
                   <div className="grid grid-cols-3 gap-4 mb-6">
                     {study.metrics.map((metric, idx) => (
                       <div key={idx} className="text-center">
@@ -191,7 +191,7 @@ export default function CaseStudiesPage() {
                     ))}
                   </div>
 
-                  {/* Technologies */}
+                  
                   <div className="flex flex-wrap gap-2 mb-6">
                     {study.technologies.slice(0, 4).map(tech => (
                       <span
@@ -220,7 +220,7 @@ export default function CaseStudiesPage() {
           </div>
         </motion.section>
 
-        {/* Filters */}
+        
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -272,7 +272,7 @@ export default function CaseStudiesPage() {
           </div>
         </motion.section>
 
-        {/* All Projects Grid */}
+        
         <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
