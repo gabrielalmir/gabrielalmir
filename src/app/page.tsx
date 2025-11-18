@@ -90,11 +90,11 @@ export default function Home() {
                   </h1>
 
                   <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-vesper-cyan/90 break-words w-full">
-                    Engenheiro Backend
+                    Engenheiro de Software Backend
                   </h2>
 
                   <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed break-words w-full">
-                    Transformando ideias em soluções robustas e escaláveis
+                    Node.js, TypeScript, NestJS, Python & IA, AWS
                   </p>
                 </div>
 
@@ -102,9 +102,9 @@ export default function Home() {
                 <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
                     '6+ anos de experiência',
-                    'Node.js & TypeScript',
-                    'AWS & Cloud',
-                    'Arquitetura Limpa'
+                    'Node.js • NestJS • TypeScript',
+                    'Python • Machine Learning',
+                    'AWS • Microsserviços'
                   ].map((item) => (
                     <Badge
                       key={item}
@@ -119,8 +119,7 @@ export default function Home() {
                 {/* Short bio - concise and scannable */}
                 <div className="space-y-3 text-foreground/80 max-w-2xl w-full">
                     <p className="text-base leading-relaxed break-words w-full">
-                    Apaixonado por <strong className="text-vesper-orange font-semibold">sistemas distribuídos</strong> e <strong className="text-vesper-orange font-semibold">arquitetura de microsserviços</strong>,
-                    com experiência em desenvolvimento de soluções escaláveis e robustas.
+                    Engenheiro de Software Backend com sólida experiência em <strong className="text-vesper-orange font-semibold">Node.js</strong> e <strong className="text-vesper-orange font-semibold">Python</strong>, atuando no desenvolvimento de APIs escaláveis, integrações entre sistemas e soluções de <strong className="text-vesper-orange font-semibold">machine learning</strong> aplicadas a problemas de negócio. Foco em <strong className="text-vesper-orange font-semibold">arquitetura limpa</strong>, <strong className="text-vesper-orange font-semibold">boas práticas (SOLID, Design Patterns)</strong>, <strong className="text-vesper-orange font-semibold">observabilidade (OpenTelemetry)</strong> e <strong className="text-vesper-orange font-semibold">automação com CI/CD</strong> em ambientes <strong className="text-vesper-orange font-semibold">AWS</strong>.
                     </p>
                 </div>
 
@@ -174,7 +173,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl overflow-hidden border border-vesper-orange/20 bg-gradient-to-br from-vesper-orange/5 to-vesper-cyan/5">
                     <Image
                       src="/me.jpg"
-                      alt="Gabriel Almir - Backend Engineer"
+                      alt="Gabriel Almir - Engenheiro de Software Backend"
                       width={400}
                       height={400}
                       className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -241,7 +240,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Cloud & Infrastructure */}
+              {/* Cloud & DevOps */}
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="w-1 h-6 sm:h-8 bg-vesper-cyan rounded-full flex-shrink-0"></div>
@@ -261,6 +260,13 @@ export default function Home() {
                         <div className="font-semibold text-foreground text-center text-sm sm:text-base">{label}</div>
                       </div>
                     </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {['Lambda', 'S3', 'SQS', 'DynamoDB', 'RDS', 'ECS', 'CloudWatch', 'API Gateway', 'CI/CD', 'GitHub Actions', 'OpenTelemetry'].map((tech) => (
+                    <Badge key={tech} variant="outline" className="border-vesper-cyan/30 text-vesper-cyan/80 text-xs px-2 py-1">
+                      {tech}
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -287,6 +293,28 @@ export default function Home() {
                         <div className="font-medium text-foreground/90 text-center text-xs sm:text-sm">{label}</div>
                       </div>
                     </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {['SQL Server', 'DynamoDB', 'Amazon SQS'].map((tech) => (
+                    <Badge key={tech} variant="outline" className="border-foreground/20 text-foreground/70 text-xs px-2 py-1">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* IA & Machine Learning */}
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-1 h-6 sm:h-8 bg-vesper-orange/60 rounded-full flex-shrink-0"></div>
+                  <h3 className="text-lg sm:text-xl font-bold text-vesper-orange/90">IA & Machine Learning</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['Pandas', 'LangChain', 'LLMs', 'RAG', 'Prophet', 'Previsões', 'NLP'].map((tech) => (
+                    <Badge key={tech} variant="outline" className="border-vesper-orange/30 text-vesper-orange/80 text-xs px-3 py-1.5">
+                      {tech}
+                    </Badge>
                   ))}
                 </div>
               </div>

@@ -215,13 +215,48 @@ body {
   backdrop-filter: blur(4px);
   transition: all 0.3s ease;
 }
+
 .noise-layer {
   position: absolute;
   inset: -40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  opacity: 0.05;
-  mix-blend-mode: screen;
+  /* CRT Scanlines effect */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(var(--vesper-cyan), 0.03) 2px,
+      rgba(var(--vesper-cyan), 0.03) 4px
+    ),
+    /* CRT phosphor grid pattern */
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(var(--vesper-orange), 0.02) 2px,
+      rgba(var(--vesper-orange), 0.02) 4px
+    ),
+    /* Retro terminal noise */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
   pointer-events: none;
+  animation: terminal-flicker 8s linear infinite;
+}
+
+@keyframes terminal-flicker {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.18;
+  }
+  98% {
+    opacity: 0.12;
+  }
+  99% {
+    opacity: 0.08;
+  }
 }
 
 .hero-blob {
