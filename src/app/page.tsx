@@ -11,7 +11,7 @@ import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, Nestjs
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black">
+    <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
       {/* Subtle background effects - reduced opacity */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
@@ -19,7 +19,7 @@ export default function Home() {
       </div>
 
       {/* Compact modern header */}
-      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-vesper-orange/10 bg-background/95 backdrop-blur-md">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex justify-between items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity" aria-label='logo gabrielalmir'>
@@ -67,7 +67,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
         {/* Hero Section - Redesigned with better hierarchy */}
         <section className="py-16 md:py-24 lg:py-32">
           <div className="mx-auto">
@@ -76,9 +76,9 @@ export default function Home() {
               {/* Left Column - Content (prioritized) */}
               <div className="space-y-8">
                 {/* Greeting tag */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5">
-                  <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse"></span>
-                  <span className="text-sm text-vesper-cyan">Quero fazer você se apaixonar por programação!</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5 max-w-full">
+                  <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse flex-shrink-0"></span>
+                  <span className="text-sm text-vesper-cyan truncate">Quero fazer você se apaixonar por programação!</span>
                 </div>
 
                 {/* Main headline - much larger and prominent */}
