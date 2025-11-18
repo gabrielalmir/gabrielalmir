@@ -318,13 +318,15 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-vesper-orange/10 border border-vesper-orange/20 flex items-center justify-center overflow-hidden">
-                <Image
-                  src={'/me.jpg'}
-                  alt={'Gabriel Almir'}
-                  layout="fill"
-                  objectFit="cover"
-                />
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border border-vesper-orange/20 bg-vesper-orange/10">
+              <Image
+                src="/me.jpg"
+                alt="Gabriel Almir"
+                fill
+                sizes="64px"
+                className="object-cover"
+                priority
+              />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-vesper-orange">{post.author || 'Gabriel Almir'}</h3>
