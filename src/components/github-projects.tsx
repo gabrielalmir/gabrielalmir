@@ -327,9 +327,9 @@ export default function GitHubProjects({ username }: { username: string }) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="terminal-window border border-vesper-orange/20 p-6 animate-pulse">
+          <div key={i} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
             <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
             <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
             <div className="flex gap-2 mb-4">
@@ -344,29 +344,29 @@ export default function GitHubProjects({ username }: { username: string }) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 w-full">
       {/* Filter Buttons - Enhanced visual hierarchy */}
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
         {categoryFilters.map(({ id, label, icon: Icon }) => (
           <Button
             key={id}
             variant={activeFilter === id ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveFilter(id)}
-            className={`group transition-all duration-200 ${
+            className={`group transition-all duration-200 text-xs sm:text-sm ${
               activeFilter === id
                 ? 'bg-vesper-orange text-black border-vesper-orange shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/30'
                 : 'border-vesper-orange/30 text-vesper-orange/70 hover:border-vesper-orange hover:text-vesper-orange hover:bg-vesper-orange/10'
             }`}
           >
-            <Icon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-            <span className="font-medium">{label}</span>
+            <Icon className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span className="font-medium whitespace-nowrap">{label}</span>
           </Button>
         ))}
       </div>
 
       {/* Projects Grid - Improved spacing */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {displayedProjects.map((project: GitHubProject) => {
           const isFeatured = project.name in featuredProjects;
           return (
