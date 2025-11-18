@@ -44,7 +44,7 @@ const MarkdownH4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
 );
 
 const MarkdownP = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-  <p className="text-vesper-orange/90 leading-[1.8] mb-5 text-base" {...props} />
+  <p className="text-vesper-orange/90 leading-[1.8] mb-5 text-pretty text-base" {...props} />
 );
 
 const MarkdownUl = (props: React.HTMLAttributes<HTMLUListElement>) => (
