@@ -67,14 +67,14 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="w-full overflow-x-hidden">
+      <main className="w-full overflow-x-hidden max-w-full">
         {/* Hero Section - Redesigned with better hierarchy */}
-        <section className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-7xl">
-            <div className="grid lg:grid-cols-[1.5fr,1fr] gap-12 lg:gap-16 items-center">
+        <section className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 w-full max-w-full">
+          <div className="container mx-auto max-w-7xl w-full">
+            <div className="grid lg:grid-cols-[1.5fr,1fr] gap-12 lg:gap-16 items-center w-full max-w-full">
 
               {/* Left Column - Content (prioritized) */}
-              <div className="space-y-8 w-full max-w-full">
+              <div className="space-y-6 md:space-y-8 w-full max-w-full overflow-hidden">
                 {/* Greeting tag */}
                 <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5 max-w-full">
                   <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse flex-shrink-0"></span>
@@ -82,24 +82,24 @@ export default function Home() {
                 </div>
 
                 {/* Main headline - much larger and prominent */}
-                <div className="space-y-4 w-full">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words">
+                <div className="space-y-3 md:space-y-4 w-full max-w-full">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words w-full">
                     <span className="text-foreground">Olá, sou</span>
                     <br />
                     <span className="text-vesper-orange">Gabriel Almir</span>
                   </h1>
 
-                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-vesper-cyan/90 break-words">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-vesper-cyan/90 break-words w-full">
                     Engenheiro Backend
                   </h2>
 
-                  <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed break-words">
+                  <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed break-words w-full">
                     Transformando ideias em soluções robustas e escaláveis
                   </p>
                 </div>
 
                 {/* Key highlights - clean bullet format */}
-                <div className="flex flex-wrap gap-2 sm:gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
                     '6+ anos de experiência',
                     'Node.js & TypeScript',
@@ -117,15 +117,15 @@ export default function Home() {
                 </div>
 
                 {/* Short bio - concise and scannable */}
-                <div className="space-y-3 text-foreground/80 max-w-2xl">
-                  <p className="text-base leading-relaxed break-words">
+                <div className="space-y-3 text-foreground/80 max-w-2xl w-full">
+                  <p className="text-base leading-relaxed break-words w-full">
                     Especialista em <strong className="text-vesper-orange font-semibold">sistemas distribuídos</strong> e <strong className="text-vesper-orange font-semibold">arquitetura de microsserviços</strong>,
                     com experiência comprovada em soluções que atendem milhares de usuários.
                   </p>
                 </div>
 
                 {/* CTA Buttons - clear hierarchy */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full max-w-full">
                   <Link href="#contato" className="w-full sm:w-auto">
                   <Button size="lg" className="terminal-button group w-full sm:w-auto">
                     <MailIcon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
@@ -145,7 +145,7 @@ export default function Home() {
                 </div>
 
                 {/* Social proof */}
-                <div className="flex items-center gap-4 sm:gap-6 pt-4 justify-center sm:justify-start">
+                <div className="flex items-center gap-4 sm:gap-6 pt-4 justify-center sm:justify-start w-full max-w-full flex-wrap">
                   {[
                     { Icon: Linkedin, href: "https://linkedin.com/in/gabrielalmir", label: "LinkedIn" },
                     { Icon: Github, href: "https://github.com/gabrielalmir", label: "GitHub" },
@@ -188,20 +188,20 @@ export default function Home() {
         </section>
 
         {/* Skills Section - Reorganized with categories */}
-        <section id="habilidades" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-7xl">
+        <section id="habilidades" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+          <div className="container mx-auto max-w-7xl w-full">
             {/* Section header */}
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+            <div className="text-center mb-12 sm:mb-16 w-full max-w-full px-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
                 Habilidades Técnicas
               </h2>
-              <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto px-4">
+              <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto break-words">
                 Tecnologias e ferramentas que domino para criar soluções escaláveis
               </p>
             </div>
 
             {/* Skills organized by category */}
-            <div className="space-y-12">
+            <div className="space-y-12 w-full max-w-full">
 
               {/* Primary Skills - Backend */}
               <div className="space-y-4 sm:space-y-6">
@@ -323,14 +323,14 @@ export default function Home() {
         </section>
 
         {/* Projects Section - Simplified and focused */}
-        <section id="projetos" className="py-16 md:py-24 bg-gradient-to-b from-background to-vesper-orange/5 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-6xl">
+        <section id="projetos" className="py-16 md:py-24 bg-gradient-to-b from-background to-vesper-orange/5 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+          <div className="container mx-auto max-w-6xl w-full">
             {/* Section header */}
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+            <div className="text-center mb-12 sm:mb-16 w-full max-w-full px-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
                 Projetos em Destaque
               </h2>
-              <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto px-4">
+              <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto break-words">
                 Seleção dos projetos mais relevantes que demonstram expertise em backend, cloud e soluções escaláveis
               </p>
             </div>
@@ -351,19 +351,19 @@ export default function Home() {
         </section>
 
         {/* About/Resume Section */}
-        <section id="sobre" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-7xl">
+        <section id="sobre" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+          <div className="container mx-auto max-w-7xl w-full">
           <ModernResumeSection />
           </div>
         </section>
 
         {/* Contact Section - Clean and inviting */}
-        <section id="contato" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6">
+        <section id="contato" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+          <div className="container mx-auto max-w-4xl text-center w-full">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6 break-words px-4">
               Vamos conversar?
             </h2>
-            <p className="text-base sm:text-lg text-foreground/70 mb-8 sm:mb-12 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-foreground/70 mb-8 sm:mb-12 max-w-2xl mx-auto break-words px-4">
               Estou sempre aberto a novas oportunidades, colaborações e discussões sobre tecnologia.
               Entre em contato através dos canais abaixo.
             </p>
