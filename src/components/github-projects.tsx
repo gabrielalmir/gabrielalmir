@@ -36,29 +36,43 @@ const featuredProjects = {
   'manuvi': {
     priority: 1,
     category: 'backend',
-    impact: 'Plataforma SaaS industrial com Clean Architecture e DDD',
-    highlights: ['Clean Architecture', 'DDD', 'FastAPI', 'Escalabilidade'],
+    impact: 'Plataforma SaaS industrial completa com Clean Architecture, DDD e FastAPI para gestão de manutenções',
+    highlights: ['Clean Architecture', 'DDD', 'FastAPI', 'PostgreSQL', 'JWT'],
     icon: Award
   },
   'techfinance-lastdance-api': {
     priority: 2,
     category: 'cloud',
-    impact: 'API serverless com AWS Lambda, DynamoDB e S3 para escalabilidade automática',
-    highlights: ['AWS Lambda', 'DynamoDB', 'Serverless', 'TypeScript'],
+    impact: 'API serverless moderna com AWS Lambda, DynamoDB e S3 para escalabilidade automática e alta disponibilidade',
+    highlights: ['AWS Lambda', 'DynamoDB', 'S3', 'Serverless', 'TypeScript'],
     icon: Cloud
   },
-  'techfinance-previsao': {
+  'codebeats': {
     priority: 3,
+    category: 'backend',
+    impact: 'Plataforma de streaming de música com API REST robusta, arquitetura escalável e sistema de autenticação',
+    highlights: ['NestJS', 'TypeScript', 'REST API', 'PostgreSQL', 'Docker'],
+    icon: Database
+  },
+  'bitqueue': {
+    priority: 4,
+    category: 'backend',
+    impact: 'Sistema de mensageria confiável e escalável para desacoplar microsserviços e aplicações serverless',
+    highlights: ['Message Queue', 'TypeScript', 'NestJS', 'Microsserviços', 'Redis'],
+    icon: Zap
+  },
+  'techfinance-previsao': {
+    priority: 5,
     category: 'ai',
-    impact: 'Modelo de ML para previsão de séries temporais usando Python/Prophet',
-    highlights: ['Machine Learning', 'Prophet', 'Python', 'Previsões'],
+    impact: 'Modelo de Machine Learning para previsão de séries temporais financeiras usando Python/Prophet',
+    highlights: ['Machine Learning', 'Prophet', 'Python', 'Previsões', 'Pandas'],
     icon: Brain
   },
   'd4sign-node-sdk': {
-    priority: 4,
+    priority: 6,
     category: 'opensource',
-    impact: 'SDK open-source para integração com API de assinatura digital',
-    highlights: ['Open Source', 'SDK', 'TypeScript', 'Integração'],
+    impact: 'SDK open-source completo para integração com API de assinatura digital D4Sign',
+    highlights: ['Open Source', 'SDK', 'TypeScript', 'NPM', 'API Client'],
     icon: Code
   }
 };
