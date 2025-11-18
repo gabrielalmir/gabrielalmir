@@ -48,10 +48,10 @@ export const ModernResumeSection: React.FC = () => {
         description: 'Aprimoramento de sistemas com foco em arquitetura, testes e documentação, acelerando fluxos de negócio.'
       },
       {
-        title: 'Full Stack Node.js Developer',
-        company: 'Freelancer',
-        period: 'Outubro 2016 - Março 2023',
-        description: 'Desenvolvimento de APIs REST, autenticação JWT, mensageria com RabbitMQ, MySQL e Redis.'
+        title: 'Desenvolvedor Full-Stack',
+        company: 'Diolinux',
+        period: 'Maio 2013 - Ago 2016 · 3 anos 4 meses',
+        description: 'Modernizei sistemas legados com JavaScript, implementando otimizações de desempenho, automação de processos e melhorias em SEO técnico. Atuei no projeto Diolinux como Desenvolvedor Web, modernizando a infraestrutura back-end e aprimorando o desempenho para motores de busca (SEO). Esta experiência consolidou minhas competências em arquitetura de software, escalabilidade e integração de sistemas.'
       }
     ],
     education: [

@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Brain, Cloud, Code, Database, ExternalLink, Eye, GitFork, Star, Zap } from "lucide-react";
+import { Award, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -77,42 +77,66 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
 
   return (
     <Card
-      className={`terminal-window border group hover:border-vesper-orange transition-all duration-300 relative overflow-hidden ${
+      className={`group relative overflow-hidden transition-all duration-300 h-full flex flex-col ${
         isFeatured
-          ? 'border-vesper-orange/40 bg-vesper-orange/5 ring-1 ring-vesper-orange/20'
-          : 'border-vesper-orange/20 bg-background'
+          ? 'border-2 border-vesper-orange/50 bg-gradient-to-br from-vesper-orange/10 via-vesper-orange/5 to-background shadow-lg shadow-vesper-orange/10 hover:shadow-xl hover:shadow-vesper-orange/20 hover:border-vesper-orange'
+          : 'border border-vesper-orange/20 bg-background hover:border-vesper-orange/40 hover:bg-vesper-orange/5'
       }`}
     >
+      {/* Featured badge and glow effect */}
       {isFeatured && (
-        <div className="absolute top-2 right-2 z-10">
-          <Badge className="bg-vesper-orange/20 text-vesper-orange border-vesper-orange/40 text-xs">
-            <Award className="h-3 w-3 mr-1" />
-            Destaque
-          </Badge>
-        </div>
+        <>
+          <div className="absolute top-0 right-0 w-24 h-24 bg-vesper-orange/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div className="absolute top-3 right-3 z-10">
+            <Badge className="bg-vesper-orange text-black border-0 text-xs font-bold shadow-lg">
+              <Award className="h-3 w-3 mr-1" />
+              Destaque
+            </Badge>
+          </div>
+        </>
       )}
 
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-2">
-            <IconComponent className="h-5 w-5 text-vesper-orange" />
-            <CardTitle className="text-lg font-bold group-hover:text-vesper-orange transition-colors">
-              <span className="terminal-prompt">&gt; {project.name}</span>
+      <CardHeader className="pb-4 space-y-3">
+        {/* Icon and Title - Enhanced */}
+        <div className="flex items-start gap-3">
+          <div className={`p-2 rounded-lg transition-all ${
+            isFeatured
+              ? 'bg-vesper-orange/20 group-hover:bg-vesper-orange/30'
+              : 'bg-vesper-orange/10 group-hover:bg-vesper-orange/20'
+          }`}>
+            <IconComponent className={`h-5 w-5 transition-transform group-hover:scale-110 ${
+              isFeatured ? 'text-vesper-orange' : 'text-vesper-orange/80'
+            }`} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <CardTitle className={`text-base font-bold leading-tight transition-colors group-hover:text-vesper-orange ${
+              isFeatured ? 'text-vesper-orange' : 'text-foreground'
+            }`}>
+              {project.name}
             </CardTitle>
+            {project.language && (
+              <p className="text-xs text-vesper-orange/50 mt-1 font-mono">
+                {project.language}
+              </p>
+            )}
           </div>
         </div>
 
-        <CardDescription className="text-sm text-vesper-orange/80 leading-relaxed">
-          {featuredInfo?.impact || project.description || "No description provided"}
+        {/* Description - More prominent */}
+        <CardDescription className={`text-sm leading-relaxed min-h-[3rem] ${
+          isFeatured ? 'text-foreground/90' : 'text-foreground/70'
+        }`}>
+          {featuredInfo?.impact || project.description || "Projeto sem descrição"}
         </CardDescription>
 
-        {featuredInfo?.highlights && (
-          <div className="flex flex-wrap gap-1 mt-2">
+        {/* Highlights badges - Only for featured */}
+        {isFeatured && featuredInfo?.highlights && (
+          <div className="flex flex-wrap gap-1.5">
             {featuredInfo.highlights.map((highlight) => (
               <Badge
                 key={highlight}
                 variant="outline"
-                className="text-xs border-vesper-orange/30 text-vesper-orange/90 bg-vesper-orange/10"
+                className="text-xs border-vesper-orange/40 text-vesper-orange bg-vesper-orange/10 font-medium"
               >
                 {highlight}
               </Badge>
@@ -121,53 +145,66 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
         )}
       </CardHeader>
 
-      <CardContent className="flex-grow">
-        <div className="flex flex-wrap gap-2">
-          {project.topics.slice(0, 4).map((topic: string) => (
-            <Badge
-              key={topic}
-              variant="outline"
-              className="text-xs border-vesper-orange/20 text-vesper-orange/70 hover:text-vesper-orange hover:border-vesper-orange transition-colors"
-            >
-              <span className="terminal-prompt">&gt; {topic}</span>
-            </Badge>
-          ))}
-          {project.topics.length > 4 && (
-            <Badge variant="outline" className="text-xs border-vesper-orange/20 text-vesper-orange/50">
-              +{project.topics.length - 4}
-            </Badge>
-          )}
-        </div>
-
-        {project.language && (
-          <div className="mt-3 text-xs text-vesper-orange/60">
-            <span className="terminal-prompt">&gt; {project.language}</span>
+      <CardContent className="flex-grow pb-4">
+        {/* Topics - Cleaner display */}
+        {project.topics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {project.topics.slice(0, isFeatured ? 5 : 4).map((topic: string) => (
+              <Badge
+                key={topic}
+                variant="outline"
+                className="text-xs border-vesper-orange/20 text-vesper-orange/60 hover:text-vesper-orange hover:border-vesper-orange/40 transition-colors font-mono"
+              >
+                {topic}
+              </Badge>
+            ))}
+            {project.topics.length > (isFeatured ? 5 : 4) && (
+              <Badge variant="outline" className="text-xs border-vesper-orange/20 text-vesper-orange/40">
+                +{project.topics.length - (isFeatured ? 5 : 4)}
+              </Badge>
+            )}
           </div>
         )}
       </CardContent>
 
-      <CardFooter className="flex justify-between items-center text-sm text-vesper-orange/60 border-t border-vesper-orange/20 pt-4">
-        <div className="flex items-center gap-4">
+      <CardFooter className={`flex justify-between items-center text-sm border-t pt-4 ${
+        isFeatured ? 'border-vesper-orange/30' : 'border-vesper-orange/20'
+      }`}>
+        {/* Stats - Better spacing and hierarchy */}
+        <div className="flex items-center gap-3">
           {[
             { Icon: Star, count: project.stargazers_count, label: "stars" },
             { Icon: GitFork, count: project.forks_count, label: "forks" },
-            { Icon: Eye, count: project.watchers_count, label: "watchers" },
           ].map(({ Icon, count, label }) => (
-            <span key={label} className="flex items-center gap-1 group/stat">
-              <Icon className="h-4 w-4 group-hover/stat:text-vesper-orange transition-colors" />
-              <span className="group-hover/stat:text-vesper-orange transition-colors">{count}</span>
-              <span className="sr-only">{label}</span>
-            </span>
+            <div key={label} className="flex items-center gap-1 group/stat">
+              <Icon className={`h-3.5 w-3.5 transition-colors ${
+                isFeatured
+                  ? 'text-vesper-orange/70 group-hover/stat:text-vesper-orange'
+                  : 'text-vesper-orange/50 group-hover/stat:text-vesper-orange/80'
+              }`} />
+              <span className={`text-xs font-medium transition-colors ${
+                isFeatured
+                  ? 'text-vesper-orange/80 group-hover/stat:text-vesper-orange'
+                  : 'text-vesper-orange/60 group-hover/stat:text-vesper-orange/80'
+              }`}>
+                {count}
+              </span>
+            </div>
           ))}
         </div>
 
+        {/* View link - More prominent */}
         <Link
           href={project.html_url}
           target="_blank"
-          className="flex items-center gap-1 text-vesper-orange/80 hover:text-vesper-orange font-medium transition-colors group/link"
+          className={`flex items-center gap-1.5 font-medium transition-all group/link ${
+            isFeatured
+              ? 'text-vesper-orange hover:text-vesper-orange/80'
+              : 'text-vesper-orange/70 hover:text-vesper-orange'
+          }`}
         >
-          <span className="terminal-prompt">&gt; Ver</span>
-          <ExternalLink className="h-3 w-3 group-hover/link:scale-110 transition-transform" />
+          <span className="text-xs">Ver projeto</span>
+          <ExternalLink className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
         </Link>
       </CardFooter>
     </Card>
@@ -196,64 +233,64 @@ export default function GitHubProjects({ username }: { username: string }) {
     if (activeFilter !== 'all') {
       filtered = projects.filter(project => {
         const featuredInfo = featuredProjects[project.name as keyof typeof featuredProjects];
-        
+
         // Check if project is in featured list with matching category
         if (featuredInfo?.category === activeFilter) {
           return true;
         }
-        
+
         // For opensource filter, also check topics and other indicators
         if (activeFilter === 'opensource') {
           const opensourceIndicators = [
-            'open-source', 'opensource', 'sdk', 'library', 'framework', 
+            'open-source', 'opensource', 'sdk', 'library', 'framework',
             'tool', 'cli', 'api', 'package', 'npm', 'typescript', 'javascript'
           ];
-          
+
           // Check if project has opensource-related topics
-          const hasOpensourceTopics = project.topics.some(topic => 
-            opensourceIndicators.some(indicator => 
+          const hasOpensourceTopics = project.topics.some(topic =>
+            opensourceIndicators.some(indicator =>
               topic.toLowerCase().includes(indicator.toLowerCase())
             )
           );
-          
+
           // Check if project name or description suggests it's a library/tool
           const nameIndicatesOpensource = /-sdk$|-api$|-lib$|-cli$|-tool$/.test(project.name.toLowerCase());
-          const descriptionIndicatesOpensource = project.description && 
-            opensourceIndicators.some(indicator => 
+          const descriptionIndicatesOpensource = project.description &&
+            opensourceIndicators.some(indicator =>
               project.description.toLowerCase().includes(indicator.toLowerCase())
             );
-          
+
           return hasOpensourceTopics || nameIndicatesOpensource || descriptionIndicatesOpensource;
         }
-        
+
         // For other categories, check topics for relevant keywords
         if (activeFilter === 'backend') {
           const backendKeywords = ['api', 'backend', 'server', 'node', 'express', 'fastapi', 'nest'];
-          return project.topics.some(topic => 
+          return project.topics.some(topic =>
             backendKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-          ) || (project.description && backendKeywords.some(keyword => 
+          ) || (project.description && backendKeywords.some(keyword =>
             project.description.toLowerCase().includes(keyword.toLowerCase())
           ));
         }
-        
+
         if (activeFilter === 'cloud') {
           const cloudKeywords = ['aws', 'cloud', 'lambda', 'serverless', 'docker', 'kubernetes'];
-          return project.topics.some(topic => 
+          return project.topics.some(topic =>
             cloudKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-          ) || (project.description && cloudKeywords.some(keyword => 
+          ) || (project.description && cloudKeywords.some(keyword =>
             project.description.toLowerCase().includes(keyword.toLowerCase())
           ));
         }
-        
+
         if (activeFilter === 'ai') {
           const aiKeywords = ['ai', 'ml', 'machine-learning', 'artificial-intelligence', 'neural', 'model'];
-          return project.topics.some(topic => 
+          return project.topics.some(topic =>
             aiKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-          ) || (project.description && aiKeywords.some(keyword => 
+          ) || (project.description && aiKeywords.some(keyword =>
             project.description.toLowerCase().includes(keyword.toLowerCase())
           ));
         }
-        
+
         return false;
       });
     }
@@ -294,7 +331,7 @@ export default function GitHubProjects({ username }: { username: string }) {
 
   return (
     <div className="space-y-8">
-      {/* Filter Buttons */}
+      {/* Filter Buttons - Enhanced visual hierarchy */}
       <div className="flex flex-wrap gap-3 justify-center">
         {categoryFilters.map(({ id, label, icon: Icon }) => (
           <Button
@@ -302,19 +339,19 @@ export default function GitHubProjects({ username }: { username: string }) {
             variant={activeFilter === id ? "default" : "outline"}
             size="sm"
             onClick={() => setActiveFilter(id)}
-            className={`terminal-button-outline group ${
+            className={`group transition-all duration-200 ${
               activeFilter === id
-                ? 'bg-vesper-orange/20 border-vesper-orange text-vesper-orange'
-                : 'hover:border-vesper-orange hover:text-vesper-orange'
+                ? 'bg-vesper-orange text-black border-vesper-orange shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/30'
+                : 'border-vesper-orange/30 text-vesper-orange/70 hover:border-vesper-orange hover:text-vesper-orange hover:bg-vesper-orange/10'
             }`}
           >
             <Icon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-            <span className="terminal-prompt">&gt; {label}</span>
+            <span className="font-medium">{label}</span>
           </Button>
         ))}
       </div>
 
-      {/* Projects Grid */}
+      {/* Projects Grid - Improved spacing */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedProjects.map((project: GitHubProject) => {
           const isFeatured = project.name in featuredProjects;
@@ -328,28 +365,27 @@ export default function GitHubProjects({ username }: { username: string }) {
         })}
       </div>
 
-      {/* Show More/Less Button */}
+      {/* Show More/Less Button - Better prominence */}
       {filteredProjects.length > 6 && (
-        <div className="text-center">
+        <div className="text-center pt-4">
           <Button
             variant="outline"
+            size="lg"
             onClick={() => setShowAll(!showAll)}
-            className="terminal-button-outline group"
+            className="group border-vesper-orange/30 text-vesper-orange hover:border-vesper-orange hover:bg-vesper-orange/10 transition-all"
           >
-            <span className="terminal-prompt">
-              &gt; {showAll ? 'MOSTRAR MENOS' : `VER MAIS (${filteredProjects.length - 6} projetos)`}
+            <span className="font-medium">
+              {showAll ? 'Mostrar menos' : `Ver mais ${filteredProjects.length - 6} projetos`}
             </span>
             <Code className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
           </Button>
         </div>
       )}
 
-      {/* Results Summary */}
-      <div className="text-center text-vesper-orange/60 text-sm">
-        <span className="terminal-prompt">
-          &gt; Exibindo {displayedProjects.length} de {filteredProjects.length} projetos
-          {activeFilter !== 'all' && ` na categoria "${categoryFilters.find(f => f.id === activeFilter)?.label}"`}
-        </span>
+      {/* Results Summary - Subtle but informative */}
+      <div className="text-center text-vesper-orange/50 text-sm font-mono">
+        {displayedProjects.length} de {filteredProjects.length} projetos
+        {activeFilter !== 'all' && ` · ${categoryFilters.find(f => f.id === activeFilter)?.label}`}
       </div>
     </div>
   );
