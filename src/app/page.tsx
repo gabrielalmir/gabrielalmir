@@ -2,6 +2,7 @@ import { ExternalLink, Github, GithubIcon, Heart, Instagram, Linkedin, LinkedinI
 import Image from "next/image"
 import Link from "next/link"
 
+import { CoffeeSplash } from '@/components/coffee-splash'
 import GitHubProjects from "@/components/github-projects"
 import { ModernLogo } from '@/components/modern-logo'
 import { ModernResumeSection } from '@/components/modern-resume-section'
@@ -12,6 +13,8 @@ import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, Nestjs
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
+      {/* Coffee Splash Animation */}
+      <CoffeeSplash />
       {/* Subtle background effects - reduced opacity */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
