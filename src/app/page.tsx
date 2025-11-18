@@ -126,17 +126,17 @@ export default function Home() {
 
                 {/* CTA Buttons - clear hierarchy */}
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-4">
-                  <Link href="#contato" className="mx-auto">
-                  <Button size="lg" className="terminal-button group mx-auto">
+                  <Link href="#contato" className="mx-auto sm:mx-0">
+                  <Button size="lg" className="terminal-button group mx-auto sm:mx-0">
                     <MailIcon className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                     <span>Entrar em contato</span>
                   </Button>
                   </Link>
-                  <Link href="#projetos" className="mx-auto">
+                  <Link href="#projetos" className="mx-auto sm:mx-0">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="terminal-button-outline group mx-auto"
+                    className="terminal-button-outline group mx-auto sm:mx-0"
                   >
                     <span>Ver projetos</span>
                     <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
