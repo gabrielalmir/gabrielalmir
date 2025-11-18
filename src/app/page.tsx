@@ -118,10 +118,10 @@ export default function Home() {
 
                 {/* Short bio - concise and scannable */}
                 <div className="space-y-3 text-foreground/80 max-w-2xl w-full">
-                  <p className="text-base leading-relaxed break-words w-full">
-                    Especialista em <strong className="text-vesper-orange font-semibold">sistemas distribuídos</strong> e <strong className="text-vesper-orange font-semibold">arquitetura de microsserviços</strong>,
-                    com experiência comprovada em soluções que atendem milhares de usuários.
-                  </p>
+                    <p className="text-base leading-relaxed break-words w-full">
+                    Apaixonado por <strong className="text-vesper-orange font-semibold">sistemas distribuídos</strong> e <strong className="text-vesper-orange font-semibold">arquitetura de microsserviços</strong>,
+                    com experiência em desenvolvimento de soluções escaláveis e robustas.
+                    </p>
                 </div>
 
                 {/* CTA Buttons - clear hierarchy */}
