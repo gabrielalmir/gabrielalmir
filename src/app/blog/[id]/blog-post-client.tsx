@@ -397,18 +397,11 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: youtubeVideoId ? 0.8 : 0.6 }}
         >
-          <div className="flex justify-between items-center flex-wrap gap-4">
+          <div className="flex justify-center items-center">
             <Link href="/blog">
               <Button className="terminal-button group">
                 <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                <span className="terminal-prompt">&gt; mais posts</span>
-              </Button>
-            </Link>
-
-            <Link href="/case-studies">
-              <Button variant="outline" className="terminal-button-outline group">
-                <span className="terminal-prompt">&gt; ver case studies</span>
-                <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <span>Voltar ao blog</span>
               </Button>
             </Link>
           </div>
