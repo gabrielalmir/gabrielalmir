@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { CoffeeIcon } from 'lucide-react';
 
 export const ModernLogo = () => {
   return (
@@ -29,7 +30,7 @@ export const ModernLogo = () => {
         </svg>
 
         <span className="relative z-10 text-xs font-bold text-vesper-orange tracking-tighter leading-none">
-          Dev
+          <CoffeeIcon size={16} />
         </span>
       </div>
 

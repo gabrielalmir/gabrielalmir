@@ -1,9 +1,10 @@
 'use client';
 
+import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import type { BlogPost } from '@/lib/blog';
 import { motion } from 'framer-motion';
-import { ArrowLeft, BookOpen, Calendar, Clock, Code2, Coffee, ExternalLink, Share2, Terminal, User, Video } from 'lucide-react';
+import { ArrowLeft, BookOpen, Calendar, Clock, Code2, ExternalLink, Share2, Terminal, User, Video } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
@@ -27,35 +28,35 @@ const categories = {
 // Markdown component definitions (moved outside main component for performance)
 // Content is provided dynamically by ReactMarkdown library
 const MarkdownH1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h1 className="text-3xl font-bold text-vesper-orange mt-8 mb-4 border-b border-vesper-orange/20 pb-2" {...props} />
+  <h1 className="text-3xl font-bold text-vesper-orange mt-10 mb-5 border-b border-vesper-orange/20 pb-3 leading-tight" {...props} />
 );
 
 const MarkdownH2 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h2 className="text-2xl font-bold text-vesper-orange mt-6 mb-3" {...props} />
+  <h2 className="text-2xl font-bold text-vesper-orange mt-8 mb-4 leading-snug" {...props} />
 );
 
 const MarkdownH3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h3 className="text-xl font-bold text-vesper-orange mt-4 mb-2" {...props} />
+  <h3 className="text-xl font-bold text-vesper-orange mt-6 mb-3 leading-normal" {...props} />
 );
 
 const MarkdownH4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h4 className="text-lg font-bold text-vesper-orange mt-3 mb-2" {...props} />
+  <h4 className="text-lg font-bold text-vesper-orange mt-5 mb-2 leading-normal" {...props} />
 );
 
 const MarkdownP = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-  <p className="text-vesper-orange/90 leading-relaxed mb-4" {...props} />
+  <p className="text-vesper-orange/90 leading-[1.8] mb-5 text-base" {...props} />
 );
 
 const MarkdownUl = (props: React.HTMLAttributes<HTMLUListElement>) => (
-  <ul className="list-disc pl-6 my-4 text-vesper-orange/90 space-y-2" {...props} />
+  <ul className="list-disc pl-6 my-5 text-vesper-orange/90 space-y-3" {...props} />
 );
 
 const MarkdownOl = (props: React.HTMLAttributes<HTMLOListElement>) => (
-  <ol className="list-decimal list-inside space-y-2 my-4 text-vesper-orange/90" {...props} />
+  <ol className="list-decimal list-inside space-y-3 my-5 text-vesper-orange/90" {...props} />
 );
 
 const MarkdownLi = ({ children, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-  <li className="leading-relaxed" {...props}>
+  <li className="leading-[1.8]" {...props}>
     {children}
   </li>
 );
@@ -64,7 +65,7 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
   const isInline = !className;
   if (isInline) {
     return (
-      <code className="bg-vesper-orange/10 text-vesper-orange px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+      <code className="bg-vesper-orange/10 text-vesper-orange px-2 py-1 rounded text-sm font-mono" {...props}>
         {children}
       </code>
     );
@@ -77,13 +78,13 @@ const MarkdownCode = ({ className, children, ...props }: React.HTMLAttributes<HT
 };
 
 const MarkdownPre = ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-  <pre className="bg-zinc-900 border border-vesper-orange/20 rounded-lg p-4 my-4 overflow-x-auto" {...props}>
-    <code className="text-vesper-orange/90 text-sm font-mono block">{children}</code>
+  <pre className="bg-zinc-900 border border-vesper-orange/20 rounded-lg p-5 my-6 overflow-x-auto" {...props}>
+    <code className="text-vesper-orange/90 text-sm font-mono block leading-relaxed">{children}</code>
   </pre>
 );
 
 const MarkdownBlockquote = (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-  <blockquote className="border-l-4 border-vesper-orange/40 pl-4 my-4 italic text-vesper-orange/80" {...props} />
+  <blockquote className="border-l-4 border-vesper-orange/40 pl-5 py-1 my-6 italic text-vesper-orange/80 bg-vesper-orange/5" {...props} />
 );
 
 const MarkdownA = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
@@ -102,10 +103,36 @@ const MarkdownStrong = (props: React.HTMLAttributes<HTMLElement>) => (
 );
 
 const MarkdownEm = (props: React.HTMLAttributes<HTMLElement>) => (
-  <em className="text-vesper-orange/80 italic" {...props} />
+  <em className="text-vesper-orange/90 italic" {...props} />
 );
 
-const MarkdownHr = () => <hr className="border-vesper-orange/20 my-8" />;
+const MarkdownHr = () => <hr className="border-vesper-orange/20 my-10" />;
+
+const MarkdownTable = (props: React.HTMLAttributes<HTMLTableElement>) => (
+  <div className="overflow-x-auto my-6">
+    <table className="w-full border border-vesper-orange/20" {...props} />
+  </div>
+);
+
+const MarkdownThead = (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+  <thead className="bg-vesper-orange/10" {...props} />
+);
+
+const MarkdownTbody = (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+  <tbody {...props} />
+);
+
+const MarkdownTr = (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+  <tr className="border-b border-vesper-orange/20" {...props} />
+);
+
+const MarkdownTh = (props: React.HTMLAttributes<HTMLTableCellElement>) => (
+  <th className="text-left p-3 text-vesper-orange font-bold" {...props} />
+);
+
+const MarkdownTd = (props: React.HTMLAttributes<HTMLTableCellElement>) => (
+  <td className="p-3 text-vesper-orange/90" {...props} />
+);
 
 // Markdown components configuration
 const markdownComponents = {
@@ -124,10 +151,25 @@ const markdownComponents = {
   strong: MarkdownStrong,
   em: MarkdownEm,
   hr: MarkdownHr,
+  table: MarkdownTable,
+  thead: MarkdownThead,
+  tbody: MarkdownTbody,
+  tr: MarkdownTr,
+  th: MarkdownTh,
+  td: MarkdownTd,
 };
 
 export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) {
   const CategoryIcon = categories[post.category].icon;
+
+  // Extract YouTube video ID from URL
+  const getYouTubeVideoId = (url: string): string | null => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : null;
+  };
+
+  const youtubeVideoId = post.videoUrl ? getYouTubeVideoId(post.videoUrl) : null;
 
   const handleShare = () => {
     if (globalThis.navigator?.share) {
@@ -153,29 +195,12 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-scanline animate-scanline opacity-5"></div>
-        <div className="absolute inset-0 bg-glow"></div>
+        <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
+        <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <nav className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-vesper-orange hover:text-vesper-orange/80 transition-colors">
-              <Coffee className="h-6 w-6" />
-              <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
-            </Link>
-            <div className="space-x-6">
-              <Link href="/blog" className="hover:text-vesper-orange/80 transition-colors terminal-link">
-                <span className="terminal-prompt">&gt; blog</span>
-              </Link>
-              <Link href="/case-studies" className="hover:text-vesper-orange/80 transition-colors terminal-link">
-                <span className="terminal-prompt">&gt; case studies</span>
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Back Button */}
@@ -208,11 +233,11 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-vesper-orange mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-vesper-orange mb-5 leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-xl text-vesper-orange/80 mb-6 leading-relaxed">
+            <p className="text-lg md:text-xl text-vesper-orange/80 mb-6 leading-[1.6]">
               {post.excerpt}
             </p>
 
@@ -279,15 +304,42 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
           </div>
         </motion.header>
 
+        {/* YouTube Video Embed */}
+        {youtubeVideoId && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12"
+          >
+            <div className="terminal-window border border-vesper-orange/20 p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <Video className="h-5 w-5 text-vesper-orange" />
+                <span className="terminal-prompt">&gt; video.play()</span>
+              </div>
+
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full rounded-lg border border-vesper-orange/20"
+                  src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+                  title={post.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </motion.section>
+        )}
+
         {/* Article Content */}
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: youtubeVideoId ? 0.4 : 0.2 }}
           className="mb-12"
         >
-          <div className="terminal-window border border-vesper-orange/20 p-8">
-            <div className="flex items-center gap-2 mb-6">
+          <div className="terminal-window border border-vesper-orange/20 p-8 md:p-10">
+            <div className="flex items-center gap-2 mb-8">
               <Terminal className="h-5 w-5 text-vesper-orange" />
               <span className="terminal-prompt">&gt; cat article.md</span>
             </div>
@@ -308,7 +360,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: youtubeVideoId ? 0.6 : 0.4 }}
           className="mb-12"
         >
           <div className="terminal-window border border-vesper-orange/20 p-6">
@@ -343,7 +395,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: youtubeVideoId ? 0.8 : 0.6 }}
         >
           <div className="flex justify-between items-center flex-wrap gap-4">
             <Link href="/blog">

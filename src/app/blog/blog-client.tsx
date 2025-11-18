@@ -1,10 +1,11 @@
 'use client';
 
+import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { BlogPost } from '@/lib/blog';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Calendar, Clock, Code2, Coffee, Filter, Search, Tag, Terminal } from 'lucide-react';
+import { ArrowRight, BookOpen, Calendar, Clock, Code2, Filter, Search, Tag, Terminal } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -38,29 +39,12 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
     <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-scanline animate-scanline opacity-5"></div>
-        <div className="absolute inset-0 bg-glow"></div>
+        <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
+        <div className="absolute inset-0 bg-glow opacity-50"></div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 w-screen border-b border-vesper-orange/20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <nav className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold flex items-center gap-2 text-vesper-orange hover:text-vesper-orange/80 transition-colors">
-              <Coffee className="h-6 w-6" />
-              <span className="terminal-prompt hidden sm:block">&gt; gabrielalmir</span>
-            </Link>
-            <div className="space-x-6">
-              <Link href="/" className="hover:text-vesper-orange/80 transition-colors terminal-link">
-                <span className="terminal-prompt">&gt; home</span>
-              </Link>
-              <Link href="/case-studies" className="hover:text-vesper-orange/80 transition-colors terminal-link">
-                <span className="terminal-prompt">&gt; case studies</span>
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
