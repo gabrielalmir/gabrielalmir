@@ -2,7 +2,7 @@
 id: desenvolvimento-nao-e-8-ou-80
 title: Desenvolvimento não é 8 ou 80! - Um recado pessoal para novos programadores
 excerpt: Um recado pessoal — e profissional — para quem está começando no desenvolvimento em 2025. O que eu gostaria de ter ouvido anos atrás.
-date: 2025-11-02
+date: "2025-11-02T00:00:00-03:00"
 readTime: 8 min
 category: career
 tags:

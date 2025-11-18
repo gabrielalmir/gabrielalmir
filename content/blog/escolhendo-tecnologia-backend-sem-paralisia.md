@@ -1,6 +1,6 @@
 ---
 title: "A Verdade Sobre Escolher Tecnologias no Backend (De Alguém Que Já Errou Bastante)"
-date: "2025-11-15"
+date: "2025-11-15T19:00:00-03:00"
 excerpt: "Pra quem está começando no back-end, vale ler isso com sinceridade. O maior erro não é escolher a tecnologia errada, é não escolher nada e ficar paralisado pela análise infinita."
 category: "career"
 tags: ["Backend", "Carreira", "Tecnologia", "Decisões", "Aprendizado", "Soft Skills"]

@@ -1,6 +1,6 @@
 ---
 title: "Como Reduzi em 90% o Tempo de Sincronização de um Sistema Atendimento ao Cliente Crítico"
-date: "2024-08-15"
+date: "2024-08-15T00:00:00-03:00"
 excerpt: "A história de como transformei um processo manual lento em uma solução automatizada que sincroniza dados de bulas médicas em menos de 2 minutos, melhorando drasticamente o atendimento no SAC farmacêutico e a confiabilidade do sistema."
 category: "technical"
 tags: ["Python", "Otimização", "ERP", "Automação", "Performance", "Case Study"]

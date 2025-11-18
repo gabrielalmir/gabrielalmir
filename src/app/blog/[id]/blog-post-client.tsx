@@ -245,7 +245,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
             <div className="flex flex-wrap items-center gap-6 mb-6 text-sm text-vesper-orange/60">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
+                <span>{new Date(post.date).toLocaleDateString('pt-BR')} (UTC-3)</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />

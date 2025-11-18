@@ -1,6 +1,6 @@
 ---
 title: "Para de Querer Criar o Portfólio Perfeito (E Comece a Criar o Seu)"
-date: "2025-11-17"
+date: "2025-11-17T20:00:00-03:00"
 excerpt: "Por muito tempo tentei criar 'o portfólio perfeito'. Spoiler: ele não existe. Mas aprendi algo mais valioso no caminho - a importância de ser autêntico e pragmático, até mesmo com seus projetos pessoais."
 category: "career"
 tags: ["Portfólio", "Carreira", "Desenvolvimento", "Backend", "Autenticidade", "Evolução"]
