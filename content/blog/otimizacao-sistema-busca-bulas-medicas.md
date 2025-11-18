@@ -1,27 +1,27 @@
 ---
 title: "Como Reduzi em 90% o Tempo de Sincronização de um Sistema Médico Crítico"
 date: "2024-08-15"
-excerpt: "A história de como transformei um processo manual lento em uma solução automatizada que sincroniza dados de bulas médicas em menos de 2 minutos, melhorando drasticamente o atendimento e a confiabilidade do sistema."
+excerpt: "A história de como transformei um processo manual lento em uma solução automatizada que sincroniza dados de bulas médicas em menos de 2 minutos, melhorando drasticamente o atendimento no SAC farmacêutico e a confiabilidade do sistema."
 category: "technical"
 tags: ["Python", "Otimização", "ERP", "Automação", "Performance", "Case Study"]
 author: "Gabriel Almir"
 readTime: "8 min"
 ---
 
-Imagine um atendente tentando ajudar um paciente, mas tendo que esperar mais de 20 minutos apenas para acessar informações básicas de uma bula médica. Frustrante, certo? Esse era o cenário que encontrei quando comecei a trabalhar na otimização do sistema de busca de bulas.
+Imagine um atendente do SAC tentando ajudar um médico que ligou para tirar uma dúvida urgente sobre uma bula, mas tendo que esperar mais de 20 minutos apenas para acessar as informações no sistema. Frustrante para ambos os lados, certo? Esse era o cenário que encontrei quando comecei a trabalhar na otimização do sistema de busca de bulas de uma farmácia.
 
 ## O Problema que Precisava Resolver
 
 O sistema existente tinha um gargalo crítico: a sincronização entre múltiplos ERPs estava completamente travada. Toda vez que precisávamos atualizar os dados de bulas, o processo demorava uma eternidade e, pior ainda, muitas vezes falhava no meio do caminho.
 
 Os sintomas eram claros:
-- Atendentes esperando interminavemente por informações
+- Atendentes do SAC esperando interminavemente para responder médicos e comerciantes
 - Processos manuais consumindo horas de trabalho
 - Dados inconsistentes entre os sistemas
 - Sistema caindo frequentemente (disponibilidade de apenas 71%)
 - Um débito técnico crescente que ninguém queria tocar
 
-O pior era saber que isso impactava diretamente pessoas que precisavam de ajuda. Quando você trabalha com saúde, cada minuto conta.
+O pior era saber que isso impactava diretamente o trabalho dos profissionais de saúde e comerciantes que dependiam dessas informações. Quando você atende médicos que precisam de dados técnicos urgentes, cada minuto de espera é crítico.
 
 ## A Jornada para a Solução
 
@@ -66,7 +66,7 @@ Depois de semanas de desenvolvimento e testes intensivos, coloquei em produção
 
 Mas números são só números. O que realmente importou foi ver a diferença no dia a dia:
 
-- Atendentes conseguindo ajudar pacientes instantaneamente
+- Atendentes do SAC conseguindo responder médicos e comerciantes instantaneamente
 - Zero chamados de "sistema lento" ou "sistema fora do ar"
 - Equipe de TI livre para trabalhar em coisas mais importantes
 - Dados sempre consistentes e atualizados
@@ -128,12 +128,13 @@ Simples, eficiente, escalável.
 No fim das contas, tecnologia existe para resolver problemas de pessoas. Este projeto:
 
 - Economizou centenas de horas de trabalho manual todo mês
-- Melhorou significativamente a experiência de atendimento
+- Melhorou significativamente a qualidade do atendimento no SAC farmacêutico
+- Permitiu que médicos e comerciantes obtivessem informações técnicas precisas instantaneamente
 - Deu confiabilidade para um sistema crítico
 - Eliminou um passivo técnico que assombrava o time
 - Criou uma base sólida para crescimento futuro
 
-Começamos com um sistema que travava e frustrava todo mundo. Terminamos com uma solução que simplesmente funciona, silenciosamente, 24/7, sem precisar de babá.
+Começamos com um sistema que travava e frustrava atendentes, médicos e comerciantes. Terminamos com uma solução que simplesmente funciona, silenciosamente, 24/7, sem precisar de babá.
 
 ## Pensamentos Finais
 
