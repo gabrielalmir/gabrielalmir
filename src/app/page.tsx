@@ -1,11 +1,10 @@
 'use client';
 
-import { ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react';
+import { ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Rocket, Shield, TrendingUp, Twitter, Zap } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 
 import { CoffeeSplash } from '@/components/coffee-splash';
-import { ContactButton } from '@/components/contact-button';
 import GitHubProjects from "@/components/github-projects";
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
@@ -63,7 +62,6 @@ export default function Home() {
                   </p>
                 </div>
 
-
                 <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
                     '6+ anos de experiência',
@@ -81,7 +79,6 @@ export default function Home() {
                   ))}
                 </div>
 
-
                 <div className="space-y-3 text-foreground/80 max-w-2xl w-full">
                     <p className="text-base leading-relaxed break-words w-full">
                     Engenheiro de Software Backend com sólida experiência em <strong className="text-vesper-orange font-semibold">Node.js</strong> e <strong className="text-vesper-orange font-semibold">Python</strong>, atuando no desenvolvimento de APIs escaláveis, integrações entre sistemas e soluções de <strong className="text-vesper-orange font-semibold">machine learning</strong> aplicadas a problemas de negócio. Foco em <strong className="text-vesper-orange font-semibold">arquitetura limpa</strong>, <strong className="text-vesper-orange font-semibold">boas práticas (SOLID, Design Patterns)</strong>, <strong className="text-vesper-orange font-semibold">observabilidade (OpenTelemetry)</strong> e <strong className="text-vesper-orange font-semibold">automação com CI/CD</strong> em ambientes <strong className="text-vesper-orange font-semibold">AWS</strong>.
@@ -90,16 +87,24 @@ export default function Home() {
 
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full max-w-full">
-                  <ContactButton href="#contato" label="Entrar em contato" />
+                  <Link href="#contato" className="w-full sm:w-auto">
+                    <Button
+                      size="lg"
+                      className="group w-full sm:w-auto bg-gradient-to-r from-vesper-orange via-vesper-orange/90 to-vesper-cyan hover:from-vesper-orange/90 hover:to-vesper-cyan/90 text-black font-bold shadow-lg shadow-vesper-orange/30 hover:shadow-xl hover:shadow-vesper-orange/50 transition-all duration-300"
+                    >
+                      <span>Entrar em contato</span>
+                      <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
+                    </Button>
+                  </Link>
                   <Link href="#projetos" className="w-full sm:w-auto">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="terminal-button-outline group w-full sm:w-auto"
-                  >
-                    <span>Ver projetos</span>
-                    <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
-                  </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="terminal-button-outline group w-full sm:w-auto border-2 border-vesper-cyan/50 hover:border-vesper-cyan hover:bg-vesper-cyan/10 shadow-md shadow-vesper-cyan/20 hover:shadow-lg hover:shadow-vesper-cyan/30 transition-all duration-300"
+                    >
+                      <span>Ver projetos</span>
+                      <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
+                    </Button>
                   </Link>
                 </div>
 
@@ -180,9 +185,9 @@ export default function Home() {
                   ].map(({ Icon, label, proficiency }) => (
                     <div
                       key={label}
-                      className={`group relative p-4 rounded-xl border transition-all duration-300 hover:scale-105 ${
+                      className={`group relative p-4 rounded-xl border transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
                         proficiency === 'expert'
-                          ? 'border-vesper-orange/30 bg-vesper-orange/5 hover:border-vesper-orange hover:bg-vesper-orange/10'
+                          ? 'border-vesper-orange/30 bg-vesper-orange/5 hover:border-vesper-orange'
                           : 'border-vesper-orange/20 bg-background hover:border-vesper-orange/40'
                       }`}
                     >
@@ -191,7 +196,7 @@ export default function Home() {
                         <div className="text-center">
                           <div className="font-semibold text-foreground text-sm sm:text-base">{label}</div>
                           {proficiency === 'expert' && (
-                            <div className="text-xs text-vesper-orange mt-1">★ Expert</div>
+                            <div className="text-xs text-vesper-orange mt-1 font-bold">★ Expert</div>
                           )}
                         </div>
                       </div>
@@ -311,6 +316,91 @@ export default function Home() {
         </section>
 
 
+        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden bg-gradient-to-b from-background via-vesper-cyan/5 to-background">
+          <div className="container mx-auto max-w-7xl w-full">
+            <div className="text-center mb-12 sm:mb-16 w-full max-w-full px-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
+                Por que trabalhar comigo?
+              </h2>
+              <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto break-words">
+                Foco em entregar soluções de alta qualidade com as melhores práticas do mercado
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {[
+                {
+                  icon: Zap,
+                  title: 'Desenvolvimento Rápido',
+                  description: 'Entrega ágil sem comprometer a qualidade do código',
+                  color: 'vesper-orange'
+                },
+                {
+                  icon: Shield,
+                  title: 'Código Limpo e Seguro',
+                  description: 'Arquitetura sólida, testes e boas práticas garantidas',
+                  color: 'vesper-cyan'
+                },
+                {
+                  icon: TrendingUp,
+                  title: 'Escalabilidade',
+                  description: 'Soluções preparadas para crescer com seu negócio',
+                  color: 'vesper-orange'
+                },
+                {
+                  icon: Rocket,
+                  title: 'Foco em Qualidade',
+                  description: '100% comprometido com excelência em cada projeto',
+                  color: 'vesper-cyan'
+                }
+              ].map(({ icon: Icon, title, description, color }) => (
+                <div
+                  key={title}
+                  className="group relative p-6 rounded-xl border transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                  style={{
+                    borderColor: color === 'vesper-orange' ? 'rgba(255, 199, 153, 0.3)' : 'rgba(153, 255, 228, 0.3)',
+                    backgroundColor: color === 'vesper-orange' ? 'rgba(255, 199, 153, 0.05)' : 'rgba(153, 255, 228, 0.05)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = color === 'vesper-orange' ? 'rgba(255, 199, 153, 0.5)' : 'rgba(153, 255, 228, 0.5)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = color === 'vesper-orange' ? 'rgba(255, 199, 153, 0.3)' : 'rgba(153, 255, 228, 0.3)';
+                  }}
+                >
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div
+                      className="p-4 rounded-xl transition-all group-hover:scale-110"
+                      style={{
+                        backgroundColor: color === 'vesper-orange' ? 'rgba(255, 199, 153, 0.1)' : 'rgba(153, 255, 228, 0.1)',
+                      }}
+                    >
+                      <Icon
+                        className="h-8 w-8 sm:h-10 sm:w-10"
+                        style={{
+                          color: color === 'vesper-orange' ? 'rgb(255, 199, 153)' : 'rgb(153, 255, 228)',
+                        }}
+                      />
+                    </div>
+                    <h3
+                      className="text-lg sm:text-xl font-bold"
+                      style={{
+                        color: color === 'vesper-orange' ? 'rgb(255, 199, 153)' : 'rgb(153, 255, 228)'
+                      }}
+                    >
+                      {title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
         <section id="projetos" className="py-16 md:py-24 bg-gradient-to-b from-background to-vesper-orange/5 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
           <div className="container mx-auto max-w-6xl w-full">
 
@@ -394,17 +484,81 @@ export default function Home() {
       </main>
 
 
-      <footer className="border-t border-vesper-orange/10 py-6 sm:py-8">
+      <footer className="border-t border-vesper-orange/10 py-12 sm:py-16 bg-gradient-to-b from-background to-vesper-orange/5">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
-            <div className="flex items-center gap-2 text-foreground/60 text-xs sm:text-sm">
-              <span>© 2024-{new Date().getFullYear()} Gabriel Almir</span>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-vesper-orange">Gabriel Almir</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed">
+                Engenheiro de Software Backend especializado em Node.js, Python e AWS.
+              </p>
             </div>
 
-            <div className="flex items-center gap-2 text-foreground/40 text-xs sm:text-sm">
-              <span>Feito com</span>
-              <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-vesper-red" />
-              <span>código e café</span>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">Links Rápidos</h4>
+              <ul className="space-y-2">
+                {[
+                  { href: '/#sobre', label: 'Sobre' },
+                  { href: '/#habilidades', label: 'Skills' },
+                  { href: '/#projetos', label: 'Projetos' },
+                  { href: '/blog', label: 'Blog' },
+                ].map(({ href, label }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-sm text-foreground/60 hover:text-vesper-orange transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">Redes Sociais</h4>
+              <div className="flex gap-3">
+                {[
+                  { Icon: Linkedin, href: "https://linkedin.com/in/gabrielalmir", label: "LinkedIn" },
+                  { Icon: Github, href: "https://github.com/gabrielalmir", label: "GitHub" },
+                  { Icon: Twitter, href: "https://x.com/momentoalmir", label: "Twitter" },
+                  { Icon: Instagram, href: "https://instagram.com/momentoalmir", label: "Instagram" },
+                ].map(({ Icon, href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    className="group w-10 h-10 rounded-full border border-vesper-orange/20 flex items-center justify-center hover:border-vesper-orange hover:bg-vesper-orange/10 transition-all"
+                    aria-label={label}
+                  >
+                    <Icon className="h-4 w-4 text-foreground/60 group-hover:text-vesper-orange group-hover:scale-110 transition-all" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider">Contato</h4>
+              <Link
+                href="mailto:gabr.almir@gmail.com"
+                className="text-sm text-foreground/60 hover:text-vesper-orange transition-colors block"
+              >
+                gabr.almir@gmail.com
+              </Link>
+            </div>
+          </div>
+
+          <div className="border-t border-vesper-orange/10 pt-6 sm:pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 text-foreground/60 text-xs sm:text-sm">
+                <span>© 2024-{new Date().getFullYear()} Gabriel Almir. Todos os direitos reservados.</span>
+              </div>
+
+              <div className="flex items-center gap-2 text-foreground/40 text-xs sm:text-sm">
+                <span>Feito com</span>
+                <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-vesper-red" />
+                <span>código e café</span>
+              </div>
             </div>
           </div>
         </div>
