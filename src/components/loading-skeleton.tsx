@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 interface LoadingSkeletonProps {
   variant?: 'card' | 'text' | 'avatar' | 'button';
@@ -179,9 +180,9 @@ export function ArticleSkeleton() {
 }
 
 export function useLoadingState(duration: number = 1500) {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, duration);
