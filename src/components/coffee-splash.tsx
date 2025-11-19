@@ -169,11 +169,11 @@ export function CoffeeSplash() {
                     <div><span className="text-vesper-orange/70">OS:</span> Arch Linux</div>
                     <div><span className="text-vesper-orange/70">Kernel:</span> Linux 6.x</div>
                     <div><span className="text-vesper-orange/70">Shell:</span> zsh</div>
-                    <div><span className="text-vesper-orange/70">Node:</span> v20.x</div>
+                    <div><span className="text-vesper-orange/70">Node:</span> v22.x</div>
                     <div><span className="text-vesper-orange/70">TypeScript:</span> 5.x</div>
-                    <div><span className="text-vesper-orange/70">Python:</span> 3.12</div>
-                    <div><span className="text-vesper-orange/70">Rust:</span> 1.75</div>
-                    <div><span className="text-vesper-orange/70">Git:</span> 2.42</div>
+                    <div><span className="text-vesper-orange/70">Python:</span> 3.14</div>
+                    <div><span className="text-vesper-orange/70">Rust:</span> 1.91</div>
+                    <div><span className="text-vesper-orange/70">Git:</span> 2.51</div>
                   </div>
                 </div>
 
