@@ -64,7 +64,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                 <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5 max-w-full">
                   <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse flex-shrink-0"></span>
                   <span className="text-xs sm:text-sm text-vesper-cyan truncate">
-                    Disponível para novos projetos
+                    Vou fazer você apaixonar por tecnologia
                   </span>
                 </div>
 
