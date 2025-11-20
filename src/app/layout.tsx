@@ -1,42 +1,22 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CommandMenu } from "@/components/command-menu";
+import { CustomCursor } from "@/components/custom-cursor";
 
-import { Space_Mono } from "next/font/google";
-import localFont from "next/font/local";
-
-const geist = localFont({
-  src: [
-    {
-      path: "./fonts/GeistVF.woff",
-      style: "normal",
-      weight: "100 900",
-    },
-  ],
-  variable: "--font-geist",
-  display: "swap",
-});
-
-const geistMono = localFont({
-  src: [
-    {
-      path: "./fonts/GeistMonoVF.woff",
-      style: "normal",
-      weight: "100 900",
-    },
-  ],
-  variable: "--font-geist-mono",
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space",
-  weight: ["400", "700"],
 });
 
-export const metadata = {
-  title: "Gabriel Almir - Backend Developer",
-  description: "Backend Developer focused on building scalable, high-performance solutions using Node.js. Expertise in creating clean, maintainable, and efficient systems, leveraging modern development practices such as Clean Architecture, SOLID principles, and Design Patterns.",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Gabriel Almir | Backend Software Engineer",
+  description: "Portfolio of Gabriel Almir, a Backend Software Engineer specializing in Node.js, Python, and AWS.",
 };
 
 export default function RootLayout({
@@ -45,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-br"
-      className={`${geist.variable} ${geistMono.variable} ${spaceMono.variable}`}
-    >
-      <body className='antialiased'>
+    <html lang="pt-BR" className="scroll-smooth">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+      >
+        <CustomCursor />
+        <CommandMenu />
         {children}
       </body>
     </html>
