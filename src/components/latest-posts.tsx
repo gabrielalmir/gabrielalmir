@@ -1,6 +1,5 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlogPost } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock, Code2, Hash, Terminal } from 'lucide-react';
@@ -89,16 +88,18 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                             </div>
                         )}
 
-                        <div className="flex items-center justify-between pt-4 border-t border-vesper-orange/10">
-                            <div className="flex items-center gap-2 text-xs text-foreground/40">
-                            <Calendar className="h-3.5 w-3.5" />
-                            <span>{new Date(post.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                            </div>
+                        <Link href={`/blog/${post.id}`} className="w-full block">
+                          <div className="flex items-center justify-between pt-4 border-t border-vesper-orange/10">
+                              <div className="flex items-center gap-2 text-xs text-foreground/40">
+                              <Calendar className="h-3.5 w-3.5" />
+                              <span>{new Date(post.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                              </div>
 
-                            <span className="text-xs font-bold text-vesper-orange opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 flex items-center gap-1">
-                                Ler artigo <ArrowRight className="w-3 h-3" />
-                            </span>
-                        </div>
+                              <span className="text-xs font-bold text-vesper-orange opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 flex items-center gap-1">
+                                  Ler artigo <ArrowRight className="w-3 h-3" />
+                              </span>
+                          </div>
+                        </Link>
                     </div>
                   </div>
                 </article>
