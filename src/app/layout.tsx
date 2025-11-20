@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CommandMenu } from "@/components/command-menu";
 import { CustomCursor } from "@/components/custom-cursor";
+import { VimScroll } from "@/components/vim-scroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         <CustomCursor />
         <CommandMenu />
+        <VimScroll />
         {children}
       </body>
     </html>

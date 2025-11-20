@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Command as CommandPrimitive } from "cmdk"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { Search, Calculator, Calendar, CreditCard, Settings, Smile, User, Code, FileText, Mail, Github, Linkedin, Twitter, Laptop } from "lucide-react"
+import { Search, User, Code, FileText, Mail, Github, Linkedin, Laptop } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { DialogDescription } from "@radix-ui/react-dialog"
@@ -111,4 +111,3 @@ function CommandItem({ children, onSelect }: { children: React.ReactNode, onSele
     </CommandPrimitive.Item>
   )
 }
-

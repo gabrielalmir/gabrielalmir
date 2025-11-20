@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { AmazonwebservicesOriginal, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react";
+import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react";
 import { Award, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -37,7 +37,7 @@ const techIcons = {
   "nodejs": NodejsOriginal,
   "nestjs": NestjsOriginal,
   "python": PythonOriginal,
-  "aws": AmazonwebservicesOriginal,
+  "aws": AmazonwebservicesPlainWordmark,
   "docker": DockerOriginal,
   "react": ReactOriginal,
   "nextjs": NextjsOriginal,
@@ -169,7 +169,7 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
         {isFeatured && featuredInfo?.techStack && (
              <div className="flex gap-2 pt-1">
                 {featuredInfo.techStack.map(tech => {
-                    // @ts-ignore
+                    // @ts-expect-error - techIcons might not have all keys from techStack
                     const TechIcon = techIcons[tech];
                     if(!TechIcon) return null;
                     return (

@@ -33,7 +33,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
 
         {latestPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestPosts.map((post, index) => {
+            {latestPosts.map((post) => {
               const CategoryIcon = categories[post.category].icon;
               return (
                 <article
@@ -92,7 +92,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                           <div className="flex items-center justify-between pt-4 border-t border-vesper-orange/10">
                               <div className="flex items-center gap-2 text-xs text-foreground/40">
                               <Calendar className="h-3.5 w-3.5" />
-                              <span>{new Date(post.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                              <span className="text-vesper-orange/80">{new Date(post.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                               </div>
 
                               <span className="text-xs font-bold text-vesper-orange opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 flex items-center gap-1">

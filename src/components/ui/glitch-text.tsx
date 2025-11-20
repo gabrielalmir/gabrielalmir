@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 interface GlitchTextProps {
@@ -62,4 +62,3 @@ export function GlitchText({ text, className, as: Component = 'span' }: GlitchTe
     </Component>
   )
 }
-
