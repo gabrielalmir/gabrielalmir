@@ -2,11 +2,12 @@
 
 import { motion, useScroll, useSpring } from "framer-motion";
 import { CoffeeIcon, ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { CoffeeSplashWrapper } from '@/components/coffee-splash';
-import GitHubProjects from "@/components/github-projects";
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
 import { TechMarquee } from "@/components/tech-marquee";
@@ -16,9 +17,31 @@ import { Button } from "@/components/ui/button";
 import { GlitchText } from "@/components/ui/glitch-text";
 import { VesperDecorations } from '@/components/vesper-decorations';
 import type { BlogPost } from '@/lib/blog';
-import { AmazonwebservicesPlainWordmark, NestjsOriginal, NodejsOriginal, PythonOriginal, TypescriptOriginal } from "devicons-react";
-import { Suspense } from "react";
 import { LatestPosts } from '../components/latest-posts';
+
+const GitHubProjects = dynamic(() => import("@/components/github-projects"), {
+  ssr: false,
+  loading: () => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
+          <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
+          <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
+          <div className="flex gap-2 mb-4">
+            <div className="h-5 bg-vesper-orange/10 rounded w-16"></div>
+            <div className="h-5 bg-vesper-orange/10 rounded w-20"></div>
+          </div>
+          <div className="h-8 bg-vesper-orange/10 rounded"></div>
+        </div>
+      ))}
+    </div>
+  )
+});
+
+const CoreStack = dynamic(() => import("@/components/core-stack"), {
+  ssr: true,
+  loading: () => <div className="h-96 w-full animate-pulse bg-vesper-orange/5 rounded-xl"></div>
+});
 
 interface HomeClientProps {
   latestPosts: BlogPost[];
@@ -209,37 +232,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
             <div className="space-y-16 w-full max-w-full">
 
 
-              <div className="space-y-6">
-                <div className="flex flex-wrap items-center gap-3 mb-8">
-                  <div className="w-1 h-8 bg-vesper-orange rounded-full flex-shrink-0"></div>
-                  <h3 className="text-2xl font-bold text-vesper-orange">Core Stack</h3>
-                  <Badge variant="outline" className="border-vesper-orange/30 text-vesper-orange/80">
-                    Especialidade Principal
-                  </Badge>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-                  {[
-                    { Icon: NodejsOriginal, label: "Node.js", level: "Expert" },
-                    { Icon: TypescriptOriginal, label: "TypeScript", level: "Expert" },
-                    { Icon: NestjsOriginal, label: "NestJS", level: "Expert" },
-                    { Icon: PythonOriginal, label: "Python", level: "Advanced" },
-                    { Icon: AmazonwebservicesPlainWordmark, label: "AWS", level: "Advanced" },
-                  ].map(({ Icon, label, level }) => (
-                    <div
-                      key={label}
-                      className="group relative p-6 rounded-xl border border-vesper-orange/10 bg-background/50 hover:bg-vesper-orange/5 hover:border-vesper-orange/30 transition-all duration-300 hover:-translate-y-1"
-                    >
-                      <div className="flex flex-col items-center gap-4">
-                        <Icon size={48} className="text-vesper-cyan group-hover:scale-110 transition-transform duration-300" />
-                        <div className="text-center">
-                          <div className="font-bold text-foreground">{label}</div>
-                          <div className="text-xs text-vesper-orange/70 mt-1 font-mono">{level}</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CoreStack />
 
               <div className="grid md:grid-cols-2 gap-8">
                  <div className="space-y-6">
