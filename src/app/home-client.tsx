@@ -192,6 +192,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                       height={400}
                       className="w-full h-full object-cover image-balanced transition-all duration-700 group-hover:brightness-110"
                       priority
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 400px, 450px"
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
