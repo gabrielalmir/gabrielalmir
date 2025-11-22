@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   compress: true,
   experimental: {
     optimizePackageImports: ['lucide-react', 'devicons-react', 'framer-motion'],
-    optimizeCss: true,
+    turbo: {
+      resolveExtensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs'],
+    },
   }
 };
 
