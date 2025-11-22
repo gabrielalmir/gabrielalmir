@@ -13,18 +13,10 @@ export function CoffeeSplashWrapper() {
 }
 
 export function CoffeeSplash() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [step, setStep] = useState<'boot' | 'system' | 'ready'>('boot');
   const [logs, setLogs] = useState<string[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const hasSeenSplash = localStorage.getItem('vesper-splash-seen-v2');
-    if (!hasSeenSplash) {
-      setShow(true);
-      localStorage.setItem('vesper-splash-seen-v2', 'true');
-    }
-  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
