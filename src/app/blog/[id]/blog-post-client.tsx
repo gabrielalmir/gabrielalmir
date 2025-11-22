@@ -367,7 +367,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
               <div className="relative w-16 h-16 sm:w-16 sm:h-16 rounded-full overflow-hidden border border-vesper-orange/20 bg-vesper-orange/10 flex-shrink-0">
               <Image
-                src="/me.jpg"
+                src="/me.webp"
                 alt="Gabriel Almir"
                 fill
                 sizes="64px"

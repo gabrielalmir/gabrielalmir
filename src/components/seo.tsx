@@ -20,7 +20,7 @@ export function SEO({
   keywords = [],
   author = 'Gabriel Almir',
   type = 'website',
-  image = '/me.jpg',
+  image = '/me.webp',
   url,
   publishedTime,
   modifiedTime,

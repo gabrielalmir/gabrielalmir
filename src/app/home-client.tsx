@@ -161,7 +161,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                   <div className="aspect-square rounded-2xl overflow-hidden border border-vesper-orange/20 bg-black/40 backdrop-blur-sm relative">
                     <div className="absolute inset-0 bg-scanline opacity-10 z-10 pointer-events-none"></div>
                     <Image
-                      src="/me.jpg"
+                      src="/me.webp"
                       alt="Gabriel Almir - Engenheiro de Software Backend"
                       width={400}
                       height={400}
