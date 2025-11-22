@@ -5,7 +5,6 @@ import { CoffeeIcon, ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon,
 import Image from "next/image";
 import Link from "next/link";
 
-import { CoffeeSplash } from '@/components/coffee-splash';
 import GitHubProjects from "@/components/github-projects";
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
@@ -37,9 +36,6 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         className="fixed top-0 left-0 right-0 h-1 bg-vesper-orange origin-left z-[100]"
         style={{ scaleX }}
       />
-
-      <CoffeeSplash />
-
 
       <VesperDecorations />
 
