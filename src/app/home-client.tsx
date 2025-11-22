@@ -5,7 +5,7 @@ import { CoffeeIcon, ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon,
 import Image from "next/image";
 import Link from "next/link";
 
-import { CoffeeSplash } from '@/components/coffee-splash';
+import { CoffeeSplashWrapper } from '@/components/coffee-splash';
 import GitHubProjects from "@/components/github-projects";
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
@@ -17,7 +17,7 @@ import { GlitchText } from "@/components/ui/glitch-text";
 import { VesperDecorations } from '@/components/vesper-decorations';
 import type { BlogPost } from '@/lib/blog';
 import { AmazonwebservicesPlainWordmark, NestjsOriginal, NodejsOriginal, PythonOriginal, TypescriptOriginal } from "devicons-react";
-import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { LatestPosts } from '../components/latest-posts';
 
 interface HomeClientProps {
@@ -32,9 +32,6 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
     restDelta: 0.001
   });
 
-  const searchParams = useSearchParams();
-  const showCoffeeSplash = searchParams.get('coffee') === 'true';
-
   return (
     <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
       <motion.div
@@ -42,7 +39,9 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         style={{ scaleX }}
       />
 
-      {showCoffeeSplash && <CoffeeSplash />}
+      <Suspense fallback={null}>
+        <CoffeeSplashWrapper />
+      </Suspense>
 
       <VesperDecorations />
 

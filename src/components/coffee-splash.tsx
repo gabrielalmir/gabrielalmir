@@ -3,7 +3,14 @@
 import { ArchlinuxPlain } from 'devicons-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Cpu, Terminal as TerminalIcon, XCircle, Zap } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+
+export function CoffeeSplashWrapper() {
+  const searchParams = useSearchParams();
+  const showCoffeeSplash = searchParams.get('coffee') === 'true';
+  return showCoffeeSplash ? <CoffeeSplash /> : null;
+}
 
 export function CoffeeSplash() {
   const [show, setShow] = useState(false);
