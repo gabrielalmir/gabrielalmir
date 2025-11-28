@@ -2,65 +2,146 @@
 
 # Gabriel Almir
 
-**Backend Engineer** | Node.js • TypeScript • AWS • Python
+**Backend Engineer Node.js** | TypeScript • NestJS • Microservices • AWS
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/gabrielalmir)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielalmir)
 [![Website](https://img.shields.io/badge/Website-4CAF50?style=for-the-badge&logo=google-chrome&logoColor=white)](https://gabrielalmir.com.br)
 
-> **6+ years** building scalable systems
+> **5+ years** building scalable systems, robust APIs, and distributed architectures
 
-Specializing in **microservices architecture**, **event-driven systems**, and **intelligent automation** with Python AI. Currently architecting solutions at CTC for pharmaceutical industry compliance.
+Specializing in **microservices architecture**, **event-driven systems**, and **applied machine learning** with Python. Currently architecting solutions at CTC for pharmaceutical industry compliance.
 
-## 🚀 Impact & Results
+## 🚀 Professional Experience
 
-**CTC** • *Backend Engineer* • Aug 2023 - Present
-- Developed middleware and REST/ODATA APIs using Node.js, NestJS, and TypeScript, integrating ERP systems and analytical tools
-- Implemented customer relationship system using Node.js and SQL Server, reducing loading time by 90%
-- Created document control system for regulated pharmaceutical industry, ensuring compliance and traceability
-- Structured CI/CD for critical modular monolith using GitHub Actions, ensuring consistent deployments across multiple environments
-- Led strategic projects focused on process optimization and automation, with data-driven decisions
-- Developed Python service for intelligent package insert mapping, integrating SAP and Totvs ERP with string comparison heuristics, reducing search time by 98% (from ~1min to instant access)
+### **CTC** • *Backend Node.js Developer* • Aug 2023 - Present
 
-**Key Technologies:** Node.js, NestJS, TypeScript, Python, AWS, PostgreSQL, RabbitMQ
+**APIs & Microservices Development:**
+- Built **ODATA API middlewares** with **Node.js, NestJS, TypeScript, and TypeORM** to integrate ERP systems with data analysis tools
+- Developed **customer relationship system** (internal CRM) with **Node.js** and **SQL Server**, handling high-volume requests with **90% reduction in loading time**
+- Implemented **document control system** focused on compliance, traceability, and standardization for regulated pharmaceutical industry
+- Created **Python service** for SAP/Totvs integration with **98%+ performance improvement** using intelligent heuristics
 
-## 🛠️ Tech Stack
+**DevOps & CI/CD:**
+- Structured **CI/CD pipelines** for critical modular monolith with automated testing and predictable deployments
+- Ensured safe versioning and reduced risk across multiple environment releases
 
-<div align="left">
-  <img src="https://skillicons.dev/icons?i=nodejs,ts,python,nestjs,react,nextjs,aws,docker,postgresql,redis" height="40" />
-</div>
+**Stack:** Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Python, Docker, GitHub Actions
 
-#### 🔧 Tools
+### **Diolinux** • *Full Stack Developer* • May 2013 - Aug 2016
 
-**Core:** Node.js • TypeScript • Python • NestJS • React
+- Modernized legacy systems with **JavaScript** and best development practices
+- Worked on **backend architecture and optimization**, strengthening scalability and code organization
+- Implemented performance improvements and system integrations
 
-**Cloud:** AWS (Lambda, S3, SQS, RDS) • Docker • Terraform
+## 🛠️ Technical Skills Aligned with Backend Excellence
 
-**Data:** PostgreSQL • MongoDB • Redis • RabbitMQ
+### Backend & Architecture
+- **Node.js & NestJS:** 5+ years specialist in APIs and microservices
+- **TypeScript:** Primary language in all recent projects
+- **Hexagonal Architecture:** Certified with practical application (BitQueue)
+- **DDD (Domain-Driven Design):** Experience in modeling and implementation
+- **Design Patterns:** Formal certification and GoF patterns application
+- **Clean Code:** Focus on simple, clean, readable code with SOLID principles
 
-**AI/ML:** LangChain • LLMs • RAG • Pandas • Scikit-learn
+### Databases
+- **Relational:** SQL Server, PostgreSQL
+- **NoSQL:** MongoDB, DynamoDB
 
-**Practices:** Clean Architecture • SOLID • TDD • Event-Driven Design
+### Messaging & Event-Driven
+- **RabbitMQ:** Asynchronous communication experience
+- **Amazon SQS:** AWS services integration
+- **Event-driven architecture:** Decoupled microservices
 
-## 📈 Experience Highlights
+### APIs & Integrations
+- **REST APIs:** Building robust and well-documented APIs
+- **Workers:** Experience with different application types (APIs, Workers, async services)
+- **Integrations:** ERPs (SAP), internal systems, external platforms
 
-### **Laboratório Cristália** • *Node.js Developer* • Apr-Aug 2023
-Architecture modernization • Enhanced testing practices
+### DevOps & Cloud (AWS)
+- **AWS:** Lambda, S3, SQS, DynamoDB, RDS, ECS, CloudWatch, API Gateway
+- **Docker:** Application containerization
+- **CI/CD:** GitHub Actions (complete pipeline structuring)
+- **DevOps Culture:** Automation, observability, best practices
 
+### Quality & Testing
+- **Unit Tests:** Certified with practical project experience
+- **Integration Tests:** Automated testing experience
+- **CI/CD:** Continuous integration with automated validations
 
-### **Freelancer** • *Full Stack Developer* • 2016-2023
+## 📂 Featured Projects
 
-REST APIs • JWT Auth • RabbitMQ • Redis optimization
+### **BitQueue** • *Message Queue Platform* • Mar 2025 - Present
 
+Platform for decoupling and scaling microservices and distributed systems.
 
-### **Diolinux** • *Full Stack Developer* • 2013-2016
+**Technical Highlights:**
+- API in **Node.js and TypeScript** with **Hexagonal Architecture**
+- Focus on reliability, scalability, and system design
+- **CI/CD, automated tests, Swagger documentation**
+- Cloud environment integration
 
-Legacy system modernization • Performance optimization
+**Stack:** Node.js, TypeScript, REST, SQL, Docker, CI/CD, Swagger, GitHub
 
-## 🎓 Education
+### **TechFinance** • *Financial Management with AI* • Oct 2024 - Jun 2025
 
-**Software Development** • FATEC-SP • 2022-2025
-**IT Technical** • Senac Brasil • 2014-2016
+Financial management application with AI-powered insights for products, sales, and reports.
+
+**Components:**
+- **Backend API** in Node.js/TypeScript/Bun.js
+- **Prediction API** in Python for ML
+- Mobile app (React Native) and web (Next.js)
+
+## 🎓 Education & Certifications
+
+### Academic Background
+
+**Software Development Technologist**  
+FATEC-SP • 2022 - 2025 (ongoing)
+
+**IT Technical**  
+Senac Brasil • 2014 - 2016
+
+### Key Certifications
+
+**Backend & Architecture:**
+- Professional Backend Developer Qualification | Fatec (1040h)
+- Hexagonal Architecture (Ports and Adapters) | Full Cycle
+- Software Architecture Fundamentals | Full Cycle
+- SOLID Express Course | Full Cycle
+- Design Patterns | Centro Paula Souza
+
+**Cloud & DevOps:**
+- AWS Academy Graduate – Cloud Developing | AWS
+- Docker in Practice | Full Cycle
+- Serverless Applications on AWS Masterclass | EW Academy
+
+**Testing & Methodologies:**
+- Unit Testing (JUnit 5 and Mockito) | Javanauta
+- Agile Methodologies | Javanauta
+- Git and GitHub Version Control | DIO
+
+**Machine Learning & Python:**
+- AWS Academy Graduate – ML for Natural Language Processing | AWS
+- Intermediate Machine Learning | Kaggle
+- Intro to Machine Learning | Kaggle
+
+## 💡 Key Differentials
+
+**DevOps Culture:** Docker, CI/CD, automation, observability (OpenTelemetry, Prometheus, structured logging)
+
+**Financial Sector Experience:** TechFinance project with financial management, sales, and reporting
+
+**Initiative & Autonomy:** Open source projects (Diolinux PhotoGIMP with active community), npm libraries (Resulta)
+
+**Technical Communication:** Experience documenting solutions, multidisciplinary integrated projects
+
+**Applied Machine Learning:** Python projects, prediction APIs, natural language processing
+
+## 🌐 Languages
+
+- **Portuguese:** Native
+- **English:** Advanced (technical reading and professional communication)
 
 ## 📊 GitHub Stats
 
