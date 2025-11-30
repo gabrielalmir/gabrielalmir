@@ -81,11 +81,6 @@ Specializing in **microservices architecture**, **event-driven systems**, and **
 
 **Applied Machine Learning:** Python projects, prediction APIs, natural language processing
 
-## 🌐 Languages
-
-- **Portuguese:** Native
-- **English:** Advanced (technical reading and professional communication)
-
 ## 📊 GitHub Stats
 
 <div align="center">
