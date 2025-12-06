@@ -1,6 +1,13 @@
 'use client';
 
+
 import { Button } from '@/components/ui/button';
+
+// Sanitize route segment for post id to prevent XSS from filesystem filenames
+function sanitizeRouteSegment(id: string): string {
+  // Remove any character that is not a-z, A-Z, 0-9, - or _
+  return id.replace(/[^a-zA-Z0-9_-]/g, '');
+}
 import { BlogPost } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock, Code2, Hash, Terminal } from 'lucide-react';
 import Link from 'next/link';
@@ -63,7 +70,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                     </div>
 
                     <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-vesper-orange transition-colors break-words leading-tight relative z-10">
-                      <Link href={`/blog/${post.id}`} className="focus:outline-none">
+                      <Link href={`/blog/${sanitizeRouteSegment(post.id)}`} className="focus:outline-none">
                         <span className="absolute inset-0" aria-hidden="true" />
                         {post.title}
                       </Link>
@@ -88,7 +95,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                             </div>
                         )}
 
-                        <Link href={`/blog/${post.id}`} className="w-full block">
+                        <Link href={`/blog/${sanitizeRouteSegment(post.id)}`} className="w-full block">
                           <div className="flex items-center justify-between pt-4 border-t border-vesper-orange/10">
                               <div className="flex items-center gap-2 text-xs text-foreground/40">
                               <Calendar className="h-3.5 w-3.5" />
