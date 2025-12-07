@@ -2,85 +2,83 @@
 
 # Gabriel Almir
 
-**Desenvolvedor Backend (Pleno)** | Node.js • Python • TypeScript
+**Desenvolvedor Backend (Pleno)** | Node.js • TypeScript • NestJS
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/gabrielalmir)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielalmir)
 [![Website](https://img.shields.io/badge/Website-4CAF50?style=for-the-badge&logo=google-chrome&logoColor=white)](https://gabrielalmir.com.br)
 
+Com alguns anos de experiência construindo APIs e sistemas backend em Node.js. Tenho experiência com microservices, sistemas orientados a eventos e arquitetura de integração. Atualmente atuo na CTC, participando da evolução de soluções para o setor farmacêutico.
 
-Com alguns anos de experiência construindo APIs e sistemas backend. Tenho experiência com microservices, sistemas orientados a eventos e aplicações em Python voltadas a automação e dados. Atualmente atuo em CTC, participando da evolução de soluções para o setor farmacêutico.
+## 🚀 Experiência Profissional
 
-## 🚀 Professional Experience
+### **CTC** • *Desenvolvedor Backend Node.js* • Ago 2023 - Presente
 
-### **CTC** • *Backend Node.js Developer* • Aug 2023 - Present
-
-
-**APIs & Microservices Development:**
+**Desenvolvimento de APIs & Microservices:**
 - Desenvolvi middlewares e APIs ODATA com **Node.js, NestJS, TypeScript e TypeORM** para integrar ERPs a ferramentas de análise.
 - Contribuí para a construção de um sistema interno de relacionamento com clientes (CRM) integrado a **SQL Server**, com ganhos de performance significativos em pontos críticos.
 - Participei da implementação de um sistema de controle de documentos com foco em conformidade e rastreabilidade para ambiente regulado.
-- Desenvolvi um serviço em **Python** para integração com SAP/Totvs, que trouxe melhorias relevantes no tempo de busca via heurísticas específicas.
+- Estruturei pipelines de CI/CD para monólito modular crítico usando **GitHub Actions**.
 
 **DevOps & CI/CD:**
-- Structured **CI/CD pipelines** for critical modular monolith with automated testing and predictable deployments
-- Ensured safe versioning and reduced risk across multiple environment releases
+- Estruturei pipelines de **CI/CD** para monólito modular crítico com testes automatizados e deploys previsíveis.
+- Garanti versionamento seguro e redução de riscos em múltiplos ambientes de release.
 
-**Stack:** Node.js, NestJS, TypeScript, Python, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, GitHub Actions
+**Stack:** Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, GitHub Actions
 
-### **Diolinux** • *Full Stack Developer* • May 2013 - Aug 2016
+### **Diolinux** • *Desenvolvedor Full Stack* • Mai 2013 - Ago 2016
 
-- Modernized legacy systems with **JavaScript** and best development practices
-- Worked on **backend architecture and optimization**, strengthening scalability and code organization
-- Implemented performance improvements and system integrations
+- Modernizei sistemas legados com **JavaScript** e melhores práticas de desenvolvimento.
+- Trabalhei em **arquitetura backend e otimização**, fortalecendo escalabilidade e organização do código.
+- Implementei melhorias de performance e integrações de sistemas.
 
-## 🛠️ Technical Skills Aligned with Backend Excellence
+## 🛠️ Habilidades Técnicas Alinhadas com Excelência Backend
 
-### Backend & Architecture
-- **Node.js & NestJS:** 5+ years specialist in APIs and microservices
-- **TypeScript:** Primary language in all recent projects
-- **Hexagonal Architecture:** Certified with practical application (BitQueue)
-- **DDD (Domain-Driven Design):** Experience in modeling and implementation
-- **Design Patterns:** Formal certification and GoF patterns application
-- **Clean Code:** Focus on simple, clean, readable code with SOLID principles
+### Backend & Arquitetura
+- **Node.js & NestJS:** Experiência prática em APIs e microservices
+- **TypeScript:** Linguagem principal em projetos recentes
+- **Arquitetura Hexagonal:** Aplicação prática (BitQueue)
+- **Design Patterns:** Conhecimento de padrões e aplicação em projetos
+- **Clean Code:** Foco em código simples, legível e com princípios SOLID
 
-### Databases
-- **Relational:** SQL Server, PostgreSQL
+### Bancos de Dados
+- **Relacionais:** SQL Server, PostgreSQL
 - **NoSQL:** MongoDB, DynamoDB
 
-### Messaging & Event-Driven
-- **RabbitMQ:** Asynchronous communication experience
-- **Amazon SQS:** AWS services integration
-- **Event-driven architecture:** Decoupled microservices
+### Mensageria & Arquitetura Orientada a Eventos
+- **RabbitMQ:** Experiência em comunicação assíncrona
+- **Amazon SQS:** Integração com serviços AWS
+- **Arquitetura orientada a eventos:** Microservices desacoplados
 
-### APIs & Integrations
-- **REST APIs:** Building robust and well-documented APIs
-- **Workers:** Experience with different application types (APIs, Workers, async services)
-- **Integrations:** ERPs (SAP), internal systems, external platforms
+### APIs & Integrações
+- **APIs REST:** Construção de APIs robustas e bem documentadas
+- **Workers:** Experiência com diferentes tipos de aplicações (APIs, Workers, serviços assíncronos)
+- **Integrações:** ERPs (SAP), sistemas internos, plataformas externas
 
 ### DevOps & Cloud (AWS)
 - **AWS:** Lambda, S3, SQS, DynamoDB, RDS, ECS, CloudWatch, API Gateway
-- **Docker:** Application containerization
-- **CI/CD:** GitHub Actions (complete pipeline structuring)
-- **DevOps Culture:** Automation, observability, best practices
+- **Docker:** Containerização de aplicações
+- **CI/CD:** GitHub Actions (estruturação completa de pipelines)
+- **Cultura DevOps:** Automação, observabilidade, melhores práticas
 
-### Quality & Testing
-- **Unit Tests:** Certified with practical project experience
-- **Integration Tests:** Automated testing experience
-- **CI/CD:** Continuous integration with automated validations
+### Qualidade & Testes
+- **Testes Unitários:** Experiência certificada com projetos práticos
+- **Testes de Integração:** Experiência em testes automatizados
+- **CI/CD:** Integração contínua com validações automatizadas
 
-## 💡 Key Differentials
+## 💡 Diferenciais-Chave
 
-**DevOps Culture:** Docker, CI/CD, automation, observability (OpenTelemetry, Prometheus, structured logging)
+**Cultura DevOps:** Docker, CI/CD, automação, observabilidade (OpenTelemetry, Prometheus, structured logging)
 
-**Financial Sector Experience:** TechFinance project with financial management, sales, and reporting
+**Experiência no Setor Financeiro:** Projeto TechFinance com gestão financeira, vendas e relatórios
 
-**Initiative & Autonomy:** Open source projects (Diolinux PhotoGIMP with active community), npm libraries (Resulta)
+**Iniciativa & Autonomia:** Projetos open source (Diolinux PhotoGIMP com comunidade ativa), bibliotecas npm (Resulta)
 
-**Technical Communication:** Experience documenting solutions, multidisciplinary integrated projects
+**Comunicação Técnica:** Experiência documentando soluções, projetos integrados multidisciplinares
 
-**Applied Machine Learning:** Python projects, prediction APIs, natural language processing
+**Aprendizado Contínuo:** Exploração de IA/ML aplicada (LLMs, RAG), integrações com APIs de IA, automação inteligente
 
 <div align="center">
-  <i>"I don't read books about the world. I go out there and see it for myself." - Ezreal</i>
+  <i>"Não leio livros sobre o mundo. Saio por aí e vejo por mim mesmo." - Ezreal</i>
 </div>
+

@@ -34,7 +34,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ title, company, period,
 
 export const ModernResumeSection: React.FC = () => {
   const resumeData = {
-    summary: 'Desenvolvedor Backend (Pleno) com experiência em Node.js e Python, atuando no desenvolvimento de APIs, integrações entre sistemas e soluções básicas de ML aplicadas a problemas de negócio. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS.',
+    summary: 'Desenvolvedor Backend (Pleno) com experiência em Node.js e TypeScript, atuando no desenvolvimento de APIs, integrações entre sistemas e arquitetura de microsserviços. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS. Aprendizado contínuo em IA/ML aplicada.',
     experience: [
       {
         title: 'Desenvolvedor Backend Node.js',

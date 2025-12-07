@@ -1,13 +1,12 @@
 # Gabriel Almir
 
 **Desenvolvedor Backend (Pleno)**
-Node.js, Python, TypeScript | NestJS | AWS
-Interesse em microservices, integração de sistemas e práticas de arquitetura limpa
+Node.js, TypeScript, NestJS | Interesse em microservices e integração de sistemas
 
 [LinkedIn](https://linkedin.com/in/gabrielalmir) | [GitHub](https://github.com/gabrielalmir) | [Website](https://gabrielalmir.com.br)
 
 ## Resumo
-Desenvolvedor backend com experiência prática no desenvolvimento de APIs, integrações e serviços de backend. Trabalho principalmente com Node.js e Python, e tenho experiência usando AWS (Lambda, S3, SQS, RDS, DynamoDB), mensageria (RabbitMQ, SQS) e pipelines de CI/CD com GitHub Actions. Atualmente estudo aplicações de IA em Python (LLMs, RAG) e busco sempre entregar soluções confiáveis e alinhadas ao negócio.
+Desenvolvedor backend com experiência prática no desenvolvimento de APIs, integrações e serviços de backend. Trabalho principalmente com Node.js e TypeScript, e tenho experiência usando AWS (Lambda, S3, SQS, RDS, DynamoDB), mensageria (RabbitMQ, SQS) e pipelines de CI/CD com GitHub Actions. Atualmente tenho interesse em IA aplicada (LLMs, RAG) e busco sempre entregar soluções confiáveis e alinhadas ao negócio.
 
 ## Experience
 
@@ -47,7 +46,7 @@ Desenvolvedor backend com experiência prática no desenvolvimento de APIs, inte
 
 ## Technical Skills
 
-- **Languages**: Node.js, TypeScript, Python, JavaScript, SQL
+- **Languages**: Node.js, TypeScript, JavaScript, SQL
 - **Frameworks**: NestJS, React, FastAPI, TypeORM
 - **Cloud**: AWS (Lambda, S3, SQS, DynamoDB, RDS)
 - **Messaging**: RabbitMQ, Amazon SQS
