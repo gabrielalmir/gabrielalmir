@@ -2,31 +2,31 @@
 
 # Gabriel Almir
 
-**Backend Engineer Node.js** | TypeScript • NestJS • Microservices • AWS
+**Desenvolvedor Backend (Pleno)** | Node.js • Python • TypeScript
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/gabrielalmir)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielalmir)
 [![Website](https://img.shields.io/badge/Website-4CAF50?style=for-the-badge&logo=google-chrome&logoColor=white)](https://gabrielalmir.com.br)
 
-> **5+ years** building scalable systems, robust APIs, and distributed architectures
 
-Specializing in **microservices architecture**, **event-driven systems**, and **applied machine learning** with Python. Currently architecting solutions at CTC for pharmaceutical industry compliance.
+Com alguns anos de experiência construindo APIs e sistemas backend. Tenho experiência com microservices, sistemas orientados a eventos e aplicações em Python voltadas a automação e dados. Atualmente atuo em CTC, participando da evolução de soluções para o setor farmacêutico.
 
 ## 🚀 Professional Experience
 
 ### **CTC** • *Backend Node.js Developer* • Aug 2023 - Present
 
+
 **APIs & Microservices Development:**
-- Built **ODATA API middlewares** with **Node.js, NestJS, TypeScript, and TypeORM** to integrate ERP systems with data analysis tools
-- Developed **customer relationship system** (internal CRM) with **Node.js** and **SQL Server**, handling high-volume requests with **90% reduction in loading time**
-- Implemented **document control system** focused on compliance, traceability, and standardization for regulated pharmaceutical industry
-- Created **Python service** for SAP/Totvs integration with **98%+ performance improvement** using intelligent heuristics
+- Desenvolvi middlewares e APIs ODATA com **Node.js, NestJS, TypeScript e TypeORM** para integrar ERPs a ferramentas de análise.
+- Contribuí para a construção de um sistema interno de relacionamento com clientes (CRM) integrado a **SQL Server**, com ganhos de performance significativos em pontos críticos.
+- Participei da implementação de um sistema de controle de documentos com foco em conformidade e rastreabilidade para ambiente regulado.
+- Desenvolvi um serviço em **Python** para integração com SAP/Totvs, que trouxe melhorias relevantes no tempo de busca via heurísticas específicas.
 
 **DevOps & CI/CD:**
 - Structured **CI/CD pipelines** for critical modular monolith with automated testing and predictable deployments
 - Ensured safe versioning and reduced risk across multiple environment releases
 
-**Stack:** Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Python, Docker, GitHub Actions
+**Stack:** Node.js, NestJS, TypeScript, Python, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, GitHub Actions
 
 ### **Diolinux** • *Full Stack Developer* • May 2013 - Aug 2016
 

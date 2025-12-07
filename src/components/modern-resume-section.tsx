@@ -34,13 +34,13 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ title, company, period,
 
 export const ModernResumeSection: React.FC = () => {
   const resumeData = {
-    summary: 'Engenheiro de Software Backend com sólida experiência em Node.js e Python, atuando no desenvolvimento de APIs escaláveis, integrações entre sistemas e soluções de machine learning aplicadas a problemas de negócio. Foco em arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade (OpenTelemetry) e automação com CI/CD em ambientes AWS.',
+    summary: 'Desenvolvedor Backend (Pleno) com experiência em Node.js e Python, atuando no desenvolvimento de APIs, integrações entre sistemas e soluções básicas de ML aplicadas a problemas de negócio. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS.',
     experience: [
       {
         title: 'Desenvolvedor Backend Node.js',
         company: 'CTC',
         period: 'Agosto de 2023 – Presente | Itapira, SP | Presencial',
-        description: 'Desenvolvo e mantenho sistemas com impacto direto em operações industriais e na tomada de decisão baseada em dados. Principais entregas: Middlewares com APIs ODATA em Node.js, NestJS, TypeScript e TypeORM para integrar sistemas ERP a ferramentas de análise de dados; Sistema de relacionamento com clientes (CRM interno) integrado a SQL Server, reduzindo em ~90% o tempo de carregamento de pendências; Sistema de controle de documentos internos para ambiente regulado, garantindo conformidade e rastreabilidade; Pipelines de CI/CD para monólito modular crítico; Serviço de mapeamento de bulas em Python com heurísticas, reduzindo tempo de busca de ~1 minuto para acesso praticamente instantâneo (ganho superior a 98%).'
+        description: 'Atuo no desenvolvimento e manutenção de sistemas com foco em integração e automação para operações industriais. Entregas: middlewares e APIs ODATA em Node.js/NestJS/TypeScript para integrar ERPs a ferramentas de análise; participação na construção de um CRM interno integrado a SQL Server com ganhos de performance em pontos críticos; sistema de controle de documentos para ambiente regulado; apoio na criação de pipelines de CI/CD; serviço em Python para mapeamento de bulas que melhorou substancialmente o tempo de busca.'
       },
       {
         title: 'Desenvolvedor Full-Stack | SEO e Otimização Técnica',
@@ -151,7 +151,7 @@ export const ModernResumeSection: React.FC = () => {
 
   return (
     <section className="w-full max-w-6xl mx-auto">
-      
+
       <div className="text-center mb-12 sm:mb-16">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
           Resumo Profissional
@@ -163,7 +163,7 @@ export const ModernResumeSection: React.FC = () => {
 
       <div className="space-y-8 sm:space-y-12">
 
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,10 +174,10 @@ export const ModernResumeSection: React.FC = () => {
           <p className="text-sm sm:text-base text-foreground/80 leading-relaxed break-words">{resumeData.summary}</p>
         </motion.div>
 
-        
+
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
 
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,7 @@ export const ModernResumeSection: React.FC = () => {
             </div>
           </motion.div>
 
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -240,7 +240,7 @@ export const ModernResumeSection: React.FC = () => {
           </motion.div>
         </div>
 
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -273,7 +273,7 @@ export const ModernResumeSection: React.FC = () => {
           </div>
         </motion.div>
 
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -302,7 +302,7 @@ export const ModernResumeSection: React.FC = () => {
           </div>
         </motion.div>
 
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

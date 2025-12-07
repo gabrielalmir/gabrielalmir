@@ -106,7 +106,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                       words={[
                         "Engenheiro de Software Backend",
                         "Especialista em Node.js & Python",
-                        "Arquiteto de Sistemas Cloud",
+                        "Apaixonado por Arquitetura de Software",
                         "Entusiasta de IA & ML"
                       ]}
                       typingSpeed={80}
@@ -116,13 +116,13 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                   </div>
 
                   <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed break-words w-full mt-4">
-                    Transformo problemas complexos em <span className="text-vesper-orange">código limpo</span> e <span className="text-vesper-orange">arquiteturas escaláveis</span>.
+                    Gosto de resolver problemas com <span className="text-vesper-orange">código limpo</span> e <span className="text-vesper-orange">boas práticas</span>, sempre aprendendo e evoluindo.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
-                    '6+ anos de experiência',
+                    '5+ anos de experiência',
                     'Node.js • NestJS • TypeScript',
                     'Python • Machine Learning',
                     'AWS • Microsserviços'

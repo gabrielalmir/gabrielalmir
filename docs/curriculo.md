@@ -1,13 +1,13 @@
 # Gabriel Almir
 
-**Backend Software Engineer**
-Node.js, TypeScript, React & NestJS | Python | AWS
-Microservices, AWS, Clean Architecture
+**Desenvolvedor Backend (Pleno)**
+Node.js, Python, TypeScript | NestJS | AWS
+Interesse em microservices, integração de sistemas e práticas de arquitetura limpa
 
 [LinkedIn](https://linkedin.com/in/gabrielalmir) | [GitHub](https://github.com/gabrielalmir) | [Website](https://gabrielalmir.com.br)
 
-## Summary
-Software Engineer with over 6 years of experience in scalable backend development, robust APIs, and distributed systems. Specialist in Node.js (NestJS) and React, working with AWS (Lambda, S3, SQS, RDS, DynamoDB), messaging (RabbitMQ, SQS), CI/CD with GitHub Actions, and event-driven architecture. Currently studying applied AI with Python, focusing on LLMs, RAG, and intelligent automation. Always striving to deliver resilient, performant solutions aligned with business needs.
+## Resumo
+Desenvolvedor backend com experiência prática no desenvolvimento de APIs, integrações e serviços de backend. Trabalho principalmente com Node.js e Python, e tenho experiência usando AWS (Lambda, S3, SQS, RDS, DynamoDB), mensageria (RabbitMQ, SQS) e pipelines de CI/CD com GitHub Actions. Atualmente estudo aplicações de IA em Python (LLMs, RAG) e busco sempre entregar soluções confiáveis e alinhadas ao negócio.
 
 ## Experience
 
