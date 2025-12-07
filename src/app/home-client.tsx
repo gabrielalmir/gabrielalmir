@@ -104,10 +104,10 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                   <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-vesper-cyan/90 break-words w-full h-[1.5em] flex items-center">
                     <TypingEffect
                       words={[
-                        "Engenheiro de Software Backend",
-                        "Especialista em Node.js & Python",
-                        "Apaixonado por Arquitetura de Software",
-                        "Entusiasta de IA & ML"
+                        "Desenvolvedor Backend Node.js",
+                        "Especialista em TypeScript & NestJS",
+                        "Apaixonado por Arquitetura Limpa",
+                        "Explorador de IA & ML"
                       ]}
                       typingSpeed={80}
                       deletingSpeed={40}
@@ -122,10 +122,10 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
 
                 <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
                   {[
-                    '5+ anos de experiência',
                     'Node.js • NestJS • TypeScript',
-                    'Python • Machine Learning',
-                    'AWS • Microsserviços'
+                    'APIs & Microservices',
+                    'Arquitetura Limpa',
+                    'AWS • CI/CD'
                   ].map((item) => (
                     <Badge
                       key={item}
@@ -187,7 +187,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                     <div className="absolute inset-0 bg-scanline opacity-10 z-10 pointer-events-none"></div>
                     <Image
                       src="/me.webp"
-                      alt="Gabriel Almir - Engenheiro de Software Backend"
+                      alt="Gabriel Almir - Desenvolvedor Backend Node.js"
                       width={400}
                       height={400}
                       className="w-full h-full object-cover image-balanced transition-all duration-700 group-hover:brightness-110"
@@ -268,7 +268,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
               <div className="pt-8">
                   <h3 className="text-sm font-mono text-vesper-orange/50 mb-4 uppercase tracking-wider">Tecnologias Complementares</h3>
                   <TechMarquee
-                    items={['React', 'Next.js', 'TailwindCSS', 'GraphQL', 'gRPC', 'WebSockets', 'Jest', 'PyTest', 'FastAPI', 'Flask', 'Go', 'Rust']}
+                    items={['React', 'Next.js', 'TailwindCSS', 'GraphQL', 'gRPC', 'WebSockets', 'Jest', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB']}
                     direction="right"
                   />
               </div>
@@ -372,7 +372,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                  <CoffeeIcon size={24} className="text-vesper-orange" /> Gabriel Almir
               </h3>
               <p className="text-sm text-foreground/70 leading-relaxed max-w-xs">
-                Engenheiro de Software Backend focado em performance, escalabilidade e código limpo.
+                Desenvolvedor Backend focado em Node.js, arquitetura limpa, escalabilidade e código confiável.
               </p>
             </div>
 
