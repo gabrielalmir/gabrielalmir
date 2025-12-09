@@ -4,6 +4,7 @@ import "./globals.css";
 import { CommandMenu } from "@/components/command-menu";
 import { CustomCursor } from "@/components/custom-cursor";
 import { VimScroll } from "@/components/vim-scroll";
+import React from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
