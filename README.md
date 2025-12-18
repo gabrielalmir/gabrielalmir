@@ -145,18 +145,6 @@ Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, G
 
 ---
 
-## 🏆 GitHub Trophies
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=gabrielalmir&theme=radical&margin-w=8" />
-</p>
-
----
-
-<p align="center">
-  <img src="https://visitcount.itsvg.in/api?id=gabrielalmir&color=0" />
-</p>
-
 <div align="center">
   <i>"Não leio livros sobre o mundo. Saio por aí e vejo por mim mesmo." — Ezreal</i>
 </div>
