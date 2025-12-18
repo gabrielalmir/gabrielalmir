@@ -47,13 +47,7 @@ export function getAllPosts(): BlogPost[] {
             } as BlogPost;
         });
 
-    return allPostsData.sort((a, b) => {
-        if (new Date(a.date) < new Date(b.date)) {
-            return 1;
-        } else {
-            return -1;
-        }
-    });
+    return allPostsData.sort((a, b) => new Date(a.date) < new Date(b.date) ? 1 : 0);
 }
 
 export function getPostById(id: string): BlogPost | null {
