@@ -109,7 +109,7 @@ Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, G
 ## 🌐 Socials
 
 <p align="center">
-  <a href="https://instagram.com/gabrielalmir">
+  <a href="https://instagram.com/momentoalmir">
     <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white"/>
   </a>
   <a href="https://linkedin.com/in/gabrielalmir">
