@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BlogClientPage from '@/components/blog-client';
+import { getAllPosts } from '@/lib/blog';
+
+const posts = getAllPosts();
+---
+
+<Layout title="Blog | Gabriel Almir" description="Artigos sobre desenvolvimento backend, arquitetura de software e experiências na indústria tech.">
+  <BlogClientPage client:load posts={posts} />
+</Layout>

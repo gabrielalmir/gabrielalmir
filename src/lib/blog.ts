@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const postsDirectory = path.join(process.cwd(), 'content', 'blog');
+const postsDirectory = path.join(process.cwd(), 'src', 'content', 'blog');
 
 export interface BlogPost {
     id: string;
@@ -47,7 +47,7 @@ export function getAllPosts(): BlogPost[] {
             } as BlogPost;
         });
 
-    return allPostsData.sort((a, b) => new Date(a.date) < new Date(b.date) ? 1 : 0);
+    return allPostsData.sort((a, b) => new Date(a.date) < new Date(b.date) ? 1 : -1);
 }
 
 export function getPostById(id: string): BlogPost | null {

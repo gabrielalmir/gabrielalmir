@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { HomeClient } from '@/components/home-client';
+import { getAllPosts } from '@/lib/blog';
+
+const latestPosts = getAllPosts().slice(0, 3);
+---
+
+<Layout title="Gabriel Almir | Desenvolvedor Backend Node.js">
+  <HomeClient client:load latestPosts={latestPosts} />
+</Layout>

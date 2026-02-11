@@ -1,0 +1,21 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BlogPostClient from '@/components/blog-post-client';
+import { getAllPostIds, getPostById } from '@/lib/blog';
+
+export function getStaticPaths() {
+  const ids = getAllPostIds();
+  return ids.map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params;
+const post = getPostById(id as string);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+---
+
+<Layout title={`${post.title} | Gabriel Almir`} description={post.excerpt}>
+  <BlogPostClient client:load post={post} />
+</Layout>

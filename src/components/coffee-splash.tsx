@@ -1,14 +1,18 @@
-'use client';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
-import dynamic from 'next/dynamic';
-import { useSearchParams } from 'next/navigation';
-
-const CoffeeSplashContent = dynamic(() => import('./coffee-splash-content'), {
-  ssr: false,
-});
+const CoffeeSplashContent = lazy(() => import('./coffee-splash-content'));
 
 export function CoffeeSplashWrapper() {
-  const searchParams = useSearchParams();
-  const showCoffeeSplash = searchParams.get('coffee') === 'true';
-  return showCoffeeSplash ? <CoffeeSplashContent /> : null;
+    const [showCoffeeSplash, setShowCoffeeSplash] = useState(false);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setShowCoffeeSplash(params.get('coffee') === 'true');
+    }, []);
+
+    return showCoffeeSplash ? (
+        <Suspense fallback={null}>
+            <CoffeeSplashContent />
+        </Suspense>
+    ) : null;
 }

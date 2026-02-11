@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/GeistVF.woff') format('woff');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMonoVF.woff') format('woff');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --vesper-orange: 255 199 153;
@@ -30,6 +44,9 @@
     --card-foreground: 255 255 255;
     --popover: 16 16 16;
     --popover-foreground: 255 255 255;
+
+    --font-geist-sans: 'Geist', sans-serif;
+    --font-geist-mono: 'Geist Mono', monospace;
   }
 }
 
@@ -45,7 +62,7 @@ html {
 }
 
 body {
-  font-family: var(--font-geist, var(--font-space)), 'Space Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: var(--font-geist-sans), 'Space Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
   overflow-x: hidden;
   max-width: 100vw;
   min-width: 100%;
@@ -246,12 +263,12 @@ body {
 }
 
 .font-fira {
-  font-family: var(--font-geist-mono, var(--font-space)), 'Space Mono', 'Consolas', 'Monaco', monospace;
+  font-family: var(--font-geist-mono), 'Space Mono', 'Consolas', 'Monaco', monospace;
   font-feature-settings: "liga" 1, "calt" 1;
 }
 
 .font-display {
-  font-family: var(--font-geist, var(--font-space));
+  font-family: var(--font-geist-sans);
   letter-spacing: -0.015em;
 }
 

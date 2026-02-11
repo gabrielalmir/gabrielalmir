@@ -1,41 +1,39 @@
-"use client"
-
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 interface GlitchTextProps {
-  text: string
-  className?: string
-  as?: React.ElementType
+    text: string
+    className?: string
+    as?: React.ElementType
 }
 
 export function GlitchText({ text, className, as: Component = 'span' }: GlitchTextProps) {
-  const [isHovered, setIsHovered] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
 
-  return (
-    <Component
-      className={cn("relative inline-block group", className)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <span className="relative z-10">{text}</span>
-      {isHovered && (
-        <>
-          <span
-            className="absolute top-0 left-0 -z-10 w-full h-full text-vesper-cyan opacity-70 animate-glitch-1"
-            aria-hidden="true"
-          >
-            {text}
-          </span>
-          <span
-            className="absolute top-0 left-0 -z-10 w-full h-full text-vesper-red opacity-70 animate-glitch-2"
-            aria-hidden="true"
-          >
-            {text}
-          </span>
-        </>
-      )}
-      <style jsx>{`
+    return (
+        <Component
+            className={cn("relative inline-block group", className)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <span className="relative z-10">{text}</span>
+            {isHovered && (
+                <>
+                    <span
+                        className="absolute top-0 left-0 -z-10 w-full h-full text-vesper-cyan opacity-70 animate-glitch-1"
+                        aria-hidden="true"
+                    >
+                        {text}
+                    </span>
+                    <span
+                        className="absolute top-0 left-0 -z-10 w-full h-full text-vesper-red opacity-70 animate-glitch-2"
+                        aria-hidden="true"
+                    >
+                        {text}
+                    </span>
+                </>
+            )}
+            <style>{`
         @keyframes glitch-1 {
           0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
           20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
@@ -59,6 +57,6 @@ export function GlitchText({ text, className, as: Component = 'span' }: GlitchTe
           animation: glitch-2 0.4s infinite linear alternate-reverse;
         }
       `}</style>
-    </Component>
-  )
+        </Component>
+    )
 }

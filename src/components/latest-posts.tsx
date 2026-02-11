@@ -1,139 +1,119 @@
-'use client';
-
-
 import { Button } from '@/components/ui/button';
-
-// Sanitize route segment for post id to prevent XSS from filesystem filenames
-function sanitizeRouteSegment(id: string): string {
-  // Remove any character that is not a-z, A-Z, 0-9, - or _
-  return id.replace(/[^a-zA-Z0-9_-]/g, '');
-}
-import { BlogPost } from '@/lib/blog';
+import type { BlogPost } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock, Code2, Hash, Terminal } from 'lucide-react';
-import Link from 'next/link';
+
+function sanitizeRouteSegment(id: string): string {
+    return id.replace(/[^a-zA-Z0-9_-]/g, '');
+}
 
 const categories = {
-  technical: { label: 'Técnico', icon: Code2, color: 'text-vesper-cyan' },
-  career: { label: 'Carreira', icon: Terminal, color: 'text-vesper-orange' },
-  insights: { label: 'Insights', icon: Code2, color: 'text-vesper-cyan' }
+    technical: { label: 'Técnico', icon: Code2, color: 'text-vesper-cyan' },
+    career: { label: 'Carreira', icon: Terminal, color: 'text-vesper-orange' },
+    insights: { label: 'Insights', icon: Hash, color: 'text-vesper-red' }
 };
 
 interface LatestPostsProps {
-  latestPosts: BlogPost[];
+    latestPosts: BlogPost[];
 }
 
 export function LatestPosts({ latestPosts }: LatestPostsProps) {
-  return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-vesper-orange/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+    if (!latestPosts || latestPosts.length === 0) return null;
 
-      <div className="container mx-auto max-w-7xl w-full relative z-10">
-        <div className="text-center mb-16 w-full max-w-full px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 break-words">
-            Últimos Artigos
-          </h2>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto break-words">
-            Insights sobre desenvolvimento, arquitetura e carreira
-          </p>
-        </div>
+    return (
+        <section id="blog" className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+            <div className="container mx-auto max-w-6xl w-full">
 
-        {latestPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestPosts.map((post) => {
-              const CategoryIcon = categories[post.category].icon;
-              return (
-                <article
-                  key={post.id}
-                  className="group relative flex flex-col h-full bg-background/40 backdrop-blur-sm border border-vesper-orange/10 rounded-2xl overflow-hidden hover:border-vesper-orange/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-lg hover:shadow-vesper-orange/5"
-                >
-                  {/* Card Header / Gradient Decoration */}
-                  <div className="h-2 w-full bg-gradient-to-r from-vesper-orange/20 via-vesper-orange/60 to-vesper-cyan/20 group-hover:from-vesper-orange/40 group-hover:via-vesper-orange group-hover:to-vesper-cyan/40 transition-all duration-500" />
-
-                  <div className="p-6 flex flex-col flex-grow relative">
-                     {/* Subtle Grid Background */}
-                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
-
-                    <div className="flex items-center justify-between mb-6 relative z-10">
-                      <div className="flex items-center gap-2">
-                        <span className={`flex items-center justify-center w-8 h-8 rounded-lg bg-vesper-orange/5 border border-vesper-orange/10 group-hover:border-vesper-orange/20 transition-colors`}>
-                            <CategoryIcon className={`h-4 w-4 ${categories[post.category].color}`} />
-                        </span>
-                        <span className="text-xs font-bold text-vesper-orange/80 uppercase tracking-wider">
-                          {categories[post.category].label}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-vesper-orange/5 border border-vesper-orange/10 text-[10px] font-mono text-vesper-orange/70">
-                        <Clock className="h-3 w-3" />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-vesper-orange transition-colors break-words leading-tight relative z-10">
-                      <Link href={`/blog/${sanitizeRouteSegment(post.id)}`} className="focus:outline-none">
-                        <span className="absolute inset-0" aria-hidden="true" />
-                        {post.title}
-                      </Link>
-                    </h3>
-
-                    <p className="text-sm text-foreground/60 mb-6 leading-relaxed line-clamp-3 relative z-10 flex-grow">
-                      {post.excerpt}
+                <div className="text-center mb-16 w-full max-w-full px-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 break-words">
+                        <span className="text-vesper-orange">&lt;</span>{' '}
+                        Últimos Posts
+                        {' '}<span className="text-vesper-orange">/&gt;</span>
+                    </h2>
+                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto break-words">
+                        Artigos sobre desenvolvimento, arquitetura de software e experiências na indústria tech.
                     </p>
+                </div>
 
-                    <div className="space-y-4 relative z-10 mt-auto">
-                        {post.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
-                            {post.tags.slice(0, 3).map(tag => (
-                                <span
-                                key={tag}
-                                className="text-[10px] px-2 py-1 rounded-md bg-background border border-foreground/10 text-foreground/50 font-mono flex items-center gap-1"
-                                >
-                                <Hash className="w-2 h-2 opacity-50" />
-                                {tag}
-                                </span>
-                            ))}
-                            </div>
-                        )}
+                <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 w-full">
+                    {latestPosts.map((post) => {
+                        const category = categories[post.category as keyof typeof categories] || categories.technical;
+                        const CategoryIcon = category.icon;
+                        const safeId = sanitizeRouteSegment(post.id);
 
-                        <Link href={`/blog/${sanitizeRouteSegment(post.id)}`} className="w-full block">
-                          <div className="flex items-center justify-between pt-4 border-t border-vesper-orange/10">
-                              <div className="flex items-center gap-2 text-xs text-foreground/40">
-                              <Calendar className="h-3.5 w-3.5" />
-                              <span className="text-vesper-orange/80">{new Date(post.date).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                              </div>
+                        return (
+                            <article
+                                key={post.id}
+                                className="group relative terminal-window border border-vesper-orange/20 p-4 sm:p-6 hover:border-vesper-orange/40 transition-all duration-300 flex flex-col h-full"
+                            >
 
-                              <span className="text-xs font-bold text-vesper-orange opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 flex items-center gap-1">
-                                  Ler artigo <ArrowRight className="w-3 h-3" />
-                              </span>
-                          </div>
-                        </Link>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-center py-24 border border-dashed border-vesper-orange/20 rounded-3xl bg-vesper-orange/5">
-            <div className="mx-auto w-16 h-16 rounded-full bg-vesper-orange/10 flex items-center justify-center mb-4">
-                <Terminal className="w-8 h-8 text-vesper-orange/50" />
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                                    <div className="absolute -right-16 -top-16 w-32 h-32 bg-vesper-orange/10 blur-[40px] rounded-full"></div>
+                                </div>
+
+                                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
+                                    <div className="flex items-center gap-2">
+                                        <CategoryIcon className={`h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${category.color}`} />
+                                        <span className={`text-xs uppercase tracking-wider ${category.color}`}>
+                                            {category.label}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-foreground/60">
+                                        <Clock className="h-3 w-3 flex-shrink-0" />
+                                        <span className="whitespace-nowrap">{post.readTime}</span>
+                                    </div>
+                                </div>
+
+                                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-vesper-orange transition-colors break-words relative z-10">
+                                    {post.title}
+                                </h3>
+
+                                <p className="text-sm sm:text-base text-foreground/60 mb-3 sm:mb-4 leading-relaxed break-words relative z-10 flex-grow">
+                                    {post.excerpt}
+                                </p>
+
+                                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
+                                    <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-foreground/50">
+                                        <Calendar className="h-3 w-3 flex-shrink-0" />
+                                        <span className="whitespace-nowrap">{new Date(post.date).toLocaleDateString('pt-BR')}</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-1 mb-3 sm:mb-4 relative z-10">
+                                    {post.tags.slice(0, 3).map((tag: any) => (
+                                        <span
+                                            key={tag}
+                                            className="px-2 py-1 text-xs bg-vesper-orange/10 text-vesper-orange/80 border border-vesper-orange/20 rounded whitespace-nowrap"
+                                        >
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                    {post.tags.length > 3 && (
+                                        <span className="px-2 py-1 text-xs text-vesper-orange/60">
+                                            +{post.tags.length - 3}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <a href={`/blog/${safeId}`} className="w-full block relative z-10 mt-auto">
+                                    <Button className="terminal-button w-full group text-sm sm:text-base">
+                                        <span className="terminal-prompt">&gt; ler artigo</span>
+                                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                                    </Button>
+                                </a>
+                            </article>
+                        );
+                    })}
+                </div>
+
+                <div className="text-center mt-12">
+                    <a href="/blog">
+                        <Button size="lg" variant="outline" className="terminal-button-outline group px-8">
+                            <span>Ver todos os artigos</span>
+                            <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                    </a>
+                </div>
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">Nenhum artigo encontrado</h3>
-            <p className="text-foreground/60 max-w-sm mx-auto">
-                Estou escrevendo novos conteúdos incríveis. Volte em breve!
-            </p>
-          </div>
-        )}
-
-        <div className="text-center mt-16">
-          <Link href="/blog">
-            <Button variant="outline" className="terminal-button-outline group px-8">
-              <span>Explorar biblioteca completa</span>
-              <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 }
