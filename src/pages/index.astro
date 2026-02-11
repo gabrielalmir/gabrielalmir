@@ -4,6 +4,19 @@ import { HomeClient } from "@/components/home-client";
 import { getAllPosts } from "@/lib/blog";
 
 const latestPosts = getAllPosts().slice(0, 3);
+
+// Fetch GitHub projects at build time (no runtime API call needed)
+let githubProjects: any[] = [];
+try {
+  const res = await fetch(
+    "https://api.github.com/users/gabrielalmir/repos?sort=stars&per_page=20&direction=desc"
+  );
+  if (res.ok) {
+    githubProjects = await res.json();
+  }
+} catch (e) {
+  console.warn("Failed to fetch GitHub projects at build time:", e);
+}
 ---
 
 <Layout
@@ -92,7 +105,11 @@ const latestPosts = getAllPosts().slice(0, 3);
   </div>
 
   <!-- HomeClient hydrates when idle, replacing the skeleton -->
-  <HomeClient client:idle latestPosts={latestPosts} />
+  <HomeClient
+    client:idle
+    latestPosts={latestPosts}
+    githubProjects={githubProjects}
+  />
 
   <script>
     // Hide skeleton once HomeClient mounts

@@ -20,9 +20,10 @@ const CoreStack = lazy(() => import("@/components/core-stack"));
 
 interface HomeClientProps {
     latestPosts: BlogPost[];
+    githubProjects?: any[];
 }
 
-export function HomeClient({ latestPosts }: HomeClientProps) {
+export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -271,7 +272,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                                 ))}
                             </div>
                         }>
-                            <GitHubProjects username="gabrielalmir" />
+                            <GitHubProjects username="gabrielalmir" initialProjects={githubProjects} />
                         </Suspense>
 
                         <div className="text-center mt-16">

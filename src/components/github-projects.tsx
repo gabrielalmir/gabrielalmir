@@ -108,8 +108,8 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
     return (
         <Card
             className={`group relative overflow-hidden transition-all duration-500 h-full flex flex-col ${isFeatured
-                    ? 'border border-vesper-orange/40 bg-gradient-to-br from-vesper-orange/10 via-vesper-orange/5 to-background hover:border-vesper-orange hover:shadow-[0_0_30px_-10px_rgba(255,199,153,0.3)]'
-                    : 'border border-vesper-orange/10 bg-background/50 hover:border-vesper-orange/30 hover:bg-vesper-orange/5'
+                ? 'border border-vesper-orange/40 bg-gradient-to-br from-vesper-orange/10 via-vesper-orange/5 to-background hover:border-vesper-orange hover:shadow-[0_0_30px_-10px_rgba(255,199,153,0.3)]'
+                : 'border border-vesper-orange/10 bg-background/50 hover:border-vesper-orange/30 hover:bg-vesper-orange/5'
                 }`}
         >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
@@ -130,8 +130,8 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
             <CardHeader className="pb-4 space-y-4 z-10">
                 <div className="flex items-start gap-4">
                     <div className={`p-2.5 rounded-xl transition-all duration-300 ${isFeatured
-                            ? 'bg-vesper-orange/20 text-vesper-orange group-hover:scale-110 group-hover:rotate-3'
-                            : 'bg-vesper-orange/10 text-vesper-orange/70 group-hover:text-vesper-orange group-hover:bg-vesper-orange/20'
+                        ? 'bg-vesper-orange/20 text-vesper-orange group-hover:scale-110 group-hover:rotate-3'
+                        : 'bg-vesper-orange/10 text-vesper-orange/70 group-hover:text-vesper-orange group-hover:bg-vesper-orange/20'
                         }`}>
                         <IconComponent className="h-6 w-6" />
                     </div>
@@ -199,12 +199,12 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
                     ].map(({ Icon, count, label }) => (
                         <div key={label} className="flex items-center gap-1.5 group/stat">
                             <Icon className={`h-3.5 w-3.5 transition-colors ${isFeatured
-                                    ? 'text-vesper-orange/70 group-hover/stat:text-vesper-orange'
-                                    : 'text-vesper-orange/40 group-hover/stat:text-vesper-orange/80'
+                                ? 'text-vesper-orange/70 group-hover/stat:text-vesper-orange'
+                                : 'text-vesper-orange/40 group-hover/stat:text-vesper-orange/80'
                                 }`} />
                             <span className={`text-xs font-mono transition-colors ${isFeatured
-                                    ? 'text-vesper-orange/80 group-hover/stat:text-vesper-orange'
-                                    : 'text-vesper-orange/50 group-hover/stat:text-vesper-orange/80'
+                                ? 'text-vesper-orange/80 group-hover/stat:text-vesper-orange'
+                                : 'text-vesper-orange/50 group-hover/stat:text-vesper-orange/80'
                                 }`}>
                                 {count}
                             </span>
@@ -217,8 +217,8 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider transition-all group/link ${isFeatured
-                            ? 'text-vesper-orange hover:text-vesper-orange/80'
-                            : 'text-vesper-orange/60 hover:text-vesper-orange'
+                        ? 'text-vesper-orange hover:text-vesper-orange/80'
+                        : 'text-vesper-orange/60 hover:text-vesper-orange'
                         }`}
                 >
                     <span>Code</span>
@@ -229,18 +229,19 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
     );
 }
 
-export default function GitHubProjects({ username }: { username: string }) {
-    const [projects, setProjects] = useState<GitHubProject[]>([]);
-    const [loading, setLoading] = useState(true);
+export default function GitHubProjects({ username, initialProjects }: { username: string; initialProjects?: GitHubProject[] }) {
+    const [projects, setProjects] = useState<GitHubProject[]>(initialProjects || []);
+    const [loading, setLoading] = useState(!initialProjects);
     const [activeFilter, setActiveFilter] = useState('all');
     const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
+        if (initialProjects) return;
         fetchGitHubProjects(username)
             .then(setProjects)
             .catch(console.error)
             .finally(() => setLoading(false));
-    }, [username]);
+    }, [username, initialProjects]);
 
     const filteredProjects = useMemo(() => {
         let filtered = projects;
@@ -347,8 +348,8 @@ export default function GitHubProjects({ username }: { username: string }) {
                         size="sm"
                         onClick={() => setActiveFilter(id)}
                         className={`group transition-all duration-200 text-xs sm:text-sm ${activeFilter === id
-                                ? 'bg-vesper-orange text-black border-vesper-orange shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/30'
-                                : 'border-vesper-orange/30 text-vesper-orange/70 hover:border-vesper-orange hover:text-vesper-orange hover:bg-vesper-orange/10'
+                            ? 'bg-vesper-orange text-black border-vesper-orange shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/30'
+                            : 'border-vesper-orange/30 text-vesper-orange/70 hover:border-vesper-orange hover:text-vesper-orange hover:bg-vesper-orange/10'
                             }`}
                     >
                         <Icon className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 group-hover:scale-110 transition-transform flex-shrink-0" />
