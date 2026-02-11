@@ -1,19 +1,24 @@
 ---
-import '@/styles/globals.css';
-import { CustomCursor } from '@/components/custom-cursor';
-import { CommandMenu } from '@/components/command-menu';
-import { VimScroll } from '@/components/vim-scroll';
+import "@/styles/globals.css";
+import { CustomCursor } from "@/components/custom-cursor";
+import { CommandMenu } from "@/components/command-menu";
+import { VimScroll } from "@/components/vim-scroll";
 
 interface Props {
   title: string;
   description?: string;
+  preloadImage?: string;
 }
 
-const { title, description = 'Gabriel Almir - Desenvolvedor Backend Node.js especializado em TypeScript, NestJS, AWS e arquitetura limpa.' } = Astro.props;
+const {
+  title,
+  description = "Gabriel Almir - Desenvolvedor Backend Node.js especializado em TypeScript, NestJS, AWS e arquitetura limpa.",
+  preloadImage,
+} = Astro.props;
 ---
 
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -28,6 +33,8 @@ const { title, description = 'Gabriel Almir - Desenvolvedor Backend Node.js espe
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
+    <link rel="preconnect" href="https://api.github.com" />
     <title>{title}</title>
   </head>
   <body>
