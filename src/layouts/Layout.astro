@@ -38,9 +38,11 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <CustomCursor client:only="react" />
-    <CommandMenu client:only="react" />
-    <VimScroll client:only="react" />
+    ```astro
+    <CustomCursor client:idle />
+    <CommandMenu client:idle />
+    <VimScroll client:idle />
+    ```
     <slot />
   </body>
 </html>
