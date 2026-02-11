@@ -37,12 +37,10 @@ const {
     <link rel="preconnect" href="https://api.github.com" />
     <title>{title}</title>
   </head>
-  <body>
-    ```astro
+  <body class="min-h-screen bg-background text-foreground">
     <CustomCursor client:idle />
     <CommandMenu client:idle />
     <VimScroll client:idle />
-    ```
     <slot />
   </body>
 </html>

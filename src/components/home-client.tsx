@@ -31,7 +31,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
     });
 
     return (
-        <div className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
+        <div data-home-loaded className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
             <motion.div
                 className="fixed top-0 left-0 right-0 h-1 bg-vesper-orange origin-left z-[100]"
                 style={{ scaleX }}
