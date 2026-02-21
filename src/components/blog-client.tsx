@@ -2,7 +2,7 @@ import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { BlogPost } from '@/lib/blog';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { ArrowRight, BookOpen, Calendar, Clock, Code2, Filter, Search, Tag, Terminal } from 'lucide-react';
 import { useState } from 'react';
 
@@ -33,7 +33,8 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
     });
 
     return (
-        <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
+        <LazyMotion features={domAnimation}>
+            <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
 
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
@@ -43,7 +44,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
             <Header />
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -68,9 +69,9 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
                             <span className="text-xs sm:text-sm break-words">cat posts.log | grep -E "(TypeScript|Node.js|AWS|Architecture|Python)"</span>
                         </div>
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -151,9 +152,9 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
                             </div>
                         </div>
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -163,7 +164,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
                             const CategoryIcon = categories[post.category as keyof typeof categories]?.icon || Code2;
                             const categoryInfo = categories[post.category as keyof typeof categories] || categories.technical;
                             return (
-                                <motion.article
+                                <m.article
                                     key={post.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -220,13 +221,13 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
                                             <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                                         </Button>
                                     </a>
-                                </motion.article>
+                                </m.article>
                             );
                         })}
                     </div>
 
                     {filteredPosts.length === 0 && (
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className="terminal-window border border-vesper-orange/20 p-6 sm:p-8 text-center"
@@ -243,10 +244,11 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
                                 <br />
                                 <span className="text-vesper-orange/60">0</span>
                             </div>
-                        </motion.div>
+                        </m.div>
                     )}
-                </motion.section>
+                </m.section>
             </main>
-        </div>
+            </div>
+        </LazyMotion>
     );
 }

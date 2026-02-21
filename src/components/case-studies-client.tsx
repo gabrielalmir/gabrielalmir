@@ -1,6 +1,6 @@
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { ArrowRight, Calendar, Cloud, Code2, Database, Shield, Tag, Terminal, TrendingUp, Users, Zap } from 'lucide-react';
 import { useState } from 'react';
 
@@ -75,7 +75,8 @@ export default function CaseStudiesPage() {
     const featuredStudies = caseStudies.filter(study => study.featured);
 
     return (
-        <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
+        <LazyMotion features={domAnimation}>
+            <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black">
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
                 <div className="absolute inset-0 bg-glow opacity-50"></div>
@@ -84,7 +85,7 @@ export default function CaseStudiesPage() {
             <Header />
 
             <main className="container mx-auto px-4 py-12">
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -117,9 +118,9 @@ export default function CaseStudiesPage() {
                             </div>
                         </div>
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -138,7 +139,7 @@ export default function CaseStudiesPage() {
                         {featuredStudies.map((study, index) => {
                             const CategoryIcon = categories[study.category].icon;
                             return (
-                                <motion.div
+                                <m.div
                                     key={study.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -168,8 +169,8 @@ export default function CaseStudiesPage() {
                                     </p>
 
                                     <div className="grid grid-cols-3 gap-4 mb-6">
-                                        {study.metrics.map((metric, idx) => (
-                                            <div key={idx} className="text-center">
+                                        {study.metrics.map((metric) => (
+                                            <div key={metric.label} className="text-center">
                                                 <div className="text-lg font-bold text-vesper-orange">
                                                     {metric.value}
                                                 </div>
@@ -205,13 +206,13 @@ export default function CaseStudiesPage() {
                                             <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                         </Button>
                                     </a>
-                                </motion.div>
+                                </m.div>
                             );
                         })}
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -260,9 +261,9 @@ export default function CaseStudiesPage() {
                             </div>
                         </div>
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
@@ -271,7 +272,7 @@ export default function CaseStudiesPage() {
                         {filteredStudies.map((study, index) => {
                             const CategoryIcon = categories[study.category].icon;
                             return (
-                                <motion.article
+                                <m.article
                                     key={study.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -329,13 +330,13 @@ export default function CaseStudiesPage() {
                                             <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                         </Button>
                                     </a>
-                                </motion.article>
+                                </m.article>
                             );
                         })}
                     </div>
 
                     {filteredStudies.length === 0 && (
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className="terminal-window border border-vesper-orange/20 p-8 text-center"
@@ -352,10 +353,11 @@ export default function CaseStudiesPage() {
                                 <br />
                                 <span className="text-vesper-orange/60">0</span>
                             </div>
-                        </motion.div>
+                        </m.div>
                     )}
-                </motion.section>
+                </m.section>
             </main>
-        </div>
+            </div>
+        </LazyMotion>
     );
 }

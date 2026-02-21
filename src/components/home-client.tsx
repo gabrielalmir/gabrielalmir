@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from "framer-motion";
+import { LazyMotion, domAnimation, m, useScroll, useSpring } from "framer-motion";
 import { CoffeeIcon, ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react';
 import { lazy, Suspense } from "react";
 
@@ -32,8 +32,9 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
     });
 
     return (
-        <div data-home-loaded className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
-            <motion.div
+        <LazyMotion features={domAnimation}>
+            <div data-home-loaded className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
+            <m.div
                 className="fixed top-0 left-0 right-0 h-1 bg-vesper-orange origin-left z-[100]"
                 style={{ scaleX }}
             />
@@ -259,8 +260,8 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
 
                         <Suspense fallback={
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                                {[...Array(6)].map((_, i) => (
-                                    <div key={i} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
+                                {Array.from({ length: 6 }, (_, index) => `home-skeleton-${index}`).map((skeletonId) => (
+                                    <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
                                         <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
                                         <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
                                         <div className="flex gap-2 mb-4">
@@ -420,6 +421,7 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
                     </div>
                 </div>
             </footer>
-        </div>
+            </div>
+        </LazyMotion>
     )
 }

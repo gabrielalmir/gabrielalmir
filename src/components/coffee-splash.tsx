@@ -1,14 +1,13 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useSyncExternalStore } from 'react';
 
 const CoffeeSplashContent = lazy(() => import('./coffee-splash-content'));
 
 export function CoffeeSplashWrapper() {
-    const [showCoffeeSplash, setShowCoffeeSplash] = useState(false);
-
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        setShowCoffeeSplash(params.get('coffee') === 'true');
-    }, []);
+    const showCoffeeSplash = useSyncExternalStore(
+        () => () => {},
+        () => new URLSearchParams(window.location.search).get('coffee') === 'true',
+        () => false
+    );
 
     return showCoffeeSplash ? (
         <Suspense fallback={null}>

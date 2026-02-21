@@ -33,7 +33,7 @@ export function CommandMenu() {
                     Navegue pelo portfolio usando comandos rápidos
                 </DialogDescription>
                 <CommandPrimitive className="flex h-full w-full flex-col overflow-hidden rounded-md bg-transparent text-popover-foreground">
-                    <div className="flex items-center border-b border-vesper-orange/10 px-3" cmdk-input-wrapper="">
+                    <div className="flex items-center border-b border-vesper-orange/10 px-3" data-cmdk-input-wrapper="">
                         <Search className="mr-2 h-4 w-4 shrink-0 opacity-50 text-vesper-orange" />
                         <CommandPrimitive.Input
                             placeholder="Digite um comando ou pesquise..."

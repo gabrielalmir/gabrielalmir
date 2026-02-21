@@ -1,7 +1,7 @@
 import { Header } from '@/components/header';
 import { Button } from '@/components/ui/button';
 import type { BlogPost } from '@/lib/blog';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { ArrowLeft, BookOpen, Calendar, Clock, Code2, ExternalLink, Share2, Terminal, User, Video } from 'lucide-react';
 import type React from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -13,26 +13,36 @@ interface BlogPostClientProps {
     readonly post: BlogPost;
 }
 
+type MarkdownHeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { node?: unknown };
+
 const categories: Record<string, { label: string; icon: React.ComponentType<{ className?: string }>; color: string }> = {
     technical: { label: 'Técnico', icon: Code2, color: 'text-blue-400' },
     career: { label: 'Carreira', icon: BookOpen, color: 'text-green-400' },
     insights: { label: 'Insights', icon: Terminal, color: 'text-purple-400' }
 };
 
-const MarkdownH1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-vesper-orange mt-10 sm:mt-12 md:mt-14 mb-5 sm:mb-6 md:mb-7 border-b border-vesper-orange/20 pb-3 sm:pb-4 leading-[1.2] break-words tracking-tight" {...props} />
+const MarkdownH1 = ({ children, node: _node, ...props }: MarkdownHeadingProps) => (
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-vesper-orange mt-10 sm:mt-12 md:mt-14 mb-5 sm:mb-6 md:mb-7 border-b border-vesper-orange/20 pb-3 sm:pb-4 leading-[1.2] break-words tracking-tight" {...props}>
+        {children ?? <span className="sr-only">Heading</span>}
+    </h1>
 );
 
-const MarkdownH2 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-vesper-orange mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 leading-[1.25] break-words tracking-tight" {...props} />
+const MarkdownH2 = ({ children, node: _node, ...props }: MarkdownHeadingProps) => (
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-vesper-orange mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 leading-[1.25] break-words tracking-tight" {...props}>
+        {children ?? <span className="sr-only">Heading</span>}
+    </h2>
 );
 
-const MarkdownH3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-vesper-orange mt-7 sm:mt-8 md:mt-10 mb-3 sm:mb-4 md:mb-5 leading-[1.3] break-words tracking-tight" {...props} />
+const MarkdownH3 = ({ children, node: _node, ...props }: MarkdownHeadingProps) => (
+    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-vesper-orange mt-7 sm:mt-8 md:mt-10 mb-3 sm:mb-4 md:mb-5 leading-[1.3] break-words tracking-tight" {...props}>
+        {children ?? <span className="sr-only">Heading</span>}
+    </h3>
 );
 
-const MarkdownH4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-vesper-orange mt-6 sm:mt-7 md:mt-8 mb-3 sm:mb-4 leading-[1.35] break-words tracking-tight" {...props} />
+const MarkdownH4 = ({ children, node: _node, ...props }: MarkdownHeadingProps) => (
+    <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-vesper-orange mt-6 sm:mt-7 md:mt-8 mb-3 sm:mb-4 leading-[1.35] break-words tracking-tight" {...props}>
+        {children ?? <span className="sr-only">Heading</span>}
+    </h4>
 );
 
 const MarkdownP = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
@@ -179,7 +189,8 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
     };
 
     return (
-        <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
+        <LazyMotion features={domAnimation}>
+            <div className="min-h-screen bg-background text-vesper-orange font-mono selection:bg-vesper-orange selection:text-black overflow-x-hidden">
 
             <div className="fixed inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
@@ -190,7 +201,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
 
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
@@ -202,9 +213,9 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                             <span className="terminal-prompt text-sm sm:text-base">&gt; voltar ao blog</span>
                         </Button>
                     </a>
-                </motion.div>
+                </m.div>
 
-                <motion.header
+                <m.header
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -284,10 +295,10 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                             </div>
                         </div>
                     </div>
-                </motion.header>
+                </m.header>
 
                 {youtubeVideoId && (
-                    <motion.section
+                    <m.section
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -309,10 +320,10 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                                 />
                             </div>
                         </div>
-                    </motion.section>
+                    </m.section>
                 )}
 
-                <motion.article
+                <m.article
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: youtubeVideoId ? 0.4 : 0.2 }}
@@ -334,9 +345,9 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                             </ReactMarkdown>
                         </div>
                     </div>
-                </motion.article>
+                </m.article>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: youtubeVideoId ? 0.6 : 0.4 }}
@@ -366,9 +377,9 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                             </div>
                         </div>
                     </div>
-                </motion.section>
+                </m.section>
 
-                <motion.section
+                <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: youtubeVideoId ? 0.8 : 0.6 }}
@@ -381,8 +392,9 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                             </Button>
                         </a>
                     </div>
-                </motion.section>
+                </m.section>
             </main>
-        </div>
+            </div>
+        </LazyMotion>
     );
 }

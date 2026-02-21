@@ -1,32 +1,23 @@
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { Coffee, Terminal } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 export function VesperDecorations() {
-    const [mounted, setMounted] = useState(false);
-    const [coffeeBeans, setCoffeeBeans] = useState<Array<{ id: number; x: number; y: number; delay: number; size: number }>>([]);
-    const [rainDrops, setRainDrops] = useState<Array<{ id: number; x: number; delay: number; duration: number }>>([]);
-
-    useEffect(() => {
-        setMounted(true);
-        setCoffeeBeans(
-            Array.from({ length: 8 }, (_, i) => ({
-                id: i,
-                x: Math.random() * 100,
-                y: Math.random() * 100,
-                delay: Math.random() * 2,
-                size: Math.random() * 0.5 + 0.5,
-            }))
-        );
-        setRainDrops(
-            Array.from({ length: 30 }, (_, i) => ({
-                id: i,
-                x: Math.random() * 100,
-                delay: Math.random() * 2,
-                duration: Math.random() * 0.5 + 0.5,
-            }))
-        );
-    }, []);
+    const coffeeBeans = useMemo(() =>
+        Array.from({ length: 8 }, (_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            delay: Math.random() * 2,
+            size: Math.random() * 0.5 + 0.5,
+        })), []);
+    const rainDrops = useMemo(() =>
+        Array.from({ length: 30 }, (_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            delay: Math.random() * 2,
+            duration: Math.random() * 0.5 + 0.5,
+        })), []);
 
     const terminalLines = [
         { text: '> npm install coffee', delay: 0 },
@@ -35,14 +26,11 @@ export function VesperDecorations() {
         { text: '✓ Coffee ready!', delay: 1.5 },
     ];
 
-    if (!mounted) {
-        return null;
-    }
-
     return (
-        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <LazyMotion features={domAnimation}>
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
             {coffeeBeans.map((bean) => (
-                <motion.div
+                <m.div
                     key={bean.id}
                     initial={{ opacity: 0, y: -20, rotate: 0 }}
                     animate={{
@@ -65,11 +53,11 @@ export function VesperDecorations() {
                     }}
                 >
                     <Coffee className="w-4 h-4 text-amber-600/20" />
-                </motion.div>
+                </m.div>
             ))}
 
             {rainDrops.map((drop) => (
-                <motion.div
+                <m.div
                     key={drop.id}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{
@@ -90,11 +78,11 @@ export function VesperDecorations() {
                     }}
                 >
                     <div className="w-0.5 h-8 bg-gradient-to-b from-vesper-cyan/30 via-vesper-cyan/20 to-transparent" />
-                </motion.div>
+                </m.div>
             ))}
 
             <div className="absolute top-20 right-8 hidden lg:block">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 0.1, scale: 1 }}
                     transition={{ duration: 1, delay: 2 }}
@@ -105,25 +93,25 @@ export function VesperDecorations() {
                         <span className="text-xs text-vesper-orange/40 font-mono">terminal</span>
                     </div>
                     <div className="space-y-1">
-                        {terminalLines.map((line, i) => (
-                            <motion.div
-                                key={i}
+                        {terminalLines.map((line) => (
+                            <m.div
+                                key={line.text}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 0.3, x: 0 }}
                                 transition={{ duration: 0.3, delay: line.delay + 2 }}
                                 className="text-xs text-vesper-cyan/30 font-mono"
                             >
                                 {line.text}
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
             </div>
 
             <div className="absolute bottom-32 left-1/4 hidden md:block">
                 {[0, 1, 2].map((i) => (
-                    <motion.div
-                        key={i}
+                    <m.div
+                        key={`steam-${i}`}
                         initial={{ opacity: 0, y: 0, x: 0 }}
                         animate={{
                             opacity: [0, 0.2, 0],
@@ -140,12 +128,12 @@ export function VesperDecorations() {
                         className="absolute"
                     >
                         <div className="w-1 h-8 bg-vesper-orange/10 rounded-full blur-sm" />
-                    </motion.div>
+                    </m.div>
                 ))}
             </div>
 
             <div className="absolute bottom-8 left-8 hidden md:block">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 0.3, 0] }}
                     transition={{
@@ -157,16 +145,16 @@ export function VesperDecorations() {
                     className="flex items-center gap-2 text-vesper-cyan/20 font-mono text-xs"
                 >
                     <span>$</span>
-                    <motion.span
+                    <m.span
                         animate={{ opacity: [1, 0, 1] }}
                         transition={{ duration: 0.8, repeat: Infinity }}
                         className="w-2 h-4 bg-vesper-cyan/40"
                     />
-                </motion.div>
+                </m.div>
             </div>
 
             <div className="absolute top-1/3 left-8 hidden xl:block">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.08 }}
                     transition={{ duration: 1, delay: 2.5 }}
@@ -175,11 +163,11 @@ export function VesperDecorations() {
                     <div>const coffee = ☕</div>
                     <div>brew(coffee)</div>
                     <div>return 'ready'</div>
-                </motion.div>
+                </m.div>
             </div>
 
             <div className="absolute bottom-20 right-12 hidden 2xl:block">
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.06 }}
                     transition={{ duration: 1, delay: 3 }}
@@ -190,17 +178,17 @@ export function VesperDecorations() {
                     <div>║     Developer     ║</div>
                     <div>║    Coffee Lover   ║</div>
                     <div>╚═══════════════════╝</div>
-                </motion.div>
+                </m.div>
             </div>
 
             <div className="absolute top-1/2 right-1/4 hidden lg:block">
                 {[0, 1, 2, 3].map((i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0, y: 0 }}
+                    <m.div
+                        key={`bubble-${i}`}
+                        initial={{ opacity: 0, scale: 0.95, y: 0 }}
                         animate={{
                             opacity: [0, 0.15, 0],
-                            scale: [0, 1, 0],
+                            scale: [0.95, 1, 0.95],
                             y: [-20, 20],
                             x: [0, (i % 2 === 0 ? 1 : -1) * 30],
                         }}
@@ -214,7 +202,7 @@ export function VesperDecorations() {
                         className="absolute"
                     >
                         <div className="w-2 h-2 rounded-full bg-amber-600/20 blur-sm" />
-                    </motion.div>
+                    </m.div>
                 ))}
             </div>
 
@@ -230,6 +218,7 @@ export function VesperDecorations() {
                     }}
                 />
             </div>
-        </div>
+            </div>
+        </LazyMotion>
     );
 }

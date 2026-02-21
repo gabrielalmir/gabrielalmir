@@ -323,8 +323,8 @@ export default function GitHubProjects({ username, initialProjects }: { username
     if (loading) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {[...Array(6)].map((_, i) => (
-                    <div key={i} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
+                {Array.from({ length: 6 }, (_, index) => `repo-skeleton-${index}`).map((skeletonId) => (
+                    <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
                         <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
                         <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
                         <div className="flex gap-2 mb-4">
