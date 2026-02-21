@@ -1,8 +1,23 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { Coffee, Terminal } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 
 export function VesperDecorations() {
+    const disableHeavyDecorations = useSyncExternalStore(
+        (onStoreChange) => {
+            const pointerMedia = window.matchMedia('(pointer: coarse)');
+            const widthMedia = window.matchMedia('(max-width: 1024px)');
+            pointerMedia.addEventListener('change', onStoreChange);
+            widthMedia.addEventListener('change', onStoreChange);
+            return () => {
+                pointerMedia.removeEventListener('change', onStoreChange);
+                widthMedia.removeEventListener('change', onStoreChange);
+            };
+        },
+        () => window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(max-width: 1024px)').matches,
+        () => true
+    );
+
     const coffeeBeans = useMemo(() =>
         Array.from({ length: 8 }, (_, i) => ({
             id: i,
@@ -36,6 +51,10 @@ export function VesperDecorations() {
         { id: 'bubble-c', driftX: 30, delay: 1 },
         { id: 'bubble-d', driftX: -30, delay: 1.5 },
     ];
+
+    if (disableHeavyDecorations) {
+        return null;
+    }
 
     return (
         <LazyMotion features={domAnimation}>

@@ -17,5 +17,5 @@ if (!post) {
 ---
 
 <Layout title={`${post.title} | Gabriel Almir`} description={post.excerpt}>
-  <BlogPostClient client:load post={post} />
+  <BlogPostClient client:idle post={post} />
 </Layout>

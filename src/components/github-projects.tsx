@@ -1,9 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { AmazonwebservicesPlainWordmark, DockerOriginal, MongodbOriginal, NestjsOriginal, NextjsOriginal, NodejsOriginal, PostgresqlOriginal, PythonOriginal, RabbitmqOriginal, ReactOriginal, RedisOriginal, TypescriptOriginal } from "devicons-react";
+import { LazyDevIcon } from "@/components/lazy-devicon";
 import { Award, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 async function fetchGitHubProjects(username: string) {
     const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=20&direction=desc`);
@@ -28,18 +28,18 @@ interface GitHubProject {
 }
 
 const techIcons = {
-    "typescript": TypescriptOriginal,
-    "nodejs": NodejsOriginal,
-    "nestjs": NestjsOriginal,
-    "python": PythonOriginal,
-    "aws": AmazonwebservicesPlainWordmark,
-    "docker": DockerOriginal,
-    "react": ReactOriginal,
-    "nextjs": NextjsOriginal,
-    "postgresql": PostgresqlOriginal,
-    "mongodb": MongodbOriginal,
-    "redis": RedisOriginal,
-    "rabbitmq": RabbitmqOriginal,
+    "typescript": "TypescriptOriginal",
+    "nodejs": "NodejsOriginal",
+    "nestjs": "NestjsOriginal",
+    "python": "PythonOriginal",
+    "aws": "AmazonwebservicesPlainWordmark",
+    "docker": "DockerOriginal",
+    "react": "ReactOriginal",
+    "nextjs": "NextjsOriginal",
+    "postgresql": "PostgresqlOriginal",
+    "mongodb": "MongodbOriginal",
+    "redis": "RedisOriginal",
+    "rabbitmq": "RabbitmqOriginal",
 }
 
 const featuredProjects = {
@@ -101,7 +101,7 @@ const categoryFilters = [
     { id: 'opensource', label: 'Open Source', icon: Zap },
 ];
 
-function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, isFeatured?: boolean }) {
+function ProjectCard({ project, isFeatured = false, loadTechIcons = false }: { project: GitHubProject, isFeatured?: boolean; loadTechIcons?: boolean }) {
     const featuredInfo = featuredProjects[project.name as keyof typeof featuredProjects];
     const IconComponent = featuredInfo?.icon || Code;
 
@@ -157,11 +157,15 @@ function ProjectCard({ project, isFeatured = false }: { project: GitHubProject, 
                     <div className="flex gap-2 pt-1">
                         {featuredInfo.techStack.map(tech => {
                             // @ts-expect-error - techIcons might not have all keys from techStack
-                            const TechIcon = techIcons[tech];
-                            if (!TechIcon) return null;
+                            const techIcon = techIcons[tech];
+                            if (!techIcon) return null;
                             return (
                                 <div key={tech} className="p-1.5 rounded bg-background/50 border border-vesper-orange/10" title={tech}>
-                                    <TechIcon size={14} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+                                    {loadTechIcons ? (
+                                        <LazyDevIcon icon={techIcon} size={14} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+                                    ) : (
+                                        <span className="inline-block h-3.5 w-3.5 rounded-sm bg-vesper-orange/20" />
+                                    )}
                                 </div>
                             )
                         })}
@@ -234,6 +238,8 @@ export default function GitHubProjects({ username, initialProjects }: { username
     const [loading, setLoading] = useState(!initialProjects);
     const [activeFilter, setActiveFilter] = useState('all');
     const [showAll, setShowAll] = useState(false);
+    const [loadTechIcons, setLoadTechIcons] = useState(false);
+    const projectsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (initialProjects) return;
@@ -242,6 +248,25 @@ export default function GitHubProjects({ username, initialProjects }: { username
             .catch(console.error)
             .finally(() => setLoading(false));
     }, [username, initialProjects]);
+
+    useEffect(() => {
+        if (!projectsRef.current) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setLoadTechIcons(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: "160px" }
+        );
+
+        observer.observe(projectsRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     const filteredProjects = useMemo(() => {
         let filtered = projects;
@@ -339,7 +364,7 @@ export default function GitHubProjects({ username, initialProjects }: { username
     }
 
     return (
-        <div className="space-y-6 sm:space-y-8 w-full">
+        <div ref={projectsRef} className="space-y-6 sm:space-y-8 w-full">
             <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
                 {categoryFilters.map(({ id, label, icon: Icon }) => (
                     <Button
@@ -366,6 +391,7 @@ export default function GitHubProjects({ username, initialProjects }: { username
                             key={project.id}
                             project={project}
                             isFeatured={isFeatured}
+                            loadTechIcons={loadTechIcons}
                         />
                     );
                 })}

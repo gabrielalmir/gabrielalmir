@@ -1,6 +1,6 @@
 import { LazyMotion, domAnimation, m, useScroll, useSpring } from "framer-motion";
 import { CoffeeIcon, ExternalLink, Github, Heart, Instagram, Linkedin, MailIcon, Twitter } from 'lucide-react';
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 
 import { CoffeeSplashWrapper } from '@/components/coffee-splash';
 import { Header } from '@/components/header';
@@ -11,11 +11,45 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlitchText } from "@/components/ui/glitch-text";
 import { VesperDecorations } from '@/components/vesper-decorations';
-import type { BlogPost } from '@/lib/blog';
+import type { BlogPostPreview } from '@/lib/blog';
 import { LatestPosts } from './latest-posts';
 
 const GitHubProjects = lazy(() => import("@/components/github-projects"));
 const CoreStack = lazy(() => import("@/components/core-stack"));
+
+function DeferredRender({
+    children,
+    fallback,
+    rootMargin = "200px",
+}: {
+    children: ReactNode;
+    fallback: ReactNode;
+    rootMargin?: string;
+}) {
+    const anchorRef = useRef<HTMLDivElement>(null);
+    const [shouldRender, setShouldRender] = useState(false);
+
+    useEffect(() => {
+        if (!anchorRef.current) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setShouldRender(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin }
+        );
+
+        observer.observe(anchorRef.current);
+        return () => observer.disconnect();
+    }, [rootMargin]);
+
+    return <div ref={anchorRef}>{shouldRender ? children : fallback}</div>;
+}
 
 const heroBadges = [
     'Node.js • NestJS • TypeScript',
@@ -54,7 +88,7 @@ const cloudInfraTech = ['Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', '
 const dataEventsTech = ['PostgreSQL', 'MongoDB', 'Redis', 'RabbitMQ', 'Kafka', 'SQS', 'ElasticSearch'];
 
 interface HomeClientProps {
-    latestPosts: BlogPost[];
+    latestPosts: BlogPostPreview[];
     githubProjects?: any[];
 }
 
@@ -156,6 +190,8 @@ function HeroSection() {
                                     height={400}
                                     className="w-full h-full object-cover image-balanced transition-all duration-700 group-hover:brightness-110"
                                     loading="eager"
+                                    fetchPriority="high"
+                                    decoding="async"
                                 />
 
                                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
@@ -185,9 +221,11 @@ function SkillsSection() {
                 </div>
 
                 <div className="space-y-16 w-full max-w-full">
-                    <Suspense fallback={<div className="h-96 w-full animate-pulse bg-vesper-orange/5 rounded-xl"></div>}>
-                        <CoreStack />
-                    </Suspense>
+                    <DeferredRender fallback={<div className="h-96 w-full animate-pulse bg-vesper-orange/5 rounded-xl"></div>}>
+                        <Suspense fallback={<div className="h-96 w-full animate-pulse bg-vesper-orange/5 rounded-xl"></div>}>
+                            <CoreStack />
+                        </Suspense>
+                    </DeferredRender>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-6">
@@ -245,23 +283,42 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
                     </p>
                 </div>
 
-                <Suspense fallback={
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        {Array.from({ length: 6 }, (_, index) => `home-skeleton-${index}`).map((skeletonId) => (
-                            <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
-                                <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
-                                <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
-                                <div className="flex gap-2 mb-4">
-                                    <div className="h-5 bg-vesper-orange/10 rounded w-16"></div>
-                                    <div className="h-5 bg-vesper-orange/10 rounded w-20"></div>
+                <DeferredRender
+                    rootMargin="280px"
+                    fallback={
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                            {Array.from({ length: 6 }, (_, index) => `home-skeleton-${index}`).map((skeletonId) => (
+                                <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
+                                    <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
+                                    <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
+                                    <div className="flex gap-2 mb-4">
+                                        <div className="h-5 bg-vesper-orange/10 rounded w-16"></div>
+                                        <div className="h-5 bg-vesper-orange/10 rounded w-20"></div>
+                                    </div>
+                                    <div className="h-8 bg-vesper-orange/10 rounded"></div>
                                 </div>
-                                <div className="h-8 bg-vesper-orange/10 rounded"></div>
-                            </div>
-                        ))}
-                    </div>
-                }>
-                    <GitHubProjects username="gabrielalmir" initialProjects={githubProjects} />
-                </Suspense>
+                            ))}
+                        </div>
+                    }
+                >
+                    <Suspense fallback={
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                            {Array.from({ length: 6 }, (_, index) => `home-skeleton-suspense-${index}`).map((skeletonId) => (
+                                <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
+                                    <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
+                                    <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
+                                    <div className="flex gap-2 mb-4">
+                                        <div className="h-5 bg-vesper-orange/10 rounded w-16"></div>
+                                        <div className="h-5 bg-vesper-orange/10 rounded w-20"></div>
+                                    </div>
+                                    <div className="h-8 bg-vesper-orange/10 rounded"></div>
+                                </div>
+                            ))}
+                        </div>
+                    }>
+                        <GitHubProjects username="gabrielalmir" initialProjects={githubProjects} />
+                    </Suspense>
+                </DeferredRender>
 
                 <div className="text-center mt-16">
                     <a href="https://github.com/gabrielalmir?tab=repositories" target="_blank" rel="noopener noreferrer">

@@ -17,6 +17,8 @@ export interface BlogPost {
     videoUrl?: string;
 }
 
+export type BlogPostPreview = Omit<BlogPost, 'content'>;
+
 export function getAllPosts(): BlogPost[] {
     if (!fs.existsSync(postsDirectory)) {
         return [];
@@ -48,6 +50,12 @@ export function getAllPosts(): BlogPost[] {
         });
 
     return allPostsData.sort((a, b) => new Date(a.date) < new Date(b.date) ? 1 : -1);
+}
+
+export function getLatestPostPreviews(limit: number): BlogPostPreview[] {
+    return getAllPosts()
+        .slice(0, limit)
+        .map(({ content: _content, ...preview }) => preview);
 }
 
 export function getPostById(id: string): BlogPost | null {

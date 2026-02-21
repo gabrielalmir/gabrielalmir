@@ -33,12 +33,12 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <link rel="preload" as="font" type="font/woff" href="/fonts/GeistVF.woff" crossorigin />
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
-    <link rel="preconnect" href="https://api.github.com" />
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-background text-foreground">
-    <CustomCursor client:idle />
+    <CustomCursor client:media="(pointer: fine)" />
     <CommandMenu client:idle />
     <VimScroll client:idle />
     <slot />

@@ -1,5 +1,5 @@
-import { ArchlinuxPlain } from 'devicons-react';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import { LazyDevIcon } from '@/components/lazy-devicon';
 import { Cpu, Terminal as TerminalIcon, XCircle, Zap } from 'lucide-react';
 import { useEffect, useReducer, useRef } from 'react';
 
@@ -140,7 +140,7 @@ export default function CoffeeSplashContent() {
                                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-vesper-orange via-vesper-cyan to-vesper-orange"></div>
 
                                     <div className="flex flex-col md:flex-row gap-8 items-start">
-                                        <ArchlinuxPlain size={100} />
+                                        <LazyDevIcon icon="ArchlinuxPlain" size={100} />
 
                                         <div className="flex-1 space-y-6 w-full">
                                             <div className="flex items-center justify-between border-b border-vesper-orange/10 pb-4">

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import type { BlogPost } from '@/lib/blog';
+import type { BlogPostPreview } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock, Code2, Hash, Terminal } from 'lucide-react';
 
 function sanitizeRouteSegment(id: string): string {
@@ -13,7 +13,7 @@ const categories = {
 };
 
 interface LatestPostsProps {
-    latestPosts: BlogPost[];
+    latestPosts: BlogPostPreview[];
 }
 
 export function LatestPosts({ latestPosts }: LatestPostsProps) {
