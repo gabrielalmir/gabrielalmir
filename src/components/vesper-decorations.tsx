@@ -25,6 +25,17 @@ export function VesperDecorations() {
         { text: '> coffee.init()', delay: 1 },
         { text: '✓ Coffee ready!', delay: 1.5 },
     ];
+    const steamTrails = [
+        { id: 'steam-left', driftX: -10, delay: 0 },
+        { id: 'steam-center', driftX: 0, delay: 0.3 },
+        { id: 'steam-right', driftX: 10, delay: 0.6 },
+    ];
+    const floatingBubbles = [
+        { id: 'bubble-a', driftX: 30, delay: 0 },
+        { id: 'bubble-b', driftX: -30, delay: 0.5 },
+        { id: 'bubble-c', driftX: 30, delay: 1 },
+        { id: 'bubble-d', driftX: -30, delay: 1.5 },
+    ];
 
     return (
         <LazyMotion features={domAnimation}>
@@ -109,18 +120,18 @@ export function VesperDecorations() {
             </div>
 
             <div className="absolute bottom-32 left-1/4 hidden md:block">
-                {[0, 1, 2].map((i) => (
+                {steamTrails.map((trail) => (
                     <m.div
-                        key={`steam-${i}`}
+                        key={trail.id}
                         initial={{ opacity: 0, y: 0, x: 0 }}
                         animate={{
                             opacity: [0, 0.2, 0],
                             y: -30,
-                            x: i * 10 - 10,
+                            x: trail.driftX,
                         }}
                         transition={{
                             duration: 2,
-                            delay: i * 0.3,
+                            delay: trail.delay,
                             repeat: Infinity,
                             repeatDelay: 3,
                             ease: 'easeOut',
@@ -182,19 +193,19 @@ export function VesperDecorations() {
             </div>
 
             <div className="absolute top-1/2 right-1/4 hidden lg:block">
-                {[0, 1, 2, 3].map((i) => (
+                {floatingBubbles.map((bubble) => (
                     <m.div
-                        key={`bubble-${i}`}
+                        key={bubble.id}
                         initial={{ opacity: 0, scale: 0.95, y: 0 }}
                         animate={{
                             opacity: [0, 0.15, 0],
                             scale: [0.95, 1, 0.95],
                             y: [-20, 20],
-                            x: [0, (i % 2 === 0 ? 1 : -1) * 30],
+                            x: [0, bubble.driftX],
                         }}
                         transition={{
                             duration: 2,
-                            delay: i * 0.5,
+                            delay: bubble.delay,
                             repeat: Infinity,
                             repeatDelay: 4,
                             ease: 'easeInOut',

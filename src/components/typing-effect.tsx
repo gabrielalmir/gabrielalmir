@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { useEffect, useState } from "react"
+import { useEffect, useReducer } from "react"
 
 interface TypingEffectProps {
     words: string[]
@@ -9,6 +9,40 @@ interface TypingEffectProps {
     pauseDuration?: number
 }
 
+type TypingState = {
+    displayText: string
+    currentWordIndex: number
+    isDeleting: boolean
+}
+
+type TypingAction =
+    | { type: "type-char"; value: string }
+    | { type: "set-deleting"; value: boolean }
+    | { type: "advance-word"; totalWords: number }
+
+function typingReducer(state: TypingState, action: TypingAction): TypingState {
+    switch (action.type) {
+        case "type-char":
+            return {
+                ...state,
+                displayText: action.value,
+            }
+        case "set-deleting":
+            return {
+                ...state,
+                isDeleting: action.value,
+            }
+        case "advance-word":
+            return {
+                displayText: "",
+                isDeleting: false,
+                currentWordIndex: (state.currentWordIndex + 1) % action.totalWords,
+            }
+        default:
+            return state
+    }
+}
+
 export function TypingEffect({
     words,
     className,
@@ -16,41 +50,40 @@ export function TypingEffect({
     deletingSpeed = 50,
     pauseDuration = 2000
 }: TypingEffectProps) {
-    const [displayText, setDisplayText] = useState("")
-    const [currentWordIndex, setCurrentWordIndex] = useState(0)
-    const [isDeleting, setIsDeleting] = useState(false)
+    const [state, dispatch] = useReducer(typingReducer, {
+        displayText: "",
+        currentWordIndex: 0,
+        isDeleting: false,
+    })
 
     useEffect(() => {
-        const currentWord = words[currentWordIndex]
+        const currentWord = words[state.currentWordIndex]
 
         const handleTyping = () => {
-            if (!isDeleting) {
-                if (displayText.length < currentWord.length) {
-                    setDisplayText(currentWord.slice(0, displayText.length + 1))
+            if (!state.isDeleting) {
+                if (state.displayText.length < currentWord.length) {
+                    dispatch({ type: "type-char", value: currentWord.slice(0, state.displayText.length + 1) })
                 } else {
-                    setTimeout(() => setIsDeleting(true), pauseDuration)
+                    setTimeout(() => dispatch({ type: "set-deleting", value: true }), pauseDuration)
                 }
+            } else if (state.displayText.length > 0) {
+                dispatch({ type: "type-char", value: currentWord.slice(0, state.displayText.length - 1) })
             } else {
-                if (displayText.length > 0) {
-                    setDisplayText(currentWord.slice(0, displayText.length - 1))
-                } else {
-                    setIsDeleting(false)
-                    setCurrentWordIndex((prev) => (prev + 1) % words.length)
-                }
+                dispatch({ type: "advance-word", totalWords: words.length })
             }
         }
 
         const timer = setTimeout(
             handleTyping,
-            isDeleting ? deletingSpeed : typingSpeed
+            state.isDeleting ? deletingSpeed : typingSpeed
         )
 
         return () => clearTimeout(timer)
-    }, [displayText, isDeleting, currentWordIndex, words, typingSpeed, deletingSpeed, pauseDuration])
+    }, [state, words, typingSpeed, deletingSpeed, pauseDuration])
 
     return (
         <span className={cn("font-mono inline-block min-w-[2ch]", className)}>
-            {displayText}
+            {state.displayText}
             <span className="animate-blink inline-block ml-1 w-[0.5em] h-[1em] bg-vesper-orange align-middle mb-1"></span>
         </span>
     )
