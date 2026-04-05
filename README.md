@@ -133,18 +133,6 @@ Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, G
 
 ---
 
-## 📊 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=gabrielalmir&theme=dark&count_private=true" />
-  <br/>
-  <img src="https://nirzak-streak-stats.vercel.app/?user=gabrielalmir&theme=dark" />
-  <br/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=gabrielalmir&layout=compact&theme=dark" />
-</p>
-
----
-
 <div align="center">
   <i>"Não leio livros sobre o mundo. Saio por aí e vejo por mim mesmo." — Ezreal</i>
 </div>
