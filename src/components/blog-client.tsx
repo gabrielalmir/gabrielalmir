@@ -43,7 +43,7 @@ export default function BlogClientPage({ posts }: Readonly<BlogClientPageProps>)
 
             <Header />
 
-            <main className="w-full overflow-x-hidden">
+            <main id="main" className="w-full overflow-x-hidden">
                 <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

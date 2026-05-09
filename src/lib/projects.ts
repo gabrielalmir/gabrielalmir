@@ -30,6 +30,12 @@ export interface Project {
     date: string;
     content: string;
     githubStats?: GitHubStats;
+    /** One-line problem statement shown above the README. */
+    problem?: string;
+    /** One-line key technical decision. */
+    decision?: string;
+    /** One-line measurable outcome. */
+    outcome?: string;
 }
 
 export type ProjectPreview = Omit<Project, 'content' | 'githubStats'>;
@@ -55,6 +61,9 @@ function parseProjectFile(slug: string): Project | null {
             featured: data.featured || false,
             screenshotUrl: data.screenshotUrl,
             date: data.date,
+            problem: data.problem,
+            decision: data.decision,
+            outcome: data.outcome,
         } as Project;
     } catch {
         return null;

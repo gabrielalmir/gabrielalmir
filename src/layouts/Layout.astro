@@ -38,6 +38,12 @@ const {
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-background text-foreground">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-vesper-orange focus:text-black focus:font-semibold focus:outline-none focus:ring-2 focus:ring-vesper-orange focus:ring-offset-2 focus:ring-offset-background"
+    >
+      Pular para o conteúdo
+    </a>
     <CustomCursor client:media="(pointer: fine)" />
     <CommandMenu client:idle />
     <VimScroll client:idle />

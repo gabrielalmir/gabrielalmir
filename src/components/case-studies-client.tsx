@@ -84,7 +84,7 @@ export default function CaseStudiesPage() {
 
             <Header />
 
-            <main className="container mx-auto px-4 py-12">
+            <main id="main" className="container mx-auto px-4 py-12">
                 <m.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

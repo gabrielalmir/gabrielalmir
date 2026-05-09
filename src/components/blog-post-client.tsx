@@ -199,7 +199,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
 
             <Header />
 
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
+            <main id="main" className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
 
                 <m.div
                     initial={{ opacity: 0, x: -20 }}

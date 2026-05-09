@@ -7,6 +7,11 @@ interface TypingEffectProps {
     typingSpeed?: number
     deletingSpeed?: number
     pauseDuration?: number
+    /**
+     * If false, the effect runs through every word once and stops on the last one.
+     * Default: true (legacy looping behaviour).
+     */
+    loop?: boolean
 }
 
 type TypingState = {
@@ -48,7 +53,8 @@ export function TypingEffect({
     className,
     typingSpeed = 100,
     deletingSpeed = 50,
-    pauseDuration = 2000
+    pauseDuration = 2000,
+    loop = true,
 }: TypingEffectProps) {
     const [state, dispatch] = useReducer(typingReducer, {
         displayText: "",
@@ -58,6 +64,13 @@ export function TypingEffect({
 
     useEffect(() => {
         const currentWord = words[state.currentWordIndex]
+        const isLastWord = state.currentWordIndex === words.length - 1
+        const fullyTyped = state.displayText.length === currentWord.length
+
+        // Non-looping: park on the final word once it's fully typed.
+        if (!loop && isLastWord && fullyTyped && !state.isDeleting) {
+            return
+        }
 
         const handleTyping = () => {
             if (!state.isDeleting) {
@@ -79,7 +92,7 @@ export function TypingEffect({
         )
 
         return () => clearTimeout(timer)
-    }, [state, words, typingSpeed, deletingSpeed, pauseDuration])
+    }, [state, words, typingSpeed, deletingSpeed, pauseDuration, loop])
 
     return (
         <span className={cn("font-mono inline-block min-w-[2ch]", className)}>

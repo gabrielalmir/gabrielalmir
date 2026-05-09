@@ -109,7 +109,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
 
                 <Header />
 
-                <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
+                <main id="main" className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 max-w-5xl w-full">
 
                     {/* Back */}
                     <m.div
@@ -121,7 +121,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                         <a href="/#projetos">
                             <Button variant="outline" className="terminal-button-outline group">
                                 <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                                <span className="terminal-prompt">&gt; voltar aos projetos</span>
+                                <span>Voltar aos projetos</span>
                             </Button>
                         </a>
                     </m.div>
@@ -169,16 +169,20 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                                         <span>Atualizado em {new Date(stats.updatedAt).toLocaleDateString('pt-BR')}</span>
                                     </div>
                                 )}
-                                {stats !== undefined && (
+                                {stats !== undefined && (stats.stars > 0 || stats.forks > 0) && (
                                     <>
-                                        <div className="flex items-center gap-1.5">
-                                            <Star className="h-3 w-3 text-vesper-orange/60" />
-                                            <span>{stats.stars}</span>
-                                        </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <GitFork className="h-3 w-3 text-vesper-orange/60" />
-                                            <span>{stats.forks}</span>
-                                        </div>
+                                        {stats.stars > 0 && (
+                                            <div className="flex items-center gap-1.5">
+                                                <Star className="h-3 w-3 text-vesper-orange/60" />
+                                                <span className="tabular-nums">{stats.stars}</span>
+                                            </div>
+                                        )}
+                                        {stats.forks > 0 && (
+                                            <div className="flex items-center gap-1.5">
+                                                <GitFork className="h-3 w-3 text-vesper-orange/60" />
+                                                <span className="tabular-nums">{stats.forks}</span>
+                                            </div>
+                                        )}
                                     </>
                                 )}
                             </div>
@@ -188,9 +192,9 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                                 {(stats?.topics?.length ? stats.topics : project.tags).map((tag) => (
                                     <span
                                         key={tag}
-                                        className="px-2.5 py-1 text-[11px] font-mono bg-vesper-orange/[0.08] text-vesper-orange/75 border border-vesper-orange/15 rounded-md whitespace-nowrap"
+                                        className="px-2.5 py-1 text-[11px] font-mono bg-vesper-orange/[0.08] text-vesper-orange/75 rounded-md whitespace-nowrap"
                                     >
-                                        #{tag}
+                                        {tag}
                                     </span>
                                 ))}
                             </div>
@@ -235,7 +239,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                                     </span>
                                 </div>
                                 <img
-                                    src={`https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1280&viewport.height=720&waitUntil=networkidle0`}
+                                    src={`https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1280&viewport.height=720&waitUntil=load`}
                                     alt={`Preview do ${project.title}`}
                                     className="w-full object-cover object-top bg-background"
                                     style={{ maxHeight: '520px' }}
@@ -257,31 +261,53 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                         </m.section>
                     )}
 
-                    {/* GitHub Stats card */}
-                    {stats && (
+                    {/* GitHub Stats — flat data tiles */}
+                    {stats && (stats.stars > 0 || stats.forks > 0 || stats.openIssues > 0) && (
                         <m.section
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.25 }}
                             className="mb-8"
                         >
-                            <div className="grid sm:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-3 divide-x divide-vesper-orange/10 rounded-xl bg-vesper-orange/[0.03] overflow-hidden">
                                 {[
                                     { icon: Star, label: 'Stars', value: stats.stars },
                                     { icon: GitFork, label: 'Forks', value: stats.forks },
                                     { icon: Tag, label: 'Issues abertas', value: stats.openIssues },
                                 ].map(({ icon: Icon, label, value }) => (
-                                    <div
-                                        key={label}
-                                        className="rounded-xl border border-vesper-orange/15 bg-background/60 backdrop-blur-sm p-4 flex items-center gap-3"
-                                    >
-                                        <div className="p-2 rounded-lg bg-vesper-orange/10">
-                                            <Icon className="h-4 w-4 text-vesper-orange/70" />
+                                    <div key={label} className="px-4 py-5 sm:px-6 sm:py-6 flex flex-col gap-1.5">
+                                        <div className="flex items-center gap-2 text-foreground/45">
+                                            <Icon className="h-3 w-3" />
+                                            <p className="text-[10px] uppercase tracking-[0.18em] font-mono">{label}</p>
                                         </div>
-                                        <div>
-                                            <p className="text-xl font-bold text-foreground font-mono">{value}</p>
-                                            <p className="text-[11px] text-foreground/50 uppercase tracking-wider">{label}</p>
-                                        </div>
+                                        <p className="text-2xl sm:text-3xl font-bold text-foreground tabular-nums leading-none">{value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </m.section>
+                    )}
+
+                    {/* TL;DR — problem / decision / outcome */}
+                    {(project.problem || project.decision || project.outcome) && (
+                        <m.section
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="mb-8"
+                        >
+                            <div className="grid sm:grid-cols-3 gap-px rounded-2xl overflow-hidden bg-vesper-orange/10">
+                                {[
+                                    { label: 'Problema', value: project.problem },
+                                    { label: 'Decisão', value: project.decision },
+                                    { label: 'Resultado', value: project.outcome },
+                                ].filter(item => item.value).map(({ label, value }) => (
+                                    <div key={label} className="bg-background p-6 sm:p-7 flex flex-col gap-3">
+                                        <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-vesper-orange/70">
+                                            {label}
+                                        </span>
+                                        <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">
+                                            {value}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
