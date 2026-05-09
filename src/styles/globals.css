@@ -378,6 +378,84 @@ body {
   color: rgb(var(--vesper-orange));
 }
 
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--vesper-orange) / 0.7);
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  background: linear-gradient(to right, rgb(var(--vesper-orange) / 0.6), transparent);
+}
+
+.section-heading {
+  font-family: var(--font-geist-sans);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: rgb(var(--foreground));
+}
+
+.section-subheading {
+  color: rgb(var(--foreground) / 0.55);
+  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
+  max-width: 38rem;
+}
+
+.project-card-grad {
+  background: linear-gradient(140deg, rgba(var(--vesper-orange), 0.06) 0%, rgba(0, 0, 0, 0.2) 60%);
+}
+
+.project-card-grad-featured {
+  background: linear-gradient(140deg, rgba(var(--vesper-orange), 0.14) 0%, rgba(var(--vesper-cyan), 0.04) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.timeline-dot {
+  position: relative;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+  background: rgb(var(--vesper-orange));
+  box-shadow: 0 0 0 4px rgb(var(--vesper-orange) / 0.15), 0 0 12px rgb(var(--vesper-orange) / 0.5);
+  flex-shrink: 0;
+}
+
+.timeline-dot--cyan {
+  background: rgb(var(--vesper-cyan));
+  box-shadow: 0 0 0 4px rgb(var(--vesper-cyan) / 0.15), 0 0 12px rgb(var(--vesper-cyan) / 0.5);
+}
+
+.availability-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgb(var(--vesper-cyan));
+  box-shadow: 0 0 0 3px rgb(var(--vesper-cyan) / 0.15), 0 0 12px rgb(var(--vesper-cyan) / 0.7);
+  animation: availability-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes availability-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgb(var(--vesper-cyan) / 0.15), 0 0 8px rgb(var(--vesper-cyan) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgb(var(--vesper-cyan) / 0.1), 0 0 16px rgb(var(--vesper-cyan) / 0.7);
+  }
+}
+
 .stat-card {
   border-radius: 1.25rem;
   border: 1px solid rgba(var(--vesper-orange), 0.15);

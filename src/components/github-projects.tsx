@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LazyDevIcon } from "@/components/lazy-devicon";
-import { Award, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
+import { Award, ArrowRight, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 async function fetchGitHubProjects(username: string) {
@@ -90,7 +90,19 @@ const featuredProjects = {
         highlights: ['Open Source', 'SDK', 'TypeScript', 'NPM', 'API Client'],
         icon: Code,
         techStack: ['typescript', 'nodejs']
+    },
+    'saturno': {
+        priority: 7,
+        category: 'fullstack',
+        impact: 'Plataforma de gestão e automação de tarefas com interface intuitiva e integrações poderosas',
+        highlights: ['Next.js', 'TypeScript', 'PostgreSQL', 'Node.js', 'Vercel'],
+        icon: Zap,
+        techStack: ['typescript', 'nextjs', 'postgresql', 'nodejs']
     }
+};
+
+const dedicatedPages: Record<string, string> = {
+    'saturno': 'saturno',
 };
 
 const categoryFilters = [
@@ -101,17 +113,33 @@ const categoryFilters = [
     { id: 'opensource', label: 'Open Source', icon: Zap },
 ];
 
-function ProjectCard({ project, isFeatured = false, loadTechIcons = false }: { project: GitHubProject, isFeatured?: boolean; loadTechIcons?: boolean }) {
+const languageColors: Record<string, string> = {
+    TypeScript: '#3178c6',
+    JavaScript: '#f7df1e',
+    Python: '#3776ab',
+    Go: '#00add8',
+    Rust: '#dea584',
+    Java: '#b07219',
+    HTML: '#e34c26',
+    CSS: '#563d7c',
+    Shell: '#89e051',
+    Dockerfile: '#384d54',
+};
+
+function ProjectCard({ project, isFeatured = false, loadTechIcons = false, dedicatedPageSlug }: { project: GitHubProject, isFeatured?: boolean; loadTechIcons?: boolean; dedicatedPageSlug?: string }) {
     const featuredInfo = featuredProjects[project.name as keyof typeof featuredProjects];
     const IconComponent = featuredInfo?.icon || Code;
+    const langColor = project.language ? languageColors[project.language] || '#888' : null;
 
     return (
         <Card
-            className={`group relative overflow-hidden transition-all duration-500 h-full flex flex-col ${isFeatured
-                ? 'border border-vesper-orange/40 bg-gradient-to-br from-vesper-orange/10 via-vesper-orange/5 to-background hover:border-vesper-orange hover:shadow-[0_0_30px_-10px_rgba(255,199,153,0.3)]'
-                : 'border border-vesper-orange/10 bg-background/50 hover:border-vesper-orange/30 hover:bg-vesper-orange/5'
+            className={`group relative overflow-hidden transition-all duration-500 h-full flex flex-col hover:-translate-y-1 ${isFeatured
+                ? 'border border-vesper-orange/40 project-card-grad-featured hover:border-vesper-orange hover:shadow-[0_25px_60px_-20px_rgba(255,199,153,0.4)]'
+                : 'border border-vesper-orange/10 project-card-grad hover:border-vesper-orange/35 hover:shadow-[0_20px_45px_-25px_rgba(255,199,153,0.25)]'
                 }`}
         >
+            <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-vesper-orange/50 to-transparent ${isFeatured ? 'opacity-60' : 'opacity-0'} group-hover:opacity-100 transition-opacity`} />
+
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="absolute -right-24 -top-24 w-48 h-48 bg-vesper-orange/10 blur-[50px] rounded-full"></div>
             </div>
@@ -141,9 +169,15 @@ function ProjectCard({ project, isFeatured = false, loadTechIcons = false }: { p
                             {project.name}
                         </CardTitle>
                         {project.language && (
-                            <p className="text-xs text-vesper-orange/50 mt-1 font-mono">
-                                {project.language}
-                            </p>
+                            <div className="flex items-center gap-1.5 mt-1.5">
+                                <span
+                                    className="inline-block w-2 h-2 rounded-full"
+                                    style={{ backgroundColor: langColor ?? '#888' }}
+                                />
+                                <p className="text-[11px] text-foreground/55 font-mono">
+                                    {project.language}
+                                </p>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -216,18 +250,29 @@ function ProjectCard({ project, isFeatured = false, loadTechIcons = false }: { p
                     ))}
                 </div>
 
-                <a
-                    href={project.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider transition-all group/link ${isFeatured
-                        ? 'text-vesper-orange hover:text-vesper-orange/80'
-                        : 'text-vesper-orange/60 hover:text-vesper-orange'
-                        }`}
-                >
-                    <span>Code</span>
-                    <ExternalLink className="h-3 w-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                </a>
+                <div className="flex items-center gap-3">
+                    {dedicatedPageSlug && (
+                        <a
+                            href={`/projects/${dedicatedPageSlug}`}
+                            className={`flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider transition-all group/link ${isFeatured
+                                ? 'text-vesper-orange hover:text-vesper-orange/80'
+                                : 'text-vesper-orange/60 hover:text-vesper-orange'
+                                }`}
+                        >
+                            <span>Saiba mais</span>
+                            <ArrowRight className="h-3 w-3 group-hover/link:translate-x-0.5 transition-transform" />
+                        </a>
+                    )}
+                    <a
+                        href={project.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider transition-all group/link text-vesper-orange/40 hover:text-vesper-orange/70"
+                    >
+                        <span>Code</span>
+                        <ExternalLink className="h-3 w-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    </a>
+                </div>
             </CardFooter>
         </Card>
     );
@@ -364,20 +409,20 @@ export default function GitHubProjects({ username, initialProjects }: { username
     }
 
     return (
-        <div ref={projectsRef} className="space-y-6 sm:space-y-8 w-full">
-            <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
+        <div ref={projectsRef} className="space-y-8 sm:space-y-10 w-full">
+            <div className="flex flex-wrap gap-1.5 justify-center p-1.5 rounded-full border border-vesper-orange/15 bg-background/40 backdrop-blur-sm w-fit mx-auto">
                 {categoryFilters.map(({ id, label, icon: Icon }) => (
                     <Button
                         key={id}
-                        variant={activeFilter === id ? "default" : "outline"}
+                        variant="ghost"
                         size="sm"
                         onClick={() => setActiveFilter(id)}
-                        className={`group transition-all duration-200 text-xs sm:text-sm ${activeFilter === id
-                            ? 'bg-vesper-orange text-black border-vesper-orange shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/30'
-                            : 'border-vesper-orange/30 text-vesper-orange/70 hover:border-vesper-orange hover:text-vesper-orange hover:bg-vesper-orange/10'
+                        className={`group transition-all duration-200 text-xs rounded-full px-3 sm:px-4 h-8 ${activeFilter === id
+                            ? 'bg-vesper-orange text-black hover:bg-vesper-orange hover:text-black shadow-md shadow-vesper-orange/20'
+                            : 'text-foreground/60 hover:text-vesper-orange hover:bg-vesper-orange/[0.08]'
                             }`}
                     >
-                        <Icon className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 group-hover:scale-110 transition-transform flex-shrink-0" />
+                        <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 flex-shrink-0" />
                         <span className="font-medium whitespace-nowrap">{label}</span>
                     </Button>
                 ))}
@@ -386,12 +431,14 @@ export default function GitHubProjects({ username, initialProjects }: { username
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {displayedProjects.map((project: GitHubProject) => {
                     const isFeatured = project.name in featuredProjects;
+                    const dedicatedPageSlug = dedicatedPages[project.name];
                     return (
                         <ProjectCard
                             key={project.id}
                             project={project}
                             isFeatured={isFeatured}
                             loadTechIcons={loadTechIcons}
+                            dedicatedPageSlug={dedicatedPageSlug}
                         />
                     );
                 })}

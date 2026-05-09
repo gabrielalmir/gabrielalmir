@@ -1,0 +1,35 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ProjectDetailClient from '@/components/project-detail-client';
+import { getAllProjectSlugs, getProjectBySlug, fetchGitHubStats, fetchGitHubReadme } from '@/lib/projects';
+
+export async function getStaticPaths() {
+  const slugs = getAllProjectSlugs();
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect('/');
+}
+
+const [githubStats, githubReadme] = await Promise.all([
+  fetchGitHubStats(project.repo),
+  fetchGitHubReadme(project.repo),
+]);
+
+const projectWithStats = {
+  ...project,
+  content: githubReadme || project.content,
+  githubStats,
+};
+---
+
+<Layout
+  title={`${project.title} | Gabriel Almir`}
+  description={project.excerpt}
+>
+  <ProjectDetailClient client:idle project={projectWithStats} />
+</Layout>
