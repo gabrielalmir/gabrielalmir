@@ -26,7 +26,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                 <div className="mb-14 md:mb-20 w-full max-w-3xl">
                     <span className="section-eyebrow text-vesper-cyan/80">02 / Escrita</span>
                     <h2 className="section-heading mt-4">
-                        <span className="text-vesper-orange/70">&lt;</span> Últimos <span className="text-vesper-cyan">Posts</span> <span className="text-vesper-orange/70">/&gt;</span>
+                        Últimos <span className="text-vesper-cyan">Posts</span>
                     </h2>
                     <p className="section-subheading mt-4">
                         Artigos sobre desenvolvimento, arquitetura de software e experiências na indústria tech.
@@ -94,7 +94,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
 
                                 <a href={`/blog/${safeId}`} className="w-full block relative z-10 mt-auto">
                                     <Button className="terminal-button w-full group text-sm sm:text-base font-semibold">
-                                        <span className="terminal-prompt">&gt; ler artigo</span>
+                                        <span>Ler artigo</span>
                                         <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
                                     </Button>
                                 </a>

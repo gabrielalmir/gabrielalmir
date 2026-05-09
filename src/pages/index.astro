@@ -9,7 +9,7 @@ let githubProjects: any[] = [];
 try {
   const res = await fetch(
     "https://api.github.com/users/gabrielalmir/repos?sort=stars&per_page=20&direction=desc",
-    { signal: AbortSignal.timeout(3000) }
+    { signal: AbortSignal.timeout(5000) }
   );
   if (res.ok) {
     githubProjects = await res.json();

@@ -40,6 +40,7 @@ const techIcons = {
     "mongodb": "MongodbOriginal",
     "redis": "RedisOriginal",
     "rabbitmq": "RabbitmqOriginal",
+    "laravel": "LaravelPlain",
 }
 
 const featuredProjects = {
@@ -95,9 +96,9 @@ const featuredProjects = {
         priority: 7,
         category: 'fullstack',
         impact: 'Plataforma de gestão e automação de tarefas com interface intuitiva e integrações poderosas',
-        highlights: ['Next.js', 'TypeScript', 'PostgreSQL', 'Node.js', 'Vercel'],
+        highlights: ['React.js', 'TypeScript', 'Laravel', 'PostgreSQL', 'PHP'],
         icon: Zap,
-        techStack: ['typescript', 'nextjs', 'postgresql', 'nodejs']
+        techStack: ['typescript', 'react', 'laravel', 'postgresql']
     }
 };
 
@@ -231,23 +232,25 @@ function ProjectCard({ project, isFeatured = false, loadTechIcons = false, dedic
             <CardFooter className={`flex justify-between items-center text-sm border-t pt-4 z-10 ${isFeatured ? 'border-vesper-orange/20' : 'border-vesper-orange/10'
                 }`}>
                 <div className="flex items-center gap-4">
-                    {[
+                    {(project.stargazers_count > 0 || project.forks_count > 0) && [
                         { Icon: Star, count: project.stargazers_count, label: "stars" },
                         { Icon: GitFork, count: project.forks_count, label: "forks" },
-                    ].map(({ Icon, count, label }) => (
-                        <div key={label} className="flex items-center gap-1.5 group/stat">
-                            <Icon className={`h-3.5 w-3.5 transition-colors ${isFeatured
-                                ? 'text-vesper-orange/70 group-hover/stat:text-vesper-orange'
-                                : 'text-vesper-orange/40 group-hover/stat:text-vesper-orange/80'
-                                }`} />
-                            <span className={`text-xs font-mono transition-colors ${isFeatured
-                                ? 'text-vesper-orange/80 group-hover/stat:text-vesper-orange'
-                                : 'text-vesper-orange/50 group-hover/stat:text-vesper-orange/80'
-                                }`}>
-                                {count}
-                            </span>
-                        </div>
-                    ))}
+                    ]
+                        .filter(({ count }) => count > 0)
+                        .map(({ Icon, count, label }) => (
+                            <div key={label} className="flex items-center gap-1.5 group/stat">
+                                <Icon className={`h-3.5 w-3.5 transition-colors ${isFeatured
+                                    ? 'text-vesper-orange/70 group-hover/stat:text-vesper-orange'
+                                    : 'text-vesper-orange/40 group-hover/stat:text-vesper-orange/80'
+                                    }`} />
+                                <span className={`text-xs font-mono tabular-nums transition-colors ${isFeatured
+                                    ? 'text-vesper-orange/80 group-hover/stat:text-vesper-orange'
+                                    : 'text-vesper-orange/50 group-hover/stat:text-vesper-orange/80'
+                                    }`}>
+                                    {count}
+                                </span>
+                            </div>
+                        ))}
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -453,7 +456,9 @@ export default function GitHubProjects({ username, initialProjects }: { username
                         className="group border-vesper-orange/30 text-vesper-orange hover:border-vesper-orange hover:bg-vesper-orange/10 transition-all"
                     >
                         <span className="font-medium">
-                            {showAll ? 'Mostrar menos' : `Ver mais ${filteredProjects.length - 6} projetos`}
+                            {showAll
+                                ? 'Mostrar menos'
+                                : `Ver mais ${filteredProjects.length - 6} ${filteredProjects.length - 6 === 1 ? 'projeto' : 'projetos'}`}
                         </span>
                         <Code className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
                     </Button>

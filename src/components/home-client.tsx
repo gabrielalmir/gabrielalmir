@@ -115,19 +115,20 @@ function HeroSection() {
                             <div className="text-lg sm:text-xl md:text-2xl lg:text-[1.625rem] font-semibold text-vesper-cyan/90 break-words w-full h-[1.5em] flex items-center">
                                 <TypingEffect
                                     words={[
-                                        "Desenvolvedor Backend Node.js",
                                         "Especialista em TypeScript & NestJS",
                                         "Apaixonado por Arquitetura Limpa",
-                                        "Explorador de IA & ML"
+                                        "Explorador de IA & ML",
+                                        "Desenvolvedor Backend Node.js"
                                     ]}
                                     typingSpeed={80}
                                     deletingSpeed={40}
                                     pauseDuration={2000}
+                                    loop={false}
                                 />
                             </div>
 
                             <p className="text-base sm:text-lg md:text-xl text-foreground/65 max-w-xl leading-[1.65] break-words w-full mt-2">
-                                Resolvo problemas com <span className="text-vesper-orange/95 font-medium">código limpo</span> e <span className="text-vesper-orange/95 font-medium">boas práticas</span>. Construindo APIs e sistemas distribuídos que escalam.
+                                Construo <span className="text-vesper-orange/95 font-medium">APIs</span> e <span className="text-vesper-orange/95 font-medium">serviços distribuídos</span> em Node.js. Foco em arquitetura legível e código que sobrevive ao próximo deploy.
                             </p>
                         </div>
 
@@ -363,9 +364,9 @@ function ContactSection() {
                         </div>
 
                         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-5 break-words tracking-[-0.025em] leading-[1.05]">
-                            Vamos construir algo
+                            Vamos conversar sobre
                             <br />
-                            <span className="text-vesper-orange">incrível juntos.</span>
+                            <span className="text-vesper-orange">seu projeto.</span>
                         </h2>
                         <p className="text-base md:text-lg text-foreground/60 mb-10 max-w-xl mx-auto break-words leading-relaxed">
                             Freelance, consultoria ou um desafio técnico interessante — adoraria conversar.
@@ -475,6 +476,23 @@ function SiteFooter() {
                             <span>© {new Date().getFullYear()} Gabriel Almir. v2.0.0</span>
                         </div>
 
+                        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-foreground/40 text-xs font-mono">
+                            <a
+                                href="/sitemap-index.xml"
+                                className="hover:text-vesper-orange transition-colors"
+                            >
+                                Sitemap
+                            </a>
+                            <a
+                                href="https://github.com/gabrielalmir/gabrielalmir"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-vesper-orange transition-colors"
+                            >
+                                Código-fonte deste site
+                            </a>
+                        </div>
+
                         <div className="flex items-center gap-2 text-foreground/40 text-xs">
                             <span>Desenvolvido com</span>
                             <Heart className="w-3 h-3 text-vesper-red fill-vesper-red animate-pulse" />
@@ -515,7 +533,7 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
 
                 <Header />
 
-                <main className="w-full overflow-x-hidden max-w-full">
+                <main id="main" className="w-full overflow-x-hidden max-w-full">
                     <HeroSection />
 
                     <section className="border-y border-vesper-orange/10 bg-vesper-orange/5 backdrop-blur-sm">

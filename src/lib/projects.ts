@@ -30,6 +30,12 @@ export interface Project {
     date: string;
     content: string;
     githubStats?: GitHubStats;
+    /** One-line problem statement shown above the README. */
+    problem?: string;
+    /** One-line key technical decision. */
+    decision?: string;
+    /** One-line measurable outcome. */
+    outcome?: string;
 }
 
 export type ProjectPreview = Omit<Project, 'content' | 'githubStats'>;
@@ -55,6 +61,9 @@ function parseProjectFile(slug: string): Project | null {
             featured: data.featured || false,
             screenshotUrl: data.screenshotUrl,
             date: data.date,
+            problem: data.problem,
+            decision: data.decision,
+            outcome: data.outcome,
         } as Project;
     } catch {
         return null;
@@ -65,7 +74,7 @@ export async function fetchGitHubStats(repo: string): Promise<GitHubStats | unde
     try {
         const res = await fetch(`https://api.github.com/repos/${repo}`, {
             headers: { Accept: 'application/vnd.github+json' },
-            signal: AbortSignal.timeout(3000),
+            signal: AbortSignal.timeout(5000),
         });
         if (!res.ok) return undefined;
         const data = await res.json();
@@ -89,7 +98,7 @@ export async function fetchGitHubReadme(repo: string): Promise<string | undefine
     try {
         const res = await fetch(`https://api.github.com/repos/${repo}/readme`, {
             headers: { Accept: 'application/vnd.github.raw+json' },
-            signal: AbortSignal.timeout(3000),
+            signal: AbortSignal.timeout(5000),
         });
         if (!res.ok) return undefined;
         return res.text();
