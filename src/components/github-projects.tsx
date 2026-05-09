@@ -40,6 +40,7 @@ const techIcons = {
     "mongodb": "MongodbOriginal",
     "redis": "RedisOriginal",
     "rabbitmq": "RabbitmqOriginal",
+    "laravel": "LaravelPlain",
 }
 
 const featuredProjects = {
@@ -95,9 +96,9 @@ const featuredProjects = {
         priority: 7,
         category: 'fullstack',
         impact: 'Plataforma de gestão e automação de tarefas com interface intuitiva e integrações poderosas',
-        highlights: ['Next.js', 'TypeScript', 'PostgreSQL', 'Node.js', 'Vercel'],
+        highlights: ['React.js', 'TypeScript', 'Laravel', 'PostgreSQL', 'PHP'],
         icon: Zap,
-        techStack: ['typescript', 'nextjs', 'postgresql', 'nodejs']
+        techStack: ['typescript', 'react', 'laravel', 'postgresql']
     }
 };
 
