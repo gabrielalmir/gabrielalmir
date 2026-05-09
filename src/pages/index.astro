@@ -8,7 +8,8 @@ const latestPosts = getLatestPostPreviews(3);
 let githubProjects: any[] = [];
 try {
   const res = await fetch(
-    "https://api.github.com/users/gabrielalmir/repos?sort=stars&per_page=20&direction=desc"
+    "https://api.github.com/users/gabrielalmir/repos?sort=stars&per_page=20&direction=desc",
+    { signal: AbortSignal.timeout(3000) }
   );
   if (res.ok) {
     githubProjects = await res.json();

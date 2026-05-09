@@ -20,16 +20,15 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
     if (!latestPosts || latestPosts.length === 0) return null;
 
     return (
-        <section id="blog" className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+        <section id="blog" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
             <div className="container mx-auto max-w-6xl w-full">
 
-                <div className="text-center mb-16 w-full max-w-full px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 break-words">
-                        <span className="text-vesper-orange">&lt;</span>{' '}
-                        Últimos Posts
-                        {' '}<span className="text-vesper-orange">/&gt;</span>
+                <div className="mb-14 md:mb-20 w-full max-w-3xl">
+                    <span className="section-eyebrow text-vesper-cyan/80">02 / Escrita</span>
+                    <h2 className="section-heading mt-4">
+                        <span className="text-vesper-orange/70">&lt;</span> Últimos <span className="text-vesper-cyan">Posts</span> <span className="text-vesper-orange/70">/&gt;</span>
                     </h2>
-                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto break-words">
+                    <p className="section-subheading mt-4">
                         Artigos sobre desenvolvimento, arquitetura de software e experiências na indústria tech.
                     </p>
                 </div>
@@ -43,61 +42,60 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                         return (
                             <article
                                 key={post.id}
-                                className="group relative terminal-window border border-vesper-orange/20 p-4 sm:p-6 hover:border-vesper-orange/40 transition-all duration-300 flex flex-col h-full"
+                                className="group relative rounded-2xl border border-vesper-orange/15 bg-gradient-to-br from-background/60 via-background to-background/40 backdrop-blur-sm p-6 sm:p-7 hover:border-vesper-orange/35 hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(255,199,153,0.3)] transition-all duration-300 flex flex-col h-full overflow-hidden"
                             >
+                                <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${category.color === 'text-vesper-cyan' ? 'via-vesper-cyan/50' : category.color === 'text-vesper-red' ? 'via-vesper-red/50' : 'via-vesper-orange/50'} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                                    <div className="absolute -right-16 -top-16 w-32 h-32 bg-vesper-orange/10 blur-[40px] rounded-full"></div>
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none">
+                                    <div className="absolute -right-20 -top-20 w-40 h-40 bg-vesper-orange/15 blur-[50px] rounded-full"></div>
                                 </div>
 
-                                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
-                                    <div className="flex items-center gap-2">
-                                        <CategoryIcon className={`h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 ${category.color}`} />
-                                        <span className={`text-xs uppercase tracking-wider ${category.color}`}>
+                                <div className="flex items-start justify-between mb-4 relative z-10 gap-3">
+                                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                                        <CategoryIcon className={`h-4 w-4 sm:h-4 sm:w-4 flex-shrink-0 ${category.color}`} />
+                                        <span className={`text-[10px] sm:text-xs uppercase tracking-[0.18em] font-semibold ${category.color}`}>
                                             {category.label}
                                         </span>
                                     </div>
-                                    <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-foreground/60">
+                                    <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-foreground/50 whitespace-nowrap flex-shrink-0">
                                         <Clock className="h-3 w-3 flex-shrink-0" />
-                                        <span className="whitespace-nowrap">{post.readTime}</span>
+                                        <span>{post.readTime}</span>
                                     </div>
                                 </div>
 
-                                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-vesper-orange transition-colors break-words relative z-10">
+                                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 group-hover:text-vesper-orange transition-colors break-words relative z-10 leading-snug">
                                     {post.title}
                                 </h3>
 
-                                <p className="text-sm sm:text-base text-foreground/60 mb-3 sm:mb-4 leading-relaxed break-words relative z-10 flex-grow">
+                                <p className="text-sm sm:text-base text-foreground/65 mb-4 leading-relaxed break-words relative z-10 flex-grow">
                                     {post.excerpt}
                                 </p>
 
-                                <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
-                                    <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-foreground/50">
-                                        <Calendar className="h-3 w-3 flex-shrink-0" />
-                                        <span className="whitespace-nowrap">{new Date(post.date).toLocaleDateString('pt-BR')}</span>
-                                    </div>
+                                <div className="flex items-center gap-2 mb-4 relative z-10 text-[10px] sm:text-xs text-foreground/50 font-mono">
+                                    <Calendar className="h-3 w-3 flex-shrink-0" />
+                                    <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
                                 </div>
 
-                                <div className="flex flex-wrap gap-1 mb-3 sm:mb-4 relative z-10">
+                                <div className="flex flex-wrap gap-1.5 mb-5 relative z-10">
                                     {post.tags.slice(0, 3).map((tag: any) => (
                                         <span
                                             key={tag}
-                                            className="px-2 py-1 text-xs bg-vesper-orange/10 text-vesper-orange/80 border border-vesper-orange/20 rounded whitespace-nowrap"
+                                            className="px-2 py-1 text-[10px] sm:text-xs bg-vesper-orange/[0.08] text-vesper-orange/75 border border-vesper-orange/15 rounded-sm font-mono whitespace-nowrap hover:border-vesper-orange/40 hover:text-vesper-orange/90 transition-colors"
                                         >
                                             #{tag}
                                         </span>
                                     ))}
                                     {post.tags.length > 3 && (
-                                        <span className="px-2 py-1 text-xs text-vesper-orange/60">
+                                        <span className="px-2 py-1 text-[10px] sm:text-xs text-foreground/40 font-mono">
                                             +{post.tags.length - 3}
                                         </span>
                                     )}
                                 </div>
 
                                 <a href={`/blog/${safeId}`} className="w-full block relative z-10 mt-auto">
-                                    <Button className="terminal-button w-full group text-sm sm:text-base">
+                                    <Button className="terminal-button w-full group text-sm sm:text-base font-semibold">
                                         <span className="terminal-prompt">&gt; ler artigo</span>
-                                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
                                     </Button>
                                 </a>
                             </article>

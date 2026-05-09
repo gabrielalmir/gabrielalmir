@@ -94,25 +94,25 @@ interface HomeClientProps {
 
 function HeroSection() {
     return (
-        <section className="py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 w-full max-w-full relative">
+        <section className="pt-20 pb-16 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28 px-4 sm:px-6 lg:px-8 w-full max-w-full relative">
             <div className="container mx-auto max-w-7xl w-full">
-                <div className="grid lg:grid-cols-[1.5fr,1fr] gap-12 lg:gap-16 items-center w-full max-w-full">
-                    <div className="space-y-6 md:space-y-8 w-full max-w-full overflow-hidden z-10">
-                        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full border border-vesper-orange/20 bg-vesper-orange/5 max-w-full">
-                            <span className="w-2 h-2 rounded-full bg-vesper-cyan animate-pulse flex-shrink-0"></span>
-                            <span className="text-xs sm:text-sm text-vesper-cyan truncate">
-                                Vou fazer você apaixonar por tecnologia
+                <div className="grid lg:grid-cols-[1.6fr,1fr] gap-12 lg:gap-20 items-center w-full max-w-full">
+                    <div className="space-y-8 md:space-y-10 w-full max-w-full overflow-hidden z-10">
+                        <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-vesper-cyan/25 bg-vesper-cyan/[0.04] backdrop-blur-sm max-w-full">
+                            <span className="availability-dot flex-shrink-0"></span>
+                            <span className="text-[11px] sm:text-xs uppercase tracking-[0.18em] font-medium text-vesper-cyan/90 truncate">
+                                Disponível para projetos
                             </span>
                         </div>
 
-                        <div className="space-y-3 md:space-y-4 w-full max-w-full">
-                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight break-words w-full tracking-tight">
-                                <span className="text-foreground">Olá, sou</span>
+                        <div className="space-y-4 md:space-y-6 w-full max-w-full">
+                            <h1 className="font-bold leading-[1.02] break-words w-full tracking-[-0.035em] text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+                                <span className="text-foreground/90">Olá, sou</span>
                                 <br />
                                 <GlitchText text="Gabriel Almir" className="text-vesper-orange" />
                             </h1>
 
-                            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-vesper-cyan/90 break-words w-full h-[1.5em] flex items-center">
+                            <div className="text-lg sm:text-xl md:text-2xl lg:text-[1.625rem] font-semibold text-vesper-cyan/90 break-words w-full h-[1.5em] flex items-center">
                                 <TypingEffect
                                     words={[
                                         "Desenvolvedor Backend Node.js",
@@ -126,62 +126,65 @@ function HeroSection() {
                                 />
                             </div>
 
-                            <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed break-words w-full mt-4">
-                                Gosto de resolver problemas com <span className="text-vesper-orange">código limpo</span> e <span className="text-vesper-orange">boas práticas</span>, sempre aprendendo e evoluindo.
+                            <p className="text-base sm:text-lg md:text-xl text-foreground/65 max-w-xl leading-[1.65] break-words w-full mt-2">
+                                Resolvo problemas com <span className="text-vesper-orange/95 font-medium">código limpo</span> e <span className="text-vesper-orange/95 font-medium">boas práticas</span>. Construindo APIs e sistemas distribuídos que escalam.
                             </p>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 sm:gap-3 w-full max-w-full">
+                        <div className="flex flex-wrap gap-2 w-full max-w-full">
                             {heroBadges.map((item) => (
-                                <Badge
+                                <span
                                     key={item}
-                                    variant="outline"
-                                    className="border-vesper-orange/30 text-vesper-orange/90 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm whitespace-nowrap"
+                                    className="inline-flex items-center gap-1.5 rounded-md border border-vesper-orange/15 bg-vesper-orange/[0.04] text-vesper-orange/85 px-2.5 py-1.5 text-[11px] sm:text-xs font-mono whitespace-nowrap hover:border-vesper-orange/30 hover:bg-vesper-orange/[0.08] transition-colors"
                                 >
                                     {item}
-                                </Badge>
+                                </span>
                             ))}
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 w-full max-w-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-center pt-2 w-full max-w-full">
                             <a href="#contato" className="w-full sm:w-auto">
                                 <Button
                                     size="lg"
-                                    className="group w-full sm:w-auto bg-vesper-orange hover:bg-vesper-orange/90 text-black font-bold shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/40 transition-all duration-300"
+                                    className="group w-full sm:w-auto bg-vesper-orange hover:bg-vesper-orange/90 text-black font-bold shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/40 transition-all duration-300 px-6 h-12"
                                 >
                                     <span>Entrar em contato</span>
-                                    <ExternalLink className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
+                                    <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </Button>
                             </a>
-                            <div className="text-xs text-foreground/40 flex items-center gap-2 px-2">
-                                <span className="hidden sm:inline">ou pressione</span>
-                                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-vesper-orange/20 bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                            <div className="text-xs text-foreground/40 flex items-center gap-2">
+                                <span>ou navegue com</span>
+                                <kbd className="pointer-events-none inline-flex h-6 select-none items-center gap-1 rounded border border-vesper-orange/20 bg-vesper-orange/[0.05] px-2 font-mono text-[10px] font-medium text-vesper-orange/80">
                                     <span className="text-xs">⌘</span>K
                                 </kbd>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 sm:gap-6 pt-4 justify-center sm:justify-start w-full max-w-full flex-wrap">
+                        <div className="flex items-center gap-1 pt-2 w-full max-w-full flex-wrap">
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 font-mono mr-3">Conecte</span>
                             {heroSocialLinks.map(({ Icon, href, label }) => (
                                 <a
                                     key={href}
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-foreground/60 hover:text-vesper-orange transition-colors group p-2"
+                                    className="text-foreground/50 hover:text-vesper-orange transition-colors group p-2"
+                                    aria-label={label}
                                 >
-                                    <Icon className="h-6 w-6 group-hover:scale-110 transition-transform" />
-                                    <span className="sr-only">{label}</span>
+                                    <Icon className="h-[18px] w-[18px] group-hover:scale-110 transition-transform" />
                                 </a>
                             ))}
                         </div>
                     </div>
 
-                    <div className="relative lg:justify-self-end group perspective-1000">
-                        <div className="absolute inset-0 bg-vesper-orange/20 rounded-2xl blur-[60px] opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+                    <div className="relative lg:justify-self-end group">
+                        <div className="absolute -inset-4 bg-vesper-orange/15 rounded-[2rem] blur-[80px] opacity-50 group-hover:opacity-70 transition-opacity duration-700" />
 
-                        <div className="relative w-full max-w-sm lg:max-w-md mx-auto transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-y-2">
-                            <div className="aspect-square rounded-2xl overflow-hidden border border-vesper-orange/20 bg-black/40 backdrop-blur-sm relative">
+                        <div className="relative w-full max-w-[320px] lg:max-w-[380px] mx-auto">
+                            <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 border-vesper-orange/40 rounded-tl-2xl pointer-events-none" />
+                            <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 border-vesper-cyan/40 rounded-br-2xl pointer-events-none" />
+
+                            <div className="aspect-square rounded-2xl overflow-hidden border border-vesper-orange/20 bg-black/40 backdrop-blur-sm relative transition-transform duration-700 group-hover:scale-[1.015]">
                                 <div className="absolute inset-0 bg-scanline opacity-10 z-10 pointer-events-none"></div>
                                 <img
                                     src="/me.webp"
@@ -194,8 +197,11 @@ function HeroSection() {
                                     decoding="async"
                                 />
 
-                                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                    <p className="text-vesper-orange font-mono text-sm">&gt; system.user_profile.load()</p>
+                                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/70 to-transparent z-20">
+                                    <div className="flex items-center justify-between text-[11px] font-mono">
+                                        <span className="text-vesper-cyan/80">~/gabrielalmir</span>
+                                        <span className="text-vesper-orange/70">v2.0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -206,19 +212,28 @@ function HeroSection() {
     );
 }
 
+function SectionHeader({ eyebrow, title, subtitle, accent = 'orange' }: { eyebrow: string; title: ReactNode; subtitle?: string; accent?: 'orange' | 'cyan' }) {
+    return (
+        <div className="mb-14 md:mb-20 w-full max-w-3xl">
+            <span className={`section-eyebrow ${accent === 'cyan' ? 'text-vesper-cyan/80' : ''}`}>
+                {eyebrow}
+            </span>
+            <h2 className="section-heading mt-4">{title}</h2>
+            {subtitle && <p className="section-subheading mt-4">{subtitle}</p>}
+        </div>
+    );
+}
+
 function SkillsSection() {
     return (
-        <section id="habilidades" className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
+        <section id="habilidades" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,199,153,0.03)_0%,transparent_70%)] pointer-events-none"></div>
             <div className="container mx-auto max-w-7xl w-full relative z-10">
-                <div className="text-center mb-16 w-full max-w-full px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 break-words">
-                        Arsenal Técnico
-                    </h2>
-                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto break-words">
-                        Ferramentas e tecnologias que utilizo para construir o futuro
-                    </p>
-                </div>
+                <SectionHeader
+                    eyebrow="01 / Stack"
+                    title={<><span className="text-foreground">Arsenal </span><span className="text-vesper-orange">Técnico</span></>}
+                    subtitle="Ferramentas e tecnologias que uso no dia a dia para construir produtos confiáveis e escaláveis."
+                />
 
                 <div className="space-y-16 w-full max-w-full">
                     <DeferredRender fallback={<div className="h-96 w-full animate-pulse bg-vesper-orange/5 rounded-xl"></div>}>
@@ -272,16 +287,14 @@ function SkillsSection() {
 
 function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
     return (
-        <section id="projetos" className="py-24 bg-gradient-to-b from-background to-vesper-orange/5 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+        <section id="projetos" className="py-20 md:py-28 bg-gradient-to-b from-background via-background to-vesper-orange/[0.03] px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
             <div className="container mx-auto max-w-6xl w-full">
-                <div className="text-center mb-16 w-full max-w-full px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 break-words">
-                        Projetos em Destaque
-                    </h2>
-                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto break-words">
-                        Code is poetry. Aqui estão alguns dos meus melhores versos.
-                    </p>
-                </div>
+                <SectionHeader
+                    eyebrow="03 / Trabalho"
+                    title={<><span className="text-foreground">Projetos em </span><span className="text-vesper-orange">Destaque</span></>}
+                    subtitle="Code is poetry. Aqui estão alguns dos meus melhores versos — desde APIs serverless até sistemas distribuídos."
+                />
+
 
                 <DeferredRender
                     rootMargin="280px"
@@ -335,42 +348,61 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
 
 function ContactSection() {
     return (
-        <section id="contato" className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
-            <div className="absolute inset-0 bg-vesper-orange/5 skew-y-3 transform origin-bottom-right -z-10"></div>
-            <div className="container mx-auto max-w-4xl text-center w-full relative z-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 break-words px-4">
-                    Vamos construir algo incrível?
-                </h2>
-                <p className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto break-words px-4 leading-relaxed">
-                    Estou disponível para freelance e consultoria. Se você tem um desafio técnico interessante, adoraria ouvir sobre ele.
-                </p>
+        <section id="contato" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
+            <div className="container mx-auto max-w-4xl w-full relative z-10">
+                <div className="relative rounded-3xl border border-vesper-orange/20 bg-gradient-to-br from-vesper-orange/[0.08] via-background to-vesper-cyan/[0.04] p-8 md:p-14 lg:p-16 overflow-hidden">
+                    <div className="absolute -top-32 -right-32 w-64 h-64 bg-vesper-orange/15 rounded-full blur-[80px] pointer-events-none" />
+                    <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-vesper-cyan/10 rounded-full blur-[80px] pointer-events-none" />
 
-                <div className="flex flex-wrap gap-4 justify-center mb-12">
-                    <a href="mailto:gabr.almir@gmail.com" className="w-full sm:w-auto">
-                        <Button size="lg" className="terminal-button group w-full sm:w-auto px-8 py-6 text-lg">
-                            <MailIcon className="h-5 w-5 mr-3 group-hover:scale-110 transition-transform flex-shrink-0" />
-                            <span className="truncate">gabr.almir@gmail.com</span>
-                        </Button>
-                    </a>
-                </div>
-
-                <div className="flex gap-6 justify-center items-center flex-wrap">
-                    {contactSocialLinks.map(({ Icon, href, label }) => (
-                        <a
-                            key={href}
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-vesper-orange/5 transition-colors"
-                        >
-                            <div className="w-12 h-12 rounded-full border border-vesper-orange/20 flex items-center justify-center group-hover:border-vesper-orange group-hover:bg-vesper-orange/10 transition-all shadow-lg shadow-transparent group-hover:shadow-vesper-orange/20">
-                                <Icon className="h-5 w-5 text-foreground/60 group-hover:text-vesper-orange group-hover:scale-110 transition-all" />
-                            </div>
-                            <span className="text-xs font-medium text-foreground/50 group-hover:text-vesper-orange transition-colors">
-                                {label}
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                        <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-vesper-cyan/25 bg-vesper-cyan/[0.06] backdrop-blur-sm mb-8">
+                            <span className="availability-dot flex-shrink-0"></span>
+                            <span className="text-[11px] uppercase tracking-[0.18em] font-medium text-vesper-cyan/90">
+                                Aceitando novos projetos
                             </span>
-                        </a>
-                    ))}
+                        </div>
+
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-5 break-words tracking-[-0.025em] leading-[1.05]">
+                            Vamos construir algo
+                            <br />
+                            <span className="text-vesper-orange">incrível juntos.</span>
+                        </h2>
+                        <p className="text-base md:text-lg text-foreground/60 mb-10 max-w-xl mx-auto break-words leading-relaxed">
+                            Freelance, consultoria ou um desafio técnico interessante — adoraria conversar.
+                        </p>
+
+                        <div className="flex flex-wrap gap-4 justify-center mb-12">
+                            <a href="mailto:gabr.almir@gmail.com" className="w-full sm:w-auto">
+                                <Button size="lg" className="group w-full sm:w-auto bg-vesper-orange hover:bg-vesper-orange/90 text-black font-bold shadow-lg shadow-vesper-orange/20 hover:shadow-xl hover:shadow-vesper-orange/40 transition-all duration-300 px-8 h-14 text-base">
+                                    <MailIcon className="h-5 w-5 mr-3 group-hover:scale-110 transition-transform flex-shrink-0" />
+                                    <span className="truncate">gabr.almir@gmail.com</span>
+                                </Button>
+                            </a>
+                        </div>
+
+                        <div className="flex items-center gap-3 text-foreground/40 text-[10px] uppercase tracking-[0.2em] font-mono mb-6">
+                            <span className="h-px w-8 bg-foreground/20" />
+                            <span>ou conecte-se</span>
+                            <span className="h-px w-8 bg-foreground/20" />
+                        </div>
+
+                        <div className="flex gap-3 justify-center items-center flex-wrap">
+                            {contactSocialLinks.map(({ Icon, href, label }) => (
+                                <a
+                                    key={href}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group flex items-center gap-2 px-4 py-2.5 rounded-lg border border-vesper-orange/15 bg-vesper-orange/[0.03] hover:border-vesper-orange/40 hover:bg-vesper-orange/[0.08] transition-all"
+                                >
+                                    <Icon className="h-4 w-4 text-foreground/60 group-hover:text-vesper-orange transition-colors" />
+                                    <span className="text-xs font-medium text-foreground/60 group-hover:text-vesper-orange transition-colors">
+                                        {label}
+                                    </span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -502,7 +534,7 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
 
                     <ProjectsSection githubProjects={githubProjects} />
 
-                    <section id="sobre" className="py-24 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+                    <section id="sobre" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
                         <div className="container mx-auto max-w-7xl w-full">
                             <ModernResumeSection />
                         </div>

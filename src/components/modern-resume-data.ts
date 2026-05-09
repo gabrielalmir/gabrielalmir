@@ -1,19 +1,25 @@
 import { Bot, Cloud, Code, Database, Globe, Server } from 'lucide-react';
 
 export const resumeData = {
-        summary: 'Desenvolvedor Backend (Pleno) com experiência em Node.js e TypeScript, atuando no desenvolvimento de APIs, integrações entre sistemas e arquitetura de microsserviços. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS. Aprendizado contínuo em IA/ML aplicada.',
+        summary: 'Analista de Sistemas Pleno com experiência em Node.js, TypeScript e NestJS, atuando no desenvolvimento de APIs, integrações entre sistemas e arquitetura de microsserviços. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS. Aprendizado contínuo em IA/ML aplicada.',
         experience: [
+            {
+                title: 'Analista de Sistemas Pleno',
+                company: 'Laboratório Cristália',
+                period: 'Abril de 2026 – Presente | Itapira, SP | No local',
+                description: 'Colaboração com equipes multifuncionais (GQ, RH, Compras, Jurídico e TI) garantindo entregas alinhadas aos requisitos de negócio e padrões de conformidade. Responsável por integrações de sistemas ERP com impacto em BPF (Boas Práticas de Fabricação). Mentoria de novos integrantes desde o onboarding até a evolução profissional, promovendo cultura de boas práticas de engenharia, testes automatizados e documentação técnica.'
+            },
             {
                 title: 'Desenvolvedor Backend Node.js',
                 company: 'CTC',
-                period: 'Agosto de 2023 – Presente | Itapira, SP | Presencial',
-                description: 'Atuo no desenvolvimento e manutenção de sistemas com foco em integração e automação para operações industriais. Entregas: middlewares e APIs ODATA em Node.js/NestJS/TypeScript para integrar ERPs a ferramentas de análise; participação na construção de um CRM interno integrado a SQL Server com ganhos de performance em pontos críticos; sistema de controle de documentos para ambiente regulado; apoio na criação de pipelines de CI/CD; serviço em Python para mapeamento de bulas que melhorou substancialmente o tempo de busca.'
+                period: 'Agosto de 2023 – Abril de 2026 | Itapira, SP | Presencial',
+                description: 'Arquitetei e otimizei a plataforma interna de SAC para consulta de bulas farmacêuticas, reduzindo 90% no tempo de carregamento. Líder técnico na migração de sistemas legados para TOTVS Cloud. Desenvolvi middlewares com APIs ODATA (Node.js/NestJS) integrando ERPs (SAP, TOTVS) com plataformas de BI. Implementei pipelines de CI/CD e sistemas de controle de documentos para ambientes regulados e auditados.'
             },
             {
-                title: 'Desenvolvedor Full-Stack | SEO e Otimização Técnica',
+                title: 'Desenvolvedor Full-Stack',
                 company: 'Diolinux',
                 period: 'Maio de 2013 – Agosto de 2016 | Marau, RS',
-                description: 'Atuei no ecossistema Diolinux modernizando aplicações web e infraestrutura, com foco em desempenho e SEO técnico. Modernização de sistemas legados com JavaScript e boas práticas de desenvolvimento web. Implementação de melhorias de SEO técnico, otimização de performance e ajustes estruturais para melhor ranqueamento em motores de busca. Atuação em arquitetura e otimização de back-end, fortalecendo práticas de escalabilidade, organização de código e integração entre sistemas.'
+                description: 'Modernização e manutenção de aplicações do ecossistema Diolinux com Clean Code. Otimização de performance no back-end resultando em maior velocidade de resposta. Atuação multidisciplinar conectando necessidades da comunidade com soluções escaláveis. Projeto de destaque: manutenção e otimização do PhotoGIMP, impactando designers e usuários Linux ao redor do mundo.'
             }
         ],
         education: [
