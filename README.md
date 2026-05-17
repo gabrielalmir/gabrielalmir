@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>Backend Developer</strong><br/>
-  Node.js • TypeScript • NestJS
+  Node.js • TypeScript • NestJS • Python • AI
 </p>
 
 <p align="center">
@@ -26,85 +26,7 @@
 Backend developer with several years of experience building APIs and backend systems using **Node.js**.  
 Strong background in **microservices**, **event-driven systems**, and **integration architecture**.
 
-Currently working at **CTC**, contributing to the evolution of solutions for the **pharmaceutical sector**, focusing on scalability, reliability, and compliance.
-
----
-
-## 🚀 Professional Experience
-
-### **CTC** • *Backend Developer (Node.js)*  
-📍 Aug 2023 – Present
-
-#### APIs & Microservices
-- Developed middleware and **OData APIs** using **Node.js, NestJS, TypeScript, and TypeORM** to integrate ERPs with analytics tools.
-- Contributed to an internal **CRM system** integrated with **SQL Server**, achieving significant performance gains in critical workflows.
-- Participated in the implementation of a **document control system** focused on compliance and traceability in a regulated environment.
-- Designed and maintained **CI/CD pipelines** for a critical modular monolith using **GitHub Actions**.
-
-#### DevOps & CI/CD
-- Built automated pipelines with testing and predictable deployments.
-- Ensured safe versioning and reduced release risks across multiple environments.
-
-**Tech Stack:**  
-Node.js, NestJS, TypeScript, SQL Server, PostgreSQL, TypeORM, Fastify, Docker, GitHub Actions
-
----
-
-### **Diolinux** • *Full Stack Developer*  
-📍 May 2013 – Aug 2016
-
-- Modernized legacy systems using **JavaScript** and modern development practices.
-- Worked on **backend architecture and optimization**, improving scalability and maintainability.
-- Implemented performance improvements and system integrations.
-
----
-
-## 🛠️ Technical Skills (Backend-Focused)
-
-### Backend & Architecture
-- **Node.js & NestJS** — APIs and microservices
-- **TypeScript** — Primary language
-- **Hexagonal Architecture** — Practical application (BitQueue)
-- **Design Patterns** — Real-world usage
-- **Clean Code & SOLID** principles
-
-### Databases
-- **Relational:** SQL Server, PostgreSQL  
-- **NoSQL:** MongoDB, DynamoDB
-
-### Messaging & Event-Driven Systems
-- **RabbitMQ** — Asynchronous communication
-- **Amazon SQS** — AWS integration
-- Event-driven microservices architecture
-
-### APIs & Integrations
-- REST APIs (robust & well-documented)
-- Workers and asynchronous services
-- ERP integrations (SAP), internal and third-party systems
-
-### DevOps & Cloud (AWS)
-- **AWS:** Lambda, S3, SQS, DynamoDB, RDS, ECS, CloudWatch, API Gateway
-- **Docker** — Containerization
-- **CI/CD** — GitHub Actions
-- DevOps culture: automation, observability, best practices
-
-### Quality & Testing
-- Unit and integration testing
-- Automated validations in CI/CD pipelines
-
----
-
-## 💡 Key Differentiators
-
-- **DevOps Mindset:** Docker, CI/CD, automation, observability (OpenTelemetry, Prometheus, structured logging)
-- **Financial Domain Experience:** TechFinance project (finance, sales, reporting)
-- **Initiative & Autonomy:**  
-  - Open source: *Diolinux PhotoGIMP* (active community)  
-  - npm libraries: *Resulta*
-- **Technical Communication:** Strong documentation and cross-team collaboration
-- **Continuous Learning:** AI/ML exploration (LLMs, RAG), AI APIs, intelligent automation
-
----
+Currently working at **Laboratório Cristália**, contributing to the evolution of solutions for the **pharmaceutical sector**, focusing on scalability, reliability, and compliance.
 
 ## 🌐 Socials
 
