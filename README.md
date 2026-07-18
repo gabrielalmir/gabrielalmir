@@ -43,6 +43,10 @@ Currently working at **Laboratório Cristália**, contributing to the evolution 
   <a href="https://youtube.com/@avlye">
     <img src="https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white"/>
   </a>
+
+  <a href="https://ko-fi.com/gabrielalmir">
+    <img src="https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white&style=for-the-badge"/>
+  </a>
 </p>
 
 ---
