@@ -183,9 +183,9 @@ export function articlePath(locale: Locale, key: ArticleKey) { return `${locale 
 
 export const copy = {
  'pt-BR': {
-  lang:'pt-BR', switchHref:'/en/', switchLabel:'EN', home:'/', nav:[['Trajetória','/#trajetoria'],['Trabalhos','/#trabalhos'],['Processo','/#processo'],['Contato','/#contato']],
+  lang:'pt-BR', switchHref:'/en/', switchLabel:'EN', home:'/', nav:[['Sistemas','/#sistemas'],['Trajetória','/#trajetoria'],['Processo','/#processo'],['Contato','/#contato']],
   title:'Gabriel Almir — sistemas, histórias e caminhos confiáveis', description:'Sou Gabriel Almir. Investigo sistemas complexos, escrevo sobre decisões e colaboro com projetos abertos.',
-  heroKicker:'Olá, eu sou Gabriel Almir.', heroTitle:'Eu transformo restrições em caminhos confiáveis.', heroBody:'Sou analista de sistemas e desenvolvedor backend. Gosto de entender por que as coisas quebram, ligar pessoas e sistemas e deixar decisões que outras pessoas conseguem continuar.', heroPrimary:'Conheça meu trabalho', heroSecondary:'Leia minhas notas',
+  heroKicker:'Olá, eu sou Gabriel Almir.', heroTitle:'Eu transformo restrições em caminhos confiáveis.', heroBody:'Investigo limites, dependências e falhas para transformar decisões técnicas em sistemas que outras pessoas conseguem operar e evoluir.', heroPrimary:'Explorar sistemas e decisões', heroSecondary:'Abrir dossiês',
   proofTitle:'O que você precisa saber em 30 segundos', proofs:[['−90%','Eu reduzi o carregamento de um sistema crítico','Resultado medido e aprovado para divulgação.'],['RIGOR','Eu trabalho com limites reais','Tenho experiência em integrações e aplicações que exigem rastreabilidade e conformidade.'],['COMUNIDADE','Eu colaboro com o PhotoGIMP','Contribuí na evolução e hoje participo da organização e revisão do projeto.']],
   workTitle:'Trabalhos que me ensinaram alguma coisa.', workIntro:'Eu conto cada trabalho pela restrição, pela decisão e pelo que consigo provar — sem reconstruir contextos confidenciais.',
   stories:[
@@ -203,9 +203,9 @@ export const copy = {
   personalTitle:'Curiosidade também é método.', personalBody:'Open source, escrita, design e aprendizado fazem parte do meu jeito de trabalhar. Eu gosto de desmontar ideias, entender as bordas e montar algo mais claro no lugar.', writingTitle:'Escrevo para pensar com mais precisão.', contactTitle:'Vamos entender um problema juntos?', contactBody:'Se você tem um sistema difícil, uma integração delicada ou só quer trocar ideias sobre trabalho e aprendizado, pode me escrever.', email:'Enviar e-mail', back:'Voltar', blogTitle:'Notas de campo', blogIntro:'Escrevo em primeira pessoa sobre decisões, falhas, escolhas e o que continuo aprendendo.', casesTitle:'Trabalhos selecionados', notFoundTitle:'Este caminho não chegou a lugar nenhum.', notFoundBody:'Às vezes uma rota termina no papel rasgado. A home e minhas notas continuam por aqui.', footer:'Feito por Gabriel, entre sistemas e margens.'
  },
  en: {
-  lang:'en', switchHref:'/', switchLabel:'PT', home:'/en/', nav:[['Trajectory','/en/#trajectory'],['Work','/en/#work'],['Process','/en/#process'],['Contact','/en/#contact']],
+  lang:'en', switchHref:'/', switchLabel:'PT', home:'/en/', nav:[['Systems','/en/#systems'],['Trajectory','/en/#trajectory'],['Process','/en/#process'],['Contact','/en/#contact']],
   title:'Gabriel Almir — systems, stories, and reliable paths', description:'I’m Gabriel Almir. I investigate complex systems, write about decisions, and collaborate on open projects.',
-  heroKicker:'Hello, I’m Gabriel Almir.', heroTitle:'I turn constraints into reliable paths.', heroBody:'I’m a systems analyst and backend developer. I enjoy understanding why things break, connecting people and systems, and leaving decisions that others can carry forward.', heroPrimary:'See my work', heroSecondary:'Read my notes',
+  heroKicker:'Hello, I’m Gabriel Almir.', heroTitle:'I turn constraints into reliable paths.', heroBody:'I investigate limits, dependencies, and failures to turn technical decisions into systems other people can operate and evolve.', heroPrimary:'Explore systems and decisions', heroSecondary:'Open dossiers',
   proofTitle:'What you should know in 30 seconds', proofs:[['−90%','I cut a critical system’s loading time','A measured result approved for disclosure.'],['REGULATED','I work within real boundaries','I have experience with integrations and applications in regulated environments.'],['OPEN','I collaborate on PhotoGIMP','I contributed to its evolution and now take part in organization and review.']],
   workTitle:'Work that taught me something.', workIntro:'I tell each story through its constraint, decision, and evidence — without reconstructing confidential contexts.',
   stories:[

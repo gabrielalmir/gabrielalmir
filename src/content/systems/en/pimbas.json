@@ -1,0 +1,28 @@
+{
+  "locale": "en", "slug": "pimbas", "tier": "dossier", "status": "implemented",
+  "sourceRepo": "https://github.com/gabrielalmir/pimbas", "sourceCommit": "main", "license": "Verify in the repository before reuse",
+  "title": "Pimbas", "eyebrow": "Architecture evolution",
+  "summary": "Friendly table-football matches and tournaments become a clear domain while the architecture reduces runtimes and preserves contracts.",
+  "card": {
+    "summary": "A tool for organizing friendly table-football matches and tournaments.",
+    "context": "It grew from a real need among people I know who play table football.",
+    "decision": "Consolidate Fastify and Next.js into one application.",
+    "evidence": "The matches, rankings, and tournaments domain is publicly implemented.",
+    "limit": "It was not adopted because there was not enough time to maintain it."
+  },
+  "context": "I built Pimbas around the real needs of people I know who play table football and needed to organize friendly matches and tournaments. The project was not adopted because I no longer had enough time to maintain it. It records an architectural evolution from Fastify to Next.js without turning intent into a usage outcome.",
+  "constraints": ["Preserve contracts throughout the migration.", "Isolate data and permissions by group.", "Reduce drift without coupling the domain to the framework."],
+  "decisions": [
+    {"title": "Consolidate the runtime", "body": "Moving the HTTP boundary to Next.js reduces deployment and configuration surfaces."},
+    {"title": "Protect the domain", "body": "Matches, rankings, and tournaments remain organized as rules independent from delivery."},
+    {"title": "Treat access as a boundary", "body": "Authentication, authorization, and group membership remain separate decisions."}
+  ],
+  "qualityAttributes": [
+    {"name": "Modifiability", "approach": "Domain separated from web delivery.", "evidence": "Versioned structure and tests in the repository."},
+    {"name": "Operability", "approach": "Fewer runtimes to configure and observe.", "evidence": "Fastify → Next.js migration recorded as a decision."},
+    {"name": "Security", "approach": "Authorization and group isolation at boundaries.", "evidence": "Contracts and checks in code."}
+  ],
+  "evidence": [{"label": "Source code", "detail": "Public implementation and migration history.", "href": "https://github.com/gabrielalmir/pimbas"}, {"label": "Verification state", "detail": "Lint, types, tests, build, license, and contract differences must be confirmed in the repository before this case is promoted to verified."}],
+  "limits": ["The project was not adopted because there was not enough time to continue maintaining it.", "The source repository license still needs confirmation.", "The source commit will be pinned after the pre-publication audit.", "Debt and reversible decisions stay explicit rather than being resolved through narrative."],
+  "diagram": [{"label": "Real need", "detail": "People organize friendly table-football matches and tournaments.", "tone": "boundary"}, {"label": "Preserve contracts", "detail": "The migration keeps the observable boundary stable.", "tone": "decision"}, {"label": "Consolidated Next.js", "detail": "One operational surface, independent domain.", "tone": "boundary"}, {"label": "Tests and history", "detail": "Versioned evidence of the transition.", "tone": "evidence"}]
+}

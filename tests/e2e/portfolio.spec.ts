@@ -36,7 +36,7 @@ test('homepage sections build with scroll without hiding content', async ({ page
   test.skip(['no-javascript','reduced-motion'].includes(testInfo.project.name), 'Scroll controller is disabled in the final-state accessibility modes');
   await page.goto('/');
   const home = page.locator('.home-story');
-  await expect(home.locator('[data-build-section]')).toHaveCount(8);
+  await expect(home.locator('[data-build-section]')).toHaveCount(9);
   const process = page.locator('#processo');
   const initial = Number(await process.getAttribute('data-build-progress'));
   await process.scrollIntoViewIfNeeded(); await page.waitForTimeout(50);
@@ -89,4 +89,38 @@ test('personal signals reveal accessible microcopy', async ({ page }) => {
   await coffee.locator('summary').click();
   await expect(coffee).toHaveAttribute('open', '');
   await expect(coffee.getByText('Uma ideia quase sempre começa com café.')).toBeVisible();
+});
+
+for (const [localePath, systemPath] of [['/', '/projects/'], ['/en/', '/en/projects/']] as const) {
+  test(`${localePath} presents three dossiers and four technical labs`, async ({ page }) => {
+    await page.goto(localePath);
+    const atlas = page.locator('.systems-atlas');
+    await expect(atlas.locator('.system-plate')).toHaveCount(3);
+    await expect(atlas.locator('.lab-card')).toHaveCount(4);
+    for (const slug of ['pimbas', 'maybe', 'saturno', 'mcp-animaginexl', 'mcp-qwen3-tts', 'hush', 'resulta']) {
+      await expect(atlas.locator(`a[href="${systemPath}${slug}"]`)).toHaveCount(1);
+    }
+  });
+}
+
+test('system dossiers expose evidence, limits, and readable architecture maps in both languages', async ({ page }) => {
+  for (const path of ['/projects/pimbas', '/en/projects/pimbas']) {
+    await page.goto(path);
+    await expect(page.locator('.system-map li')).toHaveCount(4);
+    await expect(page.locator('.quality-matrix [role="row"]')).toHaveCount(3);
+    await expect(page.locator('.evidence-limits article')).toHaveCount(2);
+    await expect(page.locator('h1')).toHaveText('Pimbas');
+  }
+});
+
+test('Ko-fi support is a plain safe external link and loads no Ko-fi resources', async ({ page }) => {
+  const kofiRequests: string[] = [];
+  page.on('request', request => { if (/ko-fi\.com/i.test(request.url())) kofiRequests.push(request.url()); });
+  await page.goto('/');
+  const support = page.locator('.open-source-support a');
+  await expect(support).toHaveAttribute('href', 'https://ko-fi.com/gabrielalmir');
+  await expect(support).toHaveAttribute('rel', 'noopener noreferrer');
+  await expect(support).toHaveAttribute('aria-label', /serviço externo/i);
+  await expect(page.locator('script[src*="ko-fi"],iframe[src*="ko-fi"],img[src*="ko-fi"]')).toHaveCount(0);
+  expect(kofiRequests).toEqual([]);
 });

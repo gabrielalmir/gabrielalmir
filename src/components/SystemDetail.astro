@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Shell from '@/components/Shell.astro';
+import SystemVisual from '@/components/SystemVisual.astro';
+const { entry } = Astro.props as { entry: CollectionEntry<'systems'> };
+const d = entry.data; const en = d.locale === 'en'; const prefix = en ? '/en' : '';
+const alternateHref = `${en ? '' : '/en'}/projects/${d.slug}`;
+const publicSites: Record<string, string> = { maybe: 'https://gabrielalmir.github.io/maybe/', saturno: 'https://saturno.gabrielalmir.com.br/' };
+const labels = en ? { context:'Context', constraints:'Forces and constraints', decisions:'Decisions', quality:'Quality attributes', evidence:'Evidence', limits:'Known limits', source:'View source', commit:'Source reference', license:'License', diagram:'Architecture map', text:'Text equivalent' } : { context:'Contexto', constraints:'Forças e restrições', decisions:'Decisões', quality:'Atributos de qualidade', evidence:'Evidências', limits:'Limites conhecidos', source:'Ver código-fonte', commit:'Referência-fonte', license:'Licença', diagram:'Mapa arquitetural', text:'Equivalente textual' };
+---
+<Layout title={`${d.title} — Gabriel Almir`} description={d.summary} lang={d.locale} alternateHref={alternateHref}>
+<Shell locale={d.locale}>
+<main id="main" class="system-page">
+  <header class="system-hero"><div class="system-hero-copy"><p class="kicker">{d.tier} / {d.status}</p><h1>{d.title}</h1><p>{d.summary}</p><div class="system-meta"><span>{labels.commit}: {d.sourceCommit}</span><span>{labels.license}: {d.license}</span></div></div><SystemVisual slug={d.slug} label={`${en ? 'Visual summary of' : 'Resumo visual de'} ${d.title}`} /></header>
+  <section class="system-context"><p class="kicker">01 / {labels.context}</p><h2>{d.context}</h2><ul>{d.constraints.map(item => <li>{item}</li>)}</ul></section>
+  <section class="system-map" aria-labelledby="map-title"><header><p class="kicker">02 / {labels.diagram}</p><h2 id="map-title">{labels.diagram}</h2></header><ol aria-label={labels.text}>{d.diagram.map((node, index) => <li class={`tone-${node.tone}`}><span>{String(index + 1).padStart(2,'0')}</span><div><strong>{node.label}</strong><p>{node.detail}</p></div></li>)}</ol></section>
+  <section class="system-decisions"><header><p class="kicker">03 / {labels.decisions}</p><h2>{labels.decisions}</h2></header><div>{d.decisions.map(decision => <article><h3>{decision.title}</h3><p>{decision.body}</p></article>)}</div></section>
+  {d.qualityAttributes.length > 0 && <section class="quality-matrix"><header><p class="kicker">04 / quality</p><h2>{labels.quality}</h2></header><div role="table">{d.qualityAttributes.map(item => <div role="row"><strong role="cell">{item.name}</strong><span role="cell">{item.approach}</span><span role="cell">{item.evidence}</span></div>)}</div></section>}
+  <section class="evidence-limits"><article><p class="kicker">{labels.evidence}</p><ul>{d.evidence.map(item => <li><strong>{item.label}</strong><span>{item.detail}</span></li>)}</ul></article><article><p class="kicker risk-label">{labels.limits}</p><ul>{d.limits.map(item => <li>{item}</li>)}</ul></article></section>
+  <section class="system-source"><div class="source-actions"><a class="button ink" href={d.sourceRepo} target="_blank" rel="noopener noreferrer">{labels.source} ↗</a>{publicSites[d.slug] && <a class="button" href={publicSites[d.slug]} target="_blank" rel="noopener noreferrer" aria-label={`${en ? 'Open public demonstration' : 'Abrir demonstração pública'} — ${d.title} (${en ? 'external site' : 'site externo'})`}>{en ? 'Open public demo' : 'Abrir demonstração'} ↗</a>}</div><a class="text-link" href={`${prefix}/#${en?'systems':'sistemas'}`}>{en?'Back to the atlas':'Voltar ao atlas'} ↑</a></section>
+</main>
+</Shell>
+</Layout>
