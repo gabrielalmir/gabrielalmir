@@ -44,21 +44,21 @@ const techIcons = {
 }
 
 const featuredProjects = {
-    'manuvi': {
+    'PhotoGIMP': {
         priority: 1,
-        category: 'backend',
-        impact: 'Plataforma SaaS industrial completa com Clean Architecture, DDD e FastAPI para gestão de manutenções',
-        highlights: ['Clean Architecture', 'DDD', 'FastAPI', 'PostgreSQL', 'JWT'],
-        icon: Award,
-        techStack: ['python', 'postgresql', 'docker', 'fastapi']
+        category: 'opensource',
+        impact: 'Patch open source que reorganiza o GIMP 2.10+ no layout do Photoshop — novos filtros em Python, tela inicial própria, configurações otimizadas. Mantido desde 2021, com usuários reais.',
+        highlights: ['Open Source', 'Python', 'GIMP', 'Manutenção contínua desde 2021'],
+        icon: Code,
+        techStack: ['python']
     },
-    'techfinance-lastdance-api': {
+    'bitqueue': {
         priority: 2,
-        category: 'cloud',
-        impact: 'API serverless moderna com AWS Lambda, DynamoDB e S3 para escalabilidade automática e alta disponibilidade',
-        highlights: ['AWS Lambda', 'DynamoDB', 'S3', 'Serverless', 'TypeScript'],
-        icon: Cloud,
-        techStack: ['aws', 'typescript', 'nodejs']
+        category: 'backend',
+        impact: 'Sistema de mensageria confiável e escalável para desacoplar microsserviços e aplicações serverless',
+        highlights: ['Message Queue', 'TypeScript', 'NestJS', 'Microsserviços', 'Redis'],
+        icon: Zap,
+        techStack: ['typescript', 'nestjs', 'redis', 'rabbitmq']
     },
     'codebeats': {
         priority: 3,
@@ -68,32 +68,24 @@ const featuredProjects = {
         icon: Database,
         techStack: ['nestjs', 'typescript', 'postgresql', 'docker']
     },
-    'bitqueue': {
-        priority: 4,
-        category: 'backend',
-        impact: 'Sistema de mensageria confiável e escalável para desacoplar microsserviços e aplicações serverless',
-        highlights: ['Message Queue', 'TypeScript', 'NestJS', 'Microsserviços', 'Redis'],
-        icon: Zap,
-        techStack: ['typescript', 'nestjs', 'redis', 'rabbitmq']
-    },
     'techfinance-previsao': {
-        priority: 5,
+        priority: 4,
         category: 'ai',
         impact: 'Modelo de Machine Learning para previsão de séries temporais financeiras usando Python/Prophet',
-        highlights: ['Machine Learning', 'Prophet', 'Python', 'Previsões', 'Pandas'],
+        highlights: ['Machine Learning', 'Prophet', 'Python', 'Previsões'],
         icon: Brain,
         techStack: ['python']
     },
-    'd4sign-node-sdk': {
-        priority: 6,
+    'd4sign-node': {
+        priority: 5,
         category: 'opensource',
-        impact: 'SDK open-source completo para integração com API de assinatura digital D4Sign',
+        impact: 'SDK open-source para integração com API de assinatura digital D4Sign',
         highlights: ['Open Source', 'SDK', 'TypeScript', 'NPM', 'API Client'],
         icon: Code,
         techStack: ['typescript', 'nodejs']
     },
     'saturno': {
-        priority: 7,
+        priority: 6,
         category: 'fullstack',
         impact: 'Plataforma de gestão e automação de tarefas com interface intuitiva e integrações poderosas',
         highlights: ['React.js', 'TypeScript', 'Laravel', 'PostgreSQL', 'PHP'],

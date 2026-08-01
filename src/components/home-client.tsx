@@ -5,7 +5,6 @@ import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "rea
 import { CoffeeSplashWrapper } from '@/components/coffee-splash';
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
-import { TechMarquee } from "@/components/tech-marquee";
 import { TypingEffect } from "@/components/typing-effect";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,7 +53,7 @@ function DeferredRender({
 const heroBadges = [
     'Node.js • NestJS • TypeScript',
     'APIs & Microservices',
-    'Arquitetura Limpa',
+    'ERP & Sistemas Regulados',
     'AWS • CI/CD'
 ];
 
@@ -84,8 +83,10 @@ const footerSocialLinks = [
     { Icon: Twitter, href: "https://x.com/momentoalmir", label: "Twitter" },
 ];
 
-const cloudInfraTech = ['Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Lambda', 'ECS', 'S3', 'DynamoDB', 'CloudWatch'];
-const dataEventsTech = ['PostgreSQL', 'MongoDB', 'Redis', 'RabbitMQ', 'Kafka', 'SQS', 'ElasticSearch'];
+const dataMessagingTech = ['PostgreSQL', 'MongoDB', 'RabbitMQ'];
+const cloudDevOpsTech = ['AWS Lambda', 'AWS SQS', 'Docker', 'CI/CD (GitLab)'];
+const integrationsTech = ['SAP', 'TOTVS', 'APIs ODATA', 'Ambientes regulados (BPF)'];
+const aiTech = ['LLMs', 'Copilot Studio'];
 
 interface HomeClientProps {
     latestPosts: BlogPostPreview[];
@@ -115,10 +116,9 @@ function HeroSection() {
                             <div className="text-lg sm:text-xl md:text-2xl lg:text-[1.625rem] font-semibold text-vesper-cyan/90 break-words w-full h-[1.5em] flex items-center">
                                 <TypingEffect
                                     words={[
-                                        "Especialista em TypeScript & NestJS",
-                                        "Apaixonado por Arquitetura Limpa",
-                                        "Explorador de IA & ML",
-                                        "Desenvolvedor Backend Node.js"
+                                        "Backend Node.js & TypeScript, com NestJS",
+                                        "Integrações ERP em ambiente regulado",
+                                        "Aplicando IA a triagem e automação"
                                     ]}
                                     typingSpeed={80}
                                     deletingSpeed={40}
@@ -128,7 +128,7 @@ function HeroSection() {
                             </div>
 
                             <p className="text-base sm:text-lg md:text-xl text-foreground/65 max-w-xl leading-[1.65] break-words w-full mt-2">
-                                Construo <span className="text-vesper-orange/95 font-medium">APIs</span> e <span className="text-vesper-orange/95 font-medium">serviços distribuídos</span> em Node.js. Foco em arquitetura legível e código que sobrevive ao próximo deploy.
+                                Integro <span className="text-vesper-orange/95 font-medium">sistemas ERP</span> e construo <span className="text-vesper-orange/95 font-medium">APIs em Node.js</span> para ambientes regulados — onde uma falha de sincronização é não-conformidade, não só um bug.
                             </p>
                         </div>
 
@@ -247,10 +247,10 @@ function SkillsSection() {
                         <div className="space-y-6">
                             <h3 className="text-xl font-bold text-vesper-cyan flex items-center gap-2">
                                 <span className="w-2 h-2 bg-vesper-cyan rounded-full"></span>
-                                Cloud & Infra
+                                Dados & Mensageria
                             </h3>
                             <div className="flex flex-wrap gap-2">
-                                {cloudInfraTech.map((tech) => (
+                                {dataMessagingTech.map((tech) => (
                                     <span key={tech} className="px-3 py-1.5 rounded-md border border-vesper-cyan/20 bg-vesper-cyan/5 text-vesper-cyan/90 text-sm hover:bg-vesper-cyan/10 transition-colors cursor-default">
                                         {tech}
                                     </span>
@@ -261,24 +261,44 @@ function SkillsSection() {
                         <div className="space-y-6">
                             <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
                                 <span className="w-2 h-2 bg-foreground/50 rounded-full"></span>
-                                Data & Events
+                                Cloud & DevOps
                             </h3>
                             <div className="flex flex-wrap gap-2">
-                                {dataEventsTech.map((tech) => (
+                                {cloudDevOpsTech.map((tech) => (
                                     <span key={tech} className="px-3 py-1.5 rounded-md border border-foreground/10 bg-foreground/5 text-foreground/80 text-sm hover:bg-foreground/10 transition-colors cursor-default">
                                         {tech}
                                     </span>
                                 ))}
                             </div>
                         </div>
-                    </div>
 
-                    <div className="pt-8">
-                        <h3 className="text-sm font-mono text-vesper-orange/50 mb-4 uppercase tracking-wider">Tecnologias Complementares</h3>
-                        <TechMarquee
-                            items={['React', 'Next.js', 'TailwindCSS', 'GraphQL', 'gRPC', 'WebSockets', 'Jest', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB']}
-                            direction="right"
-                        />
+                        <div className="space-y-6">
+                            <h3 className="text-xl font-bold text-vesper-orange flex items-center gap-2">
+                                <span className="w-2 h-2 bg-vesper-orange rounded-full"></span>
+                                Integrações & Compliance
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {integrationsTech.map((tech) => (
+                                    <span key={tech} className="px-3 py-1.5 rounded-md border border-vesper-orange/20 bg-vesper-orange/5 text-vesper-orange/90 text-sm hover:bg-vesper-orange/10 transition-colors cursor-default">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="space-y-6">
+                            <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                                <span className="w-2 h-2 bg-foreground/50 rounded-full"></span>
+                                IA aplicada
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {aiTech.map((tech) => (
+                                    <span key={tech} className="px-3 py-1.5 rounded-md border border-foreground/10 bg-foreground/5 text-foreground/80 text-sm hover:bg-foreground/10 transition-colors cursor-default">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -293,7 +313,7 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
                 <SectionHeader
                     eyebrow="03 / Trabalho"
                     title={<><span className="text-foreground">Projetos em </span><span className="text-vesper-orange">Destaque</span></>}
-                    subtitle="Code is poetry. Aqui estão alguns dos meus melhores versos — desde APIs serverless até sistemas distribuídos."
+                    subtitle="Do PhotoGIMP, mantido desde 2021 com usuários reais, a APIs e sistemas distribuídos em produção."
                 />
 
 
@@ -420,7 +440,7 @@ function SiteFooter() {
                             <CoffeeIcon size={24} className="text-vesper-orange" /> Gabriel Almir
                         </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed max-w-xs">
-                            Desenvolvedor Backend focado em Node.js, arquitetura limpa, escalabilidade e código confiável.
+                            Desenvolvedor Backend Node.js/TypeScript, com foco em integrações ERP e sistemas em ambientes regulados.
                         </p>
                     </div>
 
@@ -535,16 +555,6 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
 
                 <main id="main" className="w-full overflow-x-hidden max-w-full">
                     <HeroSection />
-
-                    <section className="border-y border-vesper-orange/10 bg-vesper-orange/5 backdrop-blur-sm">
-                        <TechMarquee
-                            speed="slow"
-                            items={[
-                                "Clean Architecture", "DDD", "SOLID", "Event-Driven", "Microservices", "Serverless",
-                                "DevOps", "CI/CD", "TDD", "System Design", "Scalability", "Performance"
-                            ]}
-                        />
-                    </section>
 
                     <SkillsSection />
 

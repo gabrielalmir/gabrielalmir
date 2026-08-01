@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>Backend Developer</strong><br/>
-  Node.js • TypeScript • NestJS • Python • AI
+  Node.js • TypeScript • NestJS • ERP Integrations & Regulated Systems
 </p>
 
 <p align="center">
@@ -27,10 +27,10 @@
 
 ## 💫 About Me
 
-Backend developer with several years of experience building APIs and backend systems using **Node.js**.  
-Strong background in **microservices**, **event-driven systems**, and **integration architecture**.
+Backend developer building APIs and backend systems in **Node.js** and **TypeScript**, with **NestJS**.  
+Focused on **ERP integrations** (SAP, TOTVS) and **regulated environments** (BPF/GMP), where data consistency is a compliance requirement, not just a nice-to-have.
 
-Currently working at **Laboratório Cristália**, contributing to the evolution of solutions for the **pharmaceutical sector**, focusing on scalability, reliability, and compliance.
+Currently working at **Laboratório Cristália** in the pharmaceutical sector. Maintainer of **[PhotoGIMP](https://github.com/gabrielalmir/PhotoGIMP)** since 2021, an open source patch used by real designers and Linux users.
 
 ## 🌐 Socials
 
@@ -54,7 +54,7 @@ Currently working at **Laboratório Cristália**, contributing to the evolution 
 ## 💻 Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=nodejs,ts,js,nestjs,aws,docker,postgres,mongodb,redis,nginx,git,github,githubactions,jest,vitest,fastify,express,python,html,css" />
+  <img src="https://skillicons.dev/icons?i=nodejs,ts,js,nestjs,aws,docker,postgres,mongodb,git,github,githubactions,fastify,python,html,css" />
 </p>
 
 ---

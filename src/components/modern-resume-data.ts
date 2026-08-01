@@ -1,13 +1,13 @@
 import { Bot, Cloud, Code, Database, Globe, Server } from 'lucide-react';
 
 export const resumeData = {
-        summary: 'Analista de Sistemas Pleno com experiência em Node.js, TypeScript e NestJS, atuando no desenvolvimento de APIs, integrações entre sistemas e arquitetura de microsserviços. Interesse por arquitetura limpa, boas práticas (SOLID, Design Patterns), observabilidade e automação com CI/CD em ambientes AWS. Aprendizado contínuo em IA/ML aplicada.',
+        summary: 'Analista de Sistemas Pleno com foco em Node.js, TypeScript e NestJS, construindo APIs e integrações entre sistemas ERP em ambiente regulado. Aplico arquitetura hexagonal e SOLID quando o cenário justifica a complexidade — e sei reconhecer quando não justifica. Venho aplicando Machine Learning e LLMs em projetos reais de detecção e tratamento de dados.',
         experience: [
             {
                 title: 'Analista de Sistemas Pleno',
                 company: 'Laboratório Cristália',
                 period: 'Abril de 2026 – Presente | Itapira, SP | No local',
-                description: 'Colaboração com equipes multifuncionais (GQ, RH, Compras, Jurídico e TI) garantindo entregas alinhadas aos requisitos de negócio e padrões de conformidade. Responsável por integrações de sistemas ERP com impacto em BPF (Boas Práticas de Fabricação). Mentoria de novos integrantes desde o onboarding até a evolução profissional, promovendo cultura de boas práticas de engenharia, testes automatizados e documentação técnica.'
+                description: 'Integrações de sistemas ERP com impacto direto em BPF (Boas Práticas de Fabricação) — onde inconsistência de dados é não-conformidade regulatória, não só bug. Aplico LLMs no dia a dia para triagem, priorização e detecção de problemas, incluindo automação de desbloqueio de senha via Copilot Studio. Colaboro com GQ, RH, Compras, Jurídico e TI para alinhar entregas técnicas às exigências de conformidade. Mantenho e evoluo aplicações Node.js e PHP legadas nesse ambiente auditado. Mentoria de novos integrantes, do onboarding à evolução técnica.'
             },
             {
                 title: 'Desenvolvedor Backend Node.js',
@@ -52,12 +52,12 @@ export const resumeData = {
             }
         ],
         skills: [
-            { icon: Code, category: 'Linguagens', items: ['Node.js', 'TypeScript', 'Python', 'JavaScript', 'SQL', 'Go'] },
-            { icon: Server, category: 'Frameworks', items: ['NestJS', 'React', 'FastAPI', 'TypeORM', 'Express.js', 'Fastify'] },
-            { icon: Cloud, category: 'Cloud', items: ['AWS Lambda', 'S3', 'SQS', 'DynamoDB', 'RDS', 'ECS', 'CloudWatch', 'API Gateway'] },
-            { icon: Database, category: 'Mensageria', items: ['RabbitMQ', 'Amazon SQS'] },
-            { icon: Globe, category: 'DevOps', items: ['Docker', 'GitHub Actions', 'CI/CD', 'OpenTelemetry'] },
-            { icon: Bot, category: 'IA/ML', items: ['Pandas', 'LangChain', 'LLMs', 'RAG', 'Prophet', 'NLP'] },
+            { icon: Code, category: 'Linguagens', items: ['Node.js', 'TypeScript', 'Python', 'JavaScript', 'SQL'] },
+            { icon: Server, category: 'Frameworks', items: ['NestJS'] },
+            { icon: Cloud, category: 'Cloud', items: ['AWS Lambda', 'AWS SQS'] },
+            { icon: Database, category: 'Mensageria', items: ['RabbitMQ'] },
+            { icon: Globe, category: 'DevOps', items: ['Docker', 'CI/CD (GitLab)'] },
+            { icon: Bot, category: 'IA aplicada', items: ['LLMs', 'Copilot Studio'] },
         ],
         certifications: [
             {
@@ -106,11 +106,11 @@ export const resumeData = {
                 url: 'https://github.com/gabrielalmir/resulta'
             },
             {
-                name: 'eventostec-rs',
+                name: 'eventostec-ts',
                 period: 'Julho de 2024 – Agosto de 2024',
-                description: 'Backend de plataforma centralizadora de eventos e meetups da comunidade tech.',
-                technologies: ['Rust', 'Axum', 'SQLx', 'AWS', 'LocalStack', 'Docker', 'Postgres'],
-                url: 'https://github.com/gabrielalmir/eventostec-rs'
+                description: 'API REST para consolidar conceitos de backend em TypeScript: plataforma centralizadora de eventos e meetups da comunidade tech, com infraestrutura local emulando AWS via LocalStack.',
+                technologies: ['TypeScript', 'Fastify', 'Drizzle ORM', 'Docker', 'LocalStack'],
+                url: 'https://github.com/gabrielalmir/eventostec-ts'
             },
             {
                 name: 'PhotoGIMP – Projeto Open Source',
