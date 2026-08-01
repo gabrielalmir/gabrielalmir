@@ -35,24 +35,45 @@ test('touch targets and heading structure are sound', async ({ page }) => {
   await expect(page.locator('.skip-link')).toBeFocused();
 });
 
-test('homepage sections build with scroll without hiding content', async ({ page }, testInfo) => {
-  test.skip(
-    ['no-javascript', 'reduced-motion'].includes(testInfo.project.name),
-    'Scroll controller is disabled in the final-state accessibility modes',
-  );
+test('homepage sections build with Framer scroll progress without hiding content', async ({
+  page,
+}, testInfo) => {
   await page.goto('/');
   const home = page.locator('.home-story');
   await expect(home.locator('[data-build-section]')).toHaveCount(9);
+  await expect(page.locator('[data-storytelling-controller]')).toHaveCount(1);
+
+  if (testInfo.project.name === 'no-javascript') {
+    await expect(page.locator('html')).not.toHaveClass(/build-motion/);
+    await expect(page.locator('#processo h2')).toBeVisible();
+    return;
+  }
+
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-storytelling-hydrated',
+    testInfo.project.name === 'reduced-motion' ? 'reduced' : 'true',
+  );
   const process = page.locator('#processo');
+  if (testInfo.project.name === 'reduced-motion') {
+    await expect(page.locator('html')).not.toHaveClass(/build-motion/);
+    await expect(process.locator('h2')).toBeVisible();
+    await expect(process.locator('[data-build-item]').first()).toHaveCSS('transform', 'none');
+    return;
+  }
+
+  await expect(page.locator('html')).toHaveClass(/build-motion/);
   const initial = Number(await process.getAttribute('data-build-progress'));
   await process.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(50);
+  await expect
+    .poll(async () => Number(await process.getAttribute('data-build-progress')))
+    .toBeGreaterThan(initial);
   const intermediate = Number(await process.getAttribute('data-build-progress'));
-  await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
-  await page.waitForTimeout(50);
-  const final = Number(await process.getAttribute('data-build-progress'));
-  expect(intermediate).toBeGreaterThan(initial);
-  expect(final).toBeGreaterThanOrEqual(intermediate);
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight - innerHeight - 20));
+  await expect
+    .poll(async () => Number(await process.getAttribute('data-build-progress')))
+    .toBeGreaterThanOrEqual(intermediate);
+  await expect(page.locator('.contact')).toHaveAttribute('data-build-progress', '1.00');
+  await expect(page.locator('.contact [data-build-item]')).toHaveCSS('opacity', '1');
   await expect(page.locator('#processo h2')).toBeVisible();
   await expect(page).toHaveScreenshot(`build-final-${testInfo.project.name}.png`, {
     fullPage: false,
@@ -63,9 +84,9 @@ test('homepage sections build with scroll without hiding content', async ({ page
 test('trajectory is bilingual, documentary, and free of the old decoration', async ({ page }) => {
   await page.goto('/');
   const trajectory = page.locator('#trajetoria');
-  await expect(trajectory.getByText('Diolinux')).toBeVisible();
-  await expect(trajectory.getByText('Laboratório Cristália')).toBeVisible();
-  await expect(trajectory.getByText(/2022—2025 · concluído/)).toBeVisible();
+  await expect(trajectory.getByText('Diolinux').first()).toBeVisible();
+  await expect(trajectory.getByText('Laboratório Cristália').first()).toBeVisible();
+  await expect(trajectory.getByText(/2022—2025 · concluído/).first()).toBeVisible();
   await trajectory.locator('.trajectory-more summary').click();
   await expect(trajectory.getByText(/problemas algorítmicos sob limite de tempo/i)).toBeVisible();
   await expect(trajectory.getByText('@momentoalmir')).toBeVisible();
@@ -101,7 +122,29 @@ test('hero has three accessible parallax depths', async ({ page }, testInfo) => 
   await expect(hero.locator('[data-parallax-layer][data-speed="0.6"]')).toHaveCount(1);
   await expect(hero.locator('[data-depth="foreground"][data-speed="1.0"]')).toHaveCount(2);
   if (testInfo.project.name === 'reduced-motion') {
-    await expect(hero.locator('[data-parallax-layer]').first()).toHaveCSS('transform', 'none');
+    await expect(page.locator('html')).toHaveAttribute('data-storytelling-hydrated', 'reduced');
+    await expect(page.locator('html')).not.toHaveClass(/build-motion/);
+    await expect(hero.locator('[data-parallax-layer]').first()).not.toHaveAttribute(
+      'style',
+      /--layer-y/,
+    );
+    const transform = await hero
+      .locator('[data-parallax-layer]')
+      .first()
+      .evaluate((element) => getComputedStyle(element).transform);
+    expect(['none', 'matrix(1, 0, 0, 1, 0, 0)']).toContain(transform);
+  } else if (testInfo.project.name !== 'no-javascript') {
+    await expect(page.locator('html')).toHaveAttribute('data-storytelling-hydrated', 'true');
+    const layer = hero.locator('[data-parallax-layer]').first();
+    const initialLayerY = await layer.evaluate((element) =>
+      getComputedStyle(element).getPropertyValue('--layer-y'),
+    );
+    await page.evaluate(() => scrollTo(0, 300));
+    await expect
+      .poll(() =>
+        layer.evaluate((element) => getComputedStyle(element).getPropertyValue('--layer-y')),
+      )
+      .not.toBe(initialLayerY);
   }
 });
 

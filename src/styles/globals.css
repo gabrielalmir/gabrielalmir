@@ -126,6 +126,9 @@ footer {
 
 .site-header nav a,
 .locale {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
   font: 600 0.69rem 'Geist Mono';
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -1816,7 +1819,9 @@ button:focus-visible {
 .build-motion [data-build-item] {
   opacity: calc(0.08 + var(--item-progress) * 0.92);
   transform: translateY(calc((1 - var(--item-progress)) * 24px));
-  transition: transform 120ms linear, opacity 120ms linear;
+  transition:
+    transform 120ms linear,
+    opacity 120ms linear;
   will-change: transform, opacity;
 }
 
@@ -2168,8 +2173,9 @@ button:focus-visible {
 
 /* Systems atlas: blue boundaries, amber decisions, green evidence, red risk. */
 .systems-atlas {
-  background: var(--paper);
-  border-block: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  border-block: 1px solid var(--paper);
 }
 
 .atlas-group-title {
@@ -2591,44 +2597,12 @@ button:focus-visible {
   min-height: 150px;
 }
 
-.system-visual svg {
+.system-visual img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 3/2;
-}
-
-.system-visual svg > * {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-}
-
-.system-visual .visual-grid {
-  stroke: var(--blue);
-  stroke-width: 1;
-  opacity: 0.11;
-}
-
-.system-visual .accent {
-  stroke: var(--amber);
-  stroke-width: 3;
-}
-
-.system-visual .fill-amber {
-  fill: var(--amber);
-  stroke: var(--ink);
-}
-
-.system-visual .fill-blue {
-  fill: var(--blue);
-  stroke: var(--ink);
-}
-
-.system-visual .fill-green {
-  fill: var(--green);
-  stroke: var(--ink);
+  object-fit: cover;
 }
 
 .system-visual figcaption {
@@ -2814,7 +2788,7 @@ button:focus-visible {
   align-items: end;
   margin-bottom: 1.5rem;
   padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid rgba(242, 236, 222, 0.38);
 }
 
 .systems-atlas .atlas-group-title {
@@ -2823,7 +2797,7 @@ button:focus-visible {
 
 .systems-atlas .atlas-group-heading > p {
   margin: 0;
-  color: var(--muted);
+  color: #c7bdad;
   font-size: 0.9rem;
 }
 
@@ -2841,8 +2815,11 @@ button:focus-visible {
 
 .systems-atlas .system-plate {
   padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  background: var(--paper-2);
+  color: var(--ink);
   border: 1px solid var(--ink);
   border-top-color: var(--amber);
+  box-shadow: 0 5px 0 rgba(24, 25, 21, 0.35);
 }
 
 .systems-atlas .system-plate > header {
@@ -2855,6 +2832,10 @@ button:focus-visible {
 
 .systems-atlas .system-plate > header > div {
   min-width: 0;
+}
+
+.systems-atlas .system-visual {
+  border-color: var(--ink);
 }
 
 .system-status {
@@ -2871,10 +2852,23 @@ button:focus-visible {
   color: var(--muted);
 }
 
+.systems-atlas .system-status {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.systems-atlas .status-experimental,
+.systems-atlas .status-planned {
+  border-color: #8b570d;
+  color: #8b570d;
+}
+
 @media (hover: hover) {
   .systems-atlas .system-plate,
   .systems-atlas .lab-card {
-    transition: transform 180ms ease, box-shadow 180ms ease;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .systems-atlas .system-plate:hover,
@@ -2902,6 +2896,12 @@ button:focus-visible {
   line-height: 1.55;
 }
 
+.systems-atlas .project-evidence,
+.systems-atlas .lab-limit,
+.systems-atlas .lab-summary {
+  color: var(--muted);
+}
+
 .project-decision {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -2911,9 +2911,9 @@ button:focus-visible {
   border-block: 1px solid var(--line);
 }
 
-.project-decision > span {
+.project-decision > svg {
   color: var(--amber);
-  font: 700 1.25rem 'Geist Mono';
+  flex: none;
 }
 
 .project-decision small {
@@ -2937,9 +2937,9 @@ button:focus-visible {
   line-height: 1.5;
 }
 
-.project-evidence > span {
+.project-evidence > svg {
   color: var(--green);
-  font-weight: 800;
+  flex: none;
 }
 
 .systems-atlas .lab-grid {
@@ -2952,9 +2952,11 @@ button:focus-visible {
 .systems-atlas .lab-card {
   min-width: 0;
   padding: clamp(1.2rem, 2vw, 1.75rem);
-  background: transparent;
-  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 1px solid var(--ink);
   border-top-color: var(--blue);
+  box-shadow: 0 4px 0 rgba(24, 25, 21, 0.3);
 }
 
 .systems-atlas .lab-card > header {
@@ -2982,9 +2984,9 @@ button:focus-visible {
   border-top: 1px solid var(--line);
 }
 
-.lab-limit > span {
+.lab-limit > svg {
   color: var(--red);
-  font-weight: 800;
+  flex: none;
 }
 
 @media (max-width: 1100px) {

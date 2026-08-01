@@ -2,6 +2,7 @@
 import Shell from './Shell.astro';
 import PersonalSignals from './PersonalSignals.astro';
 import SystemsAtlas from './SystemsAtlas.astro';
+import StorytellingController from './storytelling-controller';
 import { getCollection } from 'astro:content';
 import {
   copy,
@@ -30,6 +31,7 @@ const trajectoryOverview = [
 ---
 
 <Shell locale={locale}>
+  <StorytellingController client:load />
   <main id="main" class="home-story">
     <section class="hero" data-build-section="hero" data-parallax-hero>
       <div
@@ -65,7 +67,7 @@ const trajectoryOverview = [
           <a class="button ink" href={locale === 'en' ? '#systems' : '#sistemas'}
             >{locale === 'en' ? 'Explore systems and decisions' : 'Explorar sistemas e decisões'}
             <span>↓</span></a
-          ><a class="button" href={`${locale === 'en' ? '/en' : ''}/projects/pimbas`}
+          ><a class="button" href={`${locale === 'en' ? '/en' : ''}/projects/maybe`}
             >{locale === 'en' ? 'Open dossiers' : 'Abrir dossiês'} <span>↗</span></a
           >
         </div>
@@ -357,49 +359,3 @@ const trajectoryOverview = [
     </section>
   </main></Shell
 >
-
-<script>
-  const home = document.querySelector<HTMLElement>('.home-story');
-  if (home && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('build-motion');
-    const sections = [...home.querySelectorAll<HTMLElement>('[data-build-section]')];
-    const hero = home.querySelector<HTMLElement>('[data-parallax-hero]');
-    let frame = 0;
-    const clamp = (n: number) => Math.min(1, Math.max(0, n));
-    const update = () => {
-      frame = 0;
-      if (hero) {
-        const rect = hero.getBoundingClientRect();
-        const travel = Math.min(Math.max(-rect.top, 0), rect.height);
-        hero.querySelectorAll<HTMLElement>('[data-parallax-layer]').forEach((layer) => {
-          const speed = Number(layer.dataset.speed) || 0;
-          layer.style.setProperty('--layer-y', `${(travel * speed).toFixed(2)}px`);
-        });
-      }
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        const progress = clamp(
-          (innerHeight * 0.82 - rect.top) / (rect.height + innerHeight * 0.42),
-        );
-        section.style.setProperty('--build-progress', progress.toFixed(4));
-        section.dataset.buildProgress = progress.toFixed(2);
-        const items = [...section.querySelectorAll<HTMLElement>(':scope [data-build-item]')];
-        items.forEach((item, index) => {
-          const start = (index / Math.max(6, items.length + 2)) * 0.48;
-          const itemProgress = clamp((progress - start) / 0.34);
-          item.style.setProperty('--item-progress', itemProgress.toFixed(4));
-          const itemRect = item.getBoundingClientRect();
-          const parallax =
-            (clamp((innerHeight - itemRect.top) / (innerHeight + itemRect.height)) - 0.5) * 42;
-          item.style.setProperty('--parallax', parallax.toFixed(2));
-        });
-      });
-    };
-    const request = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    addEventListener('scroll', request, { passive: true });
-    addEventListener('resize', request, { passive: true });
-    update();
-  }
-</script>
