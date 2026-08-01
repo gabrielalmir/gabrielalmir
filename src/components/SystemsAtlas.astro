@@ -52,60 +52,57 @@ const labels =
   data-build-section="systems"
   aria-labelledby="systems-title"
 >
-  <header class="section-head" data-build-item>
-    <p class="kicker">{labels.eyebrow}</p><h2 id="systems-title">{labels.title}</h2><p>
-      {labels.intro}
-    </p>
-  </header>
-  <h3 class="atlas-group-title">{labels.dossiers}</h3>
+  <div class="atlas-heading" data-build-item>
+    <header class="section-head">
+      <p class="kicker">{labels.eyebrow}</p>
+      <h2 id="systems-title">{labels.title}</h2>
+      <p>{labels.intro}</p>
+    </header>
+    <figure class="atlas-editorial">
+      <img
+        src="/images/editorial/systems-atlas.webp"
+        width="1600"
+        height="533"
+        loading="lazy"
+        alt=""
+      />
+      <figcaption>
+        {en ? 'system / boundary / evidence' : 'sistema / fronteira / evidência'}
+      </figcaption>
+    </figure>
+  </div>
+  <div class="atlas-group-heading">
+    <h3 class="atlas-group-title">{labels.dossiers}</h3>
+    <p>{en ? 'Three systems examined in depth.' : 'Três sistemas examinados em profundidade.'}</p>
+  </div>
   <div class="dossier-grid">
     {
-      dossiers.map(({ data }) => (
+      dossiers.map(({ data }, index) => (
         <article class="system-plate" data-build-item>
           <header>
-            <>
-              <div>
-                <>
-                  <p class="kicker">{data.eyebrow}</p>
-                  <h3>{data.title}</h3>
-                </>
-              </div>
-              <span class={`system-status status-${data.status}`}>{data.status}</span>
-            </>
+            <p class="project-index">0{index + 1}</p>
+            <div>
+              <p class="kicker">{data.eyebrow}</p>
+              <h3>{data.title}</h3>
+            </div>
+            <span class={`system-status status-${data.status}`}>{data.status}</span>
           </header>
           <SystemVisual
             slug={data.slug}
             label={`${en ? 'Visual summary of' : 'Resumo visual de'} ${data.title}`}
           />
           <p class="system-summary">{data.card?.summary ?? data.summary}</p>
-          <dl>
-            <>
-              <div class="fact-context">
-                <>
-                  <dt>{labels.context}</dt>
-                  <dd>{data.card?.context ?? data.context}</dd>
-                </>
-              </div>
-              <div class="fact-decision">
-                <>
-                  <dt>{labels.decision}</dt>
-                  <dd>{data.card?.decision ?? data.decisions[0].body}</dd>
-                </>
-              </div>
-              <div class="fact-evidence">
-                <>
-                  <dt>{labels.evidence}</dt>
-                  <dd>{data.card?.evidence ?? data.evidence[0].detail}</dd>
-                </>
-              </div>
-              <div class="fact-limit">
-                <>
-                  <dt>{labels.limit}</dt>
-                  <dd>{data.card?.limit ?? data.limits[0]}</dd>
-                </>
-              </div>
-            </>
-          </dl>
+          <div class="project-decision">
+            <span aria-hidden="true">◇</span>
+            <div>
+              <small>{labels.decision}</small>
+              <p>{data.card?.decision ?? data.decisions[0].body}</p>
+            </div>
+          </div>
+          <p class="project-evidence">
+            <span aria-hidden="true">✓</span>
+            {data.card?.evidence ?? data.evidence[0].detail}
+          </p>
           <div class="system-links">
             <a class="text-link" href={`${prefix}/projects/${data.slug}`}>
               {labels.open} <span>→</span>
@@ -126,40 +123,40 @@ const labels =
       ))
     }
   </div>
-  <h3 class="atlas-group-title labs-title">{labels.labs}</h3>
+  <div class="atlas-group-heading labs-title">
+    <h3 class="atlas-group-title">{labels.labs}</h3>
+    <p>
+      {
+        en
+          ? 'Focused experiments with explicit boundaries.'
+          : 'Experimentos focados, com limites explícitos.'
+      }
+    </p>
+  </div>
   <div class="lab-grid">
     {
-      labs.map(({ data }) => (
+      labs.map(({ data }, index) => (
         <article class="lab-card" data-build-item>
-          <>
-            <header>
-              <>
-                <div>
-                  <>
-                    <p class="kicker">{data.status}</p>
-                    <h3>{data.title}</h3>
-                  </>
-                </div>
-                <SystemVisual
-                  slug={data.slug}
-                  label={`${en ? 'Symbol for' : 'Símbolo de'} ${data.title}`}
-                  compact
-                />
-              </>
-            </header>
-            <p>{data.summary}</p>
-            <dl>
-              <>
-                <dt class="fact-evidence">{labels.evidence}</dt>
-                <dd>{data.evidence[0].detail}</dd>
-                <dt class="fact-limit">{labels.limit}</dt>
-                <dd>{data.limits[0]}</dd>
-              </>
-            </dl>
-            <a class="text-link" href={`${prefix}/projects/${data.slug}`}>
-              {labels.inspect} <span>→</span>
-            </a>
-          </>
+          <header>
+            <div>
+              <p class="project-index">L0{index + 1}</p>
+              <p class="kicker">{data.status}</p>
+            </div>
+            <SystemVisual
+              slug={data.slug}
+              label={`${en ? 'Symbol for' : 'Símbolo de'} ${data.title}`}
+              compact
+            />
+          </header>
+          <h3>{data.title}</h3>
+          <p class="lab-summary">{data.summary}</p>
+          <p class="lab-limit">
+            <span aria-hidden="true">!</span>
+            {data.limits[0]}
+          </p>
+          <a class="text-link" href={`${prefix}/projects/${data.slug}`}>
+            {labels.inspect} <span>→</span>
+          </a>
         </article>
       ))
     }

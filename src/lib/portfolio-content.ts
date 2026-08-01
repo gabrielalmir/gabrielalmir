@@ -147,7 +147,7 @@ export const trajectoryContent: Record<Locale, TrajectoryContent> = {
         track: 'public',
         organization: '@momentoalmir',
         role: 'Instagram',
-        summary: 'Fotografia, processo e fragmentos do cotidiano.',
+        summary: 'Fotografia e diário visual no Instagram, com processo e fragmentos do cotidiano.',
         image: {
           src: 'instagram',
           alt: 'Ilustração editorial de uma mesa de fotografia e diário visual',
@@ -160,8 +160,8 @@ export const trajectoryContent: Record<Locale, TrajectoryContent> = {
         period: 'em público',
         track: 'public',
         organization: '@avlye',
-        role: 'YouTube',
-        summary: 'Vídeos sobre tecnologia, ideias e aprendizado.',
+        role: 'YouTube · Instagram',
+        summary: 'Vídeos sobre tecnologia, ideias e aprendizado, publicados no YouTube e no Instagram.',
         image: {
           src: 'youtube',
           alt: 'Ilustração editorial de um pequeno estúdio de criação em vídeo',
@@ -292,7 +292,7 @@ export const trajectoryContent: Record<Locale, TrajectoryContent> = {
         track: 'public',
         organization: '@momentoalmir',
         role: 'Instagram',
-        summary: 'Photography, process, and fragments of everyday life.',
+        summary: 'Photography and a visual diary on Instagram, with process and fragments of everyday life.',
         image: {
           src: 'instagram',
           alt: 'Editorial illustration of a photography and visual diary workspace',
@@ -305,8 +305,8 @@ export const trajectoryContent: Record<Locale, TrajectoryContent> = {
         period: 'in public',
         track: 'public',
         organization: '@avlye',
-        role: 'YouTube',
-        summary: 'Videos about technology, ideas, and learning.',
+        role: 'YouTube · Instagram',
+        summary: 'Videos about technology, ideas, and learning, published on YouTube and Instagram.',
         image: {
           src: 'youtube',
           alt: 'Editorial illustration of a small video creation studio',

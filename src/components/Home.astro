@@ -256,6 +256,9 @@ const trajectoryOverview = [
                         </picture>
                       )
                     )}
+                    <p class="moment-role">
+                      {moment.role} · {moment.organization}
+                    </p>
                     <p>{moment.summary}</p>
                     {moment.href && (
                       <a class="text-link" href={moment.href} target="_blank" rel="noreferrer">
