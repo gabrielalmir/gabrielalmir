@@ -1,15 +1,69 @@
 ---
-import Shell from './Shell.astro'; import { copy, getArticles, articlePath, type Locale } from '@/lib/portfolio-content';
-const { locale='pt-BR' }=Astro.props as {locale:Locale}; const c=copy[locale]; const articles=getArticles(locale);
-const workId=locale==='en'?'work':'trabalhos', processId=locale==='en'?'process':'processo';
+import Shell from './Shell.astro';
+import PersonalSignals from './PersonalSignals.astro';
+import { copy, getArticles, articlePath, trajectoryContent, type Locale } from '@/lib/portfolio-content';
+const { locale='pt-BR' }=Astro.props as {locale:Locale};
+const c=copy[locale]; const trajectory=trajectoryContent[locale]; const articles=getArticles(locale);
+const workId=locale==='en'?'work':'trabalhos', processId=locale==='en'?'process':'processo', trajectoryId=locale==='en'?'trajectory':'trajetoria';
+const momentsByTrack = (track: 'career'|'learning'|'public') => trajectory.moments.filter(moment => moment.track === track);
+const trajectoryOverview = [...momentsByTrack('career'), ...momentsByTrack('learning').filter(moment => ['Senac','FATEC Itapira'].includes(moment.organization))].sort((a,b)=>a.period.localeCompare(b.period));
 ---
 <Shell locale={locale}>
-<main id="main">
- <section class="hero grid-paper"><div class="hero-copy" data-reveal><p class="kicker">{c.heroKicker}</p><h1>{c.heroTitle}</h1><p class="lede">{c.heroBody}</p><div class="actions"><a class="button ink" href={`#${workId}`}>{c.heroPrimary} <span>↓</span></a><a class="button" href={locale==='en'?'/en/blog':'/blog'}>{c.heroSecondary} <span>↗</span></a></div></div><figure class="hero-portrait" data-reveal><img src="/images/editorial/gabriel-hero.webp" width="800" height="1000" alt={locale==='en'?'Editorial portrait of Gabriel Almir':'Retrato editorial de Gabriel Almir'} fetchpriority="high"><figcaption>{locale==='en'?'Between systems, ideas, and good questions.':'Entre sistemas, ideias e boas perguntas.'}</figcaption></figure><span class="margin-note">{locale==='en'?'systems / people / learning':'sistemas / pessoas / aprendizado'}</span></section>
- <section class="proof"><header><p class="kicker">00 / {locale==='en'?'brief':'síntese'}</p><h2>{c.proofTitle}</h2></header><div>{c.proofs.map(([metric,title,text],i)=><article data-reveal><span class="index">0{i+1}</span><strong>{metric}</strong><h3>{title}</h3><p>{text}</p></article>)}</div></section>
- <section class="section work" id={workId}><header class="section-head"><p class="kicker">01 / {locale==='en'?'selected work':'trabalhos'}</p><h2>{c.workTitle}</h2><p>{c.workIntro}</p></header><div class="story-list">{c.stories.map((story,i)=><article data-reveal><header><span class="index">{story.n}</span><p class="kicker">{story.tag}</p><h3>{story.title}</h3></header><div class="story-path"><div><small>{locale==='en'?'Constraint':'Restrição'}</small><p>{story.constraint}</p></div><div><small>{locale==='en'?'Decision':'Decisão'}</small><p>{story.decision}</p></div><div><small>{locale==='en'?'Result':'Resultado'}</small><p>{story.result}</p></div></div><a class="text-link" href={story.href}>{story.label} <span>↗</span></a></article>)}</div></section>
- <section class="section process grid-paper" id={processId}><header class="section-head"><p class="kicker">02 / {locale==='en'?'behind the scenes':'bastidores'}</p><h2>{c.processTitle}</h2><p>{c.processBody}</p></header><ol>{c.processSteps.map(([n,title,text])=><li data-reveal><span>{n}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
- <section class="personal"><figure data-reveal><img src="/images/editorial/gabriel-process.webp" width="1200" height="675" loading="lazy" alt={locale==='en'?'Gabriel among visual process marks':'Gabriel entre marcas visuais de processo'}><figcaption>{locale==='en'?'Thinking is also a way of building.':'Pensar também é uma forma de construir.'}</figcaption></figure><div data-reveal><p class="kicker">03 / {locale==='en'?'personal layer':'camada pessoal'}</p><h2>{c.personalTitle}</h2><p>{c.personalBody}</p><aside><img src="/me.webp" width="800" height="800" loading="lazy" alt="Gabriel Almir"><span>{locale==='en'?'Curiosity in its natural state.':'Curiosidade em estado natural.'}</span></aside></div></section>
- <section class="section writing"><header class="section-head"><p class="kicker">04 / {locale==='en'?'writing':'escrita'}</p><h2>{c.writingTitle}</h2></header><div class="article-grid">{articles.map(a=><a class={`article-card cover-${a.cover}`} href={articlePath(locale,a.translationKey)} data-reveal><span>{a.meta}</span><h3>{a.title}</h3><p>{a.excerpt}</p><i>↗</i></a>)}</div></section>
- <section class="contact" id="contato"><p class="kicker">05 / {locale==='en'?'contact':'contato'}</p><h2>{c.contactTitle}</h2><p>{c.contactBody}</p><a class="button ink" href="mailto:contato@gabrielalmir.com">{c.email} <span>↗</span></a></section>
+<main id="main" class="home-story">
+ <section class="hero" data-build-section="hero" data-parallax-hero>
+  <div class="hero-parallax hero-parallax-back" data-parallax-layer data-depth="background" data-speed="0.3" aria-hidden="true"><span class="hero-wash"></span><span class="hero-grid"></span></div>
+  <div class="hero-parallax hero-parallax-middle" data-parallax-layer data-depth="middle" data-speed="0.6" aria-hidden="true"><span class="orbit orbit-large"><i></i><b></b></span><span class="orbit orbit-small"><i></i></span><span class="system-node node-square"></span><span class="system-node node-dot"></span><span class="system-label">input → decision → output</span></div>
+  <div class="hero-copy hero-foreground" data-depth="foreground" data-speed="1.0" data-build-item><p class="kicker">{c.heroKicker}</p><h1>{c.heroTitle}</h1><p class="lede">{c.heroBody}</p><div class="actions"><a class="button ink" href={`#${trajectoryId}`}>{locale==='en'?'Follow the path':'Conheça a trajetória'} <span>↓</span></a><a class="button" href={locale==='en'?'/en/blog':'/blog'}>{c.heroSecondary} <span>↗</span></a></div></div>
+  <figure class="hero-portrait hero-foreground" data-depth="foreground" data-speed="1.0" data-build-item><img src="/images/editorial/gabriel-hero.webp" width="800" height="1000" alt={locale==='en'?'Editorial portrait of Gabriel Almir':'Retrato editorial de Gabriel Almir'} fetchpriority="high"><figcaption>{locale==='en'?'Between systems, ideas, and good questions.':'Entre sistemas, ideias e boas perguntas.'}</figcaption></figure>
+  <a class="scroll-cue" href={`#${trajectoryId}`} aria-label={locale==='en'?'Scroll to trajectory':'Descer para a trajetória'}><span>{locale==='en'?'scroll down':'role para descer'}</span><i aria-hidden="true">↓</i></a>
+ </section>
+
+ <section class="proof" data-build-section="proof"><header data-build-item><p class="kicker">00 / {locale==='en'?'brief':'síntese'}</p><h2>{c.proofTitle}</h2></header><div>{c.proofs.map(([metric,title,text],i)=><article data-build-item><span class="index">0{i+1}</span><strong>{metric}</strong><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+
+ <section class="section trajectory" id={trajectoryId} data-build-section="trajectory" aria-labelledby={`${trajectoryId}-title`}>
+  <header class="section-head" data-build-item><p class="kicker">{trajectory.eyebrow}</p><h2 id={`${trajectoryId}-title`}>{trajectory.title}</h2><p>{trajectory.intro}</p></header>
+  <ol class="trajectory-overview" data-build-item>{trajectoryOverview.map(moment=><li><time>{moment.period}</time><span>{moment.organization}</span><small>{moment.role}</small></li>)}</ol>
+  <details class="trajectory-more" data-build-item>
+   <summary><span>{locale==='en'?'Explore the complete trajectory':'Explorar a trajetória completa'}</span><small>{locale==='en'?'Education, contests, documents, and public work':'Formação, competições, documentos e trabalho público'}</small><i aria-hidden="true">+</i></summary>
+   <div class="trajectory-detail">
+  <aside class="competition-note" data-build-item><span aria-hidden="true">⌁</span><p>{trajectory.competitionNote}</p></aside>
+  <div class="trajectory-tracks">
+   {(['career','learning'] as const).map(track=><section class={`timeline timeline-${track}`} aria-labelledby={`track-${track}`} data-build-item>
+    <header><span class="track-dot" aria-hidden="true"></span><h3 id={`track-${track}`}>{trajectory.tracks[track]}</h3></header>
+    <div class="track-line" aria-hidden="true"></div>
+    <ol>{momentsByTrack(track).map(moment=><li data-build-item>
+     <div class="moment-copy"><time>{moment.period}</time><p class="moment-role">{moment.role}</p><h4>{moment.organization}</h4><p>{moment.summary}</p></div>
+     {moment.image && <figure class={`document ${moment.image.aspect ?? ''}`}>
+      <picture><source type="image/avif" srcset={`/images/trajectory/${moment.image.src}-480.avif 480w, /images/trajectory/${moment.image.src}-960.avif 960w`}><img loading="lazy" src={`/images/trajectory/${moment.image.src}-960.webp`} srcset={`/images/trajectory/${moment.image.src}-480.webp 480w, /images/trajectory/${moment.image.src}-960.webp 960w`} sizes="(max-width: 900px) 88vw, 32vw" width="960" height={moment.image.aspect==='portrait'?1200:540} alt={moment.image.alt}></picture><figcaption>{moment.image.caption}<small>{moment.credit}</small></figcaption>
+     </figure>}
+    </li>)}</ol>
+   </section>)}
+  </div>
+  <section class="public-branch" aria-labelledby="public-track" data-build-item><header><p class="kicker">↳ branch / public</p><h3 id="public-track">{trajectory.tracks.public}</h3></header><div>{momentsByTrack('public').map(moment=><article data-build-item>
+   {moment.organization==='PhotoGIMP' ? <img class="project-logo" src="/images/trajectory/photogimp.png" width="256" height="256" loading="lazy" alt="PhotoGIMP" /> : moment.image && <picture><source type="image/avif" srcset={`/images/trajectory/${moment.image.src}-480.avif 480w, /images/trajectory/${moment.image.src}-960.avif 960w`}><img loading="lazy" src={`/images/trajectory/${moment.image.src}-960.webp`} srcset={`/images/trajectory/${moment.image.src}-480.webp 480w, /images/trajectory/${moment.image.src}-960.webp 960w`} sizes="(max-width: 900px) 88vw, 25vw" width="960" height="691" alt={moment.image.alt}></picture>}
+   <time>{moment.period}</time><h4>{moment.organization}</h4><p>{moment.summary}</p>{moment.href&&<a class="text-link" href={moment.href} target="_blank" rel="noreferrer">{locale==='en'?'Visit':'Visitar'} <span>↗</span></a>}
+  </article>)}</div></section>
+   </div>
+  </details>
+ </section>
+
+ <section class="section work" id={workId} data-build-section="work"><header class="section-head" data-build-item><p class="kicker">02 / {locale==='en'?'selected work':'trabalhos'}</p><h2>{c.workTitle}</h2><p>{c.workIntro}</p></header><div class="story-list">{c.stories.map(story=><article data-build-item><header><span class="index">{story.n}</span><p class="kicker">{story.tag}</p><h3>{story.title}</h3></header><div class="story-path">{[[locale==='en'?'Constraint':'Restrição',story.constraint],[locale==='en'?'Decision':'Decisão',story.decision],[locale==='en'?'Result':'Resultado',story.result]].map(([label,text])=><div data-build-item><small>{label}</small><p>{text}</p></div>)}</div><a class="text-link" href={story.href}>{story.label} <span>↗</span></a></article>)}</div></section>
+
+ <section class="section process grid-paper" id={processId} data-build-section="process"><header class="section-head" data-build-item><p class="kicker">03 / {locale==='en'?'behind the scenes':'bastidores'}</p><h2>{c.processTitle}</h2><p>{c.processBody}</p></header><ol>{c.processSteps.map(([n,title,text],i)=><li data-build-item><span>{n}</span><code aria-hidden="true">{['if?','{ }','✓','git+'][i]}</code><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+
+ <section class="personal" data-build-section="personal"><figure data-build-item><span class="manga-lines" aria-hidden="true"></span><img src="/images/editorial/gabriel-process.webp" width="1200" height="675" loading="lazy" alt={locale==='en'?'Gabriel among visual process marks':'Gabriel entre marcas visuais de processo'}><figcaption>{locale==='en'?'Thinking is also a way of building.':'Pensar também é uma forma de construir.'}</figcaption></figure><div data-build-item><p class="kicker">04 / {locale==='en'?'personal layer':'camada pessoal'}</p><h2>{c.personalTitle}</h2><p>{c.personalBody}</p><PersonalSignals signals={c.personalSignals} title={locale==='en'?'Personal signals':'Sinais pessoais'} /></div></section>
+
+ <section class="section writing" data-build-section="writing"><header class="section-head" data-build-item><p class="kicker">05 / {locale==='en'?'writing':'escrita'}</p><h2>{c.writingTitle}</h2></header><div class="article-grid">{articles.map(a=><a class={`article-card cover-${a.cover}`} href={articlePath(locale,a.translationKey)} data-build-item><span>{a.meta}</span><h3>{a.title}</h3><p>{a.excerpt}</p><i>↗</i></a>)}</div></section>
+ <section class="contact" id="contato" data-build-section="contact"><div data-build-item><p class="kicker">06 / {locale==='en'?'contact':'contato'}</p><h2>{c.contactTitle}</h2><p>{c.contactBody}</p><a class="button ink" href="mailto:contato@gabrielalmir.com">{c.email} <span>↗</span></a></div></section>
 </main></Shell>
+
+<script>
+ const home=document.querySelector<HTMLElement>('.home-story');
+ if(home && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.documentElement.classList.add('build-motion');
+  const sections=[...home.querySelectorAll<HTMLElement>('[data-build-section]')]; const hero=home.querySelector<HTMLElement>('[data-parallax-hero]'); let frame=0;
+  const clamp=(n:number)=>Math.min(1,Math.max(0,n));
+  const update=()=>{frame=0;if(hero){const rect=hero.getBoundingClientRect();const travel=Math.min(Math.max(-rect.top,0),rect.height);hero.querySelectorAll<HTMLElement>('[data-parallax-layer]').forEach(layer=>{const speed=Number(layer.dataset.speed)||0;layer.style.setProperty('--layer-y',`${(travel*speed).toFixed(2)}px`);});} sections.forEach(section=>{const rect=section.getBoundingClientRect();const progress=clamp((innerHeight*.82-rect.top)/(rect.height+innerHeight*.42));section.style.setProperty('--build-progress',progress.toFixed(4));section.dataset.buildProgress=progress.toFixed(2);const items=[...section.querySelectorAll<HTMLElement>(':scope [data-build-item]')];items.forEach((item,index)=>{const start=index/Math.max(6,items.length+2)*.48;const itemProgress=clamp((progress-start)/.34);item.style.setProperty('--item-progress',itemProgress.toFixed(4));const itemRect=item.getBoundingClientRect();const parallax=(clamp((innerHeight-itemRect.top)/(innerHeight+itemRect.height))-.5)*42;item.style.setProperty('--parallax',parallax.toFixed(2));});});};
+  const request=()=>{if(!frame)frame=requestAnimationFrame(update)}; addEventListener('scroll',request,{passive:true});addEventListener('resize',request,{passive:true});update();
+ }
+</script>

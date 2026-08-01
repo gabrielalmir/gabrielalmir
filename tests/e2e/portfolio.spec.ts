@@ -7,7 +7,7 @@ for (const path of ['/', '/en/']) {
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.getByText('90%', { exact: false }).first()).toBeVisible();
     await expect(page.getByText(/PhotoGIMP/i).first()).toBeVisible();
-    await expect(page.getByText(/regulad|regulated/i).first()).toBeVisible();
+    await expect(page.getByText(/rigor|regulated/i).first()).toBeVisible();
     await expect(page.getByRole('main')).toBeVisible();
     await expect(page).toHaveScreenshot(`${path === '/' ? 'home-pt' : 'home-en'}-${testInfo.project.name}.png`, { fullPage: true, animations: 'disabled' });
   });
@@ -30,4 +30,63 @@ test('touch targets and heading structure are sound', async ({ page }) => {
   await expect(page.locator('h1')).toHaveCount(1);
   await page.keyboard.press('Tab');
   await expect(page.locator('.skip-link')).toBeFocused();
+});
+
+test('homepage sections build with scroll without hiding content', async ({ page }, testInfo) => {
+  test.skip(['no-javascript','reduced-motion'].includes(testInfo.project.name), 'Scroll controller is disabled in the final-state accessibility modes');
+  await page.goto('/');
+  const home = page.locator('.home-story');
+  await expect(home.locator('[data-build-section]')).toHaveCount(8);
+  const process = page.locator('#processo');
+  const initial = Number(await process.getAttribute('data-build-progress'));
+  await process.scrollIntoViewIfNeeded(); await page.waitForTimeout(50);
+  const intermediate = Number(await process.getAttribute('data-build-progress'));
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight)); await page.waitForTimeout(50);
+  const final = Number(await process.getAttribute('data-build-progress'));
+  expect(intermediate).toBeGreaterThan(initial); expect(final).toBeGreaterThanOrEqual(intermediate);
+  await expect(page.locator('#processo h2')).toBeVisible();
+  await expect(page).toHaveScreenshot(`build-final-${testInfo.project.name}.png`, { fullPage: false, animations: 'disabled' });
+});
+
+test('trajectory is bilingual, documentary, and free of the old decoration', async ({ page }) => {
+  await page.goto('/');
+  const trajectory = page.locator('#trajetoria');
+  await expect(trajectory.getByText('Diolinux')).toBeVisible();
+  await expect(trajectory.getByText('Laboratório Cristália')).toBeVisible();
+  await expect(trajectory.getByText(/2022—2025 · concluído/)).toBeVisible();
+  await trajectory.locator('.trajectory-more summary').click();
+  await expect(trajectory.getByText(/problemas algorítmicos sob limite de tempo/i)).toBeVisible();
+  await expect(trajectory.getByText('@momentoalmir')).toBeVisible();
+  await expect(page.locator('.architecture-layer,.chapter-mark,.coffee-ring,.checkpoint')).toHaveCount(0);
+  await page.goto('/en/');
+  await page.locator('#trajectory .trajectory-more summary').click();
+  await expect(page.locator('#trajectory').getByText(/São Paulo’s public state college system/)).toBeVisible();
+  await expect(page.locator('#trajectory').getByText(/Brazilian Computer Society/)).toBeVisible();
+});
+
+test('homepage has no horizontal overflow or external image requests', async ({ page }) => {
+  const external: string[] = [];
+  page.on('request', request => { if (request.resourceType() === 'image' && !request.url().startsWith('http://127.0.0.1:4321')) external.push(request.url()); });
+  await page.goto('/');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1); expect(external).toEqual([]);
+});
+
+test('hero has three accessible parallax depths', async ({ page }, testInfo) => {
+  await page.goto('/');
+  const hero = page.locator('[data-parallax-hero]');
+  await expect(hero.locator('[data-parallax-layer][data-speed="0.3"]')).toHaveCount(1);
+  await expect(hero.locator('[data-parallax-layer][data-speed="0.6"]')).toHaveCount(1);
+  await expect(hero.locator('[data-depth="foreground"][data-speed="1.0"]')).toHaveCount(2);
+  if (testInfo.project.name === 'reduced-motion') {
+    await expect(hero.locator('[data-parallax-layer]').first()).toHaveCSS('transform', 'none');
+  }
+});
+
+test('personal signals reveal accessible microcopy', async ({ page }) => {
+  await page.goto('/');
+  const coffee = page.locator('.signal-coffee');
+  await coffee.locator('summary').click();
+  await expect(coffee).toHaveAttribute('open', '');
+  await expect(coffee.getByText('Uma ideia quase sempre começa com café.')).toBeVisible();
 });

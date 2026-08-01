@@ -1,0 +1,20 @@
+---
+type Signal = { id:string; label:string; microcopy:string };
+const { signals, title } = Astro.props as { signals:readonly Signal[]; title:string };
+const iconPaths:Record<string,string[]> = {
+ coffee:['M9 14h18v10c0 5-4 9-9 9s-9-4-9-9V14Z','M27 18h3a5 5 0 0 1 0 10h-4','M13 7c0 3 2 3 2 6M20 7c0 3 2 3 2 6'],
+ code:['M14 11 5 20l9 9','M34 11l9 9-9 9','M26 6 14 34'],
+ anime:['M5 12h35M5 20h26M5 28h19M31 20l9 8-9 8'],
+ games:['M20 5 35 20 20 35 5 20 20 5Z','M20 12v16M12 20h16'],
+ linux:['M7 11h30v24H7z','m12 18 5 4-5 4','M21 27h10']
+};
+---
+<div class="personal-signals" aria-label={title}>
+  {signals.map(signal => <details class={`signal signal-${signal.id}`} name="personal-signals">
+    <summary aria-label={signal.label}>
+      <svg viewBox="0 0 48 48" aria-hidden="true">{iconPaths[signal.id].map(d=><path d={d}/>)}</svg>
+      <span>{signal.label}</span>
+    </summary>
+    <p>{signal.microcopy}</p>
+  </details>)}
+</div>

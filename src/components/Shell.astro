@@ -4,4 +4,4 @@ const { locale='pt-BR' } = Astro.props as {locale:Locale}; const c=copy[locale];
 ---
 <header class="site-header"><a class="brand" href={c.home} aria-label={locale==='en'?'Gabriel Almir — home':'Gabriel Almir — início'}><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt=""><small>Gabriel Almir</small></a><nav aria-label={locale==='en'?'Primary':'Principal'}>{c.nav.map(([label,href])=><a href={href}>{label}</a>)}</nav><a class="locale" href={c.switchHref} hreflang={locale==='en'?'pt-BR':'en'}>{c.switchLabel}<span aria-hidden="true">↗</span></a></header>
 <slot />
-<footer><a class="brand" href={c.home} aria-label={locale==='en'?'Gabriel Almir — home':'Gabriel Almir — início'}><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt=""></a><p>{c.footer}</p><p>© {new Date().getFullYear()}</p></footer>
+<footer><a class="brand" href={c.home} aria-label={locale==='en'?'Gabriel Almir — home':'Gabriel Almir — início'}><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt=""></a><p>{c.footer} <span class="home-path" aria-hidden="true">/home/gabriel</span></p><p>© {new Date().getFullYear()}</p></footer>
