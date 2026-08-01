@@ -1,35 +1,5 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import ProjectDetailClient from '@/components/project-detail-client';
-import { getAllProjectSlugs, getProjectBySlug, fetchGitHubStats, fetchGitHubReadme } from '@/lib/projects';
-
-export async function getStaticPaths() {
-  const slugs = getAllProjectSlugs();
-  return slugs.map((slug) => ({ params: { slug } }));
-}
-
-const { slug } = Astro.params;
-const project = getProjectBySlug(slug as string);
-
-if (!project) {
-  return Astro.redirect('/');
-}
-
-const [githubStats, githubReadme] = await Promise.all([
-  fetchGitHubStats(project.repo),
-  fetchGitHubReadme(project.repo),
-]);
-
-const projectWithStats = {
-  ...project,
-  content: githubReadme || project.content,
-  githubStats,
-};
+import Layout from '@/layouts/Layout.astro'; import Shell from '@/components/Shell.astro';
+export function getStaticPaths(){return [{params:{slug:'saturno'}}]}
 ---
-
-<Layout
-  title={`${project.title} | Gabriel Almir`}
-  description={project.excerpt}
->
-  <ProjectDetailClient client:idle project={projectWithStats} />
-</Layout>
+<Layout title="Saturno — Gabriel Almir" description="Meu laboratório público para explorar organização de trabalho sem prometer o que o código não prova." lang="pt-BR" alternateHref="/en/projects/saturno"><Shell locale="pt-BR"><main id="main" class="case-page"><header class="case-hero"><p class="kicker">Projeto público / 2025</p><h1>Saturno</h1><p>Eu construí Saturno como um laboratório para explorar organização de tarefas e projetos em público.</p></header><section class="case-facts"><article><small>Restrição</small><h2>Aprender sem inflar a história.</h2><p>Eu queria experimentar uma ferramenta de trabalho sem apresentar intenção como adoção, escala ou resultado comprovado.</p></article><article><small>Decisão</small><h2>Manter a evidência perto do código.</h2><p>Registrei o escopo localmente e limitei esta narrativa ao que o projeto público demonstra. Não atribuo mensageria ou arquitetura distribuída a Saturno.</p></article><article><small>Estado</small><h2>Um laboratório, não um produto acabado.</h2><p>TypeScript, React, Laravel, PHP e PostgreSQL aparecem no projeto. O aprendizado e os limites importam mais que um inventário de stack.</p></article></section><section class="case-note"><p class="kicker">O que ficou comigo</p><h2>Projetos públicos também precisam dizer “ainda não”.</h2><p>Tratar hipótese como hipótese torna o projeto mais honesto e deixa espaço para a próxima evidência.</p><a class="button ink" href="https://github.com/gabrielalmir/saturno">Ver código público ↗</a></section></main></Shell></Layout>

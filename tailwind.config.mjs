@@ -5,10 +5,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                'jetbrains': ['var(--font-jetbrains)', 'JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
-                'space': ['var(--font-space)', 'Space Mono', 'Consolas', 'Monaco', 'monospace'],
-                'fira': ['var(--font-fira)', 'Fira Code', 'Consolas', 'Monaco', 'monospace'],
-                'mono': ['var(--font-jetbrains)', 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', 'monospace'],
+                'mono': ['var(--font-geist-mono)', 'Consolas', 'Monaco', 'Courier New', 'monospace'],
             },
             colors: {
                 "vesper-orange": "rgb(var(--vesper-orange) / <alpha-value>)",

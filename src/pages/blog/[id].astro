@@ -1,21 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import BlogPostClient from '@/components/blog-post-client';
-import { getAllPostIds, getPostById } from '@/lib/blog';
-
-export function getStaticPaths() {
-  const ids = getAllPostIds();
-  return ids.map((id) => ({ params: { id } }));
+import Article from '@/components/Article.astro';
+import {articleKeys,getArticles,type ArticleKey} from '@/lib/portfolio-content';
+export function getStaticPaths(){
+  return articleKeys.map(articleKey=>({params:{id:articleKey}}));
 }
-
-const { id } = Astro.params;
-const post = getPostById(id as string);
-
-if (!post) {
-  return Astro.redirect('/blog');
-}
+const articleKey=Astro.params.id as ArticleKey;
+const a=getArticles('pt-BR').find(x=>x.translationKey===articleKey)!;
 ---
-
-<Layout title={`${post.title} | Gabriel Almir`} description={post.excerpt}>
-  <BlogPostClient client:idle post={post} />
-</Layout>
+<Layout title={`${a.title} — Gabriel Almir`} description={a.excerpt} lang="pt-BR" alternateHref={`/en/blog/${articleKey}`}><Article locale="pt-BR" articleKey={articleKey}/></Layout>

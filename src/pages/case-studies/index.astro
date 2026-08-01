@@ -1,8 +1,4 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import CaseStudiesPage from '@/components/case-studies-client';
+import Layout from '@/layouts/Layout.astro'; import Shell from '@/components/Shell.astro'; import {copy} from '@/lib/portfolio-content'; const c=copy['pt-BR'];
 ---
-
-<Layout title="Case Studies | Gabriel Almir" description="Projetos reais que demonstram expertise técnica, resolução de problemas complexos e impacto mensurável nos negócios.">
-  <CaseStudiesPage client:idle />
-</Layout>
+<Layout title={`${c.casesTitle} — Gabriel Almir`} description={c.workIntro} lang="pt-BR" alternateHref="/en/case-studies"><Shell locale="pt-BR"><main id="main" class="index-page"><header><p class="kicker">01 / trabalhos</p><h1>{c.casesTitle}</h1><p>{c.workIntro}</p></header><div class="case-index">{c.stories.map(s=><a href={s.href}><span>{s.n} / {s.tag}</span><h2>{s.title}</h2><p>{s.result}</p><i>↗</i></a>)}</div></main></Shell></Layout>

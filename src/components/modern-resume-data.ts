@@ -1,5 +1,3 @@
-import { Bot, Cloud, Code, Database, Globe, Server } from 'lucide-react';
-
 export const resumeData = {
         summary: 'Analista de Sistemas Pleno com foco em Node.js, TypeScript e NestJS, construindo APIs e integrações entre sistemas ERP em ambiente regulado. Aplico arquitetura hexagonal e SOLID quando o cenário justifica a complexidade — e sei reconhecer quando não justifica. Venho aplicando Machine Learning e LLMs em projetos reais de detecção e tratamento de dados.',
         experience: [
@@ -51,73 +49,11 @@ export const resumeData = {
                 projects: []
             }
         ],
-        skills: [
-            { icon: Code, category: 'Linguagens', items: ['Node.js', 'TypeScript', 'Python', 'JavaScript', 'SQL'] },
-            { icon: Server, category: 'Frameworks', items: ['NestJS'] },
-            { icon: Cloud, category: 'Cloud', items: ['AWS Lambda', 'AWS SQS'] },
-            { icon: Database, category: 'Mensageria', items: ['RabbitMQ'] },
-            { icon: Globe, category: 'DevOps', items: ['Docker', 'CI/CD (GitLab)'] },
-            { icon: Bot, category: 'IA aplicada', items: ['LLMs', 'Copilot Studio'] },
-        ],
         certifications: [
-            {
-                category: 'Machine Learning, Python e IA',
-                items: [
-                    { name: 'Intermediate Machine Learning | Kaggle', year: '2025' },
-                    { name: 'Intro to Machine Learning | Kaggle', year: '2024' },
-                    { name: 'AWS Academy Graduate – Machine Learning for Natural Language Processing | AWS', year: '2025' },
-                ]
-            },
-            {
-                category: 'Backend, Arquitetura e Cloud',
-                items: [
-                    { name: 'AWS Academy Graduate – Cloud Developing | AWS', year: '2025' },
-                    { name: 'Qualificação Profissional Desenvolvedor Back-end | Centro Paula Souza (Fatec)', year: '2025' },
-                    { name: 'Fundamentos da Arquitetura de Software | Full Cycle', year: '2024' },
-                    { name: 'Arquitetura Hexagonal (Ports and Adapters) | Full Cycle', year: '2025' },
-                    { name: 'Curso de SOLID Express | Full Cycle', year: '2025' },
-                    { name: 'Docker na Prática / Curso de Docker | Full Cycle', year: '2024–2025' },
-                    { name: 'Masterclass Aplicações Serverless na AWS | EW Academy', year: '2025' },
-                ]
-            },
-            {
-                category: 'Boas Práticas, Testes e Metodologias',
-                items: [
-                    { name: 'Design Patterns | Centro Paula Souza', year: '2024' },
-                    { name: 'Metodologias Ágeis | Javanauta', year: '2024' },
-                    { name: 'Testes Unitários (JUnit 5 e Mockito) | Javanauta', year: '2024' },
-                    { name: 'Career Essentials in Software Development | Microsoft & LinkedIn', year: '2024' },
-                ]
-            }
-        ],
-        projects: [
-            {
-                name: 'BitQueue',
-                period: 'Março de 2025 – Presente',
-                description: 'Plataforma de message queue para desacoplar e escalar microsserviços, sistemas distribuídos e aplicações serverless. Desenvolvimento de API em Node.js e TypeScript com Arquitetura Hexagonal. Foco em confiabilidade, escalabilidade e boas práticas de design de sistemas.',
-                technologies: ['Node.js', 'TypeScript', 'REST', 'SQL', 'React.js', 'Docker', 'CI/CD', 'Swagger', 'GitHub'],
-                url: 'https://github.com/gabrielalmir/bitqueue'
-            },
-            {
-                name: 'Resulta – Biblioteca TypeScript',
-                period: 'Fevereiro de 2025 – Presente',
-                description: 'Biblioteca TypeScript que fornece um tipo Result para lidar com sucesso e erro de forma funcional, inspirada no Result de Rust. Publicada no npm.',
-                technologies: ['TypeScript', 'Node.js', 'npm'],
-                url: 'https://github.com/gabrielalmir/resulta'
-            },
-            {
-                name: 'eventostec-ts',
-                period: 'Julho de 2024 – Agosto de 2024',
-                description: 'API REST para consolidar conceitos de backend em TypeScript: plataforma centralizadora de eventos e meetups da comunidade tech, com infraestrutura local emulando AWS via LocalStack.',
-                technologies: ['TypeScript', 'Fastify', 'Drizzle ORM', 'Docker', 'LocalStack'],
-                url: 'https://github.com/gabrielalmir/eventostec-ts'
-            },
-            {
-                name: 'PhotoGIMP – Projeto Open Source',
-                period: 'Janeiro de 2021 – Presente',
-                description: 'Mantenedor de patch para otimizar o GIMP 2.10+ para usuários do Adobe Photoshop. Organização de ferramentas para espelhar o layout do Photoshop, inclusão de novos filtros Python, nova tela inicial e configurações otimizadas.',
-                technologies: ['Python', 'Git', 'GitHub'],
-                url: 'https://github.com/gabrielalmir/photogimp'
-            }
+            { name: 'AWS Academy Graduate – Cloud Developing | AWS', year: '2025' },
+            { name: 'Arquitetura Hexagonal (Ports and Adapters) | Full Cycle', year: '2025' },
+            { name: 'Qualificação Profissional Desenvolvedor Back-end | Centro Paula Souza (Fatec)', year: '2025' },
+            { name: 'AWS Academy Graduate – Machine Learning for Natural Language Processing | AWS', year: '2025' },
+            { name: 'Fundamentos da Arquitetura de Software | Full Cycle', year: '2024' },
         ],
 };

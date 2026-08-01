@@ -1,12 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LazyDevIcon } from "@/components/lazy-devicon";
-import { Award, ArrowRight, Brain, Cloud, Code, Database, ExternalLink, GitFork, Star, Zap } from "lucide-react";
+import { Award, ArrowRight, Brain, Code, ExternalLink, GitFork, Star, Zap } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 async function fetchGitHubProjects(username: string) {
-    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=20&direction=desc`);
+    const response = await fetch(`https://api.github.com/users/${username}/repos?type=all&sort=stars&per_page=100&direction=desc`);
     if (!response.ok) {
         throw new Error("Failed to fetch projects");
     }
@@ -60,16 +59,8 @@ const featuredProjects = {
         icon: Zap,
         techStack: ['typescript', 'nestjs', 'redis', 'rabbitmq']
     },
-    'codebeats': {
-        priority: 3,
-        category: 'backend',
-        impact: 'Plataforma de streaming de música com API REST robusta, arquitetura escalável e sistema de autenticação',
-        highlights: ['NestJS', 'TypeScript', 'REST API', 'PostgreSQL', 'Docker'],
-        icon: Database,
-        techStack: ['nestjs', 'typescript', 'postgresql', 'docker']
-    },
     'techfinance-previsao': {
-        priority: 4,
+        priority: 3,
         category: 'ai',
         impact: 'Modelo de Machine Learning para previsão de séries temporais financeiras usando Python/Prophet',
         highlights: ['Machine Learning', 'Prophet', 'Python', 'Previsões'],
@@ -77,34 +68,16 @@ const featuredProjects = {
         techStack: ['python']
     },
     'd4sign-node': {
-        priority: 5,
+        priority: 4,
         category: 'opensource',
         impact: 'SDK open-source para integração com API de assinatura digital D4Sign',
         highlights: ['Open Source', 'SDK', 'TypeScript', 'NPM', 'API Client'],
         icon: Code,
         techStack: ['typescript', 'nodejs']
     },
-    'saturno': {
-        priority: 6,
-        category: 'fullstack',
-        impact: 'Plataforma de gestão e automação de tarefas com interface intuitiva e integrações poderosas',
-        highlights: ['React.js', 'TypeScript', 'Laravel', 'PostgreSQL', 'PHP'],
-        icon: Zap,
-        techStack: ['typescript', 'react', 'laravel', 'postgresql']
-    }
 };
 
-const dedicatedPages: Record<string, string> = {
-    'saturno': 'saturno',
-};
-
-const categoryFilters = [
-    { id: 'all', label: 'Todos', icon: Code },
-    { id: 'backend', label: 'Backend/APIs', icon: Database },
-    { id: 'cloud', label: 'Cloud/AWS', icon: Cloud },
-    { id: 'ai', label: 'IA/ML', icon: Brain },
-    { id: 'opensource', label: 'Open Source', icon: Zap },
-];
+const dedicatedPages: Record<string, string> = {};
 
 const languageColors: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -207,13 +180,13 @@ function ProjectCard({ project, isFeatured = false, loadTechIcons = false, dedic
                             <Badge
                                 key={topic}
                                 variant="outline"
-                                className="text-[10px] border-vesper-orange/10 text-vesper-orange/50 hover:text-vesper-orange hover:border-vesper-orange/30 transition-colors font-mono bg-transparent"
+                                className="text-[10px] border-vesper-orange/10 text-vesper-orange/80 hover:text-vesper-orange hover:border-vesper-orange/30 transition-colors font-mono bg-transparent"
                             >
                                 {topic}
                             </Badge>
                         ))}
                         {project.topics.length > (isFeatured ? 5 : 3) && (
-                            <Badge variant="outline" className="text-[10px] border-vesper-orange/10 text-vesper-orange/30 bg-transparent">
+                            <Badge variant="outline" className="text-[10px] border-vesper-orange/10 text-vesper-orange/65 bg-transparent">
                                 +{project.topics.length - (isFeatured ? 5 : 3)}
                             </Badge>
                         )}
@@ -276,8 +249,6 @@ function ProjectCard({ project, isFeatured = false, loadTechIcons = false, dedic
 export default function GitHubProjects({ username, initialProjects }: { username: string; initialProjects?: GitHubProject[] }) {
     const [projects, setProjects] = useState<GitHubProject[]>(initialProjects || []);
     const [loading, setLoading] = useState(!initialProjects);
-    const [activeFilter, setActiveFilter] = useState('all');
-    const [showAll, setShowAll] = useState(false);
     const [loadTechIcons, setLoadTechIcons] = useState(false);
     const projectsRef = useRef<HTMLDivElement>(null);
 
@@ -309,86 +280,19 @@ export default function GitHubProjects({ username, initialProjects }: { username
     }, []);
 
     const filteredProjects = useMemo(() => {
-        let filtered = projects;
+        const curated = projects.filter(project => project.name in featuredProjects);
 
-        if (activeFilter !== 'all') {
-            filtered = projects.filter(project => {
-                const featuredInfo = featuredProjects[project.name as keyof typeof featuredProjects];
-
-                if (featuredInfo?.category === activeFilter) {
-                    return true;
-                }
-
-                if (activeFilter === 'opensource') {
-                    const opensourceIndicators = [
-                        'open-source', 'opensource', 'sdk', 'library', 'framework',
-                        'tool', 'cli', 'api', 'package', 'npm', 'typescript', 'javascript'
-                    ];
-
-                    const hasOpensourceTopics = project.topics.some(topic =>
-                        opensourceIndicators.some(indicator =>
-                            topic.toLowerCase().includes(indicator.toLowerCase())
-                        )
-                    );
-
-                    const nameIndicatesOpensource = /-sdk$|-api$|-lib$|-cli$|-tool$/.test(project.name.toLowerCase());
-                    const descriptionIndicatesOpensource = project.description &&
-                        opensourceIndicators.some(indicator =>
-                            project.description.toLowerCase().includes(indicator.toLowerCase())
-                        );
-
-                    return hasOpensourceTopics || nameIndicatesOpensource || descriptionIndicatesOpensource;
-                }
-
-                if (activeFilter === 'backend') {
-                    const backendKeywords = ['api', 'backend', 'server', 'node', 'express', 'fastapi', 'nest'];
-                    return project.topics.some(topic =>
-                        backendKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-                    ) || (project.description && backendKeywords.some(keyword =>
-                        project.description.toLowerCase().includes(keyword.toLowerCase())
-                    ));
-                }
-
-                if (activeFilter === 'cloud') {
-                    const cloudKeywords = ['aws', 'cloud', 'lambda', 'serverless', 'docker', 'kubernetes'];
-                    return project.topics.some(topic =>
-                        cloudKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-                    ) || (project.description && cloudKeywords.some(keyword =>
-                        project.description.toLowerCase().includes(keyword.toLowerCase())
-                    ));
-                }
-
-                if (activeFilter === 'ai') {
-                    const aiKeywords = ['ai', 'ml', 'machine-learning', 'artificial-intelligence', 'neural', 'model'];
-                    return project.topics.some(topic =>
-                        aiKeywords.some(keyword => topic.toLowerCase().includes(keyword.toLowerCase()))
-                    ) || (project.description && aiKeywords.some(keyword =>
-                        project.description.toLowerCase().includes(keyword.toLowerCase())
-                    ));
-                }
-
-                return false;
-            });
-        }
-
-        return filtered.sort((a, b) => {
-            const aFeatured = featuredProjects[a.name as keyof typeof featuredProjects];
-            const bFeatured = featuredProjects[b.name as keyof typeof featuredProjects];
-
-            if (aFeatured && !bFeatured) return -1;
-            if (!aFeatured && bFeatured) return 1;
-            if (aFeatured && bFeatured) return aFeatured.priority - bFeatured.priority;
-
-            return b.stargazers_count - a.stargazers_count;
+        return curated.sort((a, b) => {
+            const aPriority = featuredProjects[a.name as keyof typeof featuredProjects]?.priority ?? 0;
+            const bPriority = featuredProjects[b.name as keyof typeof featuredProjects]?.priority ?? 0;
+            return aPriority - bPriority;
         });
-    }, [projects, activeFilter]);
-
-    const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
+    }, [projects]);
 
     if (loading) {
         return (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {Array.from({ length: 6 }, (_, index) => `repo-skeleton-${index}`).map((skeletonId) => (
+                {Array.from({ length: 4 }, (_, index) => `repo-skeleton-${index}`).map((skeletonId) => (
                     <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
                         <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
                         <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
@@ -405,26 +309,8 @@ export default function GitHubProjects({ username, initialProjects }: { username
 
     return (
         <div ref={projectsRef} className="space-y-8 sm:space-y-10 w-full">
-            <div className="flex flex-wrap gap-1.5 justify-center p-1.5 rounded-full border border-vesper-orange/15 bg-background/40 backdrop-blur-sm w-fit mx-auto">
-                {categoryFilters.map(({ id, label, icon: Icon }) => (
-                    <Button
-                        key={id}
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setActiveFilter(id)}
-                        className={`group transition-all duration-200 text-xs rounded-full px-3 sm:px-4 h-8 ${activeFilter === id
-                            ? 'bg-vesper-orange text-black hover:bg-vesper-orange hover:text-black shadow-md shadow-vesper-orange/20'
-                            : 'text-foreground/60 hover:text-vesper-orange hover:bg-vesper-orange/[0.08]'
-                            }`}
-                    >
-                        <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 flex-shrink-0" />
-                        <span className="font-medium whitespace-nowrap">{label}</span>
-                    </Button>
-                ))}
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {displayedProjects.map((project: GitHubProject) => {
+                {filteredProjects.map((project: GitHubProject) => {
                     const isFeatured = project.name in featuredProjects;
                     const dedicatedPageSlug = dedicatedPages[project.name];
                     return (
@@ -437,29 +323,6 @@ export default function GitHubProjects({ username, initialProjects }: { username
                         />
                     );
                 })}
-            </div>
-
-            {filteredProjects.length > 6 && (
-                <div className="text-center pt-4">
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        onClick={() => setShowAll(!showAll)}
-                        className="group border-vesper-orange/30 text-vesper-orange hover:border-vesper-orange hover:bg-vesper-orange/10 transition-all"
-                    >
-                        <span className="font-medium">
-                            {showAll
-                                ? 'Mostrar menos'
-                                : `Ver mais ${filteredProjects.length - 6} ${filteredProjects.length - 6 === 1 ? 'projeto' : 'projetos'}`}
-                        </span>
-                        <Code className="h-4 w-4 ml-2 group-hover:scale-110 transition-transform" />
-                    </Button>
-                </div>
-            )}
-
-            <div className="text-center text-vesper-orange/50 text-sm font-mono">
-                {displayedProjects.length} de {filteredProjects.length} projetos
-                {activeFilter !== 'all' && ` · ${categoryFilters.find(f => f.id === activeFilter)?.label}`}
             </div>
         </div>
     );

@@ -1,0 +1,4 @@
+---
+import Layout from '@/layouts/Layout.astro'; import Shell from '@/components/Shell.astro'; import {copy,getArticles,articlePath} from '@/lib/portfolio-content'; const c=copy.en; const articles=getArticles('en');
+---
+<Layout title={`${c.blogTitle} — Gabriel Almir`} description={c.blogIntro} lang={c.lang} alternateHref="/blog"><Shell locale="en"><main id="main" class="index-page"><header><p class="kicker">04 / writing</p><h1>{c.blogTitle}</h1><p>{c.blogIntro}</p></header><div class="article-grid">{articles.map(a=><a class={`article-card cover-${a.cover}`} href={articlePath('en',a.translationKey)}><span>{a.meta}</span><h2>{a.title}</h2><p>{a.excerpt}</p><i>↗</i></a>)}</div></main></Shell></Layout>

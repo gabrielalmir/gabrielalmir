@@ -1,0 +1,7 @@
+---
+import Shell from './Shell.astro'; import {copy, getArticles, articlePath, type ArticleKey, type Locale} from '@/lib/portfolio-content';
+const {locale,articleKey}=Astro.props as {locale:Locale,articleKey:ArticleKey}; const c=copy[locale]; const a=getArticles(locale).find(x=>x.translationKey===articleKey)!; const alt=locale==='en'?'pt-BR':'en';
+const inline=(s:string)=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const html=a.body.split(/\n\n+/).map(block=>block.startsWith('## ')?`<h2>${inline(block.slice(3))}</h2>`:`<p>${inline(block)}</p>`).join('');
+---
+<Shell locale={locale}><main id="main"><article class="article"><header class={`article-hero cover-${a.cover}`}><p class="kicker">{a.meta}</p><h1>{a.title}</h1><p>{a.excerpt}</p></header><div class="article-meta"><a href={locale==='en'?'/en/blog':'/blog'}>← {c.blogTitle}</a><a href={articlePath(alt,articleKey)} hreflang={alt}>{c.switchLabel} ↗</a></div><div class="prose" set:html={html}></div><nav class="article-end"><a class="button ink" href={locale==='en'?'/en/#contact':'/#contato'}>{locale==='en'?'Continue the conversation':'Continuar a conversa'} ↗</a></nav></article></main></Shell>

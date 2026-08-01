@@ -1,3 +1,4 @@
+import { SectionHeader } from '@/components/section-header';
 import { Button } from '@/components/ui/button';
 import type { BlogPostPreview } from '@/lib/blog';
 import { ArrowRight, Calendar, Clock, Code2, Hash, Terminal } from 'lucide-react';
@@ -23,15 +24,12 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
         <section id="blog" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
             <div className="container mx-auto max-w-6xl w-full">
 
-                <div className="mb-14 md:mb-20 w-full max-w-3xl">
-                    <span className="section-eyebrow text-vesper-cyan/80">02 / Escrita</span>
-                    <h2 className="section-heading mt-4">
-                        Últimos <span className="text-vesper-cyan">Posts</span>
-                    </h2>
-                    <p className="section-subheading mt-4">
-                        Artigos sobre desenvolvimento, arquitetura de software e experiências na indústria tech.
-                    </p>
-                </div>
+                <SectionHeader
+                    eyebrow="Escrita"
+                    title={<>Últimos <span className="text-vesper-cyan">Posts</span></>}
+                    subtitle="Artigos sobre desenvolvimento, arquitetura de software e experiências na indústria tech."
+                    accent="cyan"
+                />
 
                 <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 w-full">
                     {latestPosts.map((post) => {
@@ -67,7 +65,7 @@ export function LatestPosts({ latestPosts }: LatestPostsProps) {
                                     {post.title}
                                 </h3>
 
-                                <p className="text-sm sm:text-base text-foreground/65 mb-4 leading-relaxed break-words relative z-10 flex-grow">
+                                <p className="text-base text-foreground/65 mb-4 leading-relaxed break-words relative z-10 flex-grow">
                                     {post.excerpt}
                                 </p>
 

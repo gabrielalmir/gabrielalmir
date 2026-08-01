@@ -5,11 +5,11 @@ import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "rea
 import { CoffeeSplashWrapper } from '@/components/coffee-splash';
 import { Header } from '@/components/header';
 import { ModernResumeSection } from '@/components/modern-resume-section';
+import { SectionHeader } from '@/components/section-header';
 import { TypingEffect } from "@/components/typing-effect";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlitchText } from "@/components/ui/glitch-text";
-import { VesperDecorations } from '@/components/vesper-decorations';
 import type { BlogPostPreview } from '@/lib/blog';
 import { LatestPosts } from './latest-posts';
 
@@ -102,7 +102,7 @@ function HeroSection() {
                         <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-vesper-cyan/25 bg-vesper-cyan/[0.04] backdrop-blur-sm max-w-full">
                             <span className="availability-dot flex-shrink-0"></span>
                             <span className="text-[11px] sm:text-xs uppercase tracking-[0.18em] font-medium text-vesper-cyan/90 truncate">
-                                Disponível para projetos
+                                Aberto a novas oportunidades
                             </span>
                         </div>
 
@@ -153,7 +153,7 @@ function HeroSection() {
                                     <ExternalLink className="h-4 w-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                 </Button>
                             </a>
-                            <div className="text-xs text-foreground/40 flex items-center gap-2">
+                            <div className="text-xs text-foreground/60 flex items-center gap-2">
                                 <span>ou navegue com</span>
                                 <kbd className="pointer-events-none inline-flex h-6 select-none items-center gap-1 rounded border border-vesper-orange/20 bg-vesper-orange/[0.05] px-2 font-mono text-[10px] font-medium text-vesper-orange/80">
                                     <span className="text-xs">⌘</span>K
@@ -162,7 +162,7 @@ function HeroSection() {
                         </div>
 
                         <div className="flex items-center gap-1 pt-2 w-full max-w-full flex-wrap">
-                            <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/30 font-mono mr-3">Conecte</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/60 font-mono mr-3">Conecte</span>
                             {heroSocialLinks.map(({ Icon, href, label }) => (
                                 <a
                                     key={href}
@@ -181,7 +181,7 @@ function HeroSection() {
                     <div className="relative lg:justify-self-end group">
                         <div className="absolute -inset-4 bg-vesper-orange/15 rounded-[2rem] blur-[80px] opacity-50 group-hover:opacity-70 transition-opacity duration-700" />
 
-                        <div className="relative w-full max-w-[320px] lg:max-w-[380px] mx-auto">
+                        <div className="relative w-full max-w-[380px] lg:max-w-[480px] mx-auto">
                             <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 border-vesper-orange/40 rounded-tl-2xl pointer-events-none" />
                             <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 border-vesper-cyan/40 rounded-br-2xl pointer-events-none" />
 
@@ -190,8 +190,8 @@ function HeroSection() {
                                 <img
                                     src="/me.webp"
                                     alt="Gabriel Almir - Desenvolvedor Backend Node.js"
-                                    width={400}
-                                    height={400}
+                                    width={480}
+                                    height={480}
                                     className="w-full h-full object-cover image-balanced transition-all duration-700 group-hover:brightness-110"
                                     loading="eager"
                                     fetchPriority="high"
@@ -213,25 +213,13 @@ function HeroSection() {
     );
 }
 
-function SectionHeader({ eyebrow, title, subtitle, accent = 'orange' }: { eyebrow: string; title: ReactNode; subtitle?: string; accent?: 'orange' | 'cyan' }) {
-    return (
-        <div className="mb-14 md:mb-20 w-full max-w-3xl">
-            <span className={`section-eyebrow ${accent === 'cyan' ? 'text-vesper-cyan/80' : ''}`}>
-                {eyebrow}
-            </span>
-            <h2 className="section-heading mt-4">{title}</h2>
-            {subtitle && <p className="section-subheading mt-4">{subtitle}</p>}
-        </div>
-    );
-}
-
 function SkillsSection() {
     return (
         <section id="habilidades" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden relative">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,199,153,0.03)_0%,transparent_70%)] pointer-events-none"></div>
             <div className="container mx-auto max-w-7xl w-full relative z-10">
                 <SectionHeader
-                    eyebrow="01 / Stack"
+                    eyebrow="Stack"
                     title={<><span className="text-foreground">Arsenal </span><span className="text-vesper-orange">Técnico</span></>}
                     subtitle="Ferramentas e tecnologias que uso no dia a dia para construir produtos confiáveis e escaláveis."
                 />
@@ -311,7 +299,7 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
         <section id="projetos" className="py-20 md:py-28 bg-gradient-to-b from-background via-background to-vesper-orange/[0.03] px-4 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
             <div className="container mx-auto max-w-6xl w-full">
                 <SectionHeader
-                    eyebrow="03 / Trabalho"
+                    eyebrow="Trabalho"
                     title={<><span className="text-foreground">Projetos em </span><span className="text-vesper-orange">Destaque</span></>}
                     subtitle="Do PhotoGIMP, mantido desde 2021 com usuários reais, a APIs e sistemas distribuídos em produção."
                 />
@@ -321,7 +309,7 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
                     rootMargin="280px"
                     fallback={
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                            {Array.from({ length: 6 }, (_, index) => `home-skeleton-${index}`).map((skeletonId) => (
+                            {Array.from({ length: 4 }, (_, index) => `home-skeleton-${index}`).map((skeletonId) => (
                                 <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
                                     <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
                                     <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
@@ -337,7 +325,7 @@ function ProjectsSection({ githubProjects }: { githubProjects?: any[] }) {
                 >
                     <Suspense fallback={
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                            {Array.from({ length: 6 }, (_, index) => `home-skeleton-suspense-${index}`).map((skeletonId) => (
+                            {Array.from({ length: 4 }, (_, index) => `home-skeleton-suspense-${index}`).map((skeletonId) => (
                                 <div key={skeletonId} className="terminal-window border border-vesper-orange/20 p-4 sm:p-6 animate-pulse">
                                     <div className="h-4 bg-vesper-orange/20 rounded mb-2"></div>
                                     <div className="h-3 bg-vesper-orange/10 rounded mb-4"></div>
@@ -379,17 +367,17 @@ function ContactSection() {
                         <div className="inline-flex items-center gap-2.5 pl-2 pr-4 py-1.5 rounded-full border border-vesper-cyan/25 bg-vesper-cyan/[0.06] backdrop-blur-sm mb-8">
                             <span className="availability-dot flex-shrink-0"></span>
                             <span className="text-[11px] uppercase tracking-[0.18em] font-medium text-vesper-cyan/90">
-                                Aceitando novos projetos
+                                Aberto a novas oportunidades
                             </span>
                         </div>
 
                         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-5 break-words tracking-[-0.025em] leading-[1.05]">
                             Vamos conversar sobre
                             <br />
-                            <span className="text-vesper-orange">seu projeto.</span>
+                            <span className="text-vesper-orange">a próxima posição.</span>
                         </h2>
                         <p className="text-base md:text-lg text-foreground/60 mb-10 max-w-xl mx-auto break-words leading-relaxed">
-                            Freelance, consultoria ou um desafio técnico interessante — adoraria conversar.
+                            Buscando minha próxima posição em backend e arquitetura — vamos conversar.
                         </p>
 
                         <div className="flex flex-wrap gap-4 justify-center mb-12">
@@ -401,7 +389,7 @@ function ContactSection() {
                             </a>
                         </div>
 
-                        <div className="flex items-center gap-3 text-foreground/40 text-[10px] uppercase tracking-[0.2em] font-mono mb-6">
+                        <div className="flex items-center gap-3 text-foreground/60 text-[10px] uppercase tracking-[0.2em] font-mono mb-6">
                             <span className="h-px w-8 bg-foreground/20" />
                             <span>ou conecte-se</span>
                             <span className="h-px w-8 bg-foreground/20" />
@@ -492,11 +480,11 @@ function SiteFooter() {
 
                 <div className="border-t border-vesper-orange/10 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="flex items-center gap-2 text-foreground/40 text-xs font-mono">
+                        <div className="flex items-center gap-2 text-foreground/60 text-xs font-mono">
                             <span>© {new Date().getFullYear()} Gabriel Almir. v2.0.0</span>
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-foreground/40 text-xs font-mono">
+                        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-foreground/60 text-xs font-mono">
                             <a
                                 href="/sitemap-index.xml"
                                 className="hover:text-vesper-orange transition-colors"
@@ -513,7 +501,7 @@ function SiteFooter() {
                             </a>
                         </div>
 
-                        <div className="flex items-center gap-2 text-foreground/40 text-xs">
+                        <div className="flex items-center gap-2 text-foreground/60 text-xs">
                             <span>Desenvolvido com</span>
                             <Heart className="w-3 h-3 text-vesper-red fill-vesper-red animate-pulse" />
                             <span>em Astro & Vesper Theme</span>
@@ -535,7 +523,7 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
 
     return (
         <LazyMotion features={domAnimation}>
-            <div data-home-loaded className="min-h-screen bg-background text-foreground font-mono selection:bg-primary selection:text-black overflow-x-hidden">
+            <div data-home-loaded className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-black overflow-x-hidden">
                 <m.div
                     className="fixed top-0 left-0 right-0 h-1 bg-vesper-orange origin-left z-[100]"
                     style={{ scaleX }}
@@ -545,7 +533,6 @@ export function HomeClient({ latestPosts, githubProjects }: HomeClientProps) {
                     <CoffeeSplashWrapper />
                 </Suspense>
 
-                <VesperDecorations />
                 <div className="fixed inset-0 pointer-events-none">
                     <div className="absolute inset-0 bg-scanline animate-scanline opacity-[0.02]"></div>
                     <div className="absolute inset-0 bg-glow opacity-50"></div>
