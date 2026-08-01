@@ -4,8 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://gabrielalmir.com',
-    integrations: [
-        sitemap(),
-    ],
+  site: 'https://gabrielalmir.com',
+  integrations: [sitemap()],
 });

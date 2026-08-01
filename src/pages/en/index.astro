@@ -1,4 +1,10 @@
 ---
-import Layout from '@/layouts/Layout.astro'; import Home from '@/components/Home.astro'; import {copy} from '@/lib/portfolio-content'; const c=copy.en;
+import Layout from '@/layouts/Layout.astro';
+import Home from '@/components/Home.astro';
+import { copy } from '@/lib/portfolio-content';
+const c = copy.en;
 ---
-<Layout title={c.title} description={c.description} lang={c.lang} alternateHref="/"><Home locale="en" /></Layout>
+
+<Layout title={c.title} description={c.description} lang={c.lang} alternateHref="/"
+  ><Home locale="en" /></Layout
+>

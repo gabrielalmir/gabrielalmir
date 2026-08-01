@@ -1,7 +1,41 @@
 ---
 import { copy, type Locale } from '@/lib/portfolio-content';
-const { locale='pt-BR' } = Astro.props as {locale:Locale}; const c=copy[locale];
+const { locale = 'pt-BR' } = Astro.props as { locale: Locale };
+const c = copy[locale];
 ---
-<header class="site-header"><a class="brand" href={c.home} aria-label={locale==='en'?'Gabriel Almir — home':'Gabriel Almir — início'}><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt=""><small>Gabriel Almir</small></a><nav aria-label={locale==='en'?'Primary':'Principal'}>{c.nav.map(([label,href])=><a href={href}>{label}</a>)}</nav><a class="locale" href={c.switchHref} hreflang={locale==='en'?'pt-BR':'en'}>{c.switchLabel}<span aria-hidden="true">↗</span></a></header>
+
+<header class="site-header">
+  <a
+    class="brand"
+    href={c.home}
+    aria-label={locale === 'en' ? 'Gabriel Almir — home' : 'Gabriel Almir — início'}
+    ><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt="" /><small
+      >Gabriel Almir</small
+    ></a
+  ><nav aria-label={locale === 'en' ? 'Primary' : 'Principal'}>
+    {c.nav.map(([label, href]) => <a href={href}>{label}</a>)}
+  </nav><a class="locale" href={c.switchHref} hreflang={locale === 'en' ? 'pt-BR' : 'en'}
+    >{c.switchLabel}<span aria-hidden="true">↗</span></a
+  >
+</header>
 <slot />
-<footer><a class="brand" href={c.home} aria-label={locale==='en'?'Gabriel Almir — home':'Gabriel Almir — início'}><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt=""></a><p>{c.footer} <a class="footer-support" href="https://ko-fi.com/gabrielalmir" target="_blank" rel="noopener noreferrer" aria-label={locale==='en'?'Support open-source projects (opens an external service)':'Apoiar projetos open source (abre um serviço externo)'}>{locale==='en'?'Support open-source projects':'Apoiar projetos open source'}</a></p><p>© {new Date().getFullYear()}</p></footer>
+<footer>
+  <a
+    class="brand"
+    href={c.home}
+    aria-label={locale === 'en' ? 'Gabriel Almir — home' : 'Gabriel Almir — início'}
+    ><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt="" /></a
+  ><p>
+    {c.footer}
+    <a
+      class="footer-support"
+      href="https://ko-fi.com/gabrielalmir"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={locale === 'en'
+        ? 'Support open-source projects (opens an external service)'
+        : 'Apoiar projetos open source (abre um serviço externo)'}
+      >{locale === 'en' ? 'Support open-source projects' : 'Apoiar projetos open source'}</a
+    >
+  </p><p>© {new Date().getFullYear()}</p>
+</footer>

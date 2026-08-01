@@ -1,4 +1,22 @@
 ---
-import Layout from '@/layouts/Layout.astro'; import Shell from '@/components/Shell.astro'; import {copy} from '@/lib/portfolio-content'; const isEn=Astro.url.pathname.startsWith('/en'); const locale=isEn?'en':'pt-BR'; const c=copy[locale];
+import Layout from '@/layouts/Layout.astro';
+import Shell from '@/components/Shell.astro';
+import { copy } from '@/lib/portfolio-content';
+const isEn = Astro.url.pathname.startsWith('/en');
+const locale = isEn ? 'en' : 'pt-BR';
+const c = copy[locale];
 ---
-<Layout title={`404 — Gabriel Almir`} description={c.notFoundBody} lang={c.lang}><Shell locale={locale}><main id="main" class="not-found"><img src="/images/editorial/gabriel-404.webp" width="900" height="900" alt=""><div><p class="kicker">404 / {isEn?'lost path':'caminho perdido'}</p><h1>{c.notFoundTitle}</h1><p>{c.notFoundBody}</p><a class="button ink" href={c.home}>← {isEn?'Back home':'Voltar para casa'}</a></div></main></Shell></Layout>
+
+<Layout title={`404 — Gabriel Almir`} description={c.notFoundBody} lang={c.lang}
+  ><Shell locale={locale}
+    ><main id="main" class="not-found">
+      <img src="/images/editorial/gabriel-404.webp" width="900" height="900" alt="" /><div>
+        <p class="kicker">404 / {isEn ? 'lost path' : 'caminho perdido'}</p><h1>
+          {c.notFoundTitle}
+        </h1><p>{c.notFoundBody}</p><a class="button ink" href={c.home}
+          >← {isEn ? 'Back home' : 'Voltar para casa'}</a
+        >
+      </div>
+    </main></Shell
+  ></Layout
+>

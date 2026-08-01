@@ -1,11 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Article from '@/components/Article.astro';
-import {articleKeys,getArticles,type ArticleKey} from '@/lib/portfolio-content';
-export function getStaticPaths(){
-  return articleKeys.map(articleKey=>({params:{id:articleKey}}));
+import { articleKeys, getArticles, type ArticleKey } from '@/lib/portfolio-content';
+export function getStaticPaths() {
+  return articleKeys.map((articleKey) => ({ params: { id: articleKey } }));
 }
-const articleKey=Astro.params.id as ArticleKey;
-const a=getArticles('pt-BR').find(x=>x.translationKey===articleKey)!;
+const articleKey = Astro.params.id as ArticleKey;
+const a = getArticles('pt-BR').find((x) => x.translationKey === articleKey)!;
 ---
-<Layout title={`${a.title} — Gabriel Almir`} description={a.excerpt} lang="pt-BR" alternateHref={`/en/blog/${articleKey}`}><Article locale="pt-BR" articleKey={articleKey}/></Layout>
+
+<Layout
+  title={`${a.title} — Gabriel Almir`}
+  description={a.excerpt}
+  lang="pt-BR"
+  alternateHref={`/en/blog/${articleKey}`}
+  ><Article locale="pt-BR" articleKey={articleKey} /></Layout
+>

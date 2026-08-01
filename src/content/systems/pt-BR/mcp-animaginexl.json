@@ -1,1 +1,40 @@
-{"locale":"pt-BR","slug":"mcp-animaginexl","tier":"lab","status":"experimental","sourceRepo":"https://github.com/gabrielalmir/mcp-animaginexl","sourceCommit":"main","license":"Consultar repositório","title":"MCP AnimagineXL","eyebrow":"Laboratório de modelos","summary":"Como expor geração de imagem por MCP e REST sem esconder a fronteira de GPU?","context":"Uma exploração de contratos de ferramenta sobre modelos locais, empacotamento e recursos de GPU.","constraints":["Modelos grandes e GPU são dependências operacionais.","MCP e REST precisam descrever a mesma capacidade."],"decisions":[{"title":"Duas fronteiras","body":"MCP atende agentes; REST mantém uma integração convencional."}],"qualityAttributes":[],"evidence":[{"label":"Implementação","detail":"Servidor, endpoints e Docker no repositório.","href":"https://github.com/gabrielalmir/mcp-animaginexl"}],"limits":["Laboratório, não produto ou serviço de produção.","Capacidade e latência dependem de modelo e hardware."],"diagram":[{"label":"MCP / REST","detail":"Contratos de entrada.","tone":"boundary"},{"label":"Modelo + GPU","detail":"Dependência operacional explícita.","tone":"risk"},{"label":"Imagem","detail":"Saída implementada.","tone":"evidence"}]}
+{
+  "locale": "pt-BR",
+  "slug": "mcp-animaginexl",
+  "tier": "lab",
+  "status": "experimental",
+  "sourceRepo": "https://github.com/gabrielalmir/mcp-animaginexl",
+  "sourceCommit": "main",
+  "license": "Consultar repositório",
+  "title": "MCP AnimagineXL",
+  "eyebrow": "Laboratório de modelos",
+  "summary": "Como expor geração de imagem por MCP e REST sem esconder a fronteira de GPU?",
+  "context": "Uma exploração de contratos de ferramenta sobre modelos locais, empacotamento e recursos de GPU.",
+  "constraints": [
+    "Modelos grandes e GPU são dependências operacionais.",
+    "MCP e REST precisam descrever a mesma capacidade."
+  ],
+  "decisions": [
+    {
+      "title": "Duas fronteiras",
+      "body": "MCP atende agentes; REST mantém uma integração convencional."
+    }
+  ],
+  "qualityAttributes": [],
+  "evidence": [
+    {
+      "label": "Implementação",
+      "detail": "Servidor, endpoints e Docker no repositório.",
+      "href": "https://github.com/gabrielalmir/mcp-animaginexl"
+    }
+  ],
+  "limits": [
+    "Laboratório, não produto ou serviço de produção.",
+    "Capacidade e latência dependem de modelo e hardware."
+  ],
+  "diagram": [
+    { "label": "MCP / REST", "detail": "Contratos de entrada.", "tone": "boundary" },
+    { "label": "Modelo + GPU", "detail": "Dependência operacional explícita.", "tone": "risk" },
+    { "label": "Imagem", "detail": "Saída implementada.", "tone": "evidence" }
+  ]
+}

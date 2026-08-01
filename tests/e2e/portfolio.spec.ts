@@ -2,14 +2,17 @@ import { test, expect } from '@playwright/test';
 
 for (const path of ['/', '/en/']) {
   test(`${path} communicates the essentials and stays usable`, async ({ page }, testInfo) => {
-    await page.route(/github|microlink/i, route => route.abort());
+    await page.route(/github|microlink/i, (route) => route.abort());
     await page.goto(path);
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.getByText('90%', { exact: false }).first()).toBeVisible();
     await expect(page.getByText(/PhotoGIMP/i).first()).toBeVisible();
     await expect(page.getByText(/rigor|regulated/i).first()).toBeVisible();
     await expect(page.getByRole('main')).toBeVisible();
-    await expect(page).toHaveScreenshot(`${path === '/' ? 'home-pt' : 'home-en'}-${testInfo.project.name}.png`, { fullPage: true, animations: 'disabled' });
+    await expect(page).toHaveScreenshot(
+      `${path === '/' ? 'home-pt' : 'home-en'}-${testInfo.project.name}.png`,
+      { fullPage: true, animations: 'disabled' },
+    );
   });
 }
 
@@ -33,19 +36,28 @@ test('touch targets and heading structure are sound', async ({ page }) => {
 });
 
 test('homepage sections build with scroll without hiding content', async ({ page }, testInfo) => {
-  test.skip(['no-javascript','reduced-motion'].includes(testInfo.project.name), 'Scroll controller is disabled in the final-state accessibility modes');
+  test.skip(
+    ['no-javascript', 'reduced-motion'].includes(testInfo.project.name),
+    'Scroll controller is disabled in the final-state accessibility modes',
+  );
   await page.goto('/');
   const home = page.locator('.home-story');
   await expect(home.locator('[data-build-section]')).toHaveCount(9);
   const process = page.locator('#processo');
   const initial = Number(await process.getAttribute('data-build-progress'));
-  await process.scrollIntoViewIfNeeded(); await page.waitForTimeout(50);
+  await process.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(50);
   const intermediate = Number(await process.getAttribute('data-build-progress'));
-  await page.evaluate(() => scrollTo(0, document.body.scrollHeight)); await page.waitForTimeout(50);
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(50);
   const final = Number(await process.getAttribute('data-build-progress'));
-  expect(intermediate).toBeGreaterThan(initial); expect(final).toBeGreaterThanOrEqual(intermediate);
+  expect(intermediate).toBeGreaterThan(initial);
+  expect(final).toBeGreaterThanOrEqual(intermediate);
   await expect(page.locator('#processo h2')).toBeVisible();
-  await expect(page).toHaveScreenshot(`build-final-${testInfo.project.name}.png`, { fullPage: false, animations: 'disabled' });
+  await expect(page).toHaveScreenshot(`build-final-${testInfo.project.name}.png`, {
+    fullPage: false,
+    animations: 'disabled',
+  });
 });
 
 test('trajectory is bilingual, documentary, and free of the old decoration', async ({ page }) => {
@@ -57,19 +69,29 @@ test('trajectory is bilingual, documentary, and free of the old decoration', asy
   await trajectory.locator('.trajectory-more summary').click();
   await expect(trajectory.getByText(/problemas algorítmicos sob limite de tempo/i)).toBeVisible();
   await expect(trajectory.getByText('@momentoalmir')).toBeVisible();
-  await expect(page.locator('.architecture-layer,.chapter-mark,.coffee-ring,.checkpoint')).toHaveCount(0);
+  await expect(
+    page.locator('.architecture-layer,.chapter-mark,.coffee-ring,.checkpoint'),
+  ).toHaveCount(0);
   await page.goto('/en/');
   await page.locator('#trajectory .trajectory-more summary').click();
-  await expect(page.locator('#trajectory').getByText(/São Paulo’s public state college system/)).toBeVisible();
+  await expect(
+    page.locator('#trajectory').getByText(/São Paulo’s public state college system/),
+  ).toBeVisible();
   await expect(page.locator('#trajectory').getByText(/Brazilian Computer Society/)).toBeVisible();
 });
 
 test('homepage has no horizontal overflow or external image requests', async ({ page }) => {
   const external: string[] = [];
-  page.on('request', request => { if (request.resourceType() === 'image' && !request.url().startsWith('http://127.0.0.1:4321')) external.push(request.url()); });
+  page.on('request', (request) => {
+    if (request.resourceType() === 'image' && !request.url().startsWith('http://127.0.0.1:4321'))
+      external.push(request.url());
+  });
   await page.goto('/');
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  expect(overflow).toBeLessThanOrEqual(1); expect(external).toEqual([]);
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+  expect(external).toEqual([]);
 });
 
 test('hero has three accessible parallax depths', async ({ page }, testInfo) => {
@@ -91,19 +113,32 @@ test('personal signals reveal accessible microcopy', async ({ page }) => {
   await expect(coffee.getByText('Uma ideia quase sempre começa com café.')).toBeVisible();
 });
 
-for (const [localePath, systemPath] of [['/', '/projects/'], ['/en/', '/en/projects/']] as const) {
+for (const [localePath, systemPath] of [
+  ['/', '/projects/'],
+  ['/en/', '/en/projects/'],
+] as const) {
   test(`${localePath} presents three dossiers and four technical labs`, async ({ page }) => {
     await page.goto(localePath);
     const atlas = page.locator('.systems-atlas');
     await expect(atlas.locator('.system-plate')).toHaveCount(3);
     await expect(atlas.locator('.lab-card')).toHaveCount(4);
-    for (const slug of ['pimbas', 'maybe', 'saturno', 'mcp-animaginexl', 'mcp-qwen3-tts', 'hush', 'resulta']) {
+    for (const slug of [
+      'pimbas',
+      'maybe',
+      'saturno',
+      'mcp-animaginexl',
+      'mcp-qwen3-tts',
+      'hush',
+      'resulta',
+    ]) {
       await expect(atlas.locator(`a[href="${systemPath}${slug}"]`)).toHaveCount(1);
     }
   });
 }
 
-test('system dossiers expose evidence, limits, and readable architecture maps in both languages', async ({ page }) => {
+test('system dossiers expose evidence, limits, and readable architecture maps in both languages', async ({
+  page,
+}) => {
   for (const path of ['/projects/pimbas', '/en/projects/pimbas']) {
     await page.goto(path);
     await expect(page.locator('.system-map li')).toHaveCount(4);
@@ -113,14 +148,20 @@ test('system dossiers expose evidence, limits, and readable architecture maps in
   }
 });
 
-test('Ko-fi support is a plain safe external link and loads no Ko-fi resources', async ({ page }) => {
+test('Ko-fi support is a plain safe external link and loads no Ko-fi resources', async ({
+  page,
+}) => {
   const kofiRequests: string[] = [];
-  page.on('request', request => { if (/ko-fi\.com/i.test(request.url())) kofiRequests.push(request.url()); });
+  page.on('request', (request) => {
+    if (/ko-fi\.com/i.test(request.url())) kofiRequests.push(request.url());
+  });
   await page.goto('/');
   const support = page.locator('.open-source-support a');
   await expect(support).toHaveAttribute('href', 'https://ko-fi.com/gabrielalmir');
   await expect(support).toHaveAttribute('rel', 'noopener noreferrer');
   await expect(support).toHaveAttribute('aria-label', /serviço externo/i);
-  await expect(page.locator('script[src*="ko-fi"],iframe[src*="ko-fi"],img[src*="ko-fi"]')).toHaveCount(0);
+  await expect(
+    page.locator('script[src*="ko-fi"],iframe[src*="ko-fi"],img[src*="ko-fi"]'),
+  ).toHaveCount(0);
   expect(kofiRequests).toEqual([]);
 });

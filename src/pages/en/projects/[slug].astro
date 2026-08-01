@@ -1,10 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import SystemDetail from '@/components/SystemDetail.astro';
-export async function getStaticPaths(){
+export async function getStaticPaths() {
   const entries = await getCollection('systems', ({ data }) => data.locale === 'en');
-  return entries.map(entry => ({ params: { slug: entry.data.slug }, props: { entry } }));
+  return entries.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
 }
 const { entry } = Astro.props;
 ---
+
 <SystemDetail entry={entry} />

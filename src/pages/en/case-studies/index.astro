@@ -1,4 +1,35 @@
 ---
-import Layout from '@/layouts/Layout.astro'; import Shell from '@/components/Shell.astro'; import {copy} from '@/lib/portfolio-content'; const c=copy.en;
+import Layout from '@/layouts/Layout.astro';
+import Shell from '@/components/Shell.astro';
+import { copy } from '@/lib/portfolio-content';
+const c = copy.en;
 ---
-<Layout title={`${c.casesTitle} — Gabriel Almir`} description={c.workIntro} lang="en" alternateHref="/case-studies"><Shell locale="en"><main id="main" class="index-page"><header><p class="kicker">01 / work</p><h1>{c.casesTitle}</h1><p>{c.workIntro}</p></header><div class="case-index">{c.stories.map(s=><a href={s.href}><span>{s.n} / {s.tag}</span><h2>{s.title}</h2><p>{s.result}</p><i>↗</i></a>)}</div></main></Shell></Layout>
+
+<Layout
+  title={`${c.casesTitle} — Gabriel Almir`}
+  description={c.workIntro}
+  lang="en"
+  alternateHref="/case-studies"
+  ><Shell locale="en"
+    ><main id="main" class="index-page">
+      <header>
+        <p class="kicker">01 / work</p><h1>{c.casesTitle}</h1><p>{c.workIntro}</p>
+      </header><div class="case-index">
+        {
+          c.stories.map((s) => (
+            <a href={s.href}>
+              <>
+                <span>
+                  {s.n} / {s.tag}
+                </span>
+                <h2>{s.title}</h2>
+                <p>{s.result}</p>
+                <i>↗</i>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </main></Shell
+  ></Layout
+>

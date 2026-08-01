@@ -1,4 +1,10 @@
 ---
-import Layout from '@/layouts/Layout.astro'; import Home from '@/components/Home.astro'; import {copy} from '@/lib/portfolio-content'; const c=copy['pt-BR'];
+import Layout from '@/layouts/Layout.astro';
+import Home from '@/components/Home.astro';
+import { copy } from '@/lib/portfolio-content';
+const c = copy['pt-BR'];
 ---
-<Layout title={c.title} description={c.description} lang={c.lang} alternateHref="/en/"><Home locale="pt-BR" /></Layout>
+
+<Layout title={c.title} description={c.description} lang={c.lang} alternateHref="/en/"
+  ><Home locale="pt-BR" /></Layout
+>

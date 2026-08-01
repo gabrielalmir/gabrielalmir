@@ -1,1 +1,41 @@
-{"locale":"en","slug":"resulta","tier":"lab","status":"implemented","sourceRepo":"https://github.com/gabrielalmir/resulta","sourceCommit":"main","license":"See repository","title":"Resulta","eyebrow":"Contract laboratory","summary":"How can a total API and explicit errors stay ergonomic across ESM and CJS?","context":"A small library for investigating typed results, module interoperability, and documented guarantees.","constraints":["No path should return an implicit state.","ESM and CJS must expose the same contract."],"decisions":[{"title":"Total API","body":"Every operation represents success and error in its return type."},{"title":"Dual distribution","body":"Both module formats share documented guarantees."}],"qualityAttributes":[],"evidence":[{"label":"Public package","detail":"API, ESM/CJS builds, and versioned documentation.","href":"https://github.com/gabrielalmir/resulta"}],"limits":["The library exposes errors; it does not choose application recovery policies.","Adoption and production use are not claimed."],"diagram":[{"label":"Input","detail":"A total operation.","tone":"boundary"},{"label":"Result","detail":"Explicit success or error.","tone":"decision"},{"label":"ESM / CJS","detail":"Outputs with the same guarantee.","tone":"evidence"}]}
+{
+  "locale": "en",
+  "slug": "resulta",
+  "tier": "lab",
+  "status": "implemented",
+  "sourceRepo": "https://github.com/gabrielalmir/resulta",
+  "sourceCommit": "main",
+  "license": "See repository",
+  "title": "Resulta",
+  "eyebrow": "Contract laboratory",
+  "summary": "How can a total API and explicit errors stay ergonomic across ESM and CJS?",
+  "context": "A small library for investigating typed results, module interoperability, and documented guarantees.",
+  "constraints": [
+    "No path should return an implicit state.",
+    "ESM and CJS must expose the same contract."
+  ],
+  "decisions": [
+    {
+      "title": "Total API",
+      "body": "Every operation represents success and error in its return type."
+    },
+    { "title": "Dual distribution", "body": "Both module formats share documented guarantees." }
+  ],
+  "qualityAttributes": [],
+  "evidence": [
+    {
+      "label": "Public package",
+      "detail": "API, ESM/CJS builds, and versioned documentation.",
+      "href": "https://github.com/gabrielalmir/resulta"
+    }
+  ],
+  "limits": [
+    "The library exposes errors; it does not choose application recovery policies.",
+    "Adoption and production use are not claimed."
+  ],
+  "diagram": [
+    { "label": "Input", "detail": "A total operation.", "tone": "boundary" },
+    { "label": "Result", "detail": "Explicit success or error.", "tone": "decision" },
+    { "label": "ESM / CJS", "detail": "Outputs with the same guarantee.", "tone": "evidence" }
+  ]
+}

@@ -1,1 +1,83 @@
-{"locale":"en","slug":"saturno","tier":"dossier","status":"implemented","sourceRepo":"https://github.com/gabrielalmir/saturno","sourceCommit":"main","license":"Verify in the repository before reuse","title":"Saturno","eyebrow":"Product architecture","summary":"A modern Laravel/Inertia monolith with a modular boundary for work management.","context":"Saturno explores work organization for users, teams, and integrations without anticipating a distributed architecture.","constraints":["Consistent multi-organization access and authorization.","Evolve a product without premature distributed complexity.","Separate architectural intent from proven capability."],"decisions":[{"title":"Modern monolith","body":"Laravel and Inertia keep delivery, domain, and operation close."},{"title":"Selective DDD","body":"WorkManagement gets a modular boundary where its vocabulary needs clarity."},{"title":"Organizational isolation","body":"Organization and authorization cross every use case, not only the interface."}],"qualityAttributes":[{"name":"Security","approach":"Organization scope and per-use-case authorization.","evidence":"Boundaries to verify in code."},{"name":"Modifiability","approach":"WorkManagement as an explicit module.","evidence":"Versioned repository structure."},{"name":"Operability","approach":"One deployment unit.","evidence":"Current monolithic architecture."}],"evidence":[{"label":"Repository","detail":"Laravel/Inertia code and modular organization.","href":"https://github.com/gabrielalmir/saturno"},{"label":"Honest scope","detail":"Queues, auditing, and portability are claimed only when proven."}],"limits":["No adoption, scale, or production claim is made.","Queues, auditing, and portability stay outside the narrative until evidence exists.","License and source commit await audit."],"diagram":[{"label":"Users and teams","detail":"Actors within organizations.","tone":"boundary"},{"label":"Authorization","detail":"A decision applied to every use case.","tone":"decision"},{"label":"WorkManagement","detail":"A modular boundary inside the monolith.","tone":"boundary"},{"label":"Versioned code","detail":"Capabilities verifiable in the repository.","tone":"evidence"}]}
+{
+  "locale": "en",
+  "slug": "saturno",
+  "tier": "dossier",
+  "status": "implemented",
+  "sourceRepo": "https://github.com/gabrielalmir/saturno",
+  "sourceCommit": "main",
+  "license": "Verify in the repository before reuse",
+  "title": "Saturno",
+  "eyebrow": "Product architecture",
+  "summary": "A modern Laravel/Inertia monolith with a modular boundary for work management.",
+  "context": "Saturno explores work organization for users, teams, and integrations without anticipating a distributed architecture.",
+  "constraints": [
+    "Consistent multi-organization access and authorization.",
+    "Evolve a product without premature distributed complexity.",
+    "Separate architectural intent from proven capability."
+  ],
+  "decisions": [
+    {
+      "title": "Modern monolith",
+      "body": "Laravel and Inertia keep delivery, domain, and operation close."
+    },
+    {
+      "title": "Selective DDD",
+      "body": "WorkManagement gets a modular boundary where its vocabulary needs clarity."
+    },
+    {
+      "title": "Organizational isolation",
+      "body": "Organization and authorization cross every use case, not only the interface."
+    }
+  ],
+  "qualityAttributes": [
+    {
+      "name": "Security",
+      "approach": "Organization scope and per-use-case authorization.",
+      "evidence": "Boundaries to verify in code."
+    },
+    {
+      "name": "Modifiability",
+      "approach": "WorkManagement as an explicit module.",
+      "evidence": "Versioned repository structure."
+    },
+    {
+      "name": "Operability",
+      "approach": "One deployment unit.",
+      "evidence": "Current monolithic architecture."
+    }
+  ],
+  "evidence": [
+    {
+      "label": "Repository",
+      "detail": "Laravel/Inertia code and modular organization.",
+      "href": "https://github.com/gabrielalmir/saturno"
+    },
+    {
+      "label": "Honest scope",
+      "detail": "Queues, auditing, and portability are claimed only when proven."
+    }
+  ],
+  "limits": [
+    "No adoption, scale, or production claim is made.",
+    "Queues, auditing, and portability stay outside the narrative until evidence exists.",
+    "License and source commit await audit."
+  ],
+  "diagram": [
+    { "label": "Users and teams", "detail": "Actors within organizations.", "tone": "boundary" },
+    {
+      "label": "Authorization",
+      "detail": "A decision applied to every use case.",
+      "tone": "decision"
+    },
+    {
+      "label": "WorkManagement",
+      "detail": "A modular boundary inside the monolith.",
+      "tone": "boundary"
+    },
+    {
+      "label": "Versioned code",
+      "detail": "Capabilities verifiable in the repository.",
+      "tone": "evidence"
+    }
+  ]
+}

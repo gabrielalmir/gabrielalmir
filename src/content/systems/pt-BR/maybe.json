@@ -1,1 +1,83 @@
-{"locale":"pt-BR","slug":"maybe","tier":"dossier","status":"implemented","sourceRepo":"https://github.com/gabrielalmir/maybe","sourceCommit":"main","license":"Verificar no repositório antes de reutilizar","title":"Maybe","eyebrow":"Arquitetura para PHP legado","summary":"Erros e ausência viram estados explícitos, adotados gradualmente nas bordas de sistemas PHP 7.4.","context":"Sistemas legados misturam null, false, exceções e validações. Maybe explora uma transição incremental sem exigir reescrita.","constraints":["Compatibilidade com PHP 7.4.","Adoção gradual em código existente.","Concorrência por processos com fronteiras de segurança claras."],"decisions":[{"title":"Erros explícitos","body":"Result e Option tornam falha e ausência parte do contrato."},{"title":"Adoção nas bordas","body":"Schema e DTO entram primeiro onde dados externos atravessam o sistema."},{"title":"Async como processo","body":"O núcleo continua síncrono; concorrência, timeout e serialização pertencem a uma fronteira própria."}],"qualityAttributes":[{"name":"Compatibilidade","approach":"API compatível com PHP 7.4.","evidence":"Restrição declarada pelo projeto."},{"name":"Segurança","approach":"Validação antes de cruzar processos.","evidence":"Schema, DTO e contratos explícitos."},{"name":"Evolução","approach":"Schema → DTO → Result → Option → Async.","evidence":"Camadas podem ser adotadas incrementalmente."}],"evidence":[{"label":"API pública","detail":"Tipos e exemplos versionados no repositório.","href":"https://github.com/gabrielalmir/maybe"},{"label":"Fronteira Async","detail":"Serialização, timeout e isolamento são responsabilidades observáveis."}],"limits":["Async não substitui filas duráveis nem supervisão operacional.","A aplicação continua responsável por idempotência, recursos e recuperação.","Licença e commit-fonte aguardam fixação após auditoria."],"diagram":[{"label":"null / false / throw","detail":"Semânticas concorrentes no legado.","tone":"risk"},{"label":"Schema + DTO","detail":"Dados ganham forma na borda.","tone":"boundary"},{"label":"Result + Option","detail":"Erro e ausência entram no contrato.","tone":"decision"},{"label":"Async isolado","detail":"Processos com timeout e serialização explícitos.","tone":"evidence"}]}
+{
+  "locale": "pt-BR",
+  "slug": "maybe",
+  "tier": "dossier",
+  "status": "implemented",
+  "sourceRepo": "https://github.com/gabrielalmir/maybe",
+  "sourceCommit": "main",
+  "license": "Verificar no repositório antes de reutilizar",
+  "title": "Maybe",
+  "eyebrow": "Arquitetura para PHP legado",
+  "summary": "Erros e ausência viram estados explícitos, adotados gradualmente nas bordas de sistemas PHP 7.4.",
+  "context": "Sistemas legados misturam null, false, exceções e validações. Maybe explora uma transição incremental sem exigir reescrita.",
+  "constraints": [
+    "Compatibilidade com PHP 7.4.",
+    "Adoção gradual em código existente.",
+    "Concorrência por processos com fronteiras de segurança claras."
+  ],
+  "decisions": [
+    {
+      "title": "Erros explícitos",
+      "body": "Result e Option tornam falha e ausência parte do contrato."
+    },
+    {
+      "title": "Adoção nas bordas",
+      "body": "Schema e DTO entram primeiro onde dados externos atravessam o sistema."
+    },
+    {
+      "title": "Async como processo",
+      "body": "O núcleo continua síncrono; concorrência, timeout e serialização pertencem a uma fronteira própria."
+    }
+  ],
+  "qualityAttributes": [
+    {
+      "name": "Compatibilidade",
+      "approach": "API compatível com PHP 7.4.",
+      "evidence": "Restrição declarada pelo projeto."
+    },
+    {
+      "name": "Segurança",
+      "approach": "Validação antes de cruzar processos.",
+      "evidence": "Schema, DTO e contratos explícitos."
+    },
+    {
+      "name": "Evolução",
+      "approach": "Schema → DTO → Result → Option → Async.",
+      "evidence": "Camadas podem ser adotadas incrementalmente."
+    }
+  ],
+  "evidence": [
+    {
+      "label": "API pública",
+      "detail": "Tipos e exemplos versionados no repositório.",
+      "href": "https://github.com/gabrielalmir/maybe"
+    },
+    {
+      "label": "Fronteira Async",
+      "detail": "Serialização, timeout e isolamento são responsabilidades observáveis."
+    }
+  ],
+  "limits": [
+    "Async não substitui filas duráveis nem supervisão operacional.",
+    "A aplicação continua responsável por idempotência, recursos e recuperação.",
+    "Licença e commit-fonte aguardam fixação após auditoria."
+  ],
+  "diagram": [
+    {
+      "label": "null / false / throw",
+      "detail": "Semânticas concorrentes no legado.",
+      "tone": "risk"
+    },
+    { "label": "Schema + DTO", "detail": "Dados ganham forma na borda.", "tone": "boundary" },
+    {
+      "label": "Result + Option",
+      "detail": "Erro e ausência entram no contrato.",
+      "tone": "decision"
+    },
+    {
+      "label": "Async isolado",
+      "detail": "Processos com timeout e serialização explícitos.",
+      "tone": "evidence"
+    }
+  ]
+}

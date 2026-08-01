@@ -1,1 +1,45 @@
-{"locale":"en","slug":"hush","tier":"lab","status":"implemented","sourceRepo":"https://github.com/gabrielalmir/hush","sourceCommit":"main","license":"See repository","title":"Hush","eyebrow":"Storage laboratory","summary":"What must a RESP-compatible server make explicit about memory and concurrency?","context":"A compact implementation for investigating protocol, expiration, queues, and memory policies.","constraints":["Concurrency must not corrupt state.","TTL and eviction need predictable semantics."],"decisions":[{"title":"Bounded state","body":"LRU and TTL make eviction and expiration part of behavior."},{"title":"Protocol before product","body":"RESP defines the boundary; persistence and clustering are not implied."}],"qualityAttributes":[],"evidence":[{"label":"Public code","detail":"RESP, LRU, TTL, queues, and concurrency implemented.","href":"https://github.com/gabrielalmir/hush"}],"limits":["No persistence, authentication, or clustering.","A laboratory, not a production Redis replacement."],"diagram":[{"label":"RESP","detail":"Protocol boundary.","tone":"boundary"},{"label":"Concurrent queue","detail":"Orders access to state.","tone":"decision"},{"label":"LRU + TTL","detail":"Implemented behavior.","tone":"evidence"},{"label":"No persistence","detail":"Known limit.","tone":"risk"}]}
+{
+  "locale": "en",
+  "slug": "hush",
+  "tier": "lab",
+  "status": "implemented",
+  "sourceRepo": "https://github.com/gabrielalmir/hush",
+  "sourceCommit": "main",
+  "license": "See repository",
+  "title": "Hush",
+  "eyebrow": "Storage laboratory",
+  "summary": "What must a RESP-compatible server make explicit about memory and concurrency?",
+  "context": "A compact implementation for investigating protocol, expiration, queues, and memory policies.",
+  "constraints": [
+    "Concurrency must not corrupt state.",
+    "TTL and eviction need predictable semantics."
+  ],
+  "decisions": [
+    {
+      "title": "Bounded state",
+      "body": "LRU and TTL make eviction and expiration part of behavior."
+    },
+    {
+      "title": "Protocol before product",
+      "body": "RESP defines the boundary; persistence and clustering are not implied."
+    }
+  ],
+  "qualityAttributes": [],
+  "evidence": [
+    {
+      "label": "Public code",
+      "detail": "RESP, LRU, TTL, queues, and concurrency implemented.",
+      "href": "https://github.com/gabrielalmir/hush"
+    }
+  ],
+  "limits": [
+    "No persistence, authentication, or clustering.",
+    "A laboratory, not a production Redis replacement."
+  ],
+  "diagram": [
+    { "label": "RESP", "detail": "Protocol boundary.", "tone": "boundary" },
+    { "label": "Concurrent queue", "detail": "Orders access to state.", "tone": "decision" },
+    { "label": "LRU + TTL", "detail": "Implemented behavior.", "tone": "evidence" },
+    { "label": "No persistence", "detail": "Known limit.", "tone": "risk" }
+  ]
+}

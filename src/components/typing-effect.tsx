@@ -1,103 +1,103 @@
-import { cn } from "@/lib/utils"
-import { useEffect, useReducer } from "react"
+import { cn } from '@/lib/utils';
+import { useEffect, useReducer } from 'react';
 
 interface TypingEffectProps {
-    words: string[]
-    className?: string
-    typingSpeed?: number
-    deletingSpeed?: number
-    pauseDuration?: number
-    /**
-     * If false, the effect runs through every word once and stops on the last one.
-     * Default: true (legacy looping behaviour).
-     */
-    loop?: boolean
+  words: string[];
+  className?: string;
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
+  /**
+   * If false, the effect runs through every word once and stops on the last one.
+   * Default: true (legacy looping behaviour).
+   */
+  loop?: boolean;
 }
 
 type TypingState = {
-    displayText: string
-    currentWordIndex: number
-    isDeleting: boolean
-}
+  displayText: string;
+  currentWordIndex: number;
+  isDeleting: boolean;
+};
 
 type TypingAction =
-    | { type: "type-char"; value: string }
-    | { type: "set-deleting"; value: boolean }
-    | { type: "advance-word"; totalWords: number }
+  | { type: 'type-char'; value: string }
+  | { type: 'set-deleting'; value: boolean }
+  | { type: 'advance-word'; totalWords: number };
 
 function typingReducer(state: TypingState, action: TypingAction): TypingState {
-    switch (action.type) {
-        case "type-char":
-            return {
-                ...state,
-                displayText: action.value,
-            }
-        case "set-deleting":
-            return {
-                ...state,
-                isDeleting: action.value,
-            }
-        case "advance-word":
-            return {
-                displayText: "",
-                isDeleting: false,
-                currentWordIndex: (state.currentWordIndex + 1) % action.totalWords,
-            }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case 'type-char':
+      return {
+        ...state,
+        displayText: action.value,
+      };
+    case 'set-deleting':
+      return {
+        ...state,
+        isDeleting: action.value,
+      };
+    case 'advance-word':
+      return {
+        displayText: '',
+        isDeleting: false,
+        currentWordIndex: (state.currentWordIndex + 1) % action.totalWords,
+      };
+    default:
+      return state;
+  }
 }
 
 export function TypingEffect({
-    words,
-    className,
-    typingSpeed = 100,
-    deletingSpeed = 50,
-    pauseDuration = 2000,
-    loop = true,
+  words,
+  className,
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseDuration = 2000,
+  loop = true,
 }: TypingEffectProps) {
-    const [state, dispatch] = useReducer(typingReducer, {
-        displayText: "",
-        currentWordIndex: 0,
-        isDeleting: false,
-    })
+  const [state, dispatch] = useReducer(typingReducer, {
+    displayText: '',
+    currentWordIndex: 0,
+    isDeleting: false,
+  });
 
-    useEffect(() => {
-        const currentWord = words[state.currentWordIndex]
-        const isLastWord = state.currentWordIndex === words.length - 1
-        const fullyTyped = state.displayText.length === currentWord.length
+  useEffect(() => {
+    const currentWord = words[state.currentWordIndex];
+    const isLastWord = state.currentWordIndex === words.length - 1;
+    const fullyTyped = state.displayText.length === currentWord.length;
 
-        // Non-looping: park on the final word once it's fully typed.
-        if (!loop && isLastWord && fullyTyped && !state.isDeleting) {
-            return
+    // Non-looping: park on the final word once it's fully typed.
+    if (!loop && isLastWord && fullyTyped && !state.isDeleting) {
+      return;
+    }
+
+    const handleTyping = () => {
+      if (!state.isDeleting) {
+        if (state.displayText.length < currentWord.length) {
+          dispatch({
+            type: 'type-char',
+            value: currentWord.slice(0, state.displayText.length + 1),
+          });
+        } else {
+          setTimeout(() => dispatch({ type: 'set-deleting', value: true }), pauseDuration);
         }
+      } else if (state.displayText.length > 0) {
+        dispatch({ type: 'type-char', value: currentWord.slice(0, state.displayText.length - 1) });
+      } else {
+        dispatch({ type: 'advance-word', totalWords: words.length });
+      }
+    };
 
-        const handleTyping = () => {
-            if (!state.isDeleting) {
-                if (state.displayText.length < currentWord.length) {
-                    dispatch({ type: "type-char", value: currentWord.slice(0, state.displayText.length + 1) })
-                } else {
-                    setTimeout(() => dispatch({ type: "set-deleting", value: true }), pauseDuration)
-                }
-            } else if (state.displayText.length > 0) {
-                dispatch({ type: "type-char", value: currentWord.slice(0, state.displayText.length - 1) })
-            } else {
-                dispatch({ type: "advance-word", totalWords: words.length })
-            }
-        }
+    const timer = setTimeout(handleTyping, state.isDeleting ? deletingSpeed : typingSpeed);
 
-        const timer = setTimeout(
-            handleTyping,
-            state.isDeleting ? deletingSpeed : typingSpeed
-        )
+    return () => clearTimeout(timer);
+  }, [state, words, typingSpeed, deletingSpeed, pauseDuration, loop]);
 
-        return () => clearTimeout(timer)
-    }, [state, words, typingSpeed, deletingSpeed, pauseDuration, loop])
-
-    return (
-        <span className={cn("font-mono inline-block min-w-[2ch]", className)}>
-            {state.displayText}
-            <span className="animate-blink inline-block ml-1 w-[0.5em] h-[1em] bg-vesper-orange align-middle mb-1"></span>
-        </span>
-    )
+  return (
+    <span className={cn('font-mono inline-block min-w-[2ch]', className)}>
+      {state.displayText}
+      <span className="animate-blink inline-block ml-1 w-[0.5em] h-[1em] bg-vesper-orange align-middle mb-1"></span>
+    </span>
+  );
 }
