@@ -2853,6 +2853,14 @@ button:focus-visible {
   min-height: 7.5rem;
 }
 
+.systems-atlas .system-plate > header > div {
+  min-width: 0;
+}
+
+.system-status {
+  white-space: nowrap;
+}
+
 .systems-atlas .system-plate .kicker {
   color: var(--amber);
 }
