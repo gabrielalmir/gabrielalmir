@@ -58,9 +58,9 @@ function StorytellingEffects() {
   useEffect(() => {
     const root = document.documentElement;
     const home = document.querySelector<HTMLElement>('.home-story');
-    const reduceMotion =
-      shouldReduceMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
+
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const clearStoryStyles = () => {
       root.classList.remove('build-motion');
       root.dataset.storytellingHydrated = 'reduced';
       home?.querySelectorAll<HTMLElement>('[data-parallax-layer]').forEach((layer) => {
@@ -74,18 +74,29 @@ function StorytellingEffects() {
           item.style.removeProperty('--parallax');
         });
       });
-      return;
-    }
+    };
 
-    root.classList.add('build-motion');
-    root.dataset.storytellingHydrated = 'true';
-    updateStory();
-    window.addEventListener('resize', updateStory, { passive: true });
+    const enableStorytelling = () => {
+      root.classList.add('build-motion');
+      root.dataset.storytellingHydrated = 'true';
+      updateStory();
+      window.addEventListener('resize', updateStory, { passive: true });
+    };
+
+    const syncMotionPreference = () => {
+      window.removeEventListener('resize', updateStory);
+      if (shouldReduceMotion || motionPreference.matches) clearStoryStyles();
+      else enableStorytelling();
+    };
+
+    syncMotionPreference();
+    motionPreference.addEventListener('change', syncMotionPreference);
 
     return () => {
       root.classList.remove('build-motion');
       delete root.dataset.storytellingHydrated;
       window.removeEventListener('resize', updateStory);
+      motionPreference.removeEventListener('change', syncMotionPreference);
     };
   }, [shouldReduceMotion, updateStory]);
 

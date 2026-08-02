@@ -1792,20 +1792,32 @@ button:focus-visible {
   min-width: 0;
 }
 
-.public-branch picture {
-  display: block;
+.public-media-frame {
+  display: grid;
+  place-items: center;
+  width: calc(100% + 2.6rem);
+  aspect-ratio: 16 / 9;
   margin: -1.3rem -1.3rem 1.3rem;
+  overflow: hidden;
+  background: var(--paper-2);
 }
 
-.public-branch img {
-  display: block;
+.public-media-frame picture,
+.public-media-frame picture img {
   width: 100%;
-  aspect-ratio: 16/9;
+  height: 100%;
+}
+
+.public-media-frame img {
+  display: block;
   object-fit: cover;
 }
 
-.public-branch article:nth-child(2) img {
+.public-media-frame .project-logo {
+  width: min(42%, 168px);
+  height: auto;
   aspect-ratio: 1;
+  object-fit: contain;
 }
 
 .public-branch p {
@@ -1817,60 +1829,22 @@ button:focus-visible {
 }
 
 .build-motion [data-build-item] {
-  opacity: calc(0.08 + var(--item-progress) * 0.92);
   transform: translateY(calc((1 - var(--item-progress)) * 24px));
-  transition:
-    transform 120ms linear,
-    opacity 120ms linear;
-  will-change: transform, opacity;
-}
-
-.build-motion .systems-atlas .system-plate,
-.build-motion .systems-atlas .lab-card {
-  clip-path: inset(calc((1 - var(--item-progress)) * 60%) 0 0 0);
-}
-
-.build-motion .hero-portrait {
-  clip-path: inset(
-    calc((1 - var(--item-progress)) * 48%) calc((1 - var(--item-progress)) * 32%) round 2px
-  );
-}
-
-.build-motion .proof > header {
-  clip-path: inset(0 calc((1 - var(--item-progress)) * 100%) 0 0);
-}
-
-.build-motion .proof article {
-  clip-path: inset(0 calc((1 - var(--item-progress)) * 100%) 0 0);
+  transition: transform 120ms linear;
+  will-change: transform;
 }
 
 .build-motion .track-line {
   transform: scaleY(var(--build-progress));
 }
 
-.build-motion .document {
-  clip-path: inset(calc((1 - var(--item-progress)) * 35%) 0);
-}
-
-.build-motion .story-path > div {
-  clip-path: inset(0 calc((1 - var(--item-progress)) * 100%) 0 0);
-}
-
 .build-motion .process {
   background-size: calc(42px * var(--build-progress)) calc(42px * var(--build-progress));
-}
-
-.build-motion .process li {
-  clip-path: inset(0 calc((1 - var(--item-progress)) * 100%) 0 0);
 }
 
 .build-motion .personal .manga-lines {
   transform: translateX(calc((1 - var(--item-progress)) * 18%));
   opacity: var(--item-progress);
-}
-
-.build-motion .article-card {
-  clip-path: inset(calc((1 - var(--item-progress)) * 50%) calc((1 - var(--item-progress)) * 50%));
 }
 
 .build-motion .contact {
@@ -1913,10 +1887,6 @@ button:focus-visible {
   .build-motion [data-build-item] {
     transform: translateY(calc((1 - var(--item-progress)) * 16px));
   }
-
-  .build-motion .document {
-    clip-path: inset(calc((1 - var(--item-progress)) * 20%) 0);
-  }
 }
 @media (max-width: 560px) {
   .competition-note {
@@ -1938,9 +1908,7 @@ button:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   .build-motion [data-build-item] {
-    opacity: 1;
     transform: none;
-    clip-path: none;
     transition: none;
   }
 
@@ -2034,14 +2002,6 @@ button:focus-visible {
 
 .trajectory-detail {
   padding-top: 4rem;
-}
-
-.public-branch .project-logo {
-  width: 92px;
-  height: 92px;
-  aspect-ratio: 1;
-  object-fit: contain;
-  margin: 0 0 2rem;
 }
 
 .scroll-cue {

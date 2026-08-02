@@ -230,34 +230,36 @@ const trajectoryOverview = [
               {
                 momentsByTrack('public').map((moment) => (
                   <article data-build-item>
-                    {moment.organization === 'PhotoGIMP' ? (
-                      <img
-                        class="project-logo"
-                        src="/images/trajectory/photogimp.png"
-                        width="256"
-                        height="256"
-                        loading="lazy"
-                        alt="PhotoGIMP"
-                      />
-                    ) : (
-                      moment.image && (
-                        <picture>
-                          <source
-                            type="image/avif"
-                            srcset={`/images/trajectory/${moment.image.src}-480.avif 480w, /images/trajectory/${moment.image.src}-960.avif 960w`}
-                          />
-                          <img
-                            loading="lazy"
-                            src={`/images/trajectory/${moment.image.src}-960.webp`}
-                            srcset={`/images/trajectory/${moment.image.src}-480.webp 480w, /images/trajectory/${moment.image.src}-960.webp 960w`}
-                            sizes="(max-width: 900px) 88vw, 25vw"
-                            width="960"
-                            height="691"
-                            alt={moment.image.alt}
-                          />
-                        </picture>
-                      )
-                    )}
+                    <div class="public-media-frame">
+                      {moment.organization === 'PhotoGIMP' ? (
+                        <img
+                          class="project-logo"
+                          src="/images/trajectory/photogimp.png"
+                          width="256"
+                          height="256"
+                          loading="lazy"
+                          alt="PhotoGIMP"
+                        />
+                      ) : (
+                        moment.image && (
+                          <picture>
+                            <source
+                              type="image/avif"
+                              srcset={`/images/trajectory/${moment.image.src}-480.avif 480w, /images/trajectory/${moment.image.src}-960.avif 960w`}
+                            />
+                            <img
+                              loading="lazy"
+                              src={`/images/trajectory/${moment.image.src}-960.webp`}
+                              srcset={`/images/trajectory/${moment.image.src}-480.webp 480w, /images/trajectory/${moment.image.src}-960.webp 960w`}
+                              sizes="(max-width: 900px) 88vw, 25vw"
+                              width="960"
+                              height="691"
+                              alt={moment.image.alt}
+                            />
+                          </picture>
+                        )
+                      )}
+                    </div>
                     <p class="moment-role">
                       {moment.role} · {moment.organization}
                     </p>
