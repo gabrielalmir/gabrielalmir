@@ -165,11 +165,13 @@ test('personal signals reveal accessible microcopy', async ({ page }) => {
 
 test('header exposes status, CTA, contrast control, and locale', async ({ page }, testInfo) => {
   await page.goto('/');
+  await page.evaluate(() => localStorage.removeItem('ga-contrast'));
+  await page.reload();
   await expect(page.getByRole('link', { name: /Falar comigo/i }).first()).toBeVisible();
   await expect(page.getByRole('button', { name: /contraste/i })).toBeVisible();
   if (testInfo.project.name !== 'no-javascript') {
     await page.getByRole('button', { name: /contraste/i }).click();
-    await expect(page.locator('html')).toHaveAttribute('data-contrast', 'ink');
+    await expect(page.locator('html')).toHaveAttribute('data-contrast', 'ink', { timeout: 3000 });
     await page.getByRole('button', { name: /contraste/i }).click();
     await expect(page.locator('html')).toHaveAttribute('data-contrast', 'paper');
   }
@@ -186,6 +188,36 @@ test('signal rail and hero path craft exist for full-motion sessions', async ({ 
   await expect(page.locator('[data-signal-rail]')).toHaveCount(1);
   await expect(page.locator('.hero-path-svg')).toHaveCount(1);
   await expect(page.locator('.system-window')).toHaveCount(2);
+});
+
+test('three signature field respects capability gates', async ({ page }, testInfo) => {
+  if (testInfo.project.name === 'no-javascript') {
+    await page.goto('/');
+    // SSR mount point may exist; scene must never paint
+    await expect(page.locator('canvas[data-signature-canvas]')).toHaveCount(0);
+    return;
+  }
+
+  if (testInfo.project.name === 'reduced-motion') {
+    await page.goto('/?webgl=1');
+    await page.waitForTimeout(1000);
+    await expect(page.locator('[data-signature-active="true"]')).toHaveCount(0);
+    await expect(page.locator('canvas[data-signature-canvas]')).toHaveCount(0);
+    return;
+  }
+
+  await page.goto('/?webgl=0');
+  await page.waitForTimeout(1000);
+  await expect(page.locator('[data-signature-active="true"]')).toHaveCount(0);
+  await expect(page.locator('canvas[data-signature-canvas]')).toHaveCount(0);
+
+  await page.goto('/?webgl=1');
+  await expect(page.locator('[data-signature-field]')).toHaveCount(1);
+  await expect
+    .poll(async () => page.locator('canvas[data-signature-canvas]').count(), { timeout: 10000 })
+    .toBeGreaterThan(0);
+  await expect(page.locator('[data-signature-active="true"]')).toHaveCount(1);
+  await expect(page.locator('canvas[data-signature-canvas]')).toHaveAttribute('aria-hidden', 'true');
 });
 
 for (const [localePath, systemPath] of [

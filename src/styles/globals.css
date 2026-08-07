@@ -3722,3 +3722,43 @@ html[data-contrast='ink'] .hero-noise {
     transform: none;
   }
 }
+
+/* Three.js signature field (hero lattice) */
+.signature-field {
+  position: absolute;
+  inset: -8% -4%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.signature-field canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: none;
+}
+
+/* When WebGL is live, soften competing CSS ornaments slightly */
+.hero-parallax-middle:has([data-signature-active='true']) .orbit {
+  opacity: 0.55;
+}
+
+.hero-parallax-middle:has([data-signature-active='true']) .hero-signal-field {
+  opacity: 0.72;
+}
+
+@media (max-width: 900px) {
+  .signature-field {
+    inset: 10% -20% auto auto;
+    width: min(92vw, 420px);
+    height: min(48vh, 340px);
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-field {
+    display: none !important;
+  }
+}

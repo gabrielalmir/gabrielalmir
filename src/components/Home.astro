@@ -4,6 +4,7 @@ import PersonalSignals from './PersonalSignals.astro';
 import SystemsAtlas from './SystemsAtlas.astro';
 import SignalRail from './SignalRail.astro';
 import HeroSignalField from './HeroSignalField.astro';
+import SignatureField from './SignatureField';
 import StorytellingController from './storytelling-controller';
 import { getCollection } from 'astro:content';
 import {
@@ -55,6 +56,7 @@ const trajectoryOverview = [
         data-speed="0.6"
         aria-hidden="true"
       >
+        <SignatureField client:visible />
         <span class="orbit orbit-large"><i></i><b></b></span><span class="orbit orbit-small"
           ><i></i></span
         ><span class="system-node node-square"></span><span class="system-node node-dot"
