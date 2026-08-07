@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gabrielalmir.com',
+  site: 'https://gabrielalmir.com.br',
   devToolbar: { enabled: false },
   integrations: [react(), sitemap()],
 });

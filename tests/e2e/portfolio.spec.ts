@@ -1,4 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { reducedMotionInitScript } from '../../playwright.config';
+
+test.beforeEach(async ({ page }, testInfo) => {
+  if (testInfo.project.name === 'reduced-motion') {
+    await page.addInitScript(reducedMotionInitScript);
+  }
+});
 
 for (const path of ['/', '/en/']) {
   test(`${path} communicates the essentials and stays usable`, async ({ page }, testInfo) => {
@@ -154,6 +161,31 @@ test('personal signals reveal accessible microcopy', async ({ page }) => {
   await coffee.locator('summary').click();
   await expect(coffee).toHaveAttribute('open', '');
   await expect(coffee.getByText('Uma ideia quase sempre começa com café.')).toBeVisible();
+});
+
+test('header exposes status, CTA, contrast control, and locale', async ({ page }, testInfo) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: /Falar comigo/i }).first()).toBeVisible();
+  await expect(page.getByRole('button', { name: /contraste/i })).toBeVisible();
+  if (testInfo.project.name !== 'no-javascript') {
+    await page.getByRole('button', { name: /contraste/i }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-contrast', 'ink');
+    await page.getByRole('button', { name: /contraste/i }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-contrast', 'paper');
+  }
+  await page.goto('/en/');
+  await expect(page.getByRole('link', { name: /Talk to me/i }).first()).toBeVisible();
+  await expect(page.locator('#contact')).toHaveCount(1);
+});
+
+test('signal rail and hero path craft exist for full-motion sessions', async ({ page }, testInfo) => {
+  await page.goto('/');
+  if (testInfo.project.name === 'no-javascript' || testInfo.project.name === 'reduced-motion') {
+    return;
+  }
+  await expect(page.locator('[data-signal-rail]')).toHaveCount(1);
+  await expect(page.locator('.hero-path-svg')).toHaveCount(1);
+  await expect(page.locator('.system-window')).toHaveCount(2);
 });
 
 for (const [localePath, systemPath] of [

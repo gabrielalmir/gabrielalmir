@@ -1,20 +1,28 @@
 import { useCallback, useEffect } from 'react';
-import { MotionConfig, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
+import { MotionConfig, useMotionValueEvent, useScroll } from 'framer-motion';
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
+function prefersReducedMotion() {
+  if (typeof window === 'undefined') return true;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function StorytellingEffects() {
   const { scrollYProgress } = useScroll();
-  const shouldReduceMotion = useReducedMotion();
 
   const updateStory = useCallback(() => {
-    if (shouldReduceMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (prefersReducedMotion()) return;
 
     const home = document.querySelector<HTMLElement>('.home-story');
     if (!home) return;
 
+    const pageProgress = clamp(scrollYProgress.get());
+    home.style.setProperty('--page-progress', pageProgress.toFixed(4));
+    document.documentElement.style.setProperty('--page-progress', pageProgress.toFixed(4));
+
     const viewportHeight = window.innerHeight;
-    const reachedPageEnd = scrollYProgress.get() >= 0.99;
+    const reachedPageEnd = pageProgress >= 0.99;
     const hero = home.querySelector<HTMLElement>('[data-parallax-hero]');
     if (hero) {
       const rect = hero.getBoundingClientRect();
@@ -23,6 +31,8 @@ function StorytellingEffects() {
         const speed = Number(layer.dataset.speed) || 0;
         layer.style.setProperty('--layer-y', `${(travel * speed).toFixed(2)}px`);
       });
+      const heroDraw = clamp(1 - rect.top / (viewportHeight * 0.85));
+      hero.style.setProperty('--hero-draw', heroDraw.toFixed(4));
     }
 
     home.querySelectorAll<HTMLElement>('[data-build-section]').forEach((section) => {
@@ -51,20 +61,29 @@ function StorytellingEffects() {
         item.style.setProperty('--parallax', parallax.toFixed(2));
       });
     });
-  }, [shouldReduceMotion]);
+
+    home.querySelectorAll<HTMLElement>('.signal-node').forEach((node) => {
+      const i = Number(node.dataset.node ?? 0);
+      const threshold = i / 3.2;
+      node.dataset.active = pageProgress >= threshold ? 'true' : 'false';
+    });
+  }, [scrollYProgress]);
 
   useMotionValueEvent(scrollYProgress, 'change', updateStory);
 
   useEffect(() => {
     const root = document.documentElement;
     const home = document.querySelector<HTMLElement>('.home-story');
-
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     const clearStoryStyles = () => {
       root.classList.remove('build-motion');
       root.dataset.storytellingHydrated = 'reduced';
       home?.querySelectorAll<HTMLElement>('[data-parallax-layer]').forEach((layer) => {
         layer.style.removeProperty('--layer-y');
+      });
+      home?.querySelectorAll<HTMLElement>('[data-parallax-hero]').forEach((hero) => {
+        hero.style.removeProperty('--hero-draw');
       });
       home?.querySelectorAll<HTMLElement>('[data-build-section]').forEach((section) => {
         section.style.removeProperty('--build-progress');
@@ -74,6 +93,8 @@ function StorytellingEffects() {
           item.style.removeProperty('--parallax');
         });
       });
+      home?.style.removeProperty('--page-progress');
+      root.style.removeProperty('--page-progress');
     };
 
     const enableStorytelling = () => {
@@ -85,7 +106,7 @@ function StorytellingEffects() {
 
     const syncMotionPreference = () => {
       window.removeEventListener('resize', updateStory);
-      if (shouldReduceMotion || motionPreference.matches) clearStoryStyles();
+      if (motionPreference.matches) clearStoryStyles();
       else enableStorytelling();
     };
 
@@ -98,7 +119,7 @@ function StorytellingEffects() {
       window.removeEventListener('resize', updateStory);
       motionPreference.removeEventListener('change', syncMotionPreference);
     };
-  }, [shouldReduceMotion, updateStory]);
+  }, [updateStory]);
 
   return <span data-storytelling-controller aria-hidden="true" hidden />;
 }

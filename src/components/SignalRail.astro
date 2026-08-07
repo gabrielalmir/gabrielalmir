@@ -1,0 +1,36 @@
+---
+/**
+ * Vertical “state path” signature — systems motif, not decorative noise.
+ * Progress driven by --page-progress from storytelling-controller.
+ */
+const { locale = 'pt-BR' } = Astro.props as { locale?: 'pt-BR' | 'en' };
+const steps =
+  locale === 'en'
+    ? [
+        ['IN', 'input'],
+        ['DEC', 'decision'],
+        ['OUT', 'output'],
+        ['OK', 'verified'],
+      ]
+    : [
+        ['IN', 'entrada'],
+        ['DEC', 'decisão'],
+        ['OUT', 'saída'],
+        ['OK', 'verificado'],
+      ];
+---
+
+<aside class="signal-rail" aria-hidden="true" data-signal-rail>
+  <div class="signal-rail-track">
+    <span class="signal-rail-fill"></span>
+    {
+      steps.map(([code, label], i) => (
+        <span class={`signal-node n${i}`} data-node={i} style={`--node-i:${i}`}>
+          <i></i>
+          <small>{code}</small>
+          <em>{label}</em>
+        </span>
+      ))
+    }
+  </div>
+</aside>

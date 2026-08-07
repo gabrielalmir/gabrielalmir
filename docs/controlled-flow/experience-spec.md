@@ -83,10 +83,11 @@ Provisional narrative: accept work at an API boundary, persist or queue intent, 
 
 Motion rules:
 
-- Every animation must use opacity or transform where possible and remain under 700 ms.
-- Motion stops after reaching a state; nothing loops, pulses indefinitely, or competes with reading.
+- Every animation must use opacity or transform where possible and remain under 700 ms for *state transitions*; continuous ambient loops (orbit, ticker, status pulse) are allowed only when decorative, `aria-hidden`, and disabled under `prefers-reduced-motion`.
+- Motion stops after reaching a state for content-critical reveals; ambient signature motion may loop if it does not block reading.
 - Disable smooth scrolling and sequencing under `prefers-reduced-motion: reduce`.
-- Do not implement typing, glitch, scanlines, fake terminal chrome, fake loading, parallax, a custom cursor, or decorative network motion.
+- Allowed signature motion (production + openspec): hero depth parallax (three layers), scroll-build section/item progress, hero path stroke (`--hero-draw`), page signal rail, slow orbit rotation, mono ticker, status pulse, verified bloom once at contact.
+- Do not implement typing loops, glitch, scanlines, fake terminal chrome, fake loading screens, a custom cursor, or pointer-tracking decorative networks.
 - The written constraint, decision, and result remain adjacent to each diagram and present in the DOM before interaction.
 
 ## Responsive behavior

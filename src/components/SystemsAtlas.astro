@@ -10,9 +10,9 @@ const { locale, systems } = Astro.props as {
 const prefix = locale === 'en' ? '/en' : '';
 const dossiers = systems.filter(({ data }) => data.tier === 'dossier');
 const labs = systems.filter(({ data }) => data.tier === 'lab');
-const publicSites: Record<string, string> = {
-  maybe: 'https://gabrielalmir.github.io/maybe/',
-  saturno: 'https://saturno.gabrielalmir.com.br/',
+const publicSites: Record<string, { href: string; host: string }> = {
+  maybe: { href: 'https://gabrielalmir.github.io/maybe/', host: 'gabrielalmir.github.io/maybe' },
+  saturno: { href: 'https://saturno.gabrielalmir.com.br/', host: 'saturno.gabrielalmir.com.br' },
 };
 const en = locale === 'en';
 const labels =
@@ -79,7 +79,7 @@ const labels =
   <div class="dossier-grid">
     {
       dossiers.map(({ data }, index) => (
-        <article class="system-plate" data-build-item>
+        <article class="system-plate" data-build-item data-slug={data.slug}>
           <header>
             <p class="project-index">0{index + 1}</p>
             <div>
@@ -88,10 +88,34 @@ const labels =
             </div>
             <span class={`system-status status-${data.status}`}>{data.status}</span>
           </header>
-          <SystemVisual
-            slug={data.slug}
-            label={`${en ? 'Visual summary of' : 'Resumo visual de'} ${data.title}`}
-          />
+          {
+            publicSites[data.slug] ? (
+              <a
+                class="system-window"
+                href={publicSites[data.slug].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${en ? 'Open public demonstration' : 'Abrir demonstração pública'} — ${data.title}`}
+              >
+                <span class="window-chrome">
+                  <i></i><i></i><i></i>
+                  <em>{publicSites[data.slug].host}</em>
+                </span>
+                <span class="window-screen">
+                  <SystemVisual
+                    slug={data.slug}
+                    label={`${en ? 'Visual summary of' : 'Resumo visual de'} ${data.title}`}
+                  />
+                </span>
+                <span class="window-cta">{en ? 'Open live system' : 'Abrir sistema ao vivo'} ↗</span>
+              </a>
+            ) : (
+              <SystemVisual
+                slug={data.slug}
+                label={`${en ? 'Visual summary of' : 'Resumo visual de'} ${data.title}`}
+              />
+            )
+          }
           <p class="system-summary">{data.card?.summary ?? data.summary}</p>
           <div class="project-decision">
             <AtlasIcon name="branch" size={22} strokeWidth={1.8} />
@@ -111,7 +135,7 @@ const labels =
             {publicSites[data.slug] && (
               <a
                 class="text-link"
-                href={publicSites[data.slug]}
+                href={publicSites[data.slug].href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${en ? 'Open public demonstration' : 'Abrir demonstração pública'} — ${data.title} (${en ? 'external site' : 'site externo'})`}

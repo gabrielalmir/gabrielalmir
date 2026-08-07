@@ -2,6 +2,8 @@
 import Shell from './Shell.astro';
 import PersonalSignals from './PersonalSignals.astro';
 import SystemsAtlas from './SystemsAtlas.astro';
+import SignalRail from './SignalRail.astro';
+import HeroSignalField from './HeroSignalField.astro';
 import StorytellingController from './storytelling-controller';
 import { getCollection } from 'astro:content';
 import {
@@ -19,7 +21,8 @@ const systems = (await getCollection('systems', ({ data }) => data.locale === lo
   (a, b) => a.data.title.localeCompare(b.data.title),
 );
 const processId = locale === 'en' ? 'process' : 'processo',
-  trajectoryId = locale === 'en' ? 'trajectory' : 'trajetoria';
+  trajectoryId = locale === 'en' ? 'trajectory' : 'trajetoria',
+  contactId = locale === 'en' ? 'contact' : 'contato';
 const momentsByTrack = (track: 'career' | 'learning' | 'public') =>
   trajectory.moments.filter((moment) => moment.track === track);
 const trajectoryOverview = [
@@ -33,6 +36,7 @@ const trajectoryOverview = [
 <Shell locale={locale}>
   <StorytellingController client:load />
   <main id="main" class="home-story">
+    <SignalRail locale={locale} />
     <section class="hero" data-build-section="hero" data-parallax-hero>
       <div
         class="hero-parallax hero-parallax-back"
@@ -42,6 +46,7 @@ const trajectoryOverview = [
         aria-hidden="true"
       >
         <span class="hero-wash"></span><span class="hero-grid"></span>
+        <span class="hero-noise"></span>
       </div>
       <div
         class="hero-parallax hero-parallax-middle"
@@ -54,6 +59,7 @@ const trajectoryOverview = [
           ><i></i></span
         ><span class="system-node node-square"></span><span class="system-node node-dot"
         ></span><span class="system-label">input → decision → output</span>
+        <HeroSignalField locale={locale} />
       </div>
       <div
         class="hero-copy hero-foreground"
@@ -61,7 +67,11 @@ const trajectoryOverview = [
         data-speed="1.0"
         data-build-item
       >
-        <p class="kicker">{c.heroKicker}</p><h1>{c.heroTitle}</h1><p class="lede">
+        <p class="kicker" data-split-kicker>{c.heroKicker}</p>
+        <h1 data-display-title>
+          <span class="title-line">{c.heroTitle}</span>
+        </h1>
+        <p class="lede">
           {c.heroBody}
         </p><div class="actions">
           <a class="button ink" href={locale === 'en' ? '#systems' : '#sistemas'}
@@ -350,13 +360,29 @@ const trajectoryOverview = [
         }
       </div>
     </section>
-    <section class="contact" id="contato" data-build-section="contact">
+    <section class="contact" id={contactId} data-build-section="contact">
       <div data-build-item>
-        <p class="kicker">06 / {locale === 'en' ? 'contact' : 'contato'}</p><h2>
+        <p class="kicker">06 / {locale === 'en' ? 'contact' : 'contato'}</p>
+        <div class="contact-verified" aria-hidden="true">
+          <span class="verified-ring"></span>
+          <span class="verified-core"></span>
+          <small>{locale === 'en' ? 'path verified' : 'caminho verificado'}</small>
+        </div>
+        <h2>
           {c.contactTitle}
-        </h2><p>{c.contactBody}</p><a class="button ink" href="mailto:contato@gabrielalmir.com"
-          >{c.email} <span>↗</span></a
-        >
+        </h2><p>{c.contactBody}</p>
+        <div class="actions">
+          <a class="button ink" href="mailto:contato@gabrielalmir.com"
+            >{c.email} <span>↗</span></a
+          >
+          <a
+            class="button"
+            href={c.linkedinHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            >{c.linkedinLabel} <span>↗</span></a
+          >
+        </div>
       </div>
     </section>
   </main></Shell

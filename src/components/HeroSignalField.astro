@@ -1,0 +1,39 @@
+---
+/** Animated blueprint field unique to Gabriel: state machine, not Awwwards moiré. */
+const { locale = 'pt-BR' } = Astro.props as { locale?: 'pt-BR' | 'en' };
+const caption =
+  locale === 'en' ? 'constraint → path → evidence' : 'restrição → caminho → evidência';
+---
+
+<div class="hero-signal-field" aria-hidden="true">
+  <svg class="hero-path-svg" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      class="hero-path-line"
+      d="M40 300 C 90 300, 110 80, 180 80 S 250 260, 300 260 360 40, 440 40"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      pathLength="1"></path>
+    <circle class="hero-path-node n0" cx="40" cy="300" r="7"></circle>
+    <circle class="hero-path-node n1" cx="180" cy="80" r="7"></circle>
+    <circle class="hero-path-node n2" cx="300" cy="260" r="7"></circle>
+    <circle class="hero-path-node n3" cx="440" cy="40" r="8"></circle>
+    <path
+      class="hero-path-dash"
+      d="M60 40 H420 M60 320 H420"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-dasharray="2 10"
+      opacity="0.35"></path>
+  </svg>
+  <div class="signal-ticker">
+    <div class="signal-ticker-track">
+      <span>observe</span><span>measure</span><span>decide</span><span>verify</span><span
+        >recover</span
+      ><span>share</span><span>observe</span><span>measure</span><span>decide</span><span
+        >verify</span
+      ><span>recover</span><span>share</span>
+    </div>
+  </div>
+  <p class="hero-signal-caption">{caption}</p>
+</div>

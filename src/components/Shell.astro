@@ -12,11 +12,37 @@ const c = copy[locale];
     ><img class="brand-mark" src="/brand-mark.svg" width="48" height="48" alt="" /><small
       >Gabriel Almir</small
     ></a
-  ><nav aria-label={locale === 'en' ? 'Primary' : 'Principal'}>
-    {c.nav.map(([label, href]) => <a href={href}>{label}</a>)}
-  </nav><a class="locale" href={c.switchHref} hreflang={locale === 'en' ? 'pt-BR' : 'en'}
-    >{c.switchLabel}<span aria-hidden="true">↗</span></a
   >
+  <nav aria-label={locale === 'en' ? 'Primary' : 'Principal'}>
+    {c.nav.map(([label, href]) => <a href={href}>{label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <p class="header-status" data-status>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>{c.statusLine}</span>
+    </p>
+    <a class="header-cta" href={c.ctaHref}>{c.ctaLabel}<span aria-hidden="true">↗</span></a>
+    <a
+      class="header-social"
+      href={c.linkedinHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${c.linkedinLabel} (external)`}>{c.linkedinLabel}</a
+    >
+    <button
+      type="button"
+      class="contrast-toggle"
+      data-contrast-toggle
+      aria-pressed="false"
+      aria-label={c.contrastLabel}
+      title={c.contrastLabel}
+    >
+      <span data-contrast-label>{c.contrastToInk}</span>
+    </button>
+    <a class="locale" href={c.switchHref} hreflang={locale === 'en' ? 'pt-BR' : 'en'}
+      >{c.switchLabel}<span aria-hidden="true">↗</span></a
+    >
+  </div>
 </header>
 <slot />
 <footer>
@@ -37,5 +63,43 @@ const c = copy[locale];
         : 'Apoiar projetos open source (abre um serviço externo)'}
       >{locale === 'en' ? 'Support open-source projects' : 'Apoiar projetos open source'}</a
     >
-  </p><p>© {new Date().getFullYear()}</p>
+  </p>
+  <div class="footer-meta">
+    <a class="header-cta ghost" href={c.ctaHref}>{c.ctaLabel} <span aria-hidden="true">↗</span></a>
+    <p>© {new Date().getFullYear()}</p>
+  </div>
 </footer>
+
+<script is:inline define:vars={{ contrastToInk: c.contrastToInk, contrastToPaper: c.contrastToPaper }}>
+  (() => {
+    const root = document.documentElement;
+    const key = 'ga-contrast';
+    const buttons = () => document.querySelectorAll('[data-contrast-toggle]');
+    const apply = (mode) => {
+      const next = mode === 'ink' ? 'ink' : 'paper';
+      root.dataset.contrast = next;
+      root.style.colorScheme = next === 'ink' ? 'dark' : 'light';
+      try {
+        localStorage.setItem(key, next);
+      } catch {}
+      buttons().forEach((btn) => {
+        const pressed = next === 'ink';
+        btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+        const label = btn.querySelector('[data-contrast-label]');
+        if (label) label.textContent = pressed ? contrastToPaper : contrastToInk;
+      });
+    };
+    let stored = 'paper';
+    try {
+      stored = localStorage.getItem(key) || 'paper';
+    } catch {}
+    apply(stored);
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const btn = target.closest('[data-contrast-toggle]');
+      if (!btn) return;
+      apply(root.dataset.contrast === 'ink' ? 'paper' : 'ink');
+    });
+  })();
+</script>
