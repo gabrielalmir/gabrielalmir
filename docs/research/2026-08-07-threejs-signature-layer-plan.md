@@ -1,8 +1,18 @@
 # Next-level craft: Three.js signature layer
 
-**Status:** planning draft (no runtime implementation in this PR)  
+**Status:** implemented (P0 hero) on `feat/threejs-signature-layer` — atlas/contact polish still P1  
 **Branch intent:** document goals, FR/NFR, architecture, fidelity, risks, phased delivery  
 **Related:** `docs/research/2026-08-07-wodniack-comparison.md`, craft refresh on `main` (signal rail, hero path, system windows)
+
+### Runtime map (P0)
+
+| Path | Role |
+|---|---|
+| `src/webgl/can-run-signature.ts` | FR-4 gate |
+| `src/webgl/signature-scene.ts` | mount/unmount Three scene |
+| `src/components/SignatureField.tsx` | lazy island |
+| `?webgl=0` / `PUBLIC_THREE_SIGNATURE=0` | force off |
+| `?webgl=1` | force attempt on |
 
 ---
 

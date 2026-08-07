@@ -86,7 +86,7 @@ Motion rules:
 - Every animation must use opacity or transform where possible and remain under 700 ms for *state transitions*; continuous ambient loops (orbit, ticker, status pulse) are allowed only when decorative, `aria-hidden`, and disabled under `prefers-reduced-motion`.
 - Motion stops after reaching a state for content-critical reveals; ambient signature motion may loop if it does not block reading.
 - Disable smooth scrolling and sequencing under `prefers-reduced-motion: reduce`.
-- Allowed signature motion (production + openspec): hero depth parallax (three layers), scroll-build section/item progress, hero path stroke (`--hero-draw`), page signal rail, slow orbit rotation, mono ticker, status pulse, verified bloom once at contact.
+- Allowed signature motion (production + openspec): hero depth parallax (three layers), scroll-build section/item progress, hero path stroke (`--hero-draw`), page signal rail, slow orbit rotation, mono ticker, status pulse, verified bloom once at contact, **optional lazy Three.js state-lattice** in the hero (`SignatureField`, gated; `aria-hidden`; unmounted on reduced-motion / save-data / low-memory / no-WebGL / `?webgl=0` / `PUBLIC_THREE_SIGNATURE=0`).
 - Do not implement typing loops, glitch, scanlines, fake terminal chrome, fake loading screens, a custom cursor, or pointer-tracking decorative networks.
 - The written constraint, decision, and result remain adjacent to each diagram and present in the DOM before interaction.
 
