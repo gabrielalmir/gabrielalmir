@@ -1,0 +1,216 @@
+---
+/**
+ * Casca de navegação.
+ *
+ * Três decisões que sustentam o resto:
+ *  1. `sticky`, não `fixed`. A barra continua no fluxo e reserva a própria
+ *     altura, então nenhuma página precisa compensar com padding no topo —
+ *     e o dossiê, que não tem hero de tela cheia, não nasce debaixo dela.
+ *  2. O menu de telas pequenas é `<details>`/`<summary>`. Abre e fecha por
+ *     conta do navegador: sem JS o site continua navegável.
+ *  3. A marca vem de /brand-mark.svg, que é preto sobre transparente. Em vez
+ *     de inverter (o que devolveria um branco frio e diferente do paper), a
+ *     forma vira máscara e a cor é `currentColor` — assim ela também
+ *     acompanha o hover do link.
+ */
+import Icon from './Icon.astro';
+import { contact, nav } from '../lib/content';
+
+const mailto = `mailto:${contact.email}`;
+const cta = 'Falar comigo';
+---
+
+<header class="sticky top-0 z-90 border-b border-ink-700 bg-ink-900/80 backdrop-blur-lg">
+  <div class="nav-bar u-shell flex items-center justify-between gap-4">
+    <a href="/" class="brand inline-flex items-center text-paper">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="sr-only">Gabriel Almir</span>
+    </a>
+
+    <nav class="flex items-center gap-8" aria-label="Navegação principal">
+      <ul class="hidden items-center gap-8 md:flex">
+        {
+          nav.map((item) => (
+            <li>
+              <a class="nav-link u-label" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a class="nav-cta u-label hidden md:inline-flex" href={mailto}>
+        {cta}
+        <span class="nav-cta-icon"><Icon name="arrow-up-right" size={14} /></span>
+      </a>
+
+      <details class="nav-disclosure md:hidden">
+        <summary class="nav-burger -mr-2 text-paper" aria-label="Menu de navegação">
+          <span class="flex h-11 w-11 items-center justify-center">
+            <span class="burger-glyph burger-open"><Icon name="menu" size={22} /></span>
+            <span class="burger-glyph burger-close"><Icon name="x" size={22} /></span>
+          </span>
+        </summary>
+
+        <div class="nav-panel absolute inset-x-0 border-b border-ink-700 bg-ink-900/95 backdrop-blur-lg">
+          <div class="u-shell flex flex-col pt-1 pb-7">
+            <ul class="flex flex-col">
+              {
+                nav.map((item) => (
+                  <li class="border-b border-ink-800">
+                    <a class="u-label block py-4 text-ink-300" href={item.href}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <a class="nav-cta u-label mt-6 inline-flex w-fit" href={mailto}>
+              {cta}
+              <span class="nav-cta-icon"><Icon name="arrow-up-right" size={14} /></span>
+            </a>
+          </div>
+        </div>
+      </details>
+    </nav>
+  </div>
+</header>
+
+<style is:global>
+  /* A barra é sticky: um salto de âncora que alinhasse a seção ao topo do
+     viewport a deixaria escondida atrás dela. O recuo vale para o scroll
+     nativo e para o Lenis, então mora no <html> e não em cada seção. */
+  :root {
+    --nav-height: 4rem;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-height) + 1.5rem);
+  }
+</style>
+
+<style>
+  .nav-bar {
+    height: var(--nav-height);
+  }
+
+  /* A máscara recorta a silhueta da marca; a cor é herdada do link. */
+  .brand-mark {
+    display: block;
+    width: 28px;
+    height: 28px;
+    background-color: currentColor;
+    -webkit-mask-image: url('/brand-mark.svg');
+    mask-image: url('/brand-mark.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .brand {
+    transition: color 0.35s var(--ease-ink);
+  }
+
+  .brand:hover,
+  .brand:focus-visible {
+    color: var(--color-blue-bright);
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--color-ink-300);
+    transition: color 0.35s var(--ease-ink);
+  }
+
+  /* Mesmo gesto do .link-ink: o traço de tinta cresce da esquerda. */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.5em;
+    height: 1px;
+    background-color: var(--color-blue-bright);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-ink);
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--color-paper);
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .nav-cta {
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-ink-700);
+    padding: 0.6rem 0.9rem;
+    color: var(--color-paper);
+    transition:
+      border-color 0.35s var(--ease-ink),
+      color 0.35s var(--ease-ink);
+  }
+
+  .nav-cta:hover,
+  .nav-cta:focus-visible {
+    border-color: var(--color-blue);
+    color: var(--color-blue-bright);
+  }
+
+  .nav-cta-icon {
+    display: inline-flex;
+    transition: transform 0.35s var(--ease-ink);
+  }
+
+  .nav-cta:hover .nav-cta-icon,
+  .nav-cta:focus-visible .nav-cta-icon {
+    transform: translate(2px, -2px);
+  }
+
+  /* O triângulo padrão do summary não pertence a esta tipografia. Um `display`
+     diferente de `block` aqui quebra o toggle nativo em WebKit antigo — por
+     isso o flex do alvo de toque mora no span de dentro. */
+  .nav-burger {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .nav-burger::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Troca de glifo pelo estado nativo do <details> — nenhum JS envolvido. */
+  .burger-glyph {
+    display: block;
+  }
+
+  .burger-close {
+    display: none;
+  }
+
+  .nav-disclosure[open] .burger-open {
+    display: none;
+  }
+
+  .nav-disclosure[open] .burger-close {
+    display: block;
+  }
+
+  /* O +1px salta a hairline do header, para o painel não cobri-la. */
+  .nav-panel {
+    top: calc(100% + 1px);
+    box-shadow: 0 24px 60px -30px rgb(0 0 0 / 0.9);
+  }
+</style>

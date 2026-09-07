@@ -1,0 +1,86 @@
+---
+/**
+ * Processo — os quatro passos como cartões que se empilham.
+ *
+ * O empilhamento é CSS puro: `position: sticky` com `top` escalonado por card.
+ * Assim ele já funciona (de forma degradada) antes do GSAP entrar, e some
+ * inteiro fora de `.motion-ready` — sem motion são quatro blocos normais.
+ * A partir de `md` só porque em tela curta o pin esconderia texto atrás do nav.
+ */
+import { Image } from 'astro:assets';
+// Alias para não sombrear o global `process` do Node dentro do frontmatter.
+import { process as processSection } from '../lib/content';
+import { figureImages } from '../lib/images';
+import Stroke from './marks/Stroke.astro';
+---
+
+<section
+  id="processo"
+  data-process
+  aria-labelledby="processo-titulo"
+  class="bg-ink-900 py-28 md:py-40"
+>
+  <div class="u-shell">
+    <header class="max-w-3xl" data-reveal-group>
+      <p class="u-label text-blue-bright" data-reveal>{processSection.kicker}</p>
+      <h2 id="processo-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
+        {processSection.title}
+      </h2>
+      <p class="mt-8 max-w-2xl text-ink-300" data-reveal>{processSection.lead}</p>
+    </header>
+
+    {/* Faixa de textura entre o cabeçalho e os cards: respiro, não ilustração de apoio. */}
+    <figure class="mt-16 overflow-hidden border-y border-ink-800 md:mt-24" data-reveal>
+      <Image
+        src={figureImages.process}
+        alt="Ilustração: retrato de Gabriel Almir a grafite sobre uma colagem de papéis rasgados, com arcos a lápis e recortes geométricos em azul e laranja."
+        widths={[640, 960, 1200]}
+        sizes="(min-width: 84rem) 84rem, 100vw"
+        format="avif"
+        loading="lazy"
+        decoding="async"
+        class="u-inked h-[clamp(10rem,26vw,20rem)] w-full object-cover object-[center_28%] opacity-40"
+      />
+    </figure>
+
+    {/* Container em bloco: o sticky de cada card precisa de irmãos diretos altos. */}
+    <div class="mt-16 space-y-6 md:mt-24 md:space-y-10">
+      {
+        processSection.steps.map((step, i) => (
+          <article
+            data-process-card
+            style={`--i: ${i}`}
+            class="relative overflow-hidden border border-ink-700 bg-ink-850 px-7 py-10 md:px-14 md:py-16"
+          >
+            <span
+              aria-hidden="true"
+              class="u-display text-numeral pointer-events-none absolute -top-3 right-4 text-ink-500 select-none md:right-10"
+            >
+              {step.n}
+            </span>
+
+            {/* `relative` sem z-index: por vir depois no DOM, o texto já pinta sobre o numeral. */}
+            <div class="relative max-w-2xl">
+              <Stroke class="h-auto w-20 text-blue md:w-28" />
+              <h3 class="u-display mt-6 text-4xl text-paper md:text-5xl">
+                <span class="sr-only">Passo {step.n}. </span>
+                {step.title}
+              </h3>
+              <p class="mt-4 max-w-[52ch] text-ink-300">{step.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* `.motion-ready` está no <html>, fora do escopo do componente. */
+  @media (min-width: 768px) {
+    :global(html.motion-ready) [data-process-card] {
+      position: sticky;
+      top: calc(8rem + var(--i) * 1.5rem);
+    }
+  }
+</style>

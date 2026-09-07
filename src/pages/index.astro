@@ -1,0 +1,56 @@
+---
+/**
+ * Home.
+ *
+ * A página só faz duas coisas: separar a coleção pelos dois modos de leitura
+ * (dossiê ocupa painel, laboratório entra na grade) e montar as seções na
+ * ordem em que a narrativa foi escrita. Toda a copy mora em src/lib/content.ts.
+ */
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Proofs from '../components/Proofs.astro';
+import Systems from '../components/Systems.astro';
+import Trajectory from '../components/Trajectory.astro';
+import AISystems from '../components/AISystems.astro';
+import Process from '../components/Process.astro';
+import Contact from '../components/Contact.astro';
+import { contact, site } from '../lib/content';
+
+const all = await getCollection('systems');
+const dossiers = all
+  .filter((entry) => entry.data.kind === 'dossier')
+  .sort((a, b) => a.data.order - b.data.order);
+const labs = all
+  .filter((entry) => entry.data.kind === 'lab')
+  .sort((a, b) => a.data.order - b.data.order);
+
+// JSON-LD é um claim legível por máquina e vale tanto quanto o texto da página:
+// cada campo sai de src/lib/content.ts, nada de currículo escrito aqui.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.author,
+  url: site.url,
+  jobTitle: 'Analista de Sistemas Pleno',
+  description: site.description,
+  email: `mailto:${contact.email}`,
+  sameAs: [contact.linkedin, contact.github],
+};
+---
+
+<Base preloader>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(personLd)}></script>
+
+  <Hero />
+  <Proofs />
+  <Systems dossiers={dossiers} labs={labs} />
+  <Trajectory />
+  <AISystems />
+  <Process />
+  <Contact />
+</Base>

@@ -1,0 +1,112 @@
+---
+/**
+ * Provas — os 30 segundos.
+ *
+ * Três afirmações, cada uma com o lastro logo abaixo. O que importa aqui:
+ *  1. O número já nasce escrito ("−90%"). O contador é enfeite do motion, que
+ *     zera e conta de novo; sem JS a prova continua inteira e legível.
+ *  2. Cada item é um container CSS — as marcas se medem pela própria coluna e
+ *     não pela viewport, senão a palavra e o numeral atravessam a hairline.
+ *  3. Um respingo vermelho só, no item do −90%. É o teto da seção.
+ */
+import { proofs } from '../lib/content';
+import Circle from './marks/Circle.astro';
+import Splatter from './marks/Splatter.astro';
+import Stroke from './marks/Stroke.astro';
+---
+
+<section id="provas" data-proofs aria-labelledby="provas-titulo" class="bg-ink-900 py-32 md:py-48">
+  <div class="u-shell">
+    <header class="max-w-4xl" data-reveal-group>
+      {/* Azul puro só sustenta texto ≥ 18px; o kicker tem 12px, então vai de blue-bright. */}
+      <p class="u-label relative inline-block text-blue-bright" data-reveal>
+        {/* O círculo é posicionado e a palavra é relativa: a ordem de pintura
+            já deixa o traço atrás do texto, sem precisar de z-index. */}
+        <span
+          class="pointer-events-none absolute top-1/2 left-1/2 w-44 -translate-x-1/2 -translate-y-1/2"
+          aria-hidden="true"
+        >
+          <Circle class="w-full text-ink-700 opacity-70" />
+        </span>
+        <span class="relative">{proofs.kicker}</span>
+      </p>
+
+      <h2 id="provas-titulo" class="u-display text-section mt-6">{proofs.title}</h2>
+    </header>
+
+    <div class="mt-20 grid gap-y-16 md:mt-28 md:grid-cols-3 md:gap-x-10" data-reveal-group>
+      {
+        proofs.items.map((item, index) => {
+          const count = item.count;
+          return (
+            <article
+              data-proof-item
+              data-reveal
+              class:list={[
+                'proof-item relative',
+                // A hairline separa as colunas no desktop; empilhado ela cairia
+                // sobre o texto, e a primeira coluna não separa nada.
+                index > 0 && 'md:border-l md:border-ink-700 md:pl-10',
+              ]}
+            >
+              {count && (
+                <span
+                  class="pointer-events-none absolute -top-6 right-0 w-16 md:w-20"
+                  aria-hidden="true"
+                >
+                  <Splatter class="w-full text-red" />
+                </span>
+              )}
+
+              {count ? (
+                <p class="u-display proof-number text-numeral text-paper">
+                  <span
+                    data-count
+                    data-count-from={String(count.from)}
+                    data-count-to={String(count.to)}
+                    data-count-prefix={count.prefix}
+                    data-count-suffix={count.suffix}
+                  >
+                    {item.mark}
+                  </span>
+                </p>
+              ) : (
+                <p class="u-display proof-word text-paper">{item.mark}</p>
+              )}
+
+              <Stroke class="mt-5 w-full text-blue" />
+
+              <h3 class="mt-6 text-xl leading-snug text-paper lg:text-2xl">{item.claim}</h3>
+
+              <p class="mt-3 text-base text-ink-300">{item.backing}</p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Cada item vira container de consulta: as duas marcas abaixo se medem pela
+     largura da coluna, que muda entre empilhado e três colunas. */
+  .proof-item {
+    container-type: inline-size;
+  }
+
+  /* "COMUNIDADE" são dez caixas-altas: em text-numeral a palavra passa da
+     coluna inteira. Escala própria, deliberadamente menor que a do número —
+     o número é a prova; a palavra é só o rótulo dela.
+     A primeira declaração atende quem não tem unidades de container. */
+  .proof-word {
+    font-size: clamp(1.25rem, 3vw, 2.25rem);
+    font-size: min(3.5rem, 13cqi);
+    line-height: 0.9;
+  }
+
+  /* O token continua mandando, mas o topo dele (11rem) é mais largo que a
+     coluna quando a grade abre em três. */
+  .proof-number {
+    font-size: min(var(--text-numeral), 34cqi);
+  }
+</style>

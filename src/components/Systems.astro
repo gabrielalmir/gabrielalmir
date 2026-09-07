@@ -1,0 +1,243 @@
+---
+/**
+ * Sistemas — dossiês em painéis e laboratórios em grade.
+ *
+ * Decisões que valem registro:
+ *  1. O trilho nasce como coluna. A faixa horizontal de painéis de 100vw só
+ *     existe dentro de `.motion-ready`, porque um bloco de 300vw sem o pin do
+ *     ScrollTrigger para empurrá-lo seria conteúdo inalcançável. Sem JS ou com
+ *     reduced-motion sobra uma pilha vertical legível — ver o <style> abaixo.
+ *  2. Nada aqui usa `data-reveal` dentro do trilho: um elemento com opacity 0
+ *     esperando um trigger próprio, preso num container pinado, é o jeito mais
+ *     fácil de sumir com texto para sempre. Quem anima o painel é o trilho.
+ *  3. Vermelho. Os únicos são o badge "experimental" e o nó `risk` do mapa, e
+ *     eles nunca dividem viewport: dossiê tem mapa e não tem badge, lab tem
+ *     badge e não tem mapa. Por isso o nó `risk` mantém o vermelho do contrato
+ *     em vez de cair para ink-500 — se um painel um dia ganhar badge, é a
+ *     tabela `KIND` do ArchMap que muda, num lugar só.
+ *  4. O mapa é o `ArchMap` em `orientation="horizontal"`, o mesmo componente do
+ *     dossiê. Duas implementações do mesmo diagrama discordariam em silêncio no
+ *     dia em que a natureza de um nó mudasse de cor.
+ *  5. Quem é pinado é o `[data-systems-stage]`, não a seção. A seção tem 2174px
+ *     — cabeçalho, faixa e laboratórios —, e pinar isso prende no topo da tela
+ *     um bloco duas vezes maior que ela: o leitor ficava olhando o cabeçalho
+ *     enquanto os painéis passavam cortados pela metade, e os laboratórios só
+ *     apareciam quando o pin soltava. O palco tem exatamente uma tela de
+ *     altura, então o que fica parado é o que se quer olhar.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import ArchMap from './ArchMap.astro';
+import Icon from './Icon.astro';
+import { atlasImage } from '../lib/images';
+import { systemsSection } from '../lib/content';
+
+interface Props {
+  /** Já filtrados por `kind` e ordenados por `order` pela página. */
+  dossiers: CollectionEntry<'systems'>[];
+  labs: CollectionEntry<'systems'>[];
+}
+
+const { dossiers, labs } = Astro.props;
+
+type SystemEntry = CollectionEntry<'systems'>;
+
+const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
+  implemented: 'implementado',
+  experimental: 'experimental',
+};
+
+---
+
+<section
+  id="sistemas"
+  data-systems
+  aria-labelledby="sistemas-titulo"
+  class="relative bg-ink-950 py-24 md:py-32"
+>
+  <header class="u-shell flex flex-col gap-6" data-reveal-group>
+    <p class="u-label text-blue" data-reveal>{systemsSection.kicker}</p>
+    <h2 id="sistemas-titulo" class="u-display text-section max-w-[16ch]" data-reveal>
+      {systemsSection.title}
+    </h2>
+    <p class="max-w-[58ch] text-ink-300" data-reveal>{systemsSection.lead}</p>
+  </header>
+
+  <div data-systems-stage class="mt-16 overflow-x-clip overflow-y-hidden md:mt-20">
+    <div data-systems-track class="flex flex-col gap-20">
+      {
+        dossiers.map((entry, index) => {
+          const atlas = atlasImage(entry.data.atlas);
+          // O schema garante pelo menos um de cada (min(1) na collection).
+          const constraint = entry.data.constraints[0];
+          const decision = entry.data.decisions[0];
+          const limit = entry.data.limits[0];
+
+          return (
+            <article
+              data-system-panel
+              class:list={['shrink-0', index > 0 && 'border-t u-hairline pt-20']}
+            >
+              {/* `min-w-0` porque no modo faixa o shell vira item de flex-row:
+                  sem isso o conteúdo mais largo poderia esticar o painel. */}
+              <div class="u-shell flex min-w-0 flex-col gap-12 md:gap-16">
+                <div class="grid gap-10 md:grid-cols-12 md:items-end md:gap-12">
+                  <div class="flex min-w-0 flex-col gap-5 md:col-span-7">
+                    <p class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                      <span class="u-label text-ink-400">
+                        {String(index + 1).padStart(2, '0')} —
+                      </span>
+                      <span class="u-label text-blue">{entry.data.category}</span>
+                    </p>
+
+                    <h3 class="u-display text-4xl md:text-6xl">{entry.data.title}</h3>
+
+                    <p class="max-w-[52ch] text-ink-300">{entry.data.summary}</p>
+                  </div>
+
+                  {atlas && (
+                    <div
+                      data-atlas-image
+                      class="isolate overflow-hidden bg-ink-900 md:col-span-5"
+                    >
+                      <Image
+                        src={atlas}
+                        alt={`Imagem de abertura do dossiê ${entry.data.title} — ${entry.data.category}`}
+                        widths={[480, 720, 960]}
+                        sizes="(min-width: 768px) 38vw, 92vw"
+                        format="avif"
+                        loading="lazy"
+                        decoding="async"
+                        class="u-inked h-auto w-full"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <dl class="grid gap-8 border-t u-hairline pt-8 md:grid-cols-3 md:gap-10">
+                  <div class="flex flex-col gap-2">
+                    <dt class="u-label text-ink-400">Restrição</dt>
+                    <dd class="text-base leading-relaxed text-ink-300">{constraint}</dd>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <dt class="u-label text-ink-400">Decisão</dt>
+                    <dd class="flex flex-col gap-1">
+                      <span class="text-base leading-relaxed text-paper">{decision.title}</span>
+                      <span class="text-base leading-relaxed text-ink-300">{decision.body}</span>
+                    </dd>
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <dt class="u-label text-ink-400">Limite</dt>
+                    <dd class="text-base leading-relaxed text-ink-300">{limit}</dd>
+                  </div>
+                </dl>
+
+                <ArchMap
+                  nodes={entry.data.map}
+                  title={`Mapa arquitetural de ${entry.data.title}`}
+                  orientation="horizontal"
+                  class="flex flex-col gap-4"
+                />
+
+                <a
+                  href={`/projects/${entry.id}`}
+                  class="link-ink u-label inline-flex items-center gap-2 self-start"
+                >
+                  Abrir dossiê<span class="sr-only">: {entry.data.title}</span>
+                  <Icon name="arrow-up-right" size={14} />
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <div class="u-shell mt-24 md:mt-32">
+    <header class="flex flex-col gap-5" data-reveal-group>
+      <h3 class="u-display text-3xl md:text-5xl" data-reveal>{systemsSection.labsTitle}</h3>
+      <p class="max-w-[62ch] text-ink-300" data-reveal>{systemsSection.labsLead}</p>
+    </header>
+
+    <ul class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {
+        labs.map((lab) => (
+          <li class="h-full">
+            <article
+              data-lab-card
+              class="group relative flex h-full flex-col gap-4 border u-hairline bg-ink-900 p-6 transition-colors duration-300 focus-within:border-blue hover:border-blue md:p-8"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <p class="u-label text-ink-300">{lab.data.category}</p>
+                <p
+                  class:list={[
+                    'u-label shrink-0',
+                    lab.data.status === 'experimental' ? 'text-red' : 'text-blue',
+                  ]}
+                >
+                  {STATUS_LABEL[lab.data.status]}
+                </p>
+              </div>
+
+              <h4 class="u-display text-2xl transition-colors duration-300 group-hover:text-blue-bright md:text-3xl">
+                {lab.data.title}
+              </h4>
+
+              <p class="text-base leading-relaxed text-ink-300">{lab.data.summary}</p>
+
+              {/* Stretched link: o ::after cobre o card, o texto continua real. */}
+              <a
+                href={`/projects/${lab.id}`}
+                class="u-label mt-auto inline-flex items-center gap-2 text-blue-bright after:absolute after:inset-0 after:content-['']"
+              >
+                Abrir laboratório<span class="sr-only">: {lab.data.title}</span>
+                <Icon name="arrow-up-right" size={14} />
+              </a>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /*
+    O trilho é coluna por padrão — é o que o leitor sem JS, com save-data ou com
+    reduced-motion recebe: três painéis empilhados, largura normal, sem scroll
+    lateral. A faixa de 100vw por painel só entra sob `.motion-ready`, quando o
+    gate já confirmou que o ScrollTrigger vai andar com o trilho em xPercent.
+    `:global()` porque a classe mora no <html>, fora do escopo do componente.
+  */
+  @media (min-width: 768px) {
+    /* O palco é a moldura do pin: uma tela exata de altura. Fora do
+       `.motion-ready` ele não tem altura nenhuma e a pilha vertical flui. */
+    :global(.motion-ready) [data-systems-stage] {
+      height: 100svh;
+    }
+
+    :global(.motion-ready) [data-systems-track] {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      width: max-content;
+      gap: 0;
+    }
+
+    :global(.motion-ready) [data-systems-track] [data-system-panel] {
+      display: flex;
+      align-items: center;
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100%;
+      /* O painel não pode crescer além do palco: o que passar disso ficaria
+         atrás da borda do `overflow-hidden`, invisível e sem rolagem. */
+      overflow-y: auto;
+      /* A hairline separava os painéis empilhados; lado a lado ela sobra. */
+      border-top-width: 0;
+      padding-top: 0;
+    }
+  }
+</style>

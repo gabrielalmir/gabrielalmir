@@ -1,0 +1,48 @@
+---
+/**
+ * 404.
+ *
+ * Sem preloader: quem cai aqui já errou o caminho uma vez, não precisa esperar
+ * uma cortina. O "404" gigante é eco visual do título e por isso fica escondido
+ * do leitor de tela — o h1 já diz o que aconteceu.
+ */
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { notFound } from '../lib/content';
+import { figureImages } from '../lib/images';
+
+const figure = figureImages['not-found'];
+---
+
+<Base title="404 — Gabriel Almir" path="/404">
+  <section class="u-shell flex min-h-svh items-center justify-center py-24">
+    <div
+      class="grid w-full max-w-4xl items-center gap-12 text-center sm:grid-cols-2 sm:gap-16 sm:text-left"
+    >
+      <Image
+        src={figure}
+        alt="Colagem em papel de caminhos que se cruzam e terminam sem saída; ao centro, um rasgo revela o retrato de Gabriel Almir em preto e branco."
+        width={figure.width}
+        height={figure.height}
+        format="avif"
+        loading="eager"
+        class="u-inked mx-auto w-full max-w-[20rem] sm:max-w-none"
+      />
+
+      <div>
+        <p aria-hidden="true" class="u-display text-numeral text-ink-700">{notFound.code}</p>
+        <h1 class="u-display text-section mt-4">{notFound.title}</h1>
+        <p class="mt-6 text-ink-300">{notFound.lead}</p>
+
+        <a
+          href="/"
+          class="u-label mt-10 inline-flex items-center gap-3 border u-hairline px-6 py-4 text-paper transition-colors hover:border-blue hover:text-blue-bright"
+        >
+          <Icon name="arrow-left" size={16} />
+          {notFound.cta}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

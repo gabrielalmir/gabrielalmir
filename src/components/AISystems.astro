@@ -1,0 +1,166 @@
+---
+/**
+ * Seção de IA.
+ *
+ * O diagrama é a peça central: um pipeline que ramifica no roteador e
+ * reconverge no stream. Toda a copy vem de `aiSection` — nada aqui pode
+ * sugerir produção, escala ou volume.
+ *
+ * Sem vermelho: o único acento é o azul dos conectores e do pulso do nó ativo.
+ */
+import { aiSection } from '../lib/content';
+
+/** Caixa do nó, em unidades do viewBox. */
+const BOX = { w: 180, h: 46 } as const;
+
+/**
+ * Geometria por nó: `x` é a borda esquerda da caixa, `y` o centro vertical
+ * (é por ele que os conectores entram e saem). O `satisfies` amarra as chaves
+ * aos ids de `aiSection.pipeline` — se a copy ganhar um nó, o build quebra
+ * aqui em vez de o diagrama sair mudo.
+ */
+const geometry = {
+  client: { x: 8, y: 122 },
+  router: { x: 244, y: 122 },
+  local: { x: 480, y: 56 },
+  cloud: { x: 480, y: 188 },
+  stream: { x: 712, y: 122 },
+} satisfies Record<(typeof aiSection.pipeline)[number]['id'], { x: number; y: number }>;
+
+const nodes = aiSection.pipeline.map((node) => ({ ...node, ...geometry[node.id] }));
+
+/**
+ * Conectores na ordem em que o traço deve ser desenhado: cliente → roteador,
+ * a bifurcação para os dois modelos e a reconvergência no stream.
+ */
+const connectors = [
+  'M 188 122 C 207 122 225 122 244 122',
+  'M 424 122 C 449 122 455 56 480 56',
+  'M 424 122 C 449 122 455 188 480 188',
+  'M 660 56 C 685 56 687 122 712 122',
+  'M 660 188 C 685 188 687 122 712 122',
+];
+
+const lastPractice = aiSection.practices.length - 1;
+---
+
+<section id="ia" data-ai aria-labelledby="ia-titulo" class="bg-ink-950 py-28 md:py-40">
+  <div class="u-shell">
+    <header data-reveal-group>
+      <p data-reveal class="u-label text-ink-300">{aiSection.kicker}</p>
+
+      <h2 id="ia-titulo" data-reveal class="u-display text-section mt-6 max-w-[18ch]">
+        {aiSection.title}
+      </h2>
+
+      <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 md:gap-16">
+        <p data-reveal class="text-xl leading-snug text-balance text-paper md:text-2xl">
+          {aiSection.lead}
+        </p>
+        <p data-reveal class="max-w-prose text-ink-300">{aiSection.body}</p>
+      </div>
+    </header>
+
+    {/*
+      O diagrama tem largura mínima: comprimido num celular, os rótulos de 11px
+      ficariam ilegíveis. Por isso rola na horizontal dentro deste wrapper — a
+      página em si nunca vaza. Rolagem por teclado exige um tab stop, daí o
+      `tabindex` com nome acessível.
+
+      Acessibilidade: em vez de `role="img"` + `aria-label` no <svg> (que
+      resumiria o fluxo numa frase só e depende de suporte irregular a texto
+      dentro de SVG), o desenho fica `aria-hidden` e o conteúdo é lido da lista
+      abaixo. É mais confiável e ainda dá nó a nó, com nota e ordem.
+    */}
+    <div
+      class="mt-20 overflow-x-auto md:mt-28"
+      tabindex="0"
+      role="group"
+      aria-label="Diagrama do pipeline"
+    >
+      <p class="sr-only">
+        O diagrama descreve o fluxo do pipeline: o cliente chega pelo roteador, que direciona a
+        chamada para o modelo local ou para o modelo cloud; as duas rotas convergem no stream.
+      </p>
+
+      <ol class="sr-only">
+        {aiSection.pipeline.map((node) => <li>{node.label} — {node.note}</li>)}
+      </ol>
+
+      <svg
+        class="w-full min-w-[48rem]"
+        viewBox="0 0 900 260"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {/* Conectores primeiro, para que as caixas fiquem por cima das curvas. */}
+        {
+          connectors.map((d) => (
+            <path
+              data-pipeline-path
+              d={d}
+              fill="none"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              class="stroke-blue"
+            />
+          ))
+        }
+
+        {
+          nodes.map((node) => (
+            <g data-pipeline-node={node.id}>
+              <rect
+                x={node.x}
+                y={node.y - BOX.h / 2}
+                width={BOX.w}
+                height={BOX.h}
+                rx="2"
+                stroke-width="1.5"
+                class="fill-ink-900 stroke-ink-500"
+              />
+              {/* O rótulo ocupa a caixa; a nota respira logo abaixo dela, onde
+                  cabe inteira sem apertar a hairline. */}
+              <text
+                x={node.x + BOX.w / 2}
+                y={node.y + 4}
+                text-anchor="middle"
+                class="fill-paper font-mono text-[11px] tracking-[0.12em] uppercase"
+              >
+                {node.label}
+              </text>
+              <text
+                x={node.x + BOX.w / 2}
+                y={node.y + BOX.h / 2 + 15}
+                text-anchor="middle"
+                class="fill-ink-300 font-sans text-[12px]"
+              >
+                {node.note}
+              </text>
+            </g>
+          ))
+        }
+      </svg>
+    </div>
+
+    <div class="u-hairline mt-24 grid border-t md:mt-32 md:grid-cols-3">
+      {
+        aiSection.practices.map((practice, index) => (
+          <article
+            data-reveal
+            class:list={[
+              'u-hairline py-10 md:px-8 md:py-14',
+              index < lastPractice && 'border-b md:border-b-0',
+              index > 0 ? 'md:border-l' : 'md:pl-0',
+              index === lastPractice && 'md:pr-0',
+            ]}
+          >
+            <h3 class="u-display text-2xl text-paper">{practice.title}</h3>
+            <p class="mt-4 max-w-prose text-ink-300">{practice.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+/**
+ * Círculo en (ensō) incompleto — fica atrás do kicker de cada seção.
+ *
+ * O vão no alto à direita é o gesto inteiro: o pincel entra fino, ganha peso na
+ * volta de baixo (as larguras 10 e 13.4, encaixadas para não formar degrau) e
+ * sai afinando sem fechar. O contorno é montado sobre oito pontos, não sobre
+ * quatro arcos de círculo — raio constante aqui viraria borda de botão.
+ */
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className = '', label } = Astro.props;
+
+const a11y = label
+  ? ({ role: 'img', 'aria-label': label } as const)
+  : ({ 'aria-hidden': 'true' } as const);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 200 200"
+  preserveAspectRatio="xMidYMid meet"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  {...a11y}
+>
+  <path data-mark-draw stroke-width="2.8" d="M143 43C150 47 156 53 161 60.4"></path>
+  <path
+    data-mark-draw
+    stroke-width="7.4"
+    d="M150 50C165 62 175 82 178 104C180 124 165 148 140 163C122 173 98 179 78 175C56 170 34 150 28 128C21 103 20 92 22 74C24 55 44 34 72 28C92 23.6 112 26 128 33"
+  ></path>
+  <path
+    data-mark-draw
+    stroke-width="10"
+    d="M150 150C133 164 109 175 84 176C60 176 36 158 26 134C22 124 20 116 20 108"
+  ></path>
+  <path
+    data-mark-draw
+    stroke-width="13.4"
+    d="M136 164C118 173 96 178 77 174C57 169 37 150 30 127"
+  ></path>
+  <path data-mark-draw stroke-width="1.5" d="M92 176.5C104 180 116 181.6 128 180"></path>
+  <path data-mark-draw stroke-width="3.2" d="M120 30C128 30.8 136 32.6 143 35.8"></path>
+</svg>

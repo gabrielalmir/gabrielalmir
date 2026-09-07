@@ -1,0 +1,97 @@
+---
+/**
+ * Rodapé.
+ *
+ * O ano é resolvido em build: o site é estático e um relógio de cliente só
+ * traria JS para dizer uma coisa que a data do deploy já sabe.
+ *
+ * O nome acessível de cada link repete o rótulo visível antes de acrescentar
+ * o destino — quem navega por voz continua conseguindo dizer só "GitHub".
+ */
+import Icon from './Icon.astro';
+import { contact, footer } from '../lib/content';
+
+const year = new Date().getFullYear();
+
+const links = footer.links.map((link) => {
+  const external = link.href.startsWith('http');
+  return {
+    ...link,
+    external,
+    ariaLabel: external
+      ? `${link.label} de Gabriel Almir, abre em nova aba`
+      : `${link.label} para ${contact.email}`,
+  };
+});
+---
+
+<footer class="border-t border-ink-700 bg-ink-950">
+  <div class="u-shell flex flex-col gap-12 py-16 md:flex-row md:items-end md:justify-between md:gap-16">
+    <p
+      class="u-display max-w-[18ch] text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.05] text-paper italic"
+    >
+      {footer.signature}
+    </p>
+
+    <div class="flex flex-col gap-7 md:items-end">
+      <ul class="flex flex-wrap items-center gap-x-7 gap-y-3">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                class="footer-link inline-flex items-center gap-2 text-paper"
+                href={link.href}
+                aria-label={link.ariaLabel}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noreferrer' : undefined}
+              >
+                <Icon name={link.icon} size={16} />
+                <span class="footer-link-text u-label">{link.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="u-label flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-300">
+        <span>© {year} Gabriel Almir</span>
+        <span class="hidden h-px w-6 bg-ink-600 sm:block" aria-hidden="true"></span>
+        <span>Itapira · São Paulo</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    transition: color 0.35s var(--ease-ink);
+  }
+
+  .footer-link:hover,
+  .footer-link:focus-visible {
+    color: var(--color-blue-bright);
+  }
+
+  /* Só o rótulo recebe o traço; o ícone ficaria sublinhado torto. */
+  .footer-link-text {
+    position: relative;
+  }
+
+  .footer-link-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.4em;
+    height: 1px;
+    background-color: var(--color-blue-bright);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-ink);
+  }
+
+  .footer-link:hover .footer-link-text::after,
+  .footer-link:focus-visible .footer-link-text::after {
+    transform: scaleX(1);
+  }
+</style>

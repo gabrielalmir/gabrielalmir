@@ -1,0 +1,280 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Fontes — self-hosted, subset latin, display swap.
+   Geist e Geist Mono são variáveis (woff único); Instrument Serif vem do
+   @fontsource e é carregada por src/layouts/Base.astro.
+   --------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Geist';
+  /* woff2 primeiro; o .woff fica como rede para navegador antigo. Os dois são a
+     mesma fonte variável — o .woff2 foi gerado do .woff original. */
+  src:
+    url('/fonts/GeistVF.woff2') format('woff2-variations'),
+    url('/fonts/GeistVF.woff') format('woff-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src:
+    url('/fonts/GeistMonoVF.woff2') format('woff2-variations'),
+    url('/fonts/GeistMonoVF.woff') format('woff-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Tokens — paleta Aether. Bicromática: azul-acinzentado + terracota sobre
+   preto, com um único branco quente. O vermelho é respingo, nunca superfície.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ink-950: #060708;
+  --color-ink-900: #0c0d0f;
+  --color-ink-850: #121316;
+  --color-ink-800: #191b1e;
+  --color-ink-700: #242527;
+  --color-ink-600: #3a3a41;
+  /*
+   * ink-500 é cor de TRAÇO: hairline, contorno, marca decorativa. Como texto
+   * ele dá 3,0–3,5:1 sobre os fundos do site — abaixo dos 4,5:1 que a WCAG
+   * pede para texto normal, e os rótulos em `u-label` têm 12px.
+   * ink-400 é o mesmo cinza levado até 4,7:1 no pior fundo (ink-800), e é ele
+   * que deve pintar rótulo, período, `<dt>` e qualquer texto terciário.
+   */
+  --color-ink-500: #63666c;
+  --color-ink-400: #82868c;
+  --color-ink-300: #b8b8b7;
+  --color-paper: #f5f5f4;
+
+  --color-blue: #5c85b5;
+  --color-blue-bright: #7da9e6;
+  --color-blue-wash: #aebcc8;
+  --color-red: #d75a54;
+  --color-red-bright: #ff7a71;
+
+  --font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  --text-hero: clamp(3.5rem, 9vw, 8.5rem);
+  --text-hero--line-height: 0.88;
+  --text-section: clamp(2.25rem, 5vw, 4.5rem);
+  --text-section--line-height: 0.95;
+  --text-numeral: clamp(4rem, 12vw, 11rem);
+  --text-numeral--line-height: 0.8;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.12em;
+
+  --ease-ink: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-ink: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --spacing-gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+    background-color: var(--color-ink-900);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* O scroll suave é feito por Lenis. Sem Lenis (no-js, reduced-motion) o
+     scroll nativo com âncoras precisa continuar bom. */
+  html:not(.lenis-active) {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html:not(.lenis-active) {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-ink-900);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Nenhuma seção pode empurrar a página lateralmente. */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 400;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background-color: var(--color-blue);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue-bright);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Fallback para navegadores sem :focus-visible seria pior que o padrão. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities de texto e textura
+   --------------------------------------------------------------------------- */
+@utility u-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility u-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@utility u-shell {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility u-hairline {
+  border-color: color-mix(in oklab, var(--color-ink-500) 45%, transparent);
+}
+
+/* Grão de nanquim sobre toda a página. Fixo, não bloqueia ponteiro,
+   e some para quem pediu menos movimento não é necessário — é estático. */
+@utility u-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: var(--noise-url);
+  background-size: 180px 180px;
+}
+
+/* Recolore uma imagem para dentro da paleta: dessatura e reprojeta o
+   contraste entre ink-900 e blue-wash. */
+@utility u-inked {
+  filter: grayscale(1) contrast(1.15) brightness(0.92);
+  mix-blend-mode: luminosity;
+}
+
+@layer components {
+  /* Link de texto com sublinhado de tinta que cresce da esquerda. */
+  .link-ink {
+    position: relative;
+    color: var(--color-blue-bright);
+    text-decoration: none;
+  }
+
+  .link-ink::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.15em;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(var(--link-scale, 0));
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-ink);
+  }
+
+  .link-ink:hover,
+  .link-ink:focus-visible {
+    --link-scale: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-ink::after {
+      transition: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Estado de movimento
+
+   A regra que governa todo o site: o HTML nasce *visível*. A classe
+   `motion-ready` só é adicionada por JS depois que o gate decide que o
+   movimento pode rodar — então esconder algo é sempre condicional a ela.
+   Sem JS, com reduced-motion, ou com o gate negando: nada some.
+   --------------------------------------------------------------------------- */
+@layer utilities {
+  .motion-ready [data-reveal] {
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .motion-ready [data-split-line] {
+    overflow: hidden;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

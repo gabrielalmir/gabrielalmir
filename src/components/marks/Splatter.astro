@@ -1,0 +1,71 @@
+---
+/**
+ * Respingo — marca o "agora" na trajetória (data-trajectory-now) e o estado de
+ * alerta dos nós `risk` do mapa. É a única marca vermelha do site: no máximo
+ * uma por viewport.
+ *
+ * Exceção às outras marcas: respingo é massa, não gesto. Vai em `fill` e leva
+ * `data-reveal` (aparece de uma vez, como tinta que bate no papel) em vez de
+ * `data-mark-draw`, que só faz sentido para contorno em stroke-dashoffset.
+ *
+ * A gota cai inclinada, e é isso que a geometria conta: a massa (primeiro path)
+ * tem uma faceta reta embaixo à esquerda, onde escorregou; as quatro farpas
+ * seguintes têm comprimentos desiguais e saem presas a ela pela base; os
+ * satélites seguem o mesmo eixo, alongados perto e mais redondos longe. Massa
+ * redonda com espinhos iguais em volta viraria estrela de ícone, não impacto.
+ */
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className = '', label } = Astro.props;
+
+const a11y = label
+  ? ({ role: 'img', 'aria-label': label } as const)
+  : ({ 'aria-hidden': 'true' } as const);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 120 120"
+  preserveAspectRatio="xMidYMid meet"
+  fill="currentColor"
+  stroke="none"
+  class={className}
+  data-reveal
+  {...a11y}
+>
+  <path
+    d="M60 31.6C69.6 31 78 36.4 80.2 44.6C81.8 50.4 76 55 76.6 61C77.2 67.6 73.6 73.8 67.4 77C61 80.4 53 80.6 46 78.4L33.4 68.8C30.8 66.8 30.6 63 31.8 59.4C33.4 54.6 32.2 50 33.4 45.2C34.8 39.6 40 34.6 46.6 32.8C50.8 31.6 55.8 31.7 60 31.6Z"
+  ></path>
+  <path d="M72 40C80.6 32.6 90 24.8 101.4 17.6C94.6 27 86.6 35.8 77.4 44.4Z"></path>
+  <path d="M40 76.6C35.4 82.4 31.6 88.8 28.6 95.6C30.4 88 33.4 80.8 37.4 74.2Z"></path>
+  <path d="M52.4 32C51 27.4 50.2 22.6 50 17.8C52 22.2 53.6 26.8 54.8 31.6Z"></path>
+  <path d="M76.4 58C80.6 58.8 84.6 60.2 88.4 62C84.2 61.8 80 61.2 75.8 60.2Z"></path>
+  <path
+    d="M94 33.6C98.8 31.4 104 34.8 103 39.6C102.2 43.4 97.4 45 94.4 42.4C91.8 40.2 91 35.8 94 33.6Z"
+  ></path>
+  <path d="M104.6 25.4C109 22 113.8 19.6 118.4 18.2C114.2 21.8 109.6 24.8 105.2 27.4Z"></path>
+  <path
+    d="M21.4 84.2C25.6 82.6 29.8 86 29 90.4C28.4 93.8 24.2 95.4 21.6 93C19 90.6 18.4 85.6 21.4 84.2Z"
+  ></path>
+  <path
+    d="M58.6 92.6C63.4 90.4 68.8 93.8 68.2 98.8C67.8 102.4 64 104.6 61 102.8C58.4 101.2 56.4 98 56.6 95.4C56.7 94.2 57.4 93.1 58.6 92.6Z"
+  ></path>
+  <path
+    d="M87.6 76.8C89.8 75.8 92.2 77.4 91.8 79.6C91.4 81.6 88.8 82.6 87.2 81.2C85.8 80 86 77.4 87.6 76.8Z"
+  ></path>
+  <path
+    d="M41.4 97.8C43 97 44.8 98.2 44.6 100C44.4 101.6 42.4 102.4 41.2 101.2C40.1 100.1 40.1 98.3 41.4 97.8Z"
+  ></path>
+  <path
+    d="M13.4 66.6C15 65.6 17.2 66.8 17 68.6C16.8 70.2 14.8 71 13.6 70C12.4 69 12.2 67.2 13.4 66.6Z"
+  ></path>
+  <path
+    d="M101.6 54.2C103.8 53.2 106.4 54.8 106 57.2C105.6 59.4 102.8 60.4 101.2 59C99.8 57.8 100 54.9 101.6 54.2Z"
+  ></path>
+  <path
+    d="M28.6 103.4C29.8 102.8 31.2 103.8 31 105.2C30.8 106.4 29.4 106.9 28.5 106.1C27.6 105.3 27.6 103.8 28.6 103.4Z"
+  ></path>
+</svg>

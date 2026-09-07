@@ -1,0 +1,48 @@
+---
+/**
+ * Sublinhado irregular — vai sob a palavra-ênfase de um parágrafo ou título.
+ *
+ * Duas passadas que se cruzam: fundem-se no meio da palavra e se abrem nas
+ * pontas, que é o que a mão faz quando volta por cima do próprio traço. As
+ * pontas afinam por sobreposição, já que stroke tem espessura constante.
+ *
+ * `preserveAspectRatio="none"` porque a palavra sublinhada tem largura
+ * arbitrária e o sublinhado precisa esticar com ela.
+ */
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className = '', label } = Astro.props;
+
+const a11y = label
+  ? ({ role: 'img', 'aria-label': label } as const)
+  : ({ 'aria-hidden': 'true' } as const);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 240 16"
+  preserveAspectRatio="none"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  {...a11y}
+>
+  <path data-mark-draw stroke-width="1.4" d="M5 9.6C14 8.2 24 6.9 35 5.9"></path>
+  <path
+    data-mark-draw
+    stroke-width="2.9"
+    d="M26 6.6C62 4.6 100 4 138 5C166 5.7 194 7.2 219 9.4"
+  ></path>
+  <path data-mark-draw stroke-width="1.3" d="M206 8.6C216 9.6 226 10.6 235 11.4"></path>
+  <path
+    data-mark-draw
+    stroke-width="1.9"
+    d="M21 12C58 9.2 102 6.8 148 7.2C176 7.5 202 9 223 11.6"
+  ></path>
+  <path data-mark-draw stroke-width="1" d="M186 12.8C200 13.4 214 13.9 228 13.6"></path>
+</svg>

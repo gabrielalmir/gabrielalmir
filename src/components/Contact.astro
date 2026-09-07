@@ -1,0 +1,69 @@
+---
+/**
+ * Contato — fim da página.
+ *
+ * Sem formulário: o canal é e-mail direto, então o endereço aparece por
+ * extenso e é o próprio link. O respingo vermelho aqui é o único da seção —
+ * a regra de uma marca vermelha por viewport depende disso.
+ */
+import { contact, contactSection } from '../lib/content';
+import Icon from './Icon.astro';
+import Slash from './marks/Slash.astro';
+import Splatter from './marks/Splatter.astro';
+import Underline from './marks/Underline.astro';
+
+const links = [
+  { label: 'LinkedIn', href: contact.linkedin, icon: 'linkedin' },
+  { label: 'GitHub', href: contact.github, icon: 'github' },
+] as const;
+---
+
+<section
+  id="contato"
+  data-contact
+  aria-labelledby="contato-titulo"
+  class="bg-ink-950 py-40 md:py-64"
+>
+  <div class="u-shell flex flex-col items-center text-center" data-reveal-group>
+    <p class="u-label text-blue-bright" data-reveal>{contactSection.kicker}</p>
+
+    <div class="mt-8" data-reveal>
+      <h2 id="contato-titulo" class="u-display text-hero mx-auto max-w-[16ch] text-paper">
+        {contactSection.title}
+      </h2>
+      <Underline class="mx-auto mt-4 h-auto w-48 text-blue md:w-72" />
+    </div>
+
+    <p class="mt-10 max-w-xl text-ink-300" data-reveal>{contactSection.lead}</p>
+
+    <div class="relative mt-16" data-reveal>
+      <p class="u-label text-ink-300">{contactSection.cta}</p>
+      <a class="link-ink u-display mt-4 inline-block text-3xl md:text-5xl" href={`mailto:${contact.email}`}>
+        {contact.email}
+      </a>
+      {/* Deslocado por transform, não por offset fixo: não vaza da gutter no mobile. */}
+      <Splatter
+        class="pointer-events-none absolute top-0 right-0 h-auto w-12 -translate-y-2/3 translate-x-1/4 text-red md:w-16"
+      />
+    </div>
+
+    <div class="u-label mt-14 flex items-center gap-5 text-ink-300" data-reveal>
+      {
+        links.map((link, i) => (
+          <>
+            {i > 0 && <Slash class="h-4 w-auto text-ink-600" />}
+            <a
+              href={link.href}
+              rel="me noopener noreferrer"
+              target="_blank"
+              class="inline-flex items-center gap-2 transition-colors duration-300 hover:text-paper focus-visible:text-paper"
+            >
+              <Icon name={link.icon} size={16} />
+              {link.label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

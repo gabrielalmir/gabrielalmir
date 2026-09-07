@@ -1,0 +1,205 @@
+---
+/**
+ * Trajetória — carreira, formação e presença pública.
+ *
+ * Quatro decisões que valem comentário:
+ *
+ *  1. Os `<h3>` não podem ser filhos de `<ol>`. Por isso a seção é feita de
+ *     três blocos, cada um com seu título e sua própria lista, em vez de uma
+ *     lista só. `data-trajectory-track` fica apenas na de carreira — é ela que
+ *     o motion pina; formação e presença pública são grades comuns.
+ *  2. O trilho nasce como coluna. A linha horizontal só existe dentro de
+ *     `.motion-ready` e a partir de md, porque é o único cenário em que há
+ *     scrub para percorrê-la. Sem JS, com reduced-motion ou com o gate negando,
+ *     sobra a leitura vertical, que é a que funciona parada.
+ *  3. `data-trajectory-item` carrega o próprio ano como valor. O motion precisa
+ *     escrever esse ano no fundo e não deveria depender da posição de um span.
+ *  4. O ano gigante é textura: ink-800 sobre ink-900, `aria-hidden`, atrás de
+ *     tudo. Fica `sticky` dentro de um pai absoluto para acompanhar a seção sem
+ *     entrar no fluxo — nada abaixo dele se desloca se o texto mudar de largura.
+ */
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import Bracket from './marks/Bracket.astro';
+import Splatter from './marks/Splatter.astro';
+import { trajectory, type TrajectoryEntry } from '../lib/content';
+import { trajectoryImage } from '../lib/images';
+
+type Group = {
+  readonly id: string;
+  readonly title: string;
+  readonly items: readonly TrajectoryEntry[];
+  /** A nota sobre maratonas só faz sentido junto dos itens de competição. */
+  readonly quoteNote: boolean;
+  readonly wrapClass: string;
+  readonly listClass: string;
+  readonly itemClass: string;
+};
+
+// A hairline à esquerda é o fio que liga as etapas; quem mantém o fio contínuo
+// é o padding-inferior do item, não um gap entre eles.
+const itemBase = 'relative border-l border-ink-700 pl-6 sm:pl-8';
+
+// A carreira é uma lista vertical em toda largura. Houve uma faixa horizontal
+// pinada aqui; com quatro etapas ela percorria ~500px e o ano de fundo travava
+// no segundo item. Ver o comentário em src/motion/sections.ts.
+
+const gridList = 'grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3';
+
+const groups: readonly Group[] = [
+  {
+    id: 'carreira',
+    title: 'Carreira',
+    items: trajectory.career,
+    quoteNote: false,
+    // O `overflow-hidden` que segura o trilho horizontal cortaria pela metade os
+    // bullets e o respingo, que ficam *sobre* a hairline. A margem negativa
+    // devolve essa folga sem mover o conteúdo de lugar.
+    wrapClass: 'mt-8 -ml-6 pt-2 pl-6',
+    listClass: 'grid',
+    itemClass: `${itemBase} pb-14`,
+  },
+  {
+    id: 'formacao',
+    title: 'Formação & comunidade',
+    items: trajectory.formation,
+    quoteNote: true,
+    wrapClass: 'mt-10',
+    listClass: gridList,
+    itemClass: `${itemBase} pb-12`,
+  },
+  {
+    id: 'publico',
+    title: 'Em público',
+    items: trajectory.publicPresence,
+    quoteNote: false,
+    wrapClass: 'mt-10',
+    listClass: gridList,
+    itemClass: `${itemBase} pb-12`,
+  },
+];
+
+// Estado inicial do ano de fundo. Daqui em diante quem escreve é o motion.
+const firstYear = trajectory.career[0].year;
+
+// photogimp.png é um ícone 512×512, não uma fotografia: entra pequeno e sem
+// `u-inked`, que existe para reprojetar fotos dentro da paleta.
+const ICON_IMAGE = 'photogimp';
+---
+
+<section
+  id="trajetoria"
+  data-trajectory
+  aria-labelledby="trajetoria-titulo"
+  class="relative isolate bg-ink-900 py-28 md:py-40"
+>
+  <div class="pointer-events-none absolute inset-0 -z-10 select-none" aria-hidden="true">
+    <div class="u-shell h-full">
+      <div
+        data-trajectory-year
+        class="u-display sticky top-[16vh] text-[clamp(8rem,28vw,22rem)] leading-[0.8] text-ink-800"
+      >
+        {firstYear}
+      </div>
+    </div>
+  </div>
+
+  <div class="u-shell relative">
+    <header class="max-w-3xl" data-reveal-group>
+      <p class="u-label text-blue-wash" data-reveal>{trajectory.kicker}</p>
+      <h2 id="trajetoria-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
+        {trajectory.title}
+      </h2>
+      <p class="text-body mt-8 text-ink-300" data-reveal>{trajectory.lead}</p>
+    </header>
+
+    {
+      groups.map((group) => (
+        <div class="mt-20 md:mt-28">
+          <h3 class="u-display text-3xl text-paper sm:text-4xl">{group.title}</h3>
+
+          {group.quoteNote && (
+            <blockquote class="relative mt-6 mb-12 max-w-2xl px-8 text-base text-ink-300 sm:px-10">
+              <Bracket class="pointer-events-none absolute top-0 left-0 h-full w-4 text-blue" />
+              <Bracket class="pointer-events-none absolute top-0 right-0 h-full w-4 scale-x-[-1] text-blue" />
+              <p>{trajectory.note}</p>
+            </blockquote>
+          )}
+
+          <div class={group.wrapClass}>
+            <ol
+              class={group.listClass}
+              data-trajectory-track={group.id === 'carreira' ? '' : undefined}
+            >
+              {group.items.map((item) => {
+                const image = trajectoryImage(item.image);
+                const isIcon = item.image === ICON_IMAGE;
+                return (
+                  <li
+                    class={group.itemClass}
+                    data-trajectory-item={item.year}
+                    data-trajectory-now={item.now ? '' : undefined}
+                  >
+                    <span
+                      class="absolute top-3 left-0 block size-2.5 -translate-x-1/2 rounded-full border border-ink-600 bg-ink-900"
+                      aria-hidden="true"
+                    >
+                      {item.now && (
+                        <Splatter class="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-red" />
+                      )}
+                    </span>
+
+                    <span class="u-display block text-5xl leading-none text-blue">{item.year}</span>
+
+                    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                      <span class="u-label text-ink-400">{item.period}</span>
+                      {item.now && <span class="u-label text-red">agora</span>}
+                    </div>
+
+                    <p class="mt-5 text-2xl text-paper">
+                      {item.href ? (
+                        <a
+                          class="link-ink inline-flex items-center gap-2"
+                          href={item.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {item.org}
+                          <Icon name="external-link" size={16} label="abre em nova aba" />
+                        </a>
+                      ) : (
+                        item.org
+                      )}
+                    </p>
+
+                    <p class="mt-1 text-base font-medium text-ink-300">{item.role}</p>
+                    <p class="mt-4 text-base text-ink-300">{item.summary}</p>
+
+                    {image && item.imageAlt && (
+                      <figure class={isIcon ? 'mt-6' : 'mt-6 max-w-xs'}>
+                        <Image
+                          src={image}
+                          alt={item.imageAlt}
+                          width={isIcon ? 64 : 320}
+                          densities={[1, 2]}
+                          format={isIcon ? 'webp' : 'avif'}
+                          loading="lazy"
+                          decoding="async"
+                          class={
+                            isIcon
+                              ? 'size-16'
+                              : 'u-inked aspect-[960/691] w-full rounded-sm object-cover'
+                          }
+                        />
+                      </figure>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

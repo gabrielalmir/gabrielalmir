@@ -1,0 +1,55 @@
+---
+/**
+ * Colchete de nanquim — enquadra citações e notas (a nota das maratonas, as
+ * evidências dos dossiês). Vem virado para a esquerda; para o par da direita o
+ * consumidor espelha com `scale-x-[-1]`.
+ *
+ * O peso fica no terço de cima, logo depois da curva de entrada, e vai
+ * afinando: 6 dentro de 4.4 dentro de 3.2, encaixados para que a transição não
+ * vire degrau. A espinha erra o prumo de propósito (x oscila entre 10 e 11.2).
+ *
+ * `preserveAspectRatio="none"` porque o colchete acompanha a altura do bloco
+ * citado — esticado, o braço engorda de leve, que é o que a pressão do pincel
+ * faria de qualquer jeito.
+ */
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className = '', label } = Astro.props;
+
+const a11y = label
+  ? ({ role: 'img', 'aria-label': label } as const)
+  : ({ 'aria-hidden': 'true' } as const);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 36 220"
+  preserveAspectRatio="none"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  {...a11y}
+>
+  <path
+    data-mark-draw
+    stroke-width="3.2"
+    d="M31 8.6C25 8 18 8.2 14 9.6C11.6 10.5 10.6 12.6 10.4 16.4C10 34 10.6 60 10.9 88C11.2 116 11 148 10.6 176C10.4 192 10.2 202 10.6 207.4C10.9 211 12.6 212.6 16 213C20.6 213.5 25.6 213.2 31 212.4"
+  ></path>
+  <path
+    data-mark-draw
+    stroke-width="4.4"
+    d="M10.6 15C10.3 34 10.7 62 11 90C11.2 112 11.2 136 11 158"
+  ></path>
+  <path
+    data-mark-draw
+    stroke-width="6"
+    d="M11 30C10.7 48 10.9 70 11.1 90C11.2 98 11.2 104 11.1 108"
+  ></path>
+  <path data-mark-draw stroke-width="1.4" d="M25 9C28.6 9 31.6 9.4 34.4 10.2"></path>
+  <path data-mark-draw stroke-width="1.2" d="M25 212.6C28.4 212.8 31.4 213 34.2 212.4"></path>
+</svg>

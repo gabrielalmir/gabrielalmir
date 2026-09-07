@@ -1,0 +1,162 @@
+---
+/**
+ * Casca do site.
+ *
+ * Ordem de decisões que importam aqui:
+ *  1. O HTML nasce completo e visível. `motion-ready` só é adicionada por
+ *     src/motion/gate.ts, depois de checar reduced-motion, save-data e memória.
+ *     Sem JS, nada some.
+ *  2. As três faces são pré-carregadas; o resto do CSS de fonte é inline.
+ *  3. O grão fica em um único elemento fixo, fora do fluxo.
+ */
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '../styles/global.css';
+
+// As duas faces do display entram por `?url` para que o preload aponte para o
+// MESMO arquivo com hash que o CSS do @fontsource referencia — o Vite deduplica
+// por caminho de origem, então não há download dobrado. Sem isto o navegador só
+// descobre a fonte do <h1> depois de baixar e casar o CSS, e o LCP espera por
+// ela: era o que segurava a métrica em 3,9 s.
+import instrumentSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import instrumentSerifItalic from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import Nav from '../components/Nav.astro';
+import Preloader from '../components/Preloader.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../lib/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Caminho relativo, usado no canonical e no og:url. */
+  path?: string;
+  /** A home usa a cortina de tinta; as demais páginas entram direto. */
+  preloader?: boolean;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  path = Astro.url.pathname,
+  preloader = false,
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+
+// Grão de nanquim. Inline como data-URI: são ~350 bytes e evita um request
+// que atrasaria a primeira pintura da textura.
+const noise = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(#n)"/></svg>`;
+const noiseUrl = `url("data:image/svg+xml,${encodeURIComponent(noise)}")`;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0C0D0F" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Gabriel Almir" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {/*
+      `summary_large_image` promete uma imagem grande. Sem `og:image` o card
+      sai como uma faixa vazia — pior que o card pequeno que o padrão daria.
+      A imagem é a mesma capa do repositório, servida de `public/`.
+    */}
+    <meta property="og:image" content={new URL('/og.jpg', site.url).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gabriel Almir — backend, integrações e sistemas de IA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL('/og.jpg', site.url).href} />
+
+    {/*
+      Só o que a primeira tela realmente desenha: o serifado do <h1> (é o LCP) e
+      o corpo em Geist. O Geist Mono fica de fora de propósito — ele só pinta
+      rótulos de 12px, e preload é uma fila: pré-carregar o que não é crítico
+      atrasa o que é.
+    */}
+    <link rel="preload" href={instrumentSerif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={instrumentSerifItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/GeistVF.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/*
+      O veredito de movimento, decidido antes da primeira pintura.
+
+      `is:inline` de propósito: se isto entrasse no bundle, chegaria junto com o
+      GSAP — centenas de milissegundos depois em conexão lenta — e o navegador
+      pintaria a página inteira visível para só então escondê-la e animar. São
+      seis linhas para não ter esse piscar.
+
+      Só a decisão de `motion` mora aqui. WebGL, save-data, memória e largura
+      continuam em `src/motion/gate.ts`, que lê esta classe em vez de refazer a
+      conta. `?motion=1` derruba até o reduced-motion: é flag de depuração
+      digitada à mão, e some no próximo carregamento sem a query.
+    */}
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const flag = new URLSearchParams(location.search).get('motion');
+        const motion =
+          flag === '1' ||
+          (flag !== '0' && !matchMedia('(prefers-reduced-motion: reduce)').matches);
+        root.dataset.motionGate = flag ? 'url:motion=' + flag : motion ? 'ok' : 'reduced-motion';
+        if (!motion) return;
+
+        root.classList.add('motion-ready');
+
+        /*
+         * E o desarme. Esconder é uma promessa de revelar depois; quem revela é
+         * o bundle. Se ele não chegar — proxy, extensão, rede caindo, deploy com
+         * 404 — a classe ficaria de pé sozinha e a página inteira permaneceria
+         * em opacity 0. O relógio devolve a versão estática, que é completa.
+         * `startMotion()` cancela isto na primeira linha.
+         */
+        window.__motionDisarm = setTimeout(() => {
+          root.classList.remove('motion-ready');
+          root.dataset.motionGate = 'timeout';
+        }, 4000);
+      })();
+    </script>
+
+    <slot name="head" />
+  </head>
+
+  <body data-preloader={preloader ? '' : undefined}>
+    <a
+      href="#conteudo"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-200 focus-visible:bg-ink-800 focus-visible:px-4 focus-visible:py-3 focus-visible:u-label focus-visible:text-paper"
+      >Pular para o conteúdo</a
+    >
+
+    {preloader && <Preloader />}
+
+    <Nav />
+
+    <main id="conteudo">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <div class="u-noise" style={`--noise-url: ${noiseUrl}`} aria-hidden="true"></div>
+
+    <script>
+      import { startMotion } from '../motion/index';
+      startMotion();
+    </script>
+  </body>
+</html>

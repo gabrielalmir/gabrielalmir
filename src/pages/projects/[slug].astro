@@ -1,0 +1,334 @@
+---
+/**
+ * Dossiê de um sistema.
+ *
+ * A ordem das seções é o argumento: contexto, o que apertava, o que foi
+ * decidido, o que dá para verificar e o que ainda não vale afirmar. Nada aqui
+ * é escrito na página — tudo vem do frontmatter e do corpo do markdown.
+ *
+ * Só `data-project-section` é emitido para o motion. Um `data-reveal` avulso
+ * ficaria invisível se o módulo que o anima não rodasse nesta rota, e a regra
+ * é que o HTML nasce visível.
+ */
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ArchMap from '../../components/ArchMap.astro';
+import Splatter from '../../components/marks/Splatter.astro';
+import { atlasImage } from '../../lib/images';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('systems');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+// Sem `interface Props` aqui de propósito: numa rota com getStaticPaths o Astro
+// deriva o tipo das props do retorno dele, e uma interface paralela seria uma
+// segunda fonte de verdade que ninguém verifica.
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const STATUS_LABEL = { implemented: 'implementado', experimental: 'experimental' } as const;
+
+// Anterior/próximo seguem a mesma ordem de leitura da home: os dossiês, depois
+// os laboratórios — assim o dossiê não joga o leitor no meio da coleção.
+const byOrder = (a: CollectionEntry<'systems'>, b: CollectionEntry<'systems'>) =>
+  a.data.order - b.data.order;
+const all = await getCollection('systems');
+const ordered = [
+  ...all.filter((item) => item.data.kind === 'dossier').sort(byOrder),
+  ...all.filter((item) => item.data.kind === 'lab').sort(byOrder),
+];
+const position = ordered.findIndex((item) => item.id === entry.id);
+const previous = position > 0 ? ordered[position - 1] : undefined;
+const next = position >= 0 && position < ordered.length - 1 ? ordered[position + 1] : undefined;
+
+const atlas = atlasImage(entry.data.atlas);
+const atlasAlt = `Ilustração de abertura do dossiê ${entry.data.title}: colagem geométrica em papel, com formas recortadas e linhas de conexão.`;
+---
+
+<Base
+  title={`${entry.data.title} — Gabriel Almir`}
+  description={entry.data.summary}
+  path={`/projects/${entry.id}`}
+>
+  <article data-project class="u-shell pt-32 pb-24">
+    <a
+      href="/"
+      class="u-label inline-flex items-center gap-2 text-ink-300 transition-colors hover:text-paper"
+    >
+      <Icon name="arrow-left" size={16} />
+      Voltar para a home
+    </a>
+
+    <header class="mt-12">
+      <p class="u-label text-blue">{entry.data.category}</p>
+      <h1 class="u-display text-hero mt-5">{entry.data.title}</h1>
+      <p class="mt-7 max-w-3xl text-xl text-ink-300">{entry.data.summary}</p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 border-t u-hairline pt-6">
+        <dl class="u-label flex flex-wrap gap-x-10 gap-y-4 text-ink-400">
+          <div class="flex gap-2">
+            <dt>Status</dt>
+            <dd class="text-ink-300">{STATUS_LABEL[entry.data.status]}</dd>
+          </div>
+          <div class="flex gap-2">
+            <dt>Commit-fonte</dt>
+            <dd class="text-ink-300">{entry.data.commit}</dd>
+          </div>
+          <div class="flex gap-2">
+            <dt>Licença</dt>
+            <dd class="text-ink-300">{entry.data.license}</dd>
+          </div>
+        </dl>
+
+        <a
+          href={entry.data.repo}
+          target="_blank"
+          rel="noreferrer"
+          class="link-ink u-label inline-flex items-center gap-2"
+        >
+          <Icon name="github" size={14} />
+          Repositório
+          <Icon name="external-link" size={12} />
+        </a>
+      </div>
+    </header>
+
+    {
+      atlas && (
+        <div
+          data-atlas-image
+          class="mt-14 aspect-[4/3] w-full overflow-hidden border u-hairline bg-ink-850 md:aspect-[16/9]"
+        >
+          {/*
+            É o LCP desta página: entra `eager`, com prioridade, e com srcset —
+            um telefone não deve baixar 1200px de largura para uma faixa de 390.
+          */}
+          <Image
+            src={atlas}
+            alt={atlasAlt}
+            widths={[480, 720, 960, 1200]}
+            sizes="(min-width: 84rem) 74rem, 100vw"
+            format="avif"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="u-inked h-full w-full object-cover"
+          />
+        </div>
+      )
+    }
+
+    <section data-project-section id="contexto" aria-labelledby="contexto-h" class="mt-24">
+      <h2 id="contexto-h" class="u-display text-section">Contexto</h2>
+      <div class="prose-ink mt-8 max-w-3xl">
+        <Content />
+      </div>
+    </section>
+
+    <section data-project-section id="forcas" aria-labelledby="forcas-h" class="mt-24">
+      <h2 id="forcas-h" class="u-display text-section">Forças e restrições</h2>
+      <ul class="mt-8 max-w-3xl space-y-5">
+        {
+          entry.data.constraints.map((constraint) => (
+            <li class="flex items-start gap-5 text-ink-300">
+              <span aria-hidden="true" class="mt-[0.85em] h-0 w-7 shrink-0 border-t u-hairline" />
+              <span>{constraint}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section data-project-section id="decisoes" aria-labelledby="decisoes-h" class="mt-24">
+      <h2 id="decisoes-h" class="u-display text-section">Decisões</h2>
+      <ol class="mt-8 max-w-3xl">
+        {
+          entry.data.decisions.map((decision, index) => (
+            <li class="grid grid-cols-[3rem_1fr] gap-x-5 border-t u-hairline py-7">
+              <span class="u-display text-3xl leading-none text-ink-400">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="text-xl text-paper">{decision.title}</h3>
+                <p class="mt-2 text-ink-300">{decision.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    {
+      entry.data.qualities && (
+        <section data-project-section id="qualidades" aria-labelledby="qualidades-h" class="mt-24">
+          <h2 id="qualidades-h" class="u-display text-section">
+            Atributos de qualidade
+          </h2>
+          <div class="mt-8 overflow-x-auto">
+            <table class="w-full min-w-[44rem] border-collapse text-left">
+              <caption class="sr-only">
+                Atributos de qualidade de {entry.data.title}: abordagem adotada e evidência
+                correspondente.
+              </caption>
+              <thead>
+                <tr class="u-label text-ink-400">
+                  <th scope="col" class="border-b u-hairline pr-8 pb-3 font-medium">
+                    Atributo
+                  </th>
+                  <th scope="col" class="border-b u-hairline pr-8 pb-3 font-medium">
+                    Abordagem
+                  </th>
+                  <th scope="col" class="border-b u-hairline pb-3 font-medium">
+                    Evidência
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {entry.data.qualities.map((quality) => (
+                  <tr class="align-top">
+                    <th scope="row" class="border-b u-hairline py-6 pr-8 font-normal text-paper">
+                      {quality.attribute}
+                    </th>
+                    <td class="border-b u-hairline py-6 pr-8 text-ink-300">{quality.approach}</td>
+                    <td class="border-b u-hairline py-6 text-ink-300">{quality.evidence}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    <section data-project-section id="evidencias" aria-labelledby="evidencias-h" class="mt-24">
+      <h2 id="evidencias-h" class="u-display text-section">Evidências</h2>
+      <ul class="mt-8 max-w-3xl">
+        {
+          entry.data.evidence.map((item) => (
+            <li class="border-t u-hairline py-7">
+              <h3 class="text-xl text-paper">
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="link-ink inline-flex items-center gap-2"
+                  >
+                    {item.title}
+                    <Icon name="external-link" size={16} />
+                  </a>
+                ) : (
+                  item.title
+                )}
+              </h3>
+              <p class="mt-2 text-ink-300">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section data-project-section id="limites" aria-labelledby="limites-h" class="mt-24">
+      {/* O único vermelho da página fica aqui: é a seção que o leitor não pode pular. */}
+      <div class="flex items-center gap-5">
+        <h2 id="limites-h" class="u-display text-section">Limites conhecidos</h2>
+        <Splatter class="h-9 w-9 shrink-0 text-red" />
+      </div>
+      <ul class="mt-8 max-w-3xl space-y-5">
+        {
+          entry.data.limits.map((limit) => (
+            <li class="flex items-start gap-5 text-ink-300">
+              <span aria-hidden="true" class="mt-[0.85em] h-0 w-7 shrink-0 border-t u-hairline" />
+              <span>{limit}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {/* Folga maior que a das demais seções: afasta o nó `risk` do mapa do
+        respingo dos limites, para os dois vermelhos não dividirem viewport. */}
+    <section data-project-section id="mapa" aria-labelledby="mapa-h" class="mt-40">
+      <h2 id="mapa-h" class="u-display text-section">Mapa arquitetural</h2>
+      <ArchMap
+        nodes={entry.data.map}
+        title={`Mapa arquitetural de ${entry.data.title}, em ${entry.data.map.length} nós`}
+        class="mt-10 max-w-[27rem]"
+      />
+    </section>
+
+    <nav aria-label="Outros sistemas" class="mt-28 grid gap-10 border-t u-hairline pt-10 sm:grid-cols-2">
+      {
+        previous ? (
+          <a href={`/projects/${previous.id}`} class="group flex items-start gap-4">
+            <Icon name="arrow-left" size={18} class="mt-2 shrink-0 text-ink-500" />
+            <span>
+              <span class="u-label block text-ink-400">Anterior</span>
+              <span class="u-display mt-1 block text-2xl transition-colors group-hover:text-blue-bright">
+                {previous.data.title}
+              </span>
+            </span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a
+            href={`/projects/${next.id}`}
+            class="group flex items-start gap-4 sm:justify-end sm:text-right"
+          >
+            <span>
+              <span class="u-label block text-ink-400">Próximo</span>
+              <span class="u-display mt-1 block text-2xl transition-colors group-hover:text-blue-bright">
+                {next.data.title}
+              </span>
+            </span>
+            <Icon name="arrow-right" size={18} class="mt-2 shrink-0 text-ink-500" />
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>
+
+<style>
+  /* O site não usa plugin de tipografia: o corpo do markdown recebe estas
+     poucas regras, todas em cima dos tokens, para não abrir um segundo
+     sistema de estilo dentro da página. */
+  .prose-ink :global(p) {
+    margin-block-start: 1.4rem;
+    color: var(--color-ink-300);
+    font-size: var(--text-body);
+    line-height: 1.75;
+  }
+
+  .prose-ink :global(p:first-child) {
+    margin-block-start: 0;
+  }
+
+  .prose-ink :global(strong) {
+    color: var(--color-paper);
+    font-weight: 500;
+  }
+
+  .prose-ink :global(code) {
+    padding: 0.12em 0.4em;
+    border: 1px solid color-mix(in oklab, var(--color-ink-500) 45%, transparent);
+    background-color: var(--color-ink-850);
+    color: var(--color-blue-wash);
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+  }
+
+  .prose-ink :global(a) {
+    color: var(--color-blue-bright);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+</style>
