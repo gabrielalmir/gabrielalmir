@@ -27,3 +27,5 @@ playwright-report/
 
 *.pdf
 test-results
+.vercel
+.env*

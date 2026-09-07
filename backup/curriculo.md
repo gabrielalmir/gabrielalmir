@@ -1,69 +1,72 @@
 # Gabriel Almir
 
 **Analista de Sistemas Pleno | Backend, Cloud e AI Systems**
-Node.js, TypeScript, Python | Integrações, sistemas distribuídos e AI Platform Engineering
+Node.js, TypeScript e Python | Integrações, sistemas distribuídos e AI Platform Engineering
 
-[LinkedIn](https://linkedin.com/in/gabrielalmir) | [GitHub](https://github.com/gabrielalmir) | [Website](https://gabrielalmir.com.br)
+Itapira, SP · [gabr.almir@gmail.com](mailto:gabr.almir@gmail.com)
+[LinkedIn](https://linkedin.com/in/gabrielalmir) · [GitHub](https://github.com/gabrielalmir) · [gabrielalmir.com.br](https://gabrielalmir.com.br)
 
 ## Resumo
-Desenvolvedor backend com experiência prática no desenvolvimento de APIs, integrações e serviços de backend. Trabalho principalmente com Node.js e TypeScript, e tenho experiência usando AWS (Lambda, S3, SQS, RDS, DynamoDB), mensageria (RabbitMQ, SQS) e pipelines de CI/CD com GitHub Actions. Atualmente tenho interesse em IA aplicada (LLMs, RAG) e busco sempre entregar soluções confiáveis e alinhadas ao negócio.
 
-## Experience
+Desenvolvedor backend com experiência prática em APIs, integrações e serviços de backend. Trabalho principalmente com Node.js, TypeScript e PHP, com experiência em AWS (Lambda, S3, SQS, RDS, DynamoDB), mensageria (RabbitMQ, SQS) e pipelines de CI/CD com GitHub Actions. Atuo em ambientes regulados, onde rastreabilidade, consistência e continuidade operacional são requisitos de produto — e não detalhes de implementação. Atualmente direciono essa base para IA aplicada (LLMs, RAG, MCP), com foco em avaliação, guardrails e operação segura.
 
-### Systems Analyst (Pleno) | Laboratório Cristália
-*April 2026 - Present* | Itapira, SP
+## Experiência
 
-- Analyze and evolve corporate systems with Quality Assurance, HR, Procurement, Legal, and IT
-- Work on ERP integrations under traceability, security, and compliance requirements
-- Support testing, documentation, onboarding, and technical mentoring of other developers
+### Analista de Sistemas Pleno | Laboratório Cristália
+*Abril de 2026 - Presente* | Itapira, SP
 
-### Backend Node.js Engineer | CTC
-*August 2023 - April 2026* | Itapira, SP
+- Analiso e evoluo sistemas corporativos junto às áreas de Garantia da Qualidade, RH, Compras, Jurídico e TI.
+- Atuo em integrações de ERP sob requisitos de rastreabilidade, segurança e conformidade.
+- Desenvolvo e mantenho sistemas corporativos em PHP, além de Node.js e TypeScript.
+- Apoio testes, documentação, onboarding e mentoria técnica de outros desenvolvedores.
 
-- Developed middleware and REST/ODATA APIs using Node.js, NestJS, and TypeScript, integrating ERP systems and analytical tools
-- Implemented customer relationship system using Node.js and SQL Server, reducing loading time by 90%
-- Created document control system for regulated pharmaceutical industry, ensuring compliance and traceability
-- Structured CI/CD for critical modular monolith using GitHub Actions, ensuring consistent deployments across multiple environments
-- Led strategic projects focused on process optimization and automation, with data-driven decisions
-- Developed Python service for intelligent package insert mapping, integrating SAP and Totvs ERP with string comparison heuristics, reducing search time by 98% (from ~1min to instant access)
+### Desenvolvedor Backend Node.js | CTC
+*Agosto de 2023 - Abril de 2026* | Itapira, SP
 
-### Full Stack Node.js Developer | Laboratório Cristália
-*April 2023 - August 2023* | Itapira, SP
+- Desenvolvi middlewares e APIs REST/OData com Node.js, NestJS e TypeScript, integrando sistemas ERP e ferramentas analíticas.
+- Reduzi em 90% o tempo de carregamento do sistema de relacionamento com o cliente (Node.js e SQL Server).
+- Desenvolvi serviço em Python para mapeamento inteligente de bulas, integrando SAP e TOTVS por heurísticas de comparação de strings — 98% menos tempo de busca (de cerca de 1 minuto para acesso imediato).
+- Fui responsável técnico da migração de sistemas legados para TOTVS Cloud.
+- Criei sistema de controle de documentos para indústria farmacêutica regulada, garantindo conformidade e rastreabilidade.
+- Estruturei o CI/CD de um monólito modular crítico com GitHub Actions.
+- Conduzi projetos estratégicos de otimização e automação de processos, com decisões orientadas a dados.
 
-- Enhanced internal systems focusing on architecture best practices, testing, and documentation, accelerating business flows through improved document management
+### Desenvolvedor Full Stack Node.js | Laboratório Cristália
+*Abril de 2023 - Agosto de 2023* | Itapira, SP
 
-### Full Stack Node.js Developer | Freelancer
-*October 2016 - March 2023* | Remote
+- Evoluí sistemas internos com foco em boas práticas de arquitetura, testes e documentação.
 
-- Developed REST APIs, JWT authentication, messaging with RabbitMQ
-- Focused on MySQL database integration and Redis caching
+### Desenvolvedor Full Stack Node.js | Atuação independente
+*Outubro de 2016 - Março de 2023* | Remoto
 
-### Full Stack Developer | SEO and Architecture | Diolinux
-*May 2013 - August 2016* | Marau, RS
+- Desenvolvi APIs REST, autenticação com JWT e mensageria com RabbitMQ.
+- Foco em integração com bancos MySQL e cache com Redis.
 
-- Modernized legacy systems focusing on performance and automation
+### Desenvolvedor Full Stack | SEO e Arquitetura | Diolinux
+*Maio de 2013 - Agosto de 2016* | Marau, RS
 
-## Education
+- Modernizei sistemas legados com foco em performance e automação.
+- Contribuí na evolução do PhotoGIMP; hoje participo da organização e revisão do projeto.
 
-- **Software Development Technology Degree** | FATEC-SP
-  August 2022 - December 2025 (completed) | Itapira, SP
+## Formação
 
-- **IT Technical Degree** | Senac Brasil
-  2014 - 2016
+- **Tecnologia em Desenvolvimento de Software Multiplataforma** | FATEC Itapira — Agosto de 2022 a Dezembro de 2025 (concluído) | Itapira, SP
+- **Técnico em Informática** | Senac Brasil — 2014 a 2016
 
-## Technical Skills
+## Competências Técnicas
 
-- **Languages**: Node.js, TypeScript, JavaScript, SQL
-- **Frameworks**: NestJS, React, FastAPI, TypeORM
+- **Linguagens**: TypeScript, JavaScript (Node.js), PHP, Python, SQL
+- **Frameworks**: NestJS, Fastify, React, FastAPI, TypeORM, Prisma
+- **Bancos de dados**: PostgreSQL, SQL Server, MySQL, Redis, DynamoDB, RDS
 - **Cloud**: AWS (Lambda, S3, SQS, DynamoDB, RDS)
-- **Messaging**: RabbitMQ, Amazon SQS
+- **Mensageria**: RabbitMQ, Amazon SQS
 - **DevOps**: Docker, GitHub Actions, CI/CD, SonarQube
-- **Practices**: Clean Architecture, SOLID, TDD, DDD
-- **AI/ML (studying)**: Pandas, LangChain, LLMs, RAG, Scikit-learn, Google OR-Tools
-- **Observability**: Prometheus, Grafana (learning)
-- **Tools**: GitHub, Jira, Figma, Postman, Swagger, ERP (SAP)
+- **Práticas**: Clean Architecture, SOLID, TDD, DDD
+- **IA aplicada**: LLMs, RAG, MCP, LangChain, Pandas, Scikit-learn, Google OR-Tools
+- **Observabilidade**: OpenTelemetry, Prometheus, Grafana
+- **Ferramentas**: GitHub, Jira, Figma, Postman, Swagger, ERP (SAP, TOTVS)
 
-## Languages
+## Idiomas
 
-- **Portuguese**: Native
-- **English**: Advanced (continuous learning)
+- **Português**: nativo
+- **Inglês**: avançado (aprendizado contínuo)

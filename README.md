@@ -1,25 +1,14 @@
-<img width="100%" src="./docs/cover.jpg" alt="Gabriel Almir — sistemas, histórias e caminhos confiáveis" />
+<img width="100%" src="./docs/banner-github.jpg" alt="Gabriel Almir — Backend & AI Systems Engineer" />
 
 <h1 align="center">Gabriel Almir</h1>
+<p align="center"><strong>Systems Analyst · Backend &amp; AI Systems</strong><br/>
+TypeScript / Node.js • Python • ERP Integrations • Regulated Systems</p>
 
 <p align="center">
-  <strong>Backend &amp; AI Systems Engineer</strong><br/>
-  TypeScript / Node.js • Python • Integrações ERP • Sistemas Regulados
+  <a href="https://linkedin.com/in/gabrielalmir"><img src="https://img.shields.io/badge/LinkedIn-gabrielalmir-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://gabrielalmir.com.br"><img src="https://img.shields.io/badge/Portfolio-gabrielalmir.com.br-111111?style=flat-square" alt="Portfolio" /></a>
+  <a href="https://ko-fi.com/gabrielalmir"><img src="https://img.shields.io/badge/Ko--fi-support-FF5E5B?style=flat-square&logo=kofi&logoColor=white" alt="Ko-fi" /></a>
 </p>
-
-<p align="center">
-  <a href="https://linkedin.com/in/gabrielalmir">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-  </a>
-  <a href="https://gabrielalmir.com.br">
-    <img src="https://img.shields.io/badge/Portfolio-146C94?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio"/>
-  </a>
-  <a href="https://ko-fi.com/gabrielalmir">
-    <img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"/>
-  </a>
-</p>
-
----
 
 ## About
 
@@ -27,17 +16,19 @@ I build backend systems and integrations where **traceability, consistency and o
 
 My work is centered on **Node.js, TypeScript and Python**, with experience in ERP integrations (SAP/TOTVS), APIs, data flows and regulated environments (BPF/GMP). I am expanding this foundation into **AI systems**: model integration, MCP, evaluation, guardrails, observability and secure operation.
 
-I work at **Laboratório Cristália** in the pharmaceutical sector and have maintained [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) since 2021.
+I work as a Systems Analyst at **Laboratório Cristália** in the pharmaceutical sector. I contributed to the evolution of [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) and today take part in organizing and reviewing the project.
 
 ## Selected work
 
 | Project | What it demonstrates |
-|---|---|
-| [Pimbas](https://github.com/gabrielalmir/pimbas) | Product backend: domain modeling, authentication, Prisma/Postgres, tests, Docker and operational documentation. |
-| [MCP Animagine XL](https://github.com/gabrielalmir/mcp-animaginexl) | Applied AI engineering: FastMCP, REST API, validation, model management and CPU/GPU execution paths. |
-| [Astrum](https://github.com/gabrielalmir/astrum) | Data-oriented backend: multi-database queries, batched processing and XLSX/JSON reporting. |
-| [D4Sign Node](https://github.com/gabrielalmir/d4sign-node) | Typed Node.js integration for an electronic-signature API. |
-| [Resulta](https://github.com/gabrielalmir/resulta) | TypeScript library for explicit result handling, with tests, migration guidance and releases. |
+| --- | --- |
+| [Pimbas](https://github.com/gabrielalmir/pimbas) | Architectural evolution: domain modeling, contract preservation during migration, per-group data isolation. |
+| [Saturno](https://github.com/gabrielalmir/saturno) | Product architecture: a modern Laravel/Inertia monolith with a modular boundary instead of premature distribution. |
+| [Maybe](https://github.com/gabrielalmir/maybe) | Errors and absence as explicit states, adopted incrementally at the edges of PHP 7.4 systems. |
+| [Hush](https://github.com/gabrielalmir/hush) | RESP-compatible server: what concurrency, memory and TTL semantics have to make explicit. |
+| [MCP AnimagineXL](https://github.com/gabrielalmir/mcp-animaginexl) | Applied AI engineering: exposing image generation over MCP and REST without hiding the GPU boundary. |
+
+More dossiers and labs — including [Resulta](https://github.com/gabrielalmir/resulta) and [MCP Qwen3-TTS](https://github.com/gabrielalmir/mcp-qwen3-tts) — at [gabrielalmir.com.br](https://gabrielalmir.com.br).
 
 ## Engineering principles
 
@@ -56,6 +47,4 @@ I work at **Laboratório Cristália** in the pharmaceutical sector and have main
 
 `TypeScript` · `Node.js` · `Python` · `NestJS` · `Fastify` · `PostgreSQL` · `Redis` · `Docker` · `AWS` · `GitHub Actions`
 
----
-
-> “Não leio livros sobre o mundo. Saio por aí e vejo por mim mesmo.” — Ezreal
+> "Não leio livros sobre o mundo. Saio por aí e vejo por mim mesmo." — Ezreal
