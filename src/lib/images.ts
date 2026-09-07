@@ -11,7 +11,6 @@ import type { ImageMetadata } from 'astro';
 import hush from '../assets/atlas/hush.webp';
 import maybe from '../assets/atlas/maybe.webp';
 import mcpAnimaginexl from '../assets/atlas/mcp-animaginexl.webp';
-import mcpQwen3Tts from '../assets/atlas/mcp-qwen3-tts.webp';
 import pimbas from '../assets/atlas/pimbas.webp';
 import saturno from '../assets/atlas/saturno.webp';
 
@@ -30,7 +29,6 @@ export const atlasImages = {
   hush,
   maybe,
   'mcp-animaginexl': mcpAnimaginexl,
-  'mcp-qwen3-tts': mcpQwen3Tts,
   pimbas,
   saturno,
 } satisfies Record<string, ImageMetadata>;

@@ -28,7 +28,7 @@ I work as a Systems Analyst at **Laboratório Cristália** in the pharmaceutical
 | [Hush](https://github.com/gabrielalmir/hush) | RESP-compatible server: what concurrency, memory and TTL semantics have to make explicit. |
 | [MCP AnimagineXL](https://github.com/gabrielalmir/mcp-animaginexl) | Applied AI engineering: exposing image generation over MCP and REST without hiding the GPU boundary. |
 
-More dossiers and labs — including [Resulta](https://github.com/gabrielalmir/resulta) and [MCP Qwen3-TTS](https://github.com/gabrielalmir/mcp-qwen3-tts) — at [gabrielalmir.com.br](https://gabrielalmir.com.br).
+More dossiers and labs — including [Resulta](https://github.com/gabrielalmir/resulta), [Astrum](https://github.com/gabrielalmir/astrum) and [D4Sign Node](https://github.com/gabrielalmir/d4sign-node) — at [gabrielalmir.com.br](https://gabrielalmir.com.br).
 
 ## Engineering principles
 
@@ -38,6 +38,8 @@ More dossiers and labs — including [Resulta](https://github.com/gabrielalmir/r
 - Keep sensitive data, internal processes and credentials out of public repositories.
 
 ## Current focus
+
+**Q3 2026** — evaluation and guardrails for MCP servers; reporting pipelines over multiple databases.
 
 - Reliable AI integrations with MCP, structured outputs and evaluation.
 - Backend architecture for regulated and integration-heavy domains.
