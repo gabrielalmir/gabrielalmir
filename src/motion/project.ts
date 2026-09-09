@@ -17,8 +17,8 @@
  */
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import type { MotionGate } from './gate';
+import { loadSplitText, type SplitTextClass } from './split';
 
 /** Bordo macio da cortina, em % da altura: tinta não sai com régua. */
 const CURTAIN_FEATHER = 16;
@@ -43,17 +43,17 @@ export function initProject(gate: MotionGate): void {
   const root = document.querySelector<HTMLElement>('[data-project]');
   if (!root) return;
 
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger);
 
   // Antes de qualquer outra coisa e fora do contexto: a cortina só cumpre o
   // papel dela se existir no primeiro quadro.
   const disposeCurtain = raiseCurtain();
   const entrance = disposeCurtain ? 0.28 : 0;
 
-  const ctx = gsap.context(() => {
+  const ctx = gsap.context((self) => {
     /** Tudo que este módulo tocou; a rede de segurança devolve ao CSS. */
     const touched: Element[] = [];
-    let split: SplitText | null = null;
+    let split: InstanceType<SplitTextClass> | null = null;
     let bar: HTMLElement | null = null;
 
     try {
@@ -134,7 +134,13 @@ export function initProject(gate: MotionGate): void {
 
       if (headline) {
         touched.push(headline);
-        split = splitHeadline(headline, entrance);
+        // O SplitText chega por `import()` (ver split.ts); `self.add` recoloca
+        // o que nasce depois do await dentro do contexto.
+        void loadSplitText().then((SplitText) => {
+          self.add(() => {
+            split = splitHeadline(SplitText, headline, entrance);
+          });
+        });
       }
 
       /* --- blocos do dossiê ---------------------------------------------- */
@@ -305,12 +311,17 @@ function paintCurtain(el: HTMLElement, edge: number): void {
  * fonte carrega ou a largura muda — sem isso a linha se parte no lugar errado
  * e a animação recomeça do zero em vez de continuar de onde estava.
  */
-function splitHeadline(headline: HTMLElement, delay: number): SplitText | null {
+function splitHeadline(
+  SplitText: SplitTextClass | null,
+  headline: HTMLElement,
+  delay: number,
+): InstanceType<SplitTextClass> | null {
   // Se o título carrega `data-reveal`, o CSS o deixou em opacity 0 e quem o
   // revela é a entrada das linhas, não o stagger do metadado.
   if (headline.hasAttribute('data-reveal')) gsap.set(headline, { opacity: 1 });
 
   try {
+    if (!SplitText) throw new Error('SplitText indisponível');
     return SplitText.create(headline, {
       type: 'lines',
       mask: 'lines',

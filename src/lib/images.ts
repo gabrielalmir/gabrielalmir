@@ -14,7 +14,14 @@ import mcpAnimaginexl from '../assets/atlas/mcp-animaginexl.webp';
 import pimbas from '../assets/atlas/pimbas.webp';
 import saturno from '../assets/atlas/saturno.webp';
 
-import portraitPlate from '../assets/texture/portrait-plate.webp';
+import portraitPlate from '../assets/texture/portrait-plate-v2.webp';
+
+import act01 from '../assets/stage/act-01.webp';
+import act02 from '../assets/stage/act-02.webp';
+import act03 from '../assets/stage/act-03.webp';
+import act04 from '../assets/stage/act-04.webp';
+import act05 from '../assets/stage/act-05.webp';
+import act06 from '../assets/stage/act-06.webp';
 import notFoundFigure from '../assets/texture/gabriel-404.webp';
 import processFigure from '../assets/texture/gabriel-process.webp';
 
@@ -33,10 +40,20 @@ export const atlasImages = {
   saturno,
 } satisfies Record<string, ImageMetadata>;
 
+/**
+ * As chapas de tinta atrás de cada capítulo da home (ver `chapters` em
+ * content.ts). Geradas em 2026-09-09 a partir da paleta do site: nanquim
+ * diluído em azul-acinzentado sobre preto, um respingo terracota por chapa.
+ * Já saem escurecidas na origem — a chapa é textura atrás de texto, nunca
+ * pode competir com ele.
+ */
+export const stageImages = [act01, act02, act03, act04, act05, act06] as const;
+
 export const figureImages = {
   /**
-   * A chapa do hero: o desenho a grafite do Gabriel, duotonado para a rampa
-   * ink → papel do site.
+   * A chapa do hero: desenho a grafite do Gabriel sobre papel claro, com o
+   * bloco azul ao lado — gerado em 2026-09-09 a partir de uma foto dele, com
+   * ombros e moletom visíveis de propósito.
    *
    * Não é `texture/portrait.webp`, que é uma foto em que só os olhos escapam
    * do preto: recortada e posta sobre o hero quase preto, ela virava uma

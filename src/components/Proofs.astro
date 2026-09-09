@@ -15,8 +15,18 @@ import Splatter from './marks/Splatter.astro';
 import Stroke from './marks/Stroke.astro';
 ---
 
-<section id="provas" data-proofs aria-labelledby="provas-titulo" class="bg-ink-900 py-32 md:py-48">
-  <div class="u-shell">
+<section
+  id="provas"
+  data-proofs
+  data-chapter
+  data-chapter-title="Provas"
+  data-steps="1"
+  style="--steps: 1; --plate: var(--plate-2)"
+  aria-labelledby="provas-titulo"
+  class="bg-ink-900 py-32 md:py-48"
+>
+  <div data-chapter-stage>
+  <div data-step class="u-shell">
     <header class="max-w-4xl" data-reveal-group>
       {/* Azul puro só sustenta texto ≥ 18px; o kicker tem 12px, então vai de blue-bright. */}
       <p class="u-label relative inline-block text-blue-bright" data-reveal>
@@ -84,6 +94,7 @@ import Stroke from './marks/Stroke.astro';
         })
       }
     </div>
+  </div>
   </div>
 </section>
 

@@ -3,13 +3,13 @@
  * Sistemas — dossiês em painéis e laboratórios em grade.
  *
  * Decisões que valem registro:
- *  1. O trilho nasce como coluna. A faixa horizontal de painéis de 100vw só
- *     existe dentro de `.motion-ready`, porque um bloco de 300vw sem o pin do
- *     ScrollTrigger para empurrá-lo seria conteúdo inalcançável. Sem JS ou com
- *     reduced-motion sobra uma pilha vertical legível — ver o <style> abaixo.
- *  2. Nada aqui usa `data-reveal` dentro do trilho: um elemento com opacity 0
- *     esperando um trigger próprio, preso num container pinado, é o jeito mais
- *     fácil de sumir com texto para sempre. Quem anima o painel é o trilho.
+ *  1. Cada dossiê é um passo do capítulo (ver global.css): no modo capítulos
+ *     ele ocupa o palco sozinho e o crossfade entre passos substitui o antigo
+ *     trilho horizontal pinado. Sem JS ou com reduced-motion sobra uma pilha
+ *     vertical legível, com hairline entre os painéis.
+ *  2. Nada aqui usa `data-reveal` dentro dos painéis: um elemento com opacity
+ *     0 esperando um trigger próprio, dentro de um palco sticky, é o jeito
+ *     mais fácil de sumir com texto para sempre. Quem anima o painel é o passo.
  *  3. Vermelho. Os únicos são o badge "experimental" e o nó `risk` do mapa, e
  *     eles nunca dividem viewport: dossiê tem mapa e não tem badge, lab tem
  *     badge e não tem mapa. Por isso o nó `risk` mantém o vermelho do contrato
@@ -18,12 +18,6 @@
  *  4. O mapa é o `ArchMap` em `orientation="horizontal"`, o mesmo componente do
  *     dossiê. Duas implementações do mesmo diagrama discordariam em silêncio no
  *     dia em que a natureza de um nó mudasse de cor.
- *  5. Quem é pinado é o `[data-systems-stage]`, não a seção. A seção tem 2174px
- *     — cabeçalho, faixa e laboratórios —, e pinar isso prende no topo da tela
- *     um bloco duas vezes maior que ela: o leitor ficava olhando o cabeçalho
- *     enquanto os painéis passavam cortados pela metade, e os laboratórios só
- *     apareciam quando o pin soltava. O palco tem exatamente uma tela de
- *     altura, então o que fica parado é o que se quer olhar.
  */
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -47,15 +41,23 @@ const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
   experimental: 'experimental',
 };
 
+// Cabeçalho, um dossiê por passo e a grade de laboratórios no fim.
+const steps = 1 + dossiers.length + 1;
+
 ---
 
 <section
   id="sistemas"
   data-systems
+  data-chapter
+  data-chapter-title="Sistemas"
+  data-steps={String(steps)}
+  style={`--steps: ${steps}; --plate: var(--plate-3)`}
   aria-labelledby="sistemas-titulo"
   class="relative bg-ink-950 py-24 md:py-32"
 >
-  <header class="u-shell flex flex-col gap-6" data-reveal-group>
+  <div data-chapter-stage>
+  <header data-step class="u-shell flex flex-col gap-6" data-reveal-group>
     <p class="u-label text-blue" data-reveal>{systemsSection.kicker}</p>
     <h2 id="sistemas-titulo" class="u-display text-section max-w-[16ch]" data-reveal>
       {systemsSection.title}
@@ -63,8 +65,8 @@ const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
     <p class="max-w-[58ch] text-ink-300" data-reveal>{systemsSection.lead}</p>
   </header>
 
-  <div data-systems-stage class="mt-16 overflow-x-clip overflow-y-hidden md:mt-20">
-    <div data-systems-track class="flex flex-col gap-20">
+  <div class="mt-16 overflow-x-clip md:mt-20">
+    <div class="flex flex-col gap-20">
       {
         dossiers.map((entry, index) => {
           const atlas = atlasImage(entry.data.atlas);
@@ -76,6 +78,7 @@ const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
           return (
             <article
               data-system-panel
+              data-step
               class:list={['shrink-0', index > 0 && 'border-t u-hairline pt-20']}
             >
               {/* `min-w-0` porque no modo faixa o shell vira item de flex-row:
@@ -156,7 +159,7 @@ const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
     </div>
   </div>
 
-  <div class="u-shell mt-24 md:mt-32">
+  <div data-step class="u-shell mt-24 md:mt-32">
     <header class="flex flex-col gap-5" data-reveal-group>
       <h3 class="u-display text-3xl md:text-5xl" data-reveal>{systemsSection.labsTitle}</h3>
       <p class="max-w-[62ch] text-ink-300" data-reveal>{systemsSection.labsLead}</p>
@@ -202,42 +205,21 @@ const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
       }
     </ul>
   </div>
+  </div>
 </section>
 
 <style>
-  /*
-    O trilho é coluna por padrão — é o que o leitor sem JS, com save-data ou com
-    reduced-motion recebe: três painéis empilhados, largura normal, sem scroll
-    lateral. A faixa de 100vw por painel só entra sob `.motion-ready`, quando o
-    gate já confirmou que o ScrollTrigger vai andar com o trilho em xPercent.
-    `:global()` porque a classe mora no <html>, fora do escopo do componente.
-  */
+  /* No modo capítulos o dossiê tem uma tela para caber inteiro: o atlas
+     perde altura e os blocos ficam mais juntos. Fora dele, o empilhado
+     respira como antes. `:global()` porque a classe mora no <html>. */
   @media (min-width: 768px) {
-    /* O palco é a moldura do pin: uma tela exata de altura. Fora do
-       `.motion-ready` ele não tem altura nenhuma e a pilha vertical flui. */
-    :global(.motion-ready) [data-systems-stage] {
-      height: 100svh;
+    :global(html.motion-ready.chapters) [data-system-panel] > .u-shell {
+      gap: 2rem;
     }
 
-    :global(.motion-ready) [data-systems-track] {
-      flex-direction: row;
-      flex-wrap: nowrap;
-      width: max-content;
-      gap: 0;
-    }
-
-    :global(.motion-ready) [data-systems-track] [data-system-panel] {
-      display: flex;
-      align-items: center;
-      flex: 0 0 100vw;
-      width: 100vw;
-      height: 100%;
-      /* O painel não pode crescer além do palco: o que passar disso ficaria
-         atrás da borda do `overflow-hidden`, invisível e sem rolagem. */
-      overflow-y: auto;
-      /* A hairline separava os painéis empilhados; lado a lado ela sobra. */
-      border-top-width: 0;
-      padding-top: 0;
+    :global(html.motion-ready.chapters) [data-system-panel] [data-atlas-image] img {
+      max-height: 34svh;
+      object-fit: cover;
     }
   }
 </style>

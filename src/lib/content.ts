@@ -35,6 +35,30 @@ export const nav = [
   { label: 'Contato', href: '/#contato' },
 ] as const;
 
+/**
+ * Os capítulos da home, na ordem do documento.
+ *
+ * Fonte única para três coisas que precisam concordar: o `id` de cada seção,
+ * os pontos da navegação lateral e o marcador "Capítulo 03 / Sistemas". O
+ * `plate` é a chapa de tinta que fica atrás do capítulo (src/assets/stage);
+ * Processo e Contato dividem a mesma, porque a tinta assenta nos dois.
+ */
+export const chapters = [
+  { id: 'inicio', title: 'Início', plate: 1 },
+  { id: 'provas', title: 'Provas', plate: 2 },
+  { id: 'sistemas', title: 'Sistemas', plate: 3 },
+  { id: 'trajetoria', title: 'Trajetória', plate: 4 },
+  { id: 'ia', title: 'IA', plate: 5 },
+  { id: 'processo', title: 'Processo', plate: 6 },
+  { id: 'contato', title: 'Contato', plate: 6 },
+] as const;
+
+export type ChapterId = (typeof chapters)[number]['id'];
+
+export function chapterIndex(id: ChapterId): number {
+  return chapters.findIndex((chapter) => chapter.id === id);
+}
+
 export const hero = {
   kicker: 'Backend · AI Systems · Itapira/SP',
   /** Dividido em linhas para o SplitText. Junto, é uma frase só. */

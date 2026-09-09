@@ -1,0 +1,40 @@
+---
+/**
+ * O palco — o fundo contínuo da home.
+ *
+ * Fixo, em tela cheia, atrás de tudo. Três camadas: duas chapas de tinta
+ * (a/b) que fazem crossfade a cada troca de capítulo, e o canvas WebGL, que
+ * nasce transparente e só é revelado por src/motion/stage.ts quando o gate
+ * libera a cena.
+ *
+ * Só existe no modo capítulos (`html.motion-ready.chapters`, ≥768px). Fora
+ * dele fica `display: none` — e cada seção já carrega a própria chapa como
+ * fundo estático via `--plate`, então sem JS ninguém perde a tinta.
+ *
+ * As URLs otimizadas das chapas são publicadas como `--plate-N` no :root,
+ * para as seções (que referenciam `var(--plate-N)`) e para o motion, que
+ * escreve a mesma variável nas camadas a/b.
+ */
+import { getImage } from 'astro:assets';
+import { stageImages } from '../lib/images';
+
+const plates = await Promise.all(
+  stageImages.map((image) => getImage({ src: image, width: 1600, format: 'webp', quality: 60 })),
+);
+
+const plateVars = plates.map((plate, index) => `--plate-${index + 1}:url('${plate.src}')`).join(';');
+---
+
+{/* No :root, para as seções e o motion lerem a mesma URL. `is:inline` porque
+    o valor vem do build e o Astro não interpola dentro de <style>. */}
+<style is:inline set:html={`:root{${plateVars}}`}></style>
+
+<div
+  data-stage
+  aria-hidden="true"
+  class="pointer-events-none fixed inset-0 -z-10 hidden bg-ink-900 md:block"
+>
+  <div data-stage-plate="a" class="stage-plate absolute inset-0" style="background-image: var(--plate-1)"></div>
+  <div data-stage-plate="b" class="stage-plate absolute inset-0" style="background-image: var(--plate-1); opacity: 0"></div>
+  <canvas data-stage-canvas class="absolute inset-0 h-full w-full" style="opacity: 0"></canvas>
+</div>

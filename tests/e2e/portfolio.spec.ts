@@ -85,11 +85,41 @@ const SHOT_PROJECTS = ['desktop', 'reduced-motion', 'no-javascript'];
  */
 const SHOT_STYLE = `
   [data-hero-portrait],
-  [data-hero-canvas],
+  [data-stage],
+  [data-chapter-nav],
+  [data-chapter-marker],
   [data-trajectory-year],
   .u-noise { visibility: hidden !important; }
   [data-reveal] { opacity: 1 !important; }
 `;
+
+/** Onde o motor de capítulos entra: desktop com ponteiro fino, ≥1024px. */
+const CHAPTER_PROJECTS = ['desktop', 'wide'];
+
+/** Os sete capítulos da home, na ordem do documento (src/lib/content.ts). */
+const CHAPTER_IDS = ['inicio', 'provas', 'sistemas', 'trajetoria', 'ia', 'processo', 'contato'];
+
+type MotionDebug = {
+  engine: {
+    active: boolean;
+    state(): { chapter: number; step: number; progress: number; global: number };
+    stops(): { chapter: number; step: number; y: number }[];
+  } | null;
+};
+
+/** O estado do motor, exposto por src/motion/index.ts em `window.__motion`. */
+async function chapterState(page: Page) {
+  return page.evaluate(() => {
+    const motion = (window as Window & { __motion?: MotionDebug }).__motion;
+    const engine = motion?.engine ?? null;
+    return {
+      active: engine?.active ?? false,
+      state: engine?.state() ?? null,
+      y: Math.round(window.scrollY),
+      current: document.querySelector('[data-chapter-dot][aria-current="true"]')?.getAttribute('data-chapter-dot'),
+    };
+  });
+}
 
 const SHOT = {
   fullPage: true,
@@ -332,6 +362,22 @@ test('com reduced-motion a home é estática e legível sem rolar', async ({ pag
   );
   expect(pinned, 'uma seção ficou presa na tela').toBe(0);
 
+  // O modo capítulos nunca entra sem movimento: os passos ficam empilhados e
+  // inteiros, e nenhum palco fica pregado no topo.
+  await expect(page.locator('html')).not.toHaveClass(/chapters/);
+  const stuck = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('[data-chapter-stage]')).filter(
+      (stage) => getComputedStyle(stage).position === 'sticky',
+    ).length,
+  );
+  expect(stuck, 'um palco de capítulo ficou sticky sem movimento').toBe(0);
+  const hiddenSteps = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('[data-step]')).filter(
+      (step) => Number(getComputedStyle(step).opacity) < 1,
+    ).length,
+  );
+  expect(hiddenSteps, 'um passo ficou apagado sem ninguém para revelá-lo').toBe(0);
+
   await expect(page.locator('h1'), 'a manchete exige rolagem para ser lida').toBeInViewport();
 });
 
@@ -352,9 +398,14 @@ test('sem JS a home continua completa e navegável', async ({ page }, testInfo) 
   await expect(footer).toBeVisible();
   await expect(footer).toContainText('Gabriel');
 
-  // A cena nunca é montada; o fundo estático é o fundo real.
-  await expect(page.locator('[data-hero-canvas]')).toHaveCSS('opacity', '0');
-  await expect(page.locator('[data-hero-fallback]')).toBeVisible();
+  // A cena nunca é montada, e o palco nem existe nesta largura: a chapa de
+  // tinta de cada seção vem do CSS, sem um pixel de JS.
+  await expect(page.locator('[data-stage-canvas]')).toHaveCount(1);
+  await expect(page.locator('[data-stage-canvas]')).toHaveCSS('opacity', '0');
+  const heroPlate = await page
+    .locator('[data-hero]')
+    .evaluate((hero) => getComputedStyle(hero).backgroundImage);
+  expect(heroPlate, 'o hero perdeu a chapa estática').toMatch(/url\(/);
 
   // O menu de telas pequenas é <details>: abre pelo navegador, sem uma linha
   // de JS envolvida.
@@ -377,11 +428,11 @@ test('o gate de WebGL troca cena por fundo sem erro de shader', async ({ page },
     if (message.type() === 'error' || message.type() === 'warning') noisy.push(message.text());
   });
 
-  const canvas = page.locator('[data-hero-canvas]');
+  const canvas = page.locator('[data-stage-canvas]');
 
   await page.goto('/?webgl=0');
   await expect(canvas, 'o canvas apareceu com o gate negando WebGL').toHaveCSS('opacity', '0');
-  await expect(page.locator('[data-hero-fallback]')).toBeVisible();
+  await expect(page.locator('[data-stage-plate="a"]')).toHaveCSS('opacity', '1');
 
   await page.goto('/?webgl=1');
   await expect
@@ -392,6 +443,111 @@ test('o gate de WebGL troca cena por fundo sem erro de shader', async ({ page },
 
   const broken = noisy.filter((line) => /shader|GLSL|WebGL: INVALID/i.test(line));
   expect(broken, 'a cena de tinta compilou com erro').toEqual([]);
+});
+
+// ---------------------------------------------------------------------------
+// Capítulos — a home como sequência de telas, só em desktop com ponteiro fino.
+// ---------------------------------------------------------------------------
+
+test.describe('capítulos', () => {
+  test.beforeEach(async ({ page }, testInfo) => {
+    test.skip(
+      !CHAPTER_PROJECTS.includes(testInfo.project.name),
+      'o motor de capítulos só entra em desktop com ponteiro fino',
+    );
+    // Sem a cena: no Chromium headless o WebGL é rasterizado por software e
+    // derruba o rAF a poucos quadros por segundo, o que faz uma viagem de
+    // 0,9 s levar vários segundos. A cena tem o próprio teste, abaixo.
+    await page.goto('/?webgl=0');
+    await expect(page.locator('html')).toHaveClass(/chapters/);
+    // O motor remede as paradas depois das fontes; esperar por elas evita
+    // medir um layout que ainda vai mudar de altura.
+    await page.evaluate(async () => {
+      await document.fonts?.ready;
+    });
+  });
+
+  test('os pontos apontam para os sete capítulos', async ({ page }) => {
+    const dots = page.locator('[data-chapter-nav] a');
+    await expect(dots).toHaveCount(CHAPTER_IDS.length);
+    for (const [index, id] of CHAPTER_IDS.entries()) {
+      await expect(dots.nth(index)).toHaveAttribute('href', `#${id}`);
+      await expect(page.locator(`[data-chapter]#${id}`)).toHaveCount(1);
+    }
+    await expect(dots.first()).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('cada capítulo mede múltiplos exatos de uma tela', async ({ page }) => {
+    const tops = await page.evaluate(() => ({
+      vh: window.innerHeight,
+      tops: Array.from(document.querySelectorAll('[data-chapter]')).map((chapter) =>
+        Math.round(chapter.getBoundingClientRect().top + window.scrollY),
+      ),
+    }));
+    for (const top of tops.tops) {
+      expect(top % tops.vh, `um capítulo começa em ${top}px, fora do múltiplo de tela`).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test('a roda avança um capítulo por gesto, e a inércia não pula outro', async ({ page }) => {
+    await page.mouse.move(640, 400);
+    await page.mouse.wheel(0, 120);
+    await expect.poll(async () => (await chapterState(page)).current, { timeout: 4_000 }).toBe('1');
+    await expect.poll(async () => (await chapterState(page)).y, { timeout: 4_000 }).toBe(
+      await page.evaluate(() => window.innerHeight),
+    );
+
+    // Três ticks em sequência, como a inércia de um trackpad: um passo só.
+    await page.mouse.wheel(0, 120);
+    await page.mouse.wheel(0, 120);
+    await page.mouse.wheel(0, 120);
+    await page.waitForTimeout(2_000);
+    const after = await chapterState(page);
+    expect(after.state?.chapter, 'a inércia atravessou mais de um capítulo').toBeLessThanOrEqual(2);
+    expect(after.y % (await page.evaluate(() => window.innerHeight)), 'parou fora de uma parada').toBeLessThanOrEqual(1);
+  });
+
+  test('o teclado percorre as paradas', async ({ page }) => {
+    await page.keyboard.press('PageDown');
+    await expect.poll(async () => (await chapterState(page)).current, { timeout: 4_000 }).toBe('1');
+    await page.keyboard.press('End');
+    await expect.poll(async () => (await chapterState(page)).state?.chapter, { timeout: 4_000 }).toBe(
+      CHAPTER_IDS.length - 1,
+    );
+    await page.keyboard.press('Home');
+    await expect.poll(async () => (await chapterState(page)).y, { timeout: 4_000 }).toBe(0);
+  });
+
+  test('uma âncora leva ao capítulo e o hash acompanha', async ({ page }) => {
+    await page.locator('header nav ul a[href="/#ia"]').first().click();
+    await expect.poll(async () => (await chapterState(page)).current, { timeout: 4_000 }).toBe(
+      String(CHAPTER_IDS.indexOf('ia')),
+    );
+    expect(new URL(page.url()).hash).toBe('#ia');
+    // O passo ativo do capítulo é o primeiro, e é o único que aceita ponteiro.
+    await expect(page.locator('#ia [data-step].is-active')).toHaveCount(1);
+  });
+
+  test('um scroll de fora assenta na parada mais próxima, e nada vaza na horizontal', async ({ page }) => {
+    const vh = await page.evaluate(() => window.innerHeight);
+    await page.evaluate((y) => window.scrollTo(0, y), Math.round(vh * 2.4));
+    await expect.poll(async () => (await chapterState(page)).y % vh, { timeout: 4_000 }).toBeLessThanOrEqual(1);
+
+    // Em cada parada, nada pode empurrar o documento para o lado.
+    const stops = await page.evaluate(() => {
+      const motion = (window as Window & { __motion?: MotionDebug }).__motion;
+      return motion?.engine?.stops().map((stop) => stop.y) ?? [];
+    });
+    expect(stops.length).toBeGreaterThan(CHAPTER_IDS.length);
+    for (const y of stops) {
+      await page.evaluate((target) => window.scrollTo(0, target), y);
+      await page.waitForTimeout(250);
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth,
+      );
+      expect(overflow, `vazamento horizontal na parada ${y}`).toBeLessThanOrEqual(1);
+    }
+  });
 });
 
 // ---------------------------------------------------------------------------

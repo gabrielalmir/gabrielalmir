@@ -89,6 +89,16 @@ const cta = 'Falar comigo';
   html {
     scroll-padding-top: calc(var(--nav-height) + 1.5rem);
   }
+
+  /* No modo capítulos da home a barra flutua sobre o palco: `fixed`, porque
+     cada capítulo mede a tela inteira e a barra não pode roubar altura dele. */
+  @media (min-width: 768px) {
+    html.motion-ready.chapters body > header {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+    }
+  }
 </style>
 
 <style>

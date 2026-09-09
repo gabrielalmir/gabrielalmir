@@ -18,12 +18,9 @@
  *     tudo. Fica `sticky` dentro de um pai absoluto para acompanhar a seção sem
  *     entrar no fluxo — nada abaixo dele se desloca se o texto mudar de largura.
  */
-import { Image } from 'astro:assets';
-import Icon from './Icon.astro';
 import Bracket from './marks/Bracket.astro';
-import Splatter from './marks/Splatter.astro';
+import TrajectoryItem from './TrajectoryItem.astro';
 import { trajectory, type TrajectoryEntry } from '../lib/content';
-import { trajectoryImage } from '../lib/images';
 
 type Group = {
   readonly id: string;
@@ -82,14 +79,19 @@ const groups: readonly Group[] = [
 // Estado inicial do ano de fundo. Daqui em diante quem escreve é o motion.
 const firstYear = trajectory.career[0].year;
 
-// photogimp.png é um ícone 512×512, não uma fotografia: entra pequeno e sem
-// `u-inked`, que existe para reprojetar fotos dentro da paleta.
-const ICON_IMAGE = 'photogimp';
+// A carreira é o único grupo com um passo por item; os outros dois dividem o
+// último passo. O total é o que o capítulo mede em telas.
+const [career, ...rest] = groups;
+const steps = 1 + career.items.length + 1;
 ---
 
 <section
   id="trajetoria"
   data-trajectory
+  data-chapter
+  data-chapter-title="Trajetória"
+  data-steps={String(steps)}
+  style={`--steps: ${steps}; --plate: var(--plate-4)`}
   aria-labelledby="trajetoria-titulo"
   class="relative isolate bg-ink-900 py-28 md:py-40"
 >
@@ -104,17 +106,32 @@ const ICON_IMAGE = 'photogimp';
     </div>
   </div>
 
-  <div class="u-shell relative">
-    <header class="max-w-3xl" data-reveal-group>
-      <p class="u-label text-blue-wash" data-reveal>{trajectory.kicker}</p>
-      <h2 id="trajetoria-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
-        {trajectory.title}
-      </h2>
-      <p class="text-body mt-8 text-ink-300" data-reveal>{trajectory.lead}</p>
-    </header>
+  <div data-chapter-stage class="relative">
+    <div data-step class="u-shell">
+      <header class="max-w-3xl" data-reveal-group>
+        <p class="u-label text-blue-wash" data-reveal>{trajectory.kicker}</p>
+        <h2 id="trajetoria-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
+          {trajectory.title}
+        </h2>
+        <p class="text-body mt-8 text-ink-300" data-reveal>{trajectory.lead}</p>
+      </header>
+      {/* O título do primeiro grupo mora no cabeçalho: no modo capítulos cada
+          etapa da carreira é uma tela, e o <h3> precisa preceder todas. */}
+      <h3 class="u-display mt-20 text-3xl text-paper sm:text-4xl md:mt-28">{career.title}</h3>
+    </div>
 
+    {/* Carreira: um `<li>` por passo. O `<ol>` fica em fluxo, vazio de altura
+        no modo capítulos, e os itens ocupam o palco por `absolute`. */}
+    <div class={`u-shell ${career.wrapClass}`}>
+      <ol class={career.listClass} data-trajectory-track>
+        {career.items.map((item) => <TrajectoryItem item={item} itemClass={career.itemClass} step />)}
+      </ol>
+    </div>
+
+    {/* Formação e presença pública dividem o último passo. */}
+    <div data-step class="u-shell">
     {
-      groups.map((group) => (
+      rest.map((group) => (
         <div class="mt-20 md:mt-28">
           <h3 class="u-display text-3xl text-paper sm:text-4xl">{group.title}</h3>
 
@@ -127,79 +144,13 @@ const ICON_IMAGE = 'photogimp';
           )}
 
           <div class={group.wrapClass}>
-            <ol
-              class={group.listClass}
-              data-trajectory-track={group.id === 'carreira' ? '' : undefined}
-            >
-              {group.items.map((item) => {
-                const image = trajectoryImage(item.image);
-                const isIcon = item.image === ICON_IMAGE;
-                return (
-                  <li
-                    class={group.itemClass}
-                    data-trajectory-item={item.year}
-                    data-trajectory-now={item.now ? '' : undefined}
-                  >
-                    <span
-                      class="absolute top-3 left-0 block size-2.5 -translate-x-1/2 rounded-full border border-ink-600 bg-ink-900"
-                      aria-hidden="true"
-                    >
-                      {item.now && (
-                        <Splatter class="absolute top-1/2 left-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-red" />
-                      )}
-                    </span>
-
-                    <span class="u-display block text-5xl leading-none text-blue">{item.year}</span>
-
-                    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span class="u-label text-ink-400">{item.period}</span>
-                      {item.now && <span class="u-label text-red">agora</span>}
-                    </div>
-
-                    <p class="mt-5 text-2xl text-paper">
-                      {item.href ? (
-                        <a
-                          class="link-ink inline-flex items-center gap-2"
-                          href={item.href}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {item.org}
-                          <Icon name="external-link" size={16} label="abre em nova aba" />
-                        </a>
-                      ) : (
-                        item.org
-                      )}
-                    </p>
-
-                    <p class="mt-1 text-base font-medium text-ink-300">{item.role}</p>
-                    <p class="mt-4 text-base text-ink-300">{item.summary}</p>
-
-                    {image && item.imageAlt && (
-                      <figure class={isIcon ? 'mt-6' : 'mt-6 max-w-xs'}>
-                        <Image
-                          src={image}
-                          alt={item.imageAlt}
-                          width={isIcon ? 64 : 320}
-                          densities={[1, 2]}
-                          format={isIcon ? 'webp' : 'avif'}
-                          loading="lazy"
-                          decoding="async"
-                          class={
-                            isIcon
-                              ? 'size-16'
-                              : 'u-inked aspect-[960/691] w-full rounded-sm object-cover'
-                          }
-                        />
-                      </figure>
-                    )}
-                  </li>
-                );
-              })}
+            <ol class={group.listClass}>
+              {group.items.map((item) => <TrajectoryItem item={item} itemClass={group.itemClass} />)}
             </ol>
           </div>
         </div>
       ))
     }
+    </div>
   </div>
 </section>

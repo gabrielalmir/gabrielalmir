@@ -96,12 +96,12 @@
 
   /* O scroll suave é feito por Lenis. Sem Lenis (no-js, reduced-motion) o
      scroll nativo com âncoras precisa continuar bom. */
-  html:not(.lenis-active) {
+  html:not(.lenis) {
     scroll-behavior: smooth;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html:not(.lenis-active) {
+    html:not(.lenis) {
       scroll-behavior: auto;
     }
   }
@@ -266,6 +266,112 @@
   [data-reveal] {
     opacity: 1;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Capítulos — a home como uma sequência de telas.
+
+   Sem camada (`@layer`) de propósito: as utilities do Tailwind moram numa
+   camada, e regra sem camada vence qualquer camada. É o que permite tirar o
+   padding e o fundo das seções sem `!important`.
+
+   Dois regimes:
+   - Fora de `html.motion-ready.chapters` (sem JS, reduced-motion, mobile,
+     gate negado): a seção é um bloco normal, com a própria chapa de tinta
+     como fundo, e os passos ficam empilhados. É a página estática.
+   - Dentro: cada capítulo mede `steps × 100svh`, tem um palco sticky de uma
+     tela e os passos se sobrepõem nele. Quem esconde e revela os passos é
+     src/motion/steps.ts; o CSS só os deixa em opacity 0 quando a classe
+     existe — e a classe só existe com o gate liberado.
+   --------------------------------------------------------------------------- */
+[data-chapter] {
+  position: relative;
+  background-image: var(--plate, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  html.motion-ready.chapters {
+    /* As paradas são múltiplos exatos de uma tela: nada a compensar. */
+    scroll-padding-top: 0;
+  }
+
+  html.motion-ready.chapters [data-chapter] {
+    min-height: calc(var(--steps, 1) * 100svh);
+    padding-block: 0;
+    /* A chapa passa para o palco fixo atrás da página (Stage.astro), que faz
+       o crossfade entre capítulos; a seção fica transparente. */
+    background-image: none;
+    background-color: transparent;
+  }
+
+  /* O <body> pinta o fundo dele por cima de um filho fixo com z-index
+     negativo (é a ordem de pintura do contexto raiz). Transparente aqui, e o
+     <html> continua ink-900 por baixo do palco. */
+  html.motion-ready.chapters body {
+    background-color: transparent;
+  }
+
+  html.motion-ready.chapters [data-chapter-stage] {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+    /* Grid, e não bloco: uma margem de filho em fluxo (o `mt-20` de um
+       wrapper) colapsaria através do sticky e empurraria o capítulo seguinte
+       para fora do múltiplo de tela. */
+    display: grid;
+    align-content: start;
+    /* Entrada e saída do capítulo, escritas por src/motion/steps.ts. Duas
+       variáveis porque a opacidade dos passos já é de outra timeline. */
+    opacity: calc(var(--enter, 1) * var(--exit, 1));
+  }
+
+  /*
+   * Os passos se sobrepõem por `absolute`, não por grid: assim um `<li>` de
+   * uma lista continua sendo `<li>` dentro do `<ol>` e ainda ocupa o palco
+   * inteiro — o HTML não precisa achatar a semântica para virar tela.
+   */
+  html.motion-ready.chapters [data-chapter-stage] [data-step] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* A barra de navegação é fixa neste regime; o passo respira abaixo dela
+       e acima do marcador de capítulo, que é fixo no rodapé. */
+    padding-block: calc(var(--nav-height) + 1.5rem) 4.5rem;
+    margin: 0;
+    /* Hairlines e recuos que separavam os passos empilhados sobram aqui. */
+    border-top-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html.motion-ready.chapters [data-chapter-stage] [data-step].is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* O cromo que só faz sentido com capítulos: marcador e nav de pontos. */
+  html.motion-ready.chapters [data-chapter-marker] {
+    display: flex;
+  }
+}
+
+[data-chapter-marker] {
+  display: none;
+}
+
+.stage-plate {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.6s var(--ease-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -21,10 +21,15 @@ const links = [
 <section
   id="contato"
   data-contact
+  data-chapter
+  data-chapter-title="Contato"
+  data-steps="1"
+  style="--steps: 1; --plate: var(--plate-6)"
   aria-labelledby="contato-titulo"
   class="bg-ink-950 py-40 md:py-64"
 >
-  <div class="u-shell flex flex-col items-center text-center" data-reveal-group>
+  <div data-chapter-stage>
+  <div data-step class="u-shell flex flex-col items-center text-center" data-reveal-group>
     <p class="u-label text-blue-bright" data-reveal>{contactSection.kicker}</p>
 
     <div class="mt-8" data-reveal>
@@ -65,5 +70,6 @@ const links = [
         ))
       }
     </div>
+  </div>
   </div>
 </section>

@@ -7,33 +7,28 @@
  *     CSS já o escondeu sob `.motion-ready` (caso de `[data-reveal]`) ou
  *     porque este módulo — que só roda com o gate liberado — o esconde e
  *     assume a responsabilidade de revelá-lo.
- *  2. Todo trigger nasce dentro de um `gsap.matchMedia()`. Atravessar os
- *     768px reverte o contexto inteiro: nenhum pin fica órfão, nenhum
- *     `ScrollTrigger` de desktop sobrevive no mobile.
+ *  2. Todo trigger nasce dentro de um `gsap.matchMedia()`. Cruzar a media
+ *     query dos capítulos reverte o contexto inteiro: nenhum trigger de um
+ *     regime sobrevive no outro.
  *  3. Nada anima duas vezes. `settled` guarda o que já apareceu, para que uma
- *     troca de breakpoint reponha o elemento no estado final em vez de
- *     recomeçar o fade na cara de quem já leu aquele trecho.
+ *     troca de regime reponha o elemento no estado final em vez de recomeçar
+ *     o fade na cara de quem já leu aquele trecho.
+ *
+ * Dois regimes: com capítulos (desktop com ponteiro fino — ver
+ * src/motion/chapters.ts), em que cada passo entra por crossfade e este
+ * módulo só cuida do que acontece DENTRO do passo (mapa que se desenha,
+ * atlas que ganha cor, ano de fundo); e o fluxo (mobile, tablet), em que as
+ * seções são blocos empilhados e cada elemento revela ao subir.
  */
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { CHAPTER_MEDIA, type ChapterEngine } from './chapters';
 import type { MotionGate } from './gate';
-
-const DESKTOP = '(min-width: 768px)';
-/*
- * `.98` e não `767px`: com zoom de página, escala de tela fracionária ou DPI
- * não inteiro, a largura de layout pode ser 767,5. Entre `max-width: 767px` e
- * `min-width: 768px` existe uma faixa em que NENHUM dos dois contextos roda —
- * e como o CSS já escondeu os `[data-reveal]` sob `.motion-ready`, ninguém os
- * revelaria: a home inteira ficaria em branco. As duas queries têm que cobrir
- * a reta sem buraco.
- */
-const MOBILE = '(max-width: 767.98px)';
+import { initSteps } from './steps';
 
 /** O elemento entrou 15% na viewport. Mesmo ponto para tudo que revela. */
 const REVEAL_START = 'top 85%';
-/** Equivalente horizontal, para o que anda dentro de um trilho pinado. */
-const REVEAL_START_X = 'left 85%';
 
 /**
  * Alvos com movimento próprio mais adiante neste arquivo. O reveal genérico
@@ -44,20 +39,8 @@ const OWN_MOTION = '[data-lab-card], [data-system-panel], [data-trajectory-item]
 /** Onde o cursor custom cresce e vira vermelho. */
 const INTERACTIVE = '[data-cta], a[href^="mailto"], button';
 
-/**
- * Um trilho pinado e a tween que o move. Os triggers de quem viaja dentro
- * dele precisam da tween em `containerAnimation`, senão medem a posição
- * vertical de um elemento que na prática se desloca na horizontal.
- */
-type Track = { root: Element; tween: gsap.core.Tween };
-
 /** Elementos que já chegaram ao estado final nesta visita à página. */
 const settled = new WeakSet<Element>();
-
-function containerFor(el: Element, tracks: Track[]): gsap.core.Tween | undefined {
-  // `contains` inclui o próprio nó: o trilho não viaja dentro de si mesmo.
-  return tracks.find((track) => track.root !== el && track.root.contains(el))?.tween;
-}
 
 /* -------------------------------------------------------------------------
    Rede de segurança
@@ -94,30 +77,20 @@ function build(assemble: () => void): void {
    Reveal genérico
    ------------------------------------------------------------------------- */
 
-type RevealOptions = {
-  container?: gsap.core.Tween;
-  /** Sobrepõe `data-reveal-delay`; usado pelo stagger manual dos grupos. */
-  delay?: number;
-};
-
 function revealed(el: Element): void {
   gsap.set(el, { opacity: 1, y: 0 });
 }
 
-function reveal(el: HTMLElement, options: RevealOptions = {}): void {
+function reveal(el: HTMLElement, delay = Number.parseFloat(el.dataset.revealDelay ?? '') || 0): void {
   if (settled.has(el)) {
     revealed(el);
     return;
   }
 
-  const delay = options.delay ?? (Number.parseFloat(el.dataset.revealDelay ?? '') || 0);
-  const container = options.container;
-
   hide([el], { opacity: 0, y: 24 });
   ScrollTrigger.create({
     trigger: el,
-    containerAnimation: container,
-    start: container ? REVEAL_START_X : REVEAL_START,
+    start: REVEAL_START,
     once: true,
     onEnter: () => {
       settled.add(el);
@@ -126,19 +99,11 @@ function reveal(el: HTMLElement, options: RevealOptions = {}): void {
   });
 }
 
-function revealGroup(group: HTMLElement, tracks: Track[], skip: Element | null): void {
+function revealGroup(group: HTMLElement, skip: Element | null): void {
   const children = Array.from(group.querySelectorAll<HTMLElement>('[data-reveal]')).filter(
     (child) => child !== skip && !child.matches(OWN_MOTION),
   );
   if (!children.length) return;
-
-  const container = containerFor(group, tracks);
-  // `ScrollTrigger.batch` não aceita `containerAnimation`: dentro de um
-  // trilho pinado o stagger vira delay por índice, com triggers próprios.
-  if (container) {
-    children.forEach((child, index) => reveal(child, { container, delay: index * 0.08 }));
-    return;
-  }
 
   children.filter((child) => settled.has(child)).forEach(revealed);
   const pending = children.filter((child) => !settled.has(child));
@@ -155,10 +120,10 @@ function revealGroup(group: HTMLElement, tracks: Track[], skip: Element | null):
   });
 }
 
-function initReveals(tracks: Track[], skip: Element | null): void {
+function initReveals(skip: Element | null): void {
   document
     .querySelectorAll<HTMLElement>('[data-reveal-group]')
-    .forEach((group) => revealGroup(group, tracks, skip));
+    .forEach((group) => revealGroup(group, skip));
 
   Array.from(document.querySelectorAll<HTMLElement>('[data-reveal], [data-proof-item]'))
     .filter((el) => el !== skip)
@@ -166,7 +131,7 @@ function initReveals(tracks: Track[], skip: Element | null): void {
     // Filhos de grupo já foram animados em stagger; `parentElement` porque um
     // grupo pode ser ele mesmo um alvo de reveal.
     .filter((el) => !el.parentElement?.closest('[data-reveal-group]'))
-    .forEach((el) => reveal(el, { container: containerFor(el, tracks) }));
+    .forEach((el) => reveal(el));
 }
 
 /* -------------------------------------------------------------------------
@@ -220,7 +185,7 @@ function runDraw(paths: SVGGeometryElement[], stagger: number, onComplete?: () =
   });
 }
 
-function initMarks(tracks: Track[]): void {
+function initMarks(): void {
   // Mapas e pipeline têm sequência própria, disparada pela seção deles.
   const marks = document.querySelectorAll<SVGElement>(
     '[data-mark-draw]:not([data-map-line]):not([data-pipeline-path])',
@@ -232,11 +197,9 @@ function initMarks(tracks: Track[]): void {
 
     // O <svg> tem caixa previsível; um <path> com viewBox escalado, nem sempre.
     const trigger = mark.closest('svg') ?? mark;
-    const container = containerFor(mark, tracks);
     ScrollTrigger.create({
       trigger,
-      containerAnimation: container,
-      start: container ? REVEAL_START_X : REVEAL_START,
+      start: REVEAL_START,
       once: true,
       onEnter: () => runDraw(armed, 0),
     });
@@ -247,7 +210,7 @@ function initMarks(tracks: Track[]): void {
    Contadores
    ------------------------------------------------------------------------- */
 
-function initCounters(tracks: Track[]): void {
+function initCounters(): void {
   document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
     if (settled.has(el)) return;
 
@@ -260,11 +223,9 @@ function initCounters(tracks: Track[]): void {
       el.textContent = `${prefix}${Math.round(value)}${suffix}`;
     };
 
-    const container = containerFor(el, tracks);
     ScrollTrigger.create({
       trigger: el,
-      containerAnimation: container,
-      start: container ? REVEAL_START_X : REVEAL_START,
+      start: REVEAL_START,
       once: true,
       onEnter: () => {
         settled.add(el);
@@ -324,137 +285,7 @@ function focusPanel(panel: HTMLElement, lines: SVGGeometryElement[]): void {
   runDraw(lines, 0.12);
 }
 
-/** Desktop: os três dossiês andam na horizontal enquanto a seção fica pinada. */
-function pinSystems(tracks: Track[]): void {
-  const section = document.querySelector<HTMLElement>('[data-systems]');
-  const track = section?.querySelector<HTMLElement>('[data-systems-track]');
-  // O palco, não a seção. A seção carrega cabeçalho e laboratórios junto; pinar
-  // ela prenderia na tela um bloco maior que a própria tela, e o leitor ficaria
-  // olhando o cabeçalho enquanto os painéis passam cortados.
-  const stage = section?.querySelector<HTMLElement>('[data-systems-stage]');
-  if (!section || !track || !stage) return;
-
-  const panels = Array.from(track.querySelectorAll<HTMLElement>('[data-system-panel]'));
-  if (panels.length < 2) {
-    // Um painel só não tem para onde andar: vira reveal, como no mobile.
-    stackSystemPanels();
-    return;
-  }
-
-  /*
-   * A faixa anda em degraus, não em velocidade constante.
-   *
-   * Com uma tween linear o trilho nunca para: medido, apenas 30% das posições
-   * de scroll mostravam um painel inteiro — nos outros 70% havia meio painel de
-   * cada lado, com o texto cortado ao meio. Esticar o pin não mudava nada,
-   * porque a proporção é a mesma em qualquer comprimento; só deixava a seção
-   * mais longa.
-   *
-   * A timeline alterna PARADA e TRAVESSIA. Cada painel fica imóvel por
-   * `DWELL` unidades e a passagem para o próximo leva `MOVE`, com ease nas
-   * duas pontas — o gesto de virar a página. Com scrub, a duração da timeline
-   * é o comprimento do pin, então a razão dwell/move é literalmente a fração do
-   * scroll em que dá para ler.
-   *
-   * O preço é abrir mão de `containerAnimation` nos triggers dos painéis: ele
-   * exige `ease: 'none'`. Em troca, quem decide o painel ativo é o progresso da
-   * própria timeline, logo abaixo — mais direto que medir posição horizontal.
-   */
-  const DWELL = 1.8;
-  const MOVE = 1;
-  const steps = panels.length - 1;
-
-  const overflow = () => Math.max(1, track.scrollWidth - window.innerWidth);
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: stage,
-      pin: stage,
-      start: 'top top',
-      scrub: 1,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      /*
-       * O comprimento do pin é independente da razão dwell/move — essa razão
-       * vem da estrutura da timeline. Aqui só se escolhe quanto scroll a seção
-       * inteira custa. `1.45x` dá cerca de uma tela e meia de rolagem por
-       * painel; a fórmula anterior somava as unidades de parada e chegava a
-       * 11 500px, quase treze telas para três painéis.
-       */
-      end: () => `+=${overflow() * 1.45}`,
-    },
-  });
-
-  for (let i = 1; i <= steps; i += 1) {
-    timeline.to(
-      track,
-      {
-        xPercent: (-100 * i) / panels.length,
-        duration: MOVE,
-        ease: 'power2.inOut',
-      },
-      `+=${DWELL}`,
-    );
-  }
-  // Parada final: sem ela o último painel sairia da tela no mesmo quadro em
-  // que chega.
-  timeline.to({}, { duration: DWELL });
-
-  tracks.push({ root: track, tween: timeline as unknown as gsap.core.Tween });
-
-  // No desktop o painel viaja, não aparece: se ele também for `[data-reveal]`,
-  // o CSS o deixou opaco e ninguém neste caminho iria revelá-lo.
-  panels.forEach((panel) => settled.add(panel));
-  gsap.set(panels, { opacity: 1, y: 0 });
-
-  // Painel ativo pelo progresso da timeline: cada painel ocupa uma fatia igual
-  // do total, e a fatia é atravessada uma vez só (`once` por painel).
-  const armed = panels.map((panel) => ({
-    panel,
-    lines: armDraw(panel.querySelectorAll('[data-map-line]')),
-    done: false,
-  }));
-  timeline.eventCallback('onUpdate', () => {
-    const index = Math.min(panels.length - 1, Math.floor(timeline.progress() * panels.length));
-    const entry = armed[index];
-    if (entry && !entry.done) {
-      entry.done = true;
-      focusPanel(entry.panel, entry.lines);
-    }
-  });
-
-  /*
-   * Tab dentro de um trilho pinado.
-   *
-   * O foco caminha na ordem do DOM, mas os painéis 2 e 3 estão fora da tela até
-   * o scroll levar o trilho até eles: o anel de foco ia parar em x negativo, e
-   * o navegador ainda tentava "trazer à vista" rolando o próprio wrapper — o
-   * que desalinhava o trilho de forma permanente, já que quem manda na posição
-   * é o progresso do ScrollTrigger, não `scrollLeft`.
-   *
-   * `overflow-x: clip` no palco tira do navegador a caixa de rolagem. Aqui o
-   * documento é levado até a fatia de scroll que põe aquele painel na tela, de
-   * modo que o foco fique onde a pessoa está olhando.
-   */
-  const trigger = timeline.scrollTrigger;
-  section.addEventListener('focusin', (event) => {
-    if (!trigger) return;
-    const target = (event.target as HTMLElement | null)?.closest('[data-system-panel]');
-    if (!target) return;
-
-    const index = panels.indexOf(target as HTMLElement);
-    if (index < 0) return;
-
-    // O trilho anda de `start` a `end` cobrindo os n-1 saltos entre painéis.
-    const span = trigger.end - trigger.start;
-    const targetScroll = trigger.start + (span * index) / (panels.length - 1);
-    if (Math.abs(trigger.scroll() - targetScroll) < 4) return;
-    // `trigger.scroll(value)` passa pelo scrollerProxy do Lenis; um
-    // `window.scrollTo` direto duraria um quadro e o Lenis o desfaria.
-    trigger.scroll(targetScroll);
-  });
-}
-
-/** Mobile: sem pin. Os painéis são blocos empilhados que revelam ao subir. */
+/** Fluxo: os painéis são blocos empilhados que revelam ao subir. */
 function stackSystemPanels(): void {
   document.querySelectorAll<HTMLElement>('[data-system-panel]').forEach((panel) => {
     const lines = armDraw(panel.querySelectorAll('[data-map-line]'));
@@ -466,6 +297,25 @@ function stackSystemPanels(): void {
       onEnter: () => focusPanel(panel, lines),
     });
   });
+}
+
+/**
+ * Capítulos: o painel viaja como passo e não aparece por conta própria. O
+ * mapa se desenha e o atlas ganha cor quando o passo dele vira o ativo.
+ */
+function armSystemPanels(): (panel: HTMLElement) => void {
+  const armed = new Map<HTMLElement, { lines: SVGGeometryElement[]; done: boolean }>();
+  document.querySelectorAll<HTMLElement>('[data-system-panel]').forEach((panel) => {
+    settled.add(panel);
+    armed.set(panel, { lines: armDraw(panel.querySelectorAll('[data-map-line]')), done: false });
+  });
+
+  return (panel) => {
+    const entry = armed.get(panel);
+    if (!entry || entry.done) return;
+    entry.done = true;
+    focusPanel(panel, entry.lines);
+  };
 }
 
 function initLabCards(): void {
@@ -541,17 +391,7 @@ function makeYearSwitch(yearEl: HTMLElement | null): (year: string) => void {
   };
 }
 
-/**
- * Trajetória, em todos os tamanhos: lista vertical, com o ano gigante de fundo
- * trocando conforme cada etapa passa.
- *
- * Houve uma versão pinada, em faixa horizontal, e ela não funcionava. São
- * quatro etapas de carreira em cartões de 24rem: o trilho inteiro mede pouco
- * mais que a tela, então a viagem toda dava ~500px e as duas últimas etapas
- * nunca cruzavam o centro — o ano travava em 2016 e nunca chegava a 2026.
- * Um trilho horizontal precisa de conteúdo que não caiba na tela; este cabe.
- * Na vertical cada etapa tem a própria travessia e o ano acompanha de verdade.
- */
+/** Fluxo: lista vertical, com o ano de fundo trocando conforme cada etapa passa. */
 function scrollTrajectory(): void {
   const section = document.querySelector<HTMLElement>('[data-trajectory]');
   if (!section) return;
@@ -568,6 +408,22 @@ function scrollTrajectory(): void {
       onEnterBack: () => switchYear(year),
     });
   });
+}
+
+/** Capítulos: o item é passo; o ano troca quando o passo dele vira o ativo. */
+function armTrajectory(): (step: HTMLElement) => void {
+  const section = document.querySelector<HTMLElement>('[data-trajectory]');
+  if (!section) return () => {};
+
+  section.querySelectorAll<HTMLElement>('[data-trajectory-item]').forEach((item) => settled.add(item));
+  const switchYear = makeYearSwitch(section.querySelector<HTMLElement>('[data-trajectory-year]'));
+
+  return (step) => {
+    const item = step.matches('[data-trajectory-item]')
+      ? step
+      : step.querySelector<HTMLElement>('[data-trajectory-item]');
+    if (item) switchYear(readYear(item));
+  };
 }
 
 /* -------------------------------------------------------------------------
@@ -632,43 +488,6 @@ function initPipeline(): void {
         armed = true;
         if (inView.isActive) pulse.play();
       }),
-  });
-}
-
-/* -------------------------------------------------------------------------
-   Processo
-   ------------------------------------------------------------------------- */
-
-/**
- * Empilhamento dos quatro cartões.
- *
- * Decisão: o pin fica com o CSS (`position: sticky`) e o JS só encolhe o
- * cartão de baixo enquanto o próximo sobe. Quatro `ScrollTrigger` com
- * `pin` + `pinSpacing: false` encadeados dependem de os quatro se medirem na
- * ordem certa e brigam com o `refresh()` que roda depois das fontes; o sticky
- * já resolve o empilhamento sozinho, sem JS, e o scrub só acrescenta a
- * profundidade. É a versão que degrada para "cartões normais" em vez de
- * "cartões sobrepostos no lugar errado".
- */
-function stackProcessCards(): void {
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-process-card]'));
-  if (cards.length < 2) return;
-
-  cards.forEach((card, index) => {
-    const next = cards[index + 1];
-    if (!next) return;
-    gsap.to(card, {
-      scale: 0.94,
-      ease: 'none',
-      transformOrigin: 'center top',
-      scrollTrigger: {
-        trigger: next,
-        start: 'top 85%',
-        end: 'top 30%',
-        scrub: true,
-        invalidateOnRefresh: true,
-      },
-    });
   });
 }
 
@@ -802,44 +621,45 @@ function initCursor(): void {
    Entrada
    ------------------------------------------------------------------------- */
 
-/**
- * O que vale nos dois breakpoints. Roda depois dos pins, porque os reveals
- * precisam saber se o alvo viaja dentro de um trilho para escolher entre o
- * eixo vertical e o horizontal.
- */
-function initShared(tracks: Track[]): void {
+/** O que vale nos dois regimes. Roda depois do que é específico de cada um. */
+function initShared(): void {
   const contactHeading = document.querySelector<HTMLElement>('[data-contact] h2');
 
-  initReveals(tracks, contactHeading);
-  initMarks(tracks);
-  initCounters(tracks);
+  initReveals(contactHeading);
+  initMarks();
+  initCounters();
   initLabCards();
   initPipeline();
   initContact(contactHeading);
 }
 
-export function initSections(gate: MotionGate): void {
+export function initSections(gate: MotionGate, engine: ChapterEngine | null): void {
   // Gate negado: o CSS nunca escondeu nada e não há o que revelar.
   if (!gate.motion) return;
 
   const mm = gsap.matchMedia();
 
-  mm.add(DESKTOP, () => {
-    build(() => {
-      const tracks: Track[] = [];
-      pinSystems(tracks);
-      scrollTrajectory();
-      initShared(tracks);
-      stackProcessCards();
-    });
-  });
+  // Um contexto só, com a condição como variável: cruzar a media query
+  // reverte tudo e reconstrói no outro regime, sem buraco entre os dois.
+  mm.add({ chapters: CHAPTER_MEDIA, always: 'all' }, (context) => {
+    const chapterMode = Boolean(engine && context.conditions?.chapters);
 
-  mm.add(MOBILE, () => {
     build(() => {
-      // Nenhum pin: trilho horizontal em tela estreita é overflow garantido.
-      stackSystemPanels();
-      scrollTrajectory();
-      initShared([]);
+      if (engine && chapterMode) {
+        const focusSystemPanel = armSystemPanels();
+        const switchTrajectory = armTrajectory();
+        initSteps(engine, {
+          onRevealed: (el) => settled.add(el),
+          onStepActive: (step) => {
+            if (step.matches('[data-system-panel]')) focusSystemPanel(step);
+            switchTrajectory(step);
+          },
+        });
+      } else {
+        stackSystemPanels();
+        scrollTrajectory();
+      }
+      initShared();
     });
   });
 

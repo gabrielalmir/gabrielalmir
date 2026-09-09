@@ -13,8 +13,29 @@ precision mediump float;
 uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uMouse;
-uniform float uScroll;
+/* Capítulo atual, contínuo: 2.4 é "entre o terceiro e o quarto". Suavizado
+   em JS, para a tinta mudar de humor sem pular. */
+uniform float uAct;
 uniform float uReveal;
+
+/* O humor de cada ato: (limiar da aguada, escala do warp, deslocamento do
+   drift, força do azul). Limiar mais alto = menos tinta. Interpolado entre
+   atos vizinhos por `fract(uAct)`. GLSL ES 1.0 não indexa const array com
+   índice dinâmico de forma confiável, daí a cadeia de ifs. */
+vec4 actParams(float act) {
+  if (act < 0.5) return vec4(0.66, 2.1, 0.0, 1.00);
+  if (act < 1.5) return vec4(0.64, 2.4, 1.0, 0.90);
+  if (act < 2.5) return vec4(0.62, 1.6, 2.0, 1.00);
+  if (act < 3.5) return vec4(0.66, 2.8, 3.0, 0.80);
+  if (act < 4.5) return vec4(0.70, 3.2, 4.0, 1.10);
+  if (act < 5.5) return vec4(0.72, 2.0, 5.0, 0.70);
+  return vec4(0.76, 1.8, 6.0, 0.60);
+}
+
+vec4 mood() {
+  float base = floor(uAct);
+  return mix(actParams(base), actParams(base + 1.0), fract(uAct));
+}
 
 /* highp: com o default em mediump (fp16 no mobile), vUv não distingue dois
    pixels vizinhos numa tela grande e o campo ganha degrau. */
@@ -43,6 +64,14 @@ const vec4 SPLAT_D = vec4(0.822, 0.700, 0.38, 0.0064);
 const vec4 SPLAT_E = vec4(0.247, 0.253, 0.51, 0.0110);
 const vec4 SPLAT_F = vec4(0.203, 0.191, 0.64, 0.0042);
 const vec4 SPLAT_G = vec4(0.302, 0.308, 0.78, 0.0056);
+
+/* Cada respingo pertence a um ato e só aparece nele: a chapa daquele
+   capítulo já traz o seu terracota, e a regra é um vermelho por tela. Os
+   três primeiros ficam com o hero (onde a chapa deixa o respingo à esquerda,
+   longe do retrato); os outros se espalham pelos atos mais vazios. */
+float actMask(float act) {
+  return 1.0 - smoothstep(0.35, 0.65, abs(uAct - act));
+}
 
 /* O caminho do ruído roda em highp mesmo com o default em mediump: onde
    mediump vira fp16 (mobile, Apple), o fract de um produto grande devolve
@@ -82,7 +111,7 @@ highp float fbm(highp vec2 p) {
 /* Um respingo. A geometria dele roda em highp: o raio ao quadrado do menor
    respingo é ~4e-5, subnormal em fp16, e um driver que zera subnormais faria
    os menores sumirem de vez. */
-float splatter(highp vec2 uv, float aspect, vec4 splat) {
+float splatter(highp vec2 uv, float aspect, vec4 splat, float act) {
   highp vec2 d = vec2((uv.x - splat.x) * aspect, uv.y - splat.y);
   highp float dist2 = dot(d, d);
 
@@ -102,7 +131,7 @@ float splatter(highp vec2 uv, float aspect, vec4 splat) {
 
   /* Monotônico em uReveal, que só cresce: cada respingo aparece uma vez e
      depois fica. Nada aqui volta atrás. */
-  float landed = smoothstep(splat.z, splat.z + 0.12, uReveal);
+  float landed = smoothstep(splat.z, splat.z + 0.12, uReveal) * act;
   float radius = splat.w * (0.55 + 0.45 * landed);
   return landed * (1.0 - smoothstep(radius * 0.42, radius, dist * wobble));
 }
@@ -114,7 +143,9 @@ void main() {
      estreita, dividir só pela altura deixaria uma mancha só ocupando o hero
      inteiro, e a cobertura de tinta despencava conforme a proporção. */
   highp float span = min(aspect, 1.0);
-  highp vec2 p = vec2(vUv.x * aspect, vUv.y - uScroll * 0.6) / span;
+  vec4 m = mood();
+  /* Um movimento de câmera por capítulo: o domínio desliza 0.35 por ato. */
+  highp vec2 p = vec2(vUv.x * aspect, vUv.y - uAct * 0.35) / span;
 
   /* O mouse puxa o domínio inteiro para si com uma gaussiana larga: é um
      empurrão no campo, não um pincel com borda visível. */
@@ -125,13 +156,13 @@ void main() {
      em círculo em vez de reto: assim ele fica limitado, o ruído nunca sai da
      faixa bem condicionada, e o campo vagueia em vez de escorrer para sempre
      numa direção só. O período fecha exatamente em ink-field.ts. */
-  highp float angle = uTime * 0.01875;
+  highp float angle = uTime * 0.01875 + m.z;
   highp vec2 drift = vec2(cos(angle), sin(angle)) * 1.6;
 
   /* Domain warping. É o que dá a borda de papel molhado; sem ele o fbm
      entrega nuvem, não aguada. O deslocamento é anisotrópico de propósito —
      água corre numa direção. */
-  highp float warp = fbm(p * 2.1 - drift * 1.4) - 0.44;
+  highp float warp = fbm(p * m.y - drift * 1.4) - 0.44;
   highp vec2 q = p + vec2(warp, warp * -0.7) * 0.7;
 
   /* Duas escalas separadas: a baixa decide ONDE tem tinta, a alta rasga a
@@ -144,12 +175,13 @@ void main() {
      anterior espalhava aguada por metade da tela e o hero virava neblina atrás
      do texto. Cortando mais alto, o pigmento fica em poucas poças e o preto
      volta a ser o fundo — que é o que a paleta pede. */
-  float wash = smoothstep(0.66, 0.78, ink);
+  float thr = m.x;
+  float wash = smoothstep(thr, thr + 0.12, ink);
   /* Só a poça mais carregada chega perto do blue-wash cheio. */
-  float core = smoothstep(0.78, 0.88, ink);
+  float core = smoothstep(thr + 0.12, thr + 0.22, ink);
   /* Acúmulo de pigmento na borda da aguada: é esse anel que faz a mancha
      parecer molhada em vez de um gradiente. */
-  float rim = smoothstep(0.58, 0.63, ink) - smoothstep(0.63, 0.74, ink);
+  float rim = smoothstep(thr - 0.08, thr - 0.03, ink) - smoothstep(thr - 0.03, thr + 0.08, ink);
 
   /* Vinheta: o hero escreve por cima, as bordas têm que cair. */
   float radial = length((vUv - 0.5) * vec2(1.06, 1.0));
@@ -157,7 +189,7 @@ void main() {
 
   /* A lavagem fina puxa para o cinza; mesmo a mais carregada continua
      diluída — blue-wash aqui é o teto, não a cor. */
-  vec3 pigment = mix(BLUE_WASH * 0.50, BLUE_WASH * 0.92, wash);
+  vec3 pigment = mix(BLUE_WASH * 0.50, BLUE_WASH * 0.92, wash) * m.w;
 
   vec3 color = mix(INK_950, INK_900, smoothstep(0.30, 0.62, ink));
   /* Todas as misturas caíram para cerca de metade da força. O campo é textura
@@ -167,16 +199,19 @@ void main() {
   color = mix(color, BLUE_WASH * 0.42, rim * vignette * 0.11);
   color = mix(color, INK_950, (1.0 - vignette) * 0.80);
 
-  float red = splatter(vUv, aspect, SPLAT_A);
-  red += splatter(vUv, aspect, SPLAT_B);
-  red += splatter(vUv, aspect, SPLAT_C);
-  red += splatter(vUv, aspect, SPLAT_D);
-  red += splatter(vUv, aspect, SPLAT_E);
-  red += splatter(vUv, aspect, SPLAT_F);
-  red += splatter(vUv, aspect, SPLAT_G);
+  float red = splatter(vUv, aspect, SPLAT_A, actMask(0.0));
+  red += splatter(vUv, aspect, SPLAT_B, actMask(0.0));
+  red += splatter(vUv, aspect, SPLAT_C, actMask(0.0));
+  red += splatter(vUv, aspect, SPLAT_D, actMask(4.0));
+  red += splatter(vUv, aspect, SPLAT_E, actMask(2.0));
+  red += splatter(vUv, aspect, SPLAT_F, actMask(5.0));
+  red += splatter(vUv, aspect, SPLAT_G, actMask(3.0));
   /* A vinheta só abafa os respingos, não os apaga: um respingo na borda ainda
      precisa ser visto. */
   color = mix(color, RED_BRIGHT, clamp(red, 0.0, 1.0) * (0.5 + 0.5 * vignette));
 
-  gl_FragColor = vec4(color, 1.0);
+  /* O canvas fica sobre a chapa em CSS: onde a aguada não chega, o preto é
+     transparente e a chapa aparece. Alfa pré-multiplicado. */
+  float alpha = clamp(wash * vignette * 0.9 + core * 0.4 + rim * 0.5 + clamp(red, 0.0, 1.0), 0.0, 1.0);
+  gl_FragColor = vec4(color * alpha, alpha);
 }

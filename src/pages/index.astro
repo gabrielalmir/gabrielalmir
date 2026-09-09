@@ -15,6 +15,8 @@ import Trajectory from '../components/Trajectory.astro';
 import AISystems from '../components/AISystems.astro';
 import Process from '../components/Process.astro';
 import Contact from '../components/Contact.astro';
+import Stage from '../components/Stage.astro';
+import ChapterNav from '../components/ChapterNav.astro';
 import { contact, site } from '../lib/content';
 
 const all = await getCollection('systems');
@@ -45,6 +47,10 @@ const personLd = {
     type="application/ld+json"
     is:inline
     set:html={JSON.stringify(personLd)}></script>
+
+  {/* O palco vem antes das seções: é o fundo de todas elas. */}
+  <Stage />
+  <ChapterNav />
 
   <Hero />
   <Proofs />

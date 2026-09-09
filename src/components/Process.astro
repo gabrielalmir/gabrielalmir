@@ -1,11 +1,10 @@
 ---
 /**
- * Processo — os quatro passos como cartões que se empilham.
+ * Processo — os quatro passos, um por tela.
  *
- * O empilhamento é CSS puro: `position: sticky` com `top` escalonado por card.
- * Assim ele já funciona (de forma degradada) antes do GSAP entrar, e some
- * inteiro fora de `.motion-ready` — sem motion são quatro blocos normais.
- * A partir de `md` só porque em tela curta o pin esconderia texto atrás do nav.
+ * No modo capítulos (ver global.css) cada cartão é um passo do capítulo e
+ * ocupa o palco sozinho; fora dele — sem JS, reduced-motion, mobile — são
+ * quatro blocos normais, empilhados, com borda.
  */
 import { Image } from 'astro:assets';
 // Alias para não sombrear o global `process` do Node dentro do frontmatter.
@@ -17,10 +16,15 @@ import Stroke from './marks/Stroke.astro';
 <section
   id="processo"
   data-process
+  data-chapter
+  data-chapter-title="Processo"
+  data-steps={String(processSection.steps.length + 1)}
+  style={`--steps: ${processSection.steps.length + 1}; --plate: var(--plate-6)`}
   aria-labelledby="processo-titulo"
   class="bg-ink-900 py-28 md:py-40"
 >
-  <div class="u-shell">
+  <div data-chapter-stage>
+  <div data-step class="u-shell">
     <header class="max-w-3xl" data-reveal-group>
       <p class="u-label text-blue-bright" data-reveal>{processSection.kicker}</p>
       <h2 id="processo-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
@@ -42,15 +46,17 @@ import Stroke from './marks/Stroke.astro';
         class="u-inked h-[clamp(10rem,26vw,20rem)] w-full object-cover object-[center_28%] opacity-40"
       />
     </figure>
+  </div>
 
-    {/* Container em bloco: o sticky de cada card precisa de irmãos diretos altos. */}
-    <div class="mt-16 space-y-6 md:mt-24 md:space-y-10">
+    {/* Um passo por cartão: no modo capítulos cada um ocupa a tela; fora dele
+        são quatro blocos empilhados. */}
+    <div class="u-shell mt-16 space-y-6 md:mt-24 md:space-y-10">
       {
-        processSection.steps.map((step, i) => (
+        processSection.steps.map((step) => (
           <article
             data-process-card
-            style={`--i: ${i}`}
-            class="relative overflow-hidden border border-ink-700 bg-ink-850 px-7 py-10 md:px-14 md:py-16"
+            data-step
+            class="process-card relative overflow-hidden border border-ink-700 bg-ink-850 px-7 py-10 md:px-14 md:py-16"
           >
             <span
               aria-hidden="true"
@@ -76,11 +82,17 @@ import Stroke from './marks/Stroke.astro';
 </section>
 
 <style>
-  /* `.motion-ready` está no <html>, fora do escopo do componente. */
+  /* No modo capítulos o cartão vira a tela inteira: a borda e o fundo do
+     bloco sobram, e o conteúdo se alinha ao shell como as outras seções.
+     `.motion-ready` está no <html>, fora do escopo do componente. */
   @media (min-width: 768px) {
-    :global(html.motion-ready) [data-process-card] {
-      position: sticky;
-      top: calc(8rem + var(--i) * 1.5rem);
+    :global(html.motion-ready.chapters) .process-card {
+      border: 0;
+      background-color: transparent;
+      padding-inline: var(--spacing-gutter);
+      max-width: 84rem;
+      margin-inline: auto;
+      width: 100%;
     }
   }
 </style>

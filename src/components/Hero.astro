@@ -36,23 +36,19 @@ const portraitAlt =
 <section
   id="inicio"
   data-hero
+  data-chapter
+  data-chapter-title="Início"
+  data-steps="1"
+  style="--steps: 1; --plate: var(--plate-1)"
   aria-labelledby="hero-title"
-  class="relative isolate flex min-h-[calc(100svh-var(--nav-height))] flex-col justify-between overflow-hidden bg-ink-900 pt-8 pb-6 md:pt-10 md:pb-8"
+  class="relative isolate flex min-h-[calc(100svh-var(--nav-height))] flex-col overflow-hidden bg-ink-900"
 >
   {/*
-    A cena Three nasce transparente e é o JS que a revela: assim ninguém vê
-    o canvas meio pintado no primeiro quadro, nem um retângulo vazio quando
-    o gate nega WebGL e a montagem nunca acontece.
+    O fundo do hero é o palco (Stage.astro) no modo capítulos e a chapa em
+    `--plate` fora dele — a seção não tem mais canvas próprio.
   */}
-  <canvas
-    data-hero-canvas
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-    style="opacity: 0"></canvas>
-
-  {/* O fundo estático nasce visível; é o JS que o apaga quando a cena monta. */}
-  <div data-hero-fallback aria-hidden="true" class="pointer-events-none absolute inset-0 -z-20"></div>
-
+  <div data-chapter-stage class="flex flex-1 flex-col">
+  <div data-step class="flex flex-1 flex-col justify-between pt-8 pb-6 md:pt-10 md:pb-8">
   <div class="u-shell relative flex flex-1 items-center">
     <div class="grid w-full items-center gap-y-10 md:grid-cols-12 md:gap-x-10 lg:gap-x-16">
       <div class="relative z-10 col-start-1 row-start-1 md:col-span-7">
@@ -83,7 +79,7 @@ const portraitAlt =
                 class:list={[
                   'inline-flex items-center gap-2.5 px-6 py-4 u-label transition-colors duration-300',
                   action.primary
-                    ? 'bg-paper text-ink-950 hover:bg-blue-bright'
+                    ? 'hero-cta-ring bg-paper text-ink-950 hover:bg-blue-bright'
                     : 'border u-hairline text-paper hover:border-blue hover:text-blue-bright',
                 ]}
               >
@@ -144,6 +140,8 @@ const portraitAlt =
     </p>
     <span aria-hidden="true" class="h-px flex-1 bg-ink-700"></span>
   </div>
+  </div>
+  </div>
 </section>
 
 <style is:global>
@@ -165,30 +163,11 @@ const portraitAlt =
      escopo do Astro nunca casaria com o seletor. Os alvos são os data-* do
      hero, que não existem em nenhuma outra seção. */
 
-  /* Fundo de quem não tem WebGL: nanquim diluído em água, sem um pixel de JS. */
-  /*
-   * O campo atrás do hero.
-   *
-   * Antes eram três camadas a 6–13% sobre ink-950, e uma delas era um
-   * `conic-gradient` — que desenhava uma diagonal dura atravessando a tela e
-   * deixava o resto na penumbra. Agora são duas lavagens macias sobre ink-900,
-   * mais fortes e posicionadas onde importa: uma acende atrás do headline,
-   * outra atrás da chapa do retrato. O fundo é escuro porque o site é escuro,
-   * não porque falta luz nele.
-   */
-  [data-hero-fallback] {
-    background-color: var(--color-ink-900);
-    background-image:
-      radial-gradient(
-        86% 72% at 12% 0%,
-        color-mix(in oklab, var(--color-blue-wash) 30%, transparent) 0%,
-        transparent 66%
-      ),
-      radial-gradient(
-        70% 66% at 92% 58%,
-        color-mix(in oklab, var(--color-blue) 26%, transparent) 0%,
-        transparent 68%
-      );
+  /* O CTA primário vira um anel — o único lugar do site onde o botão é
+     redondo, e é o gesto que a referência cinematográfica pede na abertura. */
+  [data-hero-actions] .hero-cta-ring {
+    border-radius: 9999px;
+    padding-inline: 1.75rem;
   }
 
   /* Registrado para o motion poder interpolar o número em vez de trocá-lo de

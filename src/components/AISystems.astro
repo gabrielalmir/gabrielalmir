@@ -44,8 +44,18 @@ const connectors = [
 const lastPractice = aiSection.practices.length - 1;
 ---
 
-<section id="ia" data-ai aria-labelledby="ia-titulo" class="bg-ink-950 py-28 md:py-40">
-  <div class="u-shell">
+<section
+  id="ia"
+  data-ai
+  data-chapter
+  data-chapter-title="IA"
+  data-steps="2"
+  style="--steps: 2; --plate: var(--plate-5)"
+  aria-labelledby="ia-titulo"
+  class="bg-ink-950 py-28 md:py-40"
+>
+  <div data-chapter-stage>
+  <div data-step class="u-shell">
     <header data-reveal-group>
       <p data-reveal class="u-label text-ink-300">{aiSection.kicker}</p>
 
@@ -73,6 +83,7 @@ const lastPractice = aiSection.practices.length - 1;
       abaixo. É mais confiável e ainda dá nó a nó, com nota e ordem.
     */}
     <div
+      data-scroll-inside
       class="mt-20 overflow-x-auto md:mt-28"
       tabindex="0"
       role="group"
@@ -143,7 +154,9 @@ const lastPractice = aiSection.practices.length - 1;
         }
       </svg>
     </div>
+  </div>
 
+  <div data-step class="u-shell">
     <div class="u-hairline mt-24 grid border-t md:mt-32 md:grid-cols-3">
       {
         aiSection.practices.map((practice, index) => (
@@ -162,5 +175,6 @@ const lastPractice = aiSection.practices.length - 1;
         ))
       }
     </div>
+  </div>
   </div>
 </section>
