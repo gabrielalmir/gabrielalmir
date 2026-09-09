@@ -212,8 +212,6 @@ function initMarks(): void {
 
 function initCounters(): void {
   document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
-    if (settled.has(el)) return;
-
     const to = Number.parseFloat(el.dataset.countTo ?? '');
     if (!Number.isFinite(to)) return;
     const from = Number.parseFloat(el.dataset.countFrom ?? '') || 0;
@@ -222,6 +220,18 @@ function initCounters(): void {
     const write = (value: number) => {
       el.textContent = `${prefix}${Math.round(value)}${suffix}`;
     };
+    // O texto não é propriedade animada: o revert do matchMedia desfaz a tween
+    // mas não devolve o "−90%" ao DOM. Quem já contou volta escrito, e quem foi
+    // interrompido no meio termina escrito — a prova nunca fica em −0%.
+    const settle = () => {
+      settled.add(el);
+      write(to);
+    };
+
+    if (settled.has(el)) {
+      write(to);
+      return;
+    }
 
     ScrollTrigger.create({
       trigger: el,
@@ -239,6 +249,8 @@ function initCounters(): void {
           ease: 'power2.out',
           snap: { v: 1 },
           onUpdate: () => write(counter.v),
+          onComplete: settle,
+          onInterrupt: settle,
         });
       },
     });
