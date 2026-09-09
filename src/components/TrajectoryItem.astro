@@ -93,5 +93,32 @@ const isIcon = item.image === ICON_IMAGE;
     :global(html.motion-ready.chapters) [data-trajectory-item][data-step] > span[aria-hidden]:first-child {
       display: none;
     }
+
+    /*
+     * Os itens de grade (formação e presença pública) num capítulo: o grupo
+     * inteiro tem UMA tela, então as duas fileiras viram uma só e a foto vira
+     * tarja. Empilhados — sem JS, no celular — eles voltam ao cartão alto de
+     * sempre, com a imagem em tamanho de leitura.
+     */
+    :global(html.motion-ready.chapters) [data-trajectory-item]:not([data-step]) {
+      padding-bottom: 0;
+    }
+
+    :global(html.motion-ready.chapters) [data-trajectory-item]:not([data-step]) figure {
+      margin-top: 1rem;
+    }
+
+    :global(html.motion-ready.chapters) [data-trajectory-item]:not([data-step]) figure img {
+      height: 4.5rem;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* O ícone do PhotoGIMP é quadrado e não deve ser esticado como foto. */
+    :global(html.motion-ready.chapters) [data-trajectory-item]:not([data-step]) figure img.size-16 {
+      height: 3rem;
+      width: 3rem;
+      object-fit: contain;
+    }
   }
 </style>

@@ -40,8 +40,8 @@ export const nav = [
  *
  * Fonte única para três coisas que precisam concordar: o `id` de cada seção,
  * os pontos da navegação lateral e o marcador "Capítulo 03 / Sistemas". O
- * `plate` é a chapa de tinta que fica atrás do capítulo (src/assets/stage);
- * Processo e Contato dividem a mesma, porque a tinta assenta nos dois.
+ * `plate` é a chapa de luz que fica atrás do capítulo (src/lib/plates.ts);
+ * Processo e Contato dividem a mesma, porque o arco de cor já fechou nos dois.
  */
 export const chapters = [
   { id: 'inicio', title: 'Início', plate: 1 },

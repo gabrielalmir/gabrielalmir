@@ -79,10 +79,10 @@ const groups: readonly Group[] = [
 // Estado inicial do ano de fundo. Daqui em diante quem escreve é o motion.
 const firstYear = trajectory.career[0].year;
 
-// A carreira é o único grupo com um passo por item; os outros dois dividem o
-// último passo. O total é o que o capítulo mede em telas.
+// A carreira tem um passo por etapa; formação e presença pública levam um
+// passo cada. O total é o que o capítulo mede em telas.
 const [career, ...rest] = groups;
-const steps = 1 + career.items.length + 1;
+const steps = 1 + career.items.length + rest.length;
 ---
 
 <section
@@ -128,11 +128,10 @@ const steps = 1 + career.items.length + 1;
       </ol>
     </div>
 
-    {/* Formação e presença pública dividem o último passo. */}
-    <div data-step class="u-shell">
+    {/* Um passo por grupo: juntos eles mediam quase o dobro de uma tela. */}
     {
       rest.map((group) => (
-        <div class="mt-20 md:mt-28">
+        <div data-step class="u-shell">
           <h3 class="u-display text-3xl text-paper sm:text-4xl">{group.title}</h3>
 
           {group.quoteNote && (
@@ -144,13 +143,14 @@ const steps = 1 + career.items.length + 1;
           )}
 
           <div class={group.wrapClass}>
-            <ol class={group.listClass}>
+            {/* `--cols` só é lido no modo capítulos, onde a grade vira uma
+                fileira única para o grupo caber numa tela. */}
+            <ol class={group.listClass} style={`--cols: ${group.items.length}`}>
               {group.items.map((item) => <TrajectoryItem item={item} itemClass={group.itemClass} />)}
             </ol>
           </div>
         </div>
       ))
     }
-    </div>
   </div>
 </section>

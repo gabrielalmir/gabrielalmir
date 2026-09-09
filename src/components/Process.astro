@@ -1,16 +1,24 @@
 ---
 /**
- * Processo — os quatro passos, um por tela.
+ * Processo — o método em duas telas.
  *
- * No modo capítulos (ver global.css) cada cartão é um passo do capítulo e
- * ocupa o palco sozinho; fora dele — sem JS, reduced-motion, mobile — são
- * quatro blocos normais, empilhados, com borda.
+ * Eram cinco passos (um cabeçalho e um cartão por tela), e cinco passos são
+ * cinco gestos de rolagem para dizer quatro palavras: o capítulo media
+ * `5 × 100svh` e virou o trecho mais arrastado da home. Agora são dois — o
+ * cabeçalho, já mostrando os quatro numerais como sumário, e os quatro
+ * cartões juntos numa grade.
+ *
+ * O que faz a divisão é o `data-steps`: src/motion/steps.ts lê o atributo e
+ * monta a timeline sozinho, e global.css deriva a altura do capítulo dele.
+ * Fora do modo capítulos — sem JS, reduced-motion, mobile — tudo empilha.
  */
 import { Image } from 'astro:assets';
 // Alias para não sombrear o global `process` do Node dentro do frontmatter.
 import { process as processSection } from '../lib/content';
 import { figureImages } from '../lib/images';
 import Stroke from './marks/Stroke.astro';
+
+const STEPS = 2;
 ---
 
 <section
@@ -18,81 +26,147 @@ import Stroke from './marks/Stroke.astro';
   data-process
   data-chapter
   data-chapter-title="Processo"
-  data-steps={String(processSection.steps.length + 1)}
-  style={`--steps: ${processSection.steps.length + 1}; --plate: var(--plate-6)`}
+  data-steps={String(STEPS)}
+  style={`--steps: ${STEPS}; --plate: var(--plate-6)`}
   aria-labelledby="processo-titulo"
   class="bg-ink-900 py-28 md:py-40"
 >
   <div data-chapter-stage>
-  <div data-step class="u-shell">
-    <header class="max-w-3xl" data-reveal-group>
-      <p class="u-label text-blue-bright" data-reveal>{processSection.kicker}</p>
-      <h2 id="processo-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
-        {processSection.title}
-      </h2>
-      <p class="mt-8 max-w-2xl text-ink-300" data-reveal>{processSection.lead}</p>
-    </header>
+    <div data-step class="u-shell">
+      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-x-10">
+        <div class="lg:col-span-7">
+          <header data-reveal-group>
+            <p class="u-label text-blue-bright" data-reveal>{processSection.kicker}</p>
+            <h2 id="processo-titulo" class="u-display text-section mt-6 text-paper" data-reveal>
+              {processSection.title}
+            </h2>
+            <p class="mt-8 max-w-2xl text-ink-300" data-reveal>{processSection.lead}</p>
+          </header>
 
-    {/* Faixa de textura entre o cabeçalho e os cards: respiro, não ilustração de apoio. */}
-    <figure class="mt-16 overflow-hidden border-y border-ink-800 md:mt-24" data-reveal>
-      <Image
-        src={figureImages.process}
-        alt="Ilustração: retrato de Gabriel Almir a grafite sobre uma colagem de papéis rasgados, com arcos a lápis e recortes geométricos em azul e laranja."
-        widths={[640, 960, 1200]}
-        sizes="(min-width: 84rem) 84rem, 100vw"
-        format="avif"
-        loading="lazy"
-        decoding="async"
-        class="u-inked h-[clamp(10rem,26vw,20rem)] w-full object-cover object-[center_28%] opacity-40"
-      />
-    </figure>
-  </div>
-
-    {/* Um passo por cartão: no modo capítulos cada um ocupa a tela; fora dele
-        são quatro blocos empilhados. */}
-    <div class="u-shell mt-16 space-y-6 md:mt-24 md:space-y-10">
-      {
-        processSection.steps.map((step) => (
-          <article
-            data-process-card
-            data-step
-            class="process-card relative overflow-hidden border border-ink-700 bg-ink-850 px-7 py-10 md:px-14 md:py-16"
+          {/* O sumário: os quatro passos já nomeados aqui, para o cabeçalho não
+              ser uma tela que só promete. `aria-hidden` porque a lista de
+              verdade, com os textos, vem no passo seguinte — anunciar as duas
+              seria ler o mesmo método duas vezes. */}
+          <ol
+            aria-hidden="true"
+            class="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-ink-800 pt-8 md:mt-12"
+            data-reveal
           >
-            <span
-              aria-hidden="true"
-              class="u-display text-numeral pointer-events-none absolute -top-3 right-4 text-ink-500 select-none md:right-10"
-            >
-              {step.n}
-            </span>
+            {
+              processSection.steps.map((step) => (
+                <li class="flex items-baseline gap-3">
+                  <span class="u-label text-ink-500">{step.n}</span>
+                  <span class="u-display text-2xl text-ink-300">{step.title}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
 
-            {/* `relative` sem z-index: por vir depois no DOM, o texto já pinta sobre o numeral. */}
-            <div class="relative max-w-2xl">
-              <Stroke class="h-auto w-20 text-blue md:w-28" />
-              <h3 class="u-display mt-6 text-4xl text-paper md:text-5xl">
-                <span class="sr-only">Passo {step.n}. </span>
-                {step.title}
-              </h3>
-              <p class="mt-4 max-w-[52ch] text-ink-300">{step.body}</p>
-            </div>
-          </article>
-        ))
-      }
+        {/*
+          A ilustração inteira, na proporção em que foi desenhada. Ela era uma
+          faixa de `h-[clamp(10rem,26vw,20rem)]` com `object-cover`: em qualquer
+          altura, o corte caía numa fatia horizontal do rosto — dois olhos e
+          nada mais. Ao lado do texto ela cabe sem corte nenhum.
+
+          Sem `u-inked`, que é o utilitário usado nas outras figuras: ele aplica
+          `mix-blend-mode: luminosity`, e sobre o preto quase puro deste fundo a
+          ilustração simplesmente desaparecia. A dessaturação aqui é filtro.
+        */}
+        <figure class="hidden lg:col-span-5 lg:block" data-reveal>
+          <Image
+            src={figureImages.process}
+            alt="Ilustração: retrato de Gabriel Almir a grafite sobre uma colagem de papéis rasgados, com arcos a lápis e recortes geométricos em azul e laranja."
+            widths={[480, 720, 960]}
+            sizes="(min-width: 64rem) 34vw, 100vw"
+            format="avif"
+            loading="lazy"
+            decoding="async"
+            class="w-full opacity-80 grayscale-[0.85] contrast-[1.05] brightness-90"
+          />
+        </figure>
+      </div>
+    </div>
+
+    {/* Os quatro cartões num passo só. Empilhados fora do modo capítulos,
+        lado a lado dentro dele — onde o passo é uma tela e quatro telas
+        seguidas eram exatamente o problema. */}
+    <div data-step class="u-shell mt-16 md:mt-24">
+      <div
+        data-process-grid
+        class="grid gap-6 md:grid-cols-2 md:gap-8 xl:grid-cols-4 xl:gap-6"
+      >
+        {
+          processSection.steps.map((step) => (
+            <article
+              data-process-card
+              class="process-card relative flex h-full flex-col overflow-hidden border border-ink-700 bg-ink-850 px-7 py-10 md:px-8 md:py-10"
+            >
+              <span
+                aria-hidden="true"
+                class="u-display text-numeral pointer-events-none absolute -top-3 right-4 text-ink-500 select-none"
+              >
+                {step.n}
+              </span>
+
+              {/* `relative` sem z-index: por vir depois no DOM, o texto já pinta sobre o numeral. */}
+              <div class="relative">
+                <Stroke class="h-auto w-16 text-blue md:w-20" />
+                <h3 class="u-display mt-5 text-3xl text-paper md:text-4xl">
+                  <span class="sr-only">Passo {step.n}. </span>
+                  {step.title}
+                </h3>
+                <p class="mt-4 text-ink-300">{step.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* No modo capítulos o cartão vira a tela inteira: a borda e o fundo do
-     bloco sobram, e o conteúdo se alinha ao shell como as outras seções.
-     `.motion-ready` está no <html>, fora do escopo do componente. */
+  /* O numeral foi desenhado para um cartão que ocupava a tela inteira. Numa
+     coluna de um quarto ele encosta no título; aqui vira marca-d'água — menor,
+     mais apagado e atrás do texto, que é o papel que ele sempre teve. */
+  .process-card > span {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    opacity: 0.5;
+  }
+
+  /* No modo capítulos os quatro cartões dividem UMA tela: o numeral gigante e
+     a tipografia de cartão isolado não cabem mais, e a borda de bloco vira
+     hairline. `.motion-ready` está no <html>, fora do escopo do componente. */
   @media (min-width: 768px) {
+    :global(html.motion-ready.chapters) [data-process-grid] {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
     :global(html.motion-ready.chapters) .process-card {
-      border: 0;
       background-color: transparent;
-      padding-inline: var(--spacing-gutter);
-      max-width: 84rem;
-      margin-inline: auto;
-      width: 100%;
+      border-width: 0;
+      /* Só o filete à esquerda: quatro caixas fechadas lado a lado leem como
+         tabela de preços, quatro colunas separadas por um traço leem como
+         etapas de um método. */
+      border-left-width: 1px;
+      padding: 0 0 0 1.25rem;
+    }
+
+    :global(html.motion-ready.chapters) .process-card > span {
+      position: static;
+      display: block;
+      font-size: clamp(2.5rem, 5vh, 4rem);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  /* Janela baixa: o traço decorativo é a primeira coisa a sair. */
+  @media (min-width: 768px) and (max-height: 860px) {
+    :global(html.motion-ready.chapters) .process-card :global(svg) {
+      display: none;
     }
   }
 </style>

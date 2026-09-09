@@ -1,14 +1,13 @@
 /**
  * O palco — a cena WebGL atrás da home inteira.
  *
- * Herdeiro do campo de tinta do hero, agora em WebGL cru (ver gl.ts): o
- * mesmo quad com o fragment de nanquim, mais uma nuvem de pontos que a
- * câmera atravessa devagar. O que muda por capítulo chega por `setAct()`:
- * um número contínuo que o loop suaviza antes de entregar aos shaders, para
- * a tinta mudar de humor sem pular.
+ * Um quad em tela cheia com o fragment do campo de luz, mais uma nuvem de
+ * pontos que a câmera atravessa devagar (ver gl.ts). O que muda por capítulo
+ * chega por `setAct()`: um número contínuo que o loop suaviza antes de
+ * entregar aos shaders, para a luz mudar de temperatura sem pular.
  *
  * A cena é enfeite: nada de conteúdo depende dela. O canvas tem alfa e fica
- * sobre a chapa em CSS — onde não há aguada, a chapa aparece.
+ * sobre a chapa em CSS — onde a luz não chega, a chapa aparece.
  */
 import { createBuffer, createProgram, getContext, QUAD } from './gl';
 import inkFragment from './shaders/ink.frag.glsl?raw';
@@ -22,13 +21,13 @@ export type StageHandle = {
   dispose(): void;
 };
 
-/** Segundos até o último respingo ter caído. */
-const REVEAL_DURATION = 2.5;
+/** Segundos até a luz estar toda acesa. */
+const REVEAL_DURATION = 1.6;
 /** Ver o comentário em ink.frag.glsl: o drift é circular e o ciclo fecha aqui. */
 const TIME_PERIOD = (Math.PI * 2) / 0.01875;
 /** Fração do caminho que o mouse suavizado cobre por quadro, a 60 Hz. */
 const MOUSE_EASING = 0.045;
-/** Idem para o ato: a tinta leva ~1 s para assentar no capítulo novo. */
+/** Idem para o ato: a luz leva ~1 s para assentar no capítulo novo. */
 const ACT_EASING = 0.06;
 /** Um quadro travado não pode empurrar o campo meio segundo de uma vez. */
 const MAX_DELTA = 0.05;
@@ -152,8 +151,8 @@ export function mountStage(canvas: HTMLCanvasElement): StageHandle {
     gl.viewport(0, 0, width, height);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
-    // Pré-multiplicado nos dois passes: a tinta "por cima" da chapa, os
-    // pontos somando luz por cima da tinta.
+    // Pré-multiplicado nos dois passes: o campo "por cima" da chapa, os
+    // pontos somando luz por cima do campo.
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     drawInk();

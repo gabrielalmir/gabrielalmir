@@ -2,7 +2,7 @@
  * O palco e o cromo dos capítulos.
  *
  * Tudo que reage ao estado do motor (src/motion/chapters.ts) e não mora
- * numa seção: a chapa de tinta atrás da página (crossfade entre duas
+ * numa seção: a chapa de luz atrás da página (crossfade entre duas
  * camadas), os pontos da navegação lateral, o marcador "Capítulo 03 /
  * Sistemas" e a cena WebGL, que só sobe se o gate permitir.
  *
@@ -122,7 +122,7 @@ async function mountScene(
   };
 
   const feed = (state: ChapterState) => {
-    // O passo dentro do capítulo adianta a tinta um pouco: a troca de humor
+    // O passo dentro do capítulo adianta a luz um pouco: a troca de humor
     // começa antes da chegada, como uma câmera que já está indo.
     handle.setAct(state.chapter + state.progress * 0.6, state.global);
   };

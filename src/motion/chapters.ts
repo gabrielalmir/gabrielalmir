@@ -29,10 +29,15 @@ gsap.registerPlugin(Observer, ScrollTrigger);
  */
 export const CHAPTER_MEDIA = '(min-width: 1024px) and (pointer: fine)';
 
-/** Quanto dura a viagem entre duas paradas, em segundos. */
-const TRAVEL = 0.9;
+/**
+ * Quanto dura a viagem entre duas paradas, em segundos. Era 0.9: bonito numa
+ * parada, cansativo em vinte — com o cooldown, cada gesto custava mais de um
+ * segundo e atravessar a home virava trabalho. 0.62 ainda lê como viagem, mas
+ * responde perto do imediato.
+ */
+const TRAVEL = 0.62;
 /** Depois de chegar, quanto tempo a roda fica surda — é o que come a inércia. */
-const COOLDOWN_MS = 160;
+const COOLDOWN_MS = 120;
 /** Um scroll de fonte externa assenta depois deste silêncio. */
 const SETTLE_MS = 160;
 

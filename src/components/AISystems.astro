@@ -49,8 +49,8 @@ const lastPractice = aiSection.practices.length - 1;
   data-ai
   data-chapter
   data-chapter-title="IA"
-  data-steps="2"
-  style="--steps: 2; --plate: var(--plate-5)"
+  data-steps="3"
+  style="--steps: 3; --plate: var(--plate-5)"
   aria-labelledby="ia-titulo"
   class="bg-ink-950 py-28 md:py-40"
 >
@@ -70,7 +70,9 @@ const lastPractice = aiSection.practices.length - 1;
         <p data-reveal class="max-w-prose text-ink-300">{aiSection.body}</p>
       </div>
     </header>
+  </div>
 
+  <div data-step class="u-shell">
     {/*
       O diagrama tem largura mínima: comprimido num celular, os rótulos de 11px
       ficariam ilegíveis. Por isso rola na horizontal dentro deste wrapper — a
@@ -84,7 +86,7 @@ const lastPractice = aiSection.practices.length - 1;
     */}
     <div
       data-scroll-inside
-      class="mt-20 overflow-x-auto md:mt-28"
+      class="pipeline-frame mt-20 overflow-x-auto md:mt-28"
       tabindex="0"
       role="group"
       aria-label="Diagrama do pipeline"

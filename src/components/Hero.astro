@@ -2,10 +2,13 @@
 /**
  * Hero — a primeira tela.
  *
- * Três camadas empilhadas: o campo de tinta em WebGL (montado só por JS), o
- * fundo estático em CSS que ele substitui, e o conteúdo. Só a terceira importa:
- * sem JS a cena nunca chega, o fundo estático nunca some e o texto já está
- * inteiro no lugar.
+ * Quatro camadas, do fundo para a frente: o campo de luz (o palco fixo, ou a
+ * chapa em `--plate` sem JS), o retrato ocupando a altura inteira à direita, o
+ * véu que segura o contraste entre os dois, e o texto por cima de tudo.
+ *
+ * A composição é de plano cinematográfico, não de grade: a headline atravessa
+ * o retrato em vez de dividir a tela com ele. Só a última camada importa —
+ * sem JS a cena nunca chega e o texto já está inteiro no lugar.
  */
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
@@ -47,11 +50,51 @@ const portraitAlt =
     O fundo do hero é o palco (Stage.astro) no modo capítulos e a chapa em
     `--plate` fora dele — a seção não tem mais canvas próprio.
   */}
-  <div data-chapter-stage class="flex flex-1 flex-col">
+  {/*
+    O retrato é a matéria do plano, não uma ilustração ao lado do texto: ele
+    ocupa a altura inteira do hero, encostado na direita, e a headline passa
+    por cima dele. Fica FORA do palco e da grade de propósito — preso a uma
+    coluna ele voltaria a ser um card com foto.
+
+    Some abaixo de `md`. Ele é claro, e atrás de um parágrafo num telefone o
+    contraste do texto passaria a variar linha a linha. Num telefone o hero é
+    a frase.
+
+    Decorativo na composição, não no conteúdo: é o rosto de quem escreve a
+    página, então mantém o `alt` de verdade e continua anunciado. O
+    `pointer-events-none` existe só para o texto por cima receber o clique.
+  */}
+  <div
+    data-hero-portrait
+    class="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[56%] md:block lg:w-[48%]"
+  >
+    <Image
+      src={figureImages.portrait}
+      alt={portraitAlt}
+      widths={[570, 760, 1100]}
+      sizes="60vw"
+      format="avif"
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="h-full w-full object-cover object-[center_30%]"
+    />
+  </div>
+
+  {/*
+    O véu entre o retrato e o texto. A headline cruza a foto agora, e o desenho
+    está sobre papel claro: sem isto a última palavra de cada linha cairia num
+    fundo quase branco. O gradiente é opaco onde o texto começa e desaparece
+    antes da borda direita, para o retrato não ficar chapado.
+  */}
+  <div aria-hidden="true" class="hero-scrim pointer-events-none absolute inset-0 z-10 hidden md:block"></div>
+
+  <div data-chapter-stage class="relative z-20 flex flex-1 flex-col">
   <div data-step class="flex flex-1 flex-col justify-between pt-8 pb-6 md:pt-10 md:pb-8">
   <div class="u-shell relative flex flex-1 items-center">
     <div class="grid w-full items-center gap-y-10 md:grid-cols-12 md:gap-x-10 lg:gap-x-16">
-      <div class="relative z-10 col-start-1 row-start-1 md:col-span-7">
+      <div class="relative z-20 col-start-1 row-start-1 md:col-span-8">
         <p data-hero-kicker class="u-label text-blue">{hero.kicker}</p>
 
         <h1 id="hero-title" data-hero-headline class="u-display mt-5 text-hero-fit text-paper italic">
@@ -99,37 +142,6 @@ const portraitAlt =
         </p>
       </div>
 
-      <div
-        data-hero-portrait
-        class="relative col-start-1 row-start-1 hidden aspect-[760/950] self-center justify-self-end md:col-span-5 md:col-start-8 md:block md:max-h-[58svh] md:w-full"
-      >
-        {/*
-          O bloco azul atrás da chapa. Ele repete a composição do próprio
-          desenho, que já tem um retângulo azul ao lado da figura, e é o que
-          costura o retrato ao resto da paleta.
-
-          A chapa some abaixo de `md`. Ela é clara, e atrás de um parágrafo num
-          telefone o contraste do texto passaria a variar linha a linha — cada
-          linha com um fundo diferente. Num telefone o hero é a frase.
-        */}
-        <span
-          aria-hidden="true"
-          class="absolute -bottom-4 -left-4 h-full w-full border border-blue/50 bg-blue/8 md:-bottom-6 md:-left-6"
-        ></span>
-
-        <Image
-          src={figureImages.portrait}
-          alt={portraitAlt}
-          widths={[380, 570, 760]}
-          sizes="38vw"
-          format="avif"
-          quality={70}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          class="relative h-full w-full object-cover object-top"
-        />
-      </div>
     </div>
   </div>
 
@@ -154,8 +166,32 @@ const portraitAlt =
    * H2 do contato, que não disputa altura com nada.
    */
   .text-hero-fit {
-    font-size: clamp(3rem, min(8.2vw, 11.2svh), 8.5rem);
-    line-height: 0.88;
+    font-size: clamp(3rem, min(9.4vw, 12.6svh), 10.5rem);
+    line-height: 0.86;
+  }
+
+  /*
+   * O véu do hero. Dois gradientes: o horizontal segura o contraste onde a
+   * headline cruza o papel claro do retrato; o vertical fecha topo e base,
+   * onde ficam a barra de navegação e a régua do rodapé.
+   */
+  .hero-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-ink-950) 0%,
+        color-mix(in oklab, var(--color-ink-950) 92%, transparent) 34%,
+        color-mix(in oklab, var(--color-ink-950) 62%, transparent) 62%,
+        color-mix(in oklab, var(--color-ink-950) 24%, transparent) 88%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--color-ink-950) 70%, transparent) 0%,
+        transparent 22%,
+        transparent 74%,
+        color-mix(in oklab, var(--color-ink-950) 80%, transparent) 100%
+      );
   }
 
   /* Global e não escopado de propósito: estas regras dependem de
@@ -182,25 +218,40 @@ const portraitAlt =
     initial-value: 1;
   }
 
-  /* A máscara vive na imagem, não no wrapper: o bloco azul é irmão dela e fica
-     PARA FORA das bordas do wrapper: mascarar o wrapper o recortaria fora. */
   [data-hero-portrait] {
     --mask-progress: 1;
   }
 
+  /*
+   * Duas máscaras compostas, uma por eixo.
+   *
+   * A vertical é a revelação: `--mask-progress` sobe de 0 a 1 e o retrato
+   * emerge de baixo para cima. A horizontal é permanente — sem ela o retrato
+   * full-bleed terminaria numa aresta reta no meio da tela, que é exatamente a
+   * cara de "imagem colada" que a composição está tentando perder. Com ela, o
+   * papel se dissolve no campo de luz.
+   *
+   * `mask-composite: intersect` (`-webkit-mask-composite: source-in` no
+   * prefixado) é o que faz as duas valerem ao mesmo tempo; sem isso a segunda
+   * simplesmente substitui a primeira.
+   */
   [data-hero-portrait] img {
-    /* Uma rampa vertical, e só. A chapa se revela de baixo para cima como
-       papel saindo da prensa — a borda dela é reta, porque é uma chapa. */
-    -webkit-mask-image: linear-gradient(
-      to top,
-      #000 calc(var(--mask-progress) * 100%),
-      transparent calc(var(--mask-progress) * 100% + 12%)
-    );
-    mask-image: linear-gradient(
-      to top,
-      #000 calc(var(--mask-progress) * 100%),
-      transparent calc(var(--mask-progress) * 100% + 12%)
-    );
+    -webkit-mask-image:
+      linear-gradient(
+        to top,
+        #000 calc(var(--mask-progress) * 100%),
+        transparent calc(var(--mask-progress) * 100% + 12%)
+      ),
+      linear-gradient(to right, transparent 0%, #000 42%, #000 100%);
+    mask-image:
+      linear-gradient(
+        to top,
+        #000 calc(var(--mask-progress) * 100%),
+        transparent calc(var(--mask-progress) * 100% + 12%)
+      ),
+      linear-gradient(to right, transparent 0%, #000 42%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;

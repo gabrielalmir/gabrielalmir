@@ -286,19 +286,52 @@
    --------------------------------------------------------------------------- */
 [data-chapter] {
   position: relative;
-  /* A chapa entra por baixo de um véu escuro: no regime estático o texto
-     fica em cima dela sem nenhum JS para ajudar. */
+  /* Três camadas, de cima para baixo: a emenda, o véu e a chapa.
+     - A EMENDA fecha em preto os primeiros e os últimos 6% da seção. Cada
+       seção tem a chapa de um ato diferente, e sem isto a troca de ato virava
+       uma linha horizontal nítida no meio da rolagem — costura aparente é o
+       oposto de transição contínua.
+     - O VÉU é o contraste do texto, que mora à esquerda.
+     - A CHAPA é a luz do ato (src/lib/plates.ts). Ela já nasce na intensidade
+       certa; o véu afrouxou quando as imagens saíram. */
   background-image:
     linear-gradient(
+      180deg,
+      var(--color-ink-950) 0%,
+      transparent 6%,
+      transparent 94%,
+      var(--color-ink-950) 100%
+    ),
+    linear-gradient(
       90deg,
-      color-mix(in oklab, var(--color-ink-950) 82%, transparent) 0%,
-      color-mix(in oklab, var(--color-ink-950) 66%, transparent) 60%,
-      color-mix(in oklab, var(--color-ink-950) 50%, transparent) 100%
+      color-mix(in oklab, var(--color-ink-950) 70%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink-950) 48%, transparent) 60%,
+      color-mix(in oklab, var(--color-ink-950) 28%, transparent) 100%
     ),
     var(--plate, none);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/*
+ * No regime estático a chapa é presa à viewport, não à seção.
+ *
+ * Com `cover` numa seção de 4000px de altura, o bloom da chapa é esticado
+ * junto e vai parar fora da tela: Sistemas e Trajetória ficavam pretas do
+ * começo ao fim enquanto as seções curtas acendiam. Preso à viewport, o campo
+ * fica do tamanho certo em qualquer seção e a rolagem atravessa a luz — que é
+ * a mesma sensação que o palco fixo dá no modo capítulos.
+ *
+ * Só a partir de 768px: `fixed` é caro de compor em telefone e o iOS ignora.
+ */
+@media (min-width: 768px) {
+  [data-chapter] {
+    /* Emenda e véu rolam com a seção — a emenda PRECISA saber onde a seção
+       começa e acaba. Só a chapa fica presa à viewport. */
+    background-attachment: scroll, scroll, fixed;
+    background-size: cover, cover, 100vw 100vh;
+  }
 }
 
 @media (min-width: 768px) {
@@ -348,12 +381,19 @@
     inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*
+     * `safe` importa: com `center` puro, um passo mais alto que a tela
+     * transborda para os DOIS lados e o topo fica inalcançável — a rolagem
+     * interna só chega ao que passou por baixo. Com `safe`, o que não cabe
+     * se alinha ao topo e continua todo alcançável.
+     */
+    justify-content: safe center;
     overflow-y: auto;
     scrollbar-width: none;
     /* A barra de navegação é fixa neste regime; o passo respira abaixo dela
-       e acima do marcador de capítulo, que é fixo no rodapé. */
-    padding-block: calc(var(--nav-height) + 1.5rem) 4.5rem;
+       e acima do marcador de capítulo, que é fixo no rodapé. Apertado de
+       propósito: cada 8px aqui é altura que o conteúdo perde na tela. */
+    padding-block: calc(var(--nav-height) + 0.75rem) 3.5rem;
     margin: 0;
     /* Hairlines e recuos que separavam os passos empilhados sobram aqui. */
     border-top-width: 0;
@@ -366,11 +406,68 @@
     pointer-events: auto;
   }
 
+  /*
+   * As margens de topo que separavam os blocos empilhados (mt-20, mt-24…)
+   * aqui só empurram o passo para baixo do próprio palco: cada passo já é
+   * uma tela, e o espaçamento vem do `justify-content`.
+   */
+  html.motion-ready.chapters [data-chapter-stage] [data-step],
+  html.motion-ready.chapters [data-chapter-stage] [data-step] > :first-child {
+    margin-top: 0;
+  }
+
+  /*
+   * Grades dentro de um passo (`--cols` vem do componente) viram uma fileira
+   * só: duas fileiras de cartões não cabem numa tela, e quebrar o grupo em
+   * dois passos partiria a lista ao meio.
+   */
+  html.motion-ready.chapters [data-chapter-stage] [data-step] ol[style*='--cols'] {
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* A nota entre o título e a grade cede folga: numa tela de 800px ela era o
+     que faltava para o grupo caber inteiro. */
+  html.motion-ready.chapters [data-chapter-stage] [data-step] blockquote {
+    margin-block: 1rem;
+  }
+
   /* O cromo que só faz sentido com capítulos: marcador e nav de pontos. */
   html.motion-ready.chapters [data-chapter-marker] {
     display: flex;
   }
 }
+
+/*
+ * Janela baixa (um notebook de 768px de tela útil, uma janela não maximizada):
+ * o capítulo continua sendo UMA tela, então o que cede é a tipografia e o
+ * respiro, não a legibilidade. Sem isto o passo transbordava ~100px e a
+ * rolagem interna aparecia no meio da leitura.
+ */
+@media (min-width: 768px) and (max-height: 860px) {
+  html.motion-ready.chapters [data-chapter-stage] [data-step] {
+    padding-block: calc(var(--nav-height) + 0.5rem) 3rem;
+    font-size: 1rem;
+  }
+
+  html.motion-ready.chapters [data-chapter-stage] [data-step] h2 {
+    font-size: clamp(2rem, 4.4vh, 3.25rem);
+  }
+
+  html.motion-ready.chapters [data-chapter-stage] [data-step] h3 {
+    font-size: clamp(1.5rem, 3.4vh, 2.25rem);
+  }
+
+  /* As margens verticais em rem foram desenhadas para uma tela alta. */
+  html.motion-ready.chapters [data-chapter-stage] [data-step] .mt-10,
+  html.motion-ready.chapters [data-chapter-stage] [data-step] .mt-14,
+  html.motion-ready.chapters [data-chapter-stage] [data-step] .mt-16,
+  html.motion-ready.chapters [data-chapter-stage] [data-step] .mt-20,
+  html.motion-ready.chapters [data-chapter-stage] [data-step] .mt-24 {
+    margin-top: 1.5rem;
+  }
+}
+
 
 [data-chapter-marker] {
   display: none;
@@ -380,9 +477,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* A chapa já sai escurecida da origem; aqui ela perde mais um pouco de
-     brilho para o texto em paper ficar acima de 7:1 sobre a aguada. */
-  filter: brightness(0.6);
+  /* Sem filtro. As chapas são geradas na intensidade exata em que devem
+     aparecer; o `brightness(0.6)` daqui era compensação para imagens que já
+     vinham escuras demais, e somado ao véu abaixo transformava o fundo em
+     lama. Quem controla o contraste do texto é o .stage-scrim. */
   transition: opacity 0.6s var(--ease-ink);
 }
 
@@ -391,16 +489,16 @@
   background:
     linear-gradient(
       90deg,
-      color-mix(in oklab, var(--color-ink-950) 74%, transparent) 0%,
-      color-mix(in oklab, var(--color-ink-950) 58%, transparent) 55%,
-      color-mix(in oklab, var(--color-ink-950) 42%, transparent) 100%
+      color-mix(in oklab, var(--color-ink-950) 62%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink-950) 40%, transparent) 55%,
+      color-mix(in oklab, var(--color-ink-950) 18%, transparent) 100%
     ),
     linear-gradient(
       180deg,
-      color-mix(in oklab, var(--color-ink-950) 55%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink-950) 45%, transparent) 0%,
       transparent 30%,
       transparent 70%,
-      color-mix(in oklab, var(--color-ink-950) 45%, transparent) 100%
+      color-mix(in oklab, var(--color-ink-950) 38%, transparent) 100%
     );
 }
 

@@ -165,6 +165,25 @@ function playIntro(
       { '--mask-progress': 1, duration: 1.4, ease: 'power2.out' },
       0.1,
     );
+
+    /*
+     * O push-in de câmera, junto com a revelação. A máscara diz de onde o
+     * retrato vem; a escala diz que existe uma câmera olhando para ele — é a
+     * diferença entre uma imagem que aparece e um plano que abre. 1.06 é
+     * pouco de propósito: acima disso o corte come o ombro.
+     *
+     * Escala a IMAGEM, não o wrapper: o wrapper carrega a máscara, e escalar
+     * quem tem máscara arrastaria a borda de dissolução junto.
+     */
+    const image = portrait.querySelector('img');
+    if (image) {
+      tl.fromTo(
+        image,
+        { scale: 1.06 },
+        { scale: 1, duration: 1.6, ease: 'power2.out' },
+        0.1,
+      );
+    }
   }
 
   // Dividir o headline mexe na altura da caixa por frações de pixel; os
@@ -183,7 +202,9 @@ function buildScrollTimeline(
     scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.6 },
   });
 
-  if (portrait) tl.to(portrait, { yPercent: 15, duration: 1 }, 0);
+  // 8%, e não 15%: o retrato agora vai de borda a borda do hero, e o que era
+  // folga numa coluna de 58svh aqui descolaria a base da imagem da tela.
+  if (portrait) tl.to(portrait, { yPercent: 8, duration: 1 }, 0);
 
   if (headline) {
     tl.to(headline, { y: -60, duration: 1 }, 0);
