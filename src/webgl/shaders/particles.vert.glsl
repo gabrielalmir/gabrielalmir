@@ -49,6 +49,6 @@ void main() {
   /* Entra e sai suave nas duas pontas da caixa: sem isto o ponto reciclado
      estala na frente da câmera. */
   float fade = smoothstep(0.0, 0.6, depth) * (1.0 - smoothstep(DEPTH - 1.5, DEPTH, depth));
-  vAlpha = fade * (0.18 + 0.32 * near);
+  vAlpha = fade * (0.10 + 0.22 * near);
   vRed = aSeed.y;
 }

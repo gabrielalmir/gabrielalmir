@@ -286,7 +286,16 @@
    --------------------------------------------------------------------------- */
 [data-chapter] {
   position: relative;
-  background-image: var(--plate, none);
+  /* A chapa entra por baixo de um véu escuro: no regime estático o texto
+     fica em cima dela sem nenhum JS para ajudar. */
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-ink-950) 82%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink-950) 66%, transparent) 60%,
+      color-mix(in oklab, var(--color-ink-950) 50%, transparent) 100%
+    ),
+    var(--plate, none);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -371,7 +380,28 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* A chapa já sai escurecida da origem; aqui ela perde mais um pouco de
+     brilho para o texto em paper ficar acima de 7:1 sobre a aguada. */
+  filter: brightness(0.6);
   transition: opacity 0.6s var(--ease-ink);
+}
+
+/* Véu sobre chapa e cena: mais fechado à esquerda, onde o texto mora. */
+.stage-scrim {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-ink-950) 74%, transparent) 0%,
+      color-mix(in oklab, var(--color-ink-950) 58%, transparent) 55%,
+      color-mix(in oklab, var(--color-ink-950) 42%, transparent) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-ink-950) 55%, transparent) 0%,
+      transparent 30%,
+      transparent 70%,
+      color-mix(in oklab, var(--color-ink-950) 45%, transparent) 100%
+    );
 }
 
 @media (prefers-reduced-motion: reduce) {

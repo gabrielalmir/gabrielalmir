@@ -37,4 +37,7 @@ const plateVars = plates.map((plate, index) => `--plate-${index + 1}:url('${plat
   <div data-stage-plate="a" class="stage-plate absolute inset-0" style="background-image: var(--plate-1)"></div>
   <div data-stage-plate="b" class="stage-plate absolute inset-0" style="background-image: var(--plate-1); opacity: 0"></div>
   <canvas data-stage-canvas class="absolute inset-0 h-full w-full" style="opacity: 0"></canvas>
+  {/* O véu: escurece o palco onde o texto mora (à esquerda e no centro),
+      para a tinta ser sentida atrás do parágrafo, não lida junto com ele. */}
+  <div data-stage-scrim class="stage-scrim absolute inset-0"></div>
 </div>
