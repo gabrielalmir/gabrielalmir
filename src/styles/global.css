@@ -269,6 +269,31 @@
 }
 
 /* ---------------------------------------------------------------------------
+   Cortina de abertura
+
+   Fora de `@layer` de propósito: precisa vencer o `grid` do Tailwind que está
+   no próprio elemento.
+
+   A cortina é a única coisa do site que nasce ESCONDIDA e é o JS que a mostra
+   — e é por isso que ela é decidida no <head>, não no bundle. Enquanto a
+   classe não existir, ela não ocupa nada; quando existe, ela já está no
+   primeiro quadro, antes de a página ter sido vista. `preloading` some por uma
+   de três vias: a timeline termina, o teto de tempo de preloader.ts vence, ou
+   o desarme do <head> conclui que o bundle não vai chegar.
+   --------------------------------------------------------------------------- */
+html:not(.preloading) [data-preloader-curtain] {
+  display: none;
+}
+
+/* A trava de scroll acompanha a classe: nada de guardar e restaurar
+   `style.overflow` no JS, que é o tipo de estado que fica para trás quando a
+   animação estoura no meio. */
+html.preloading,
+html.preloading body {
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------
    Capítulos — a home como uma sequência de telas.
 
    Sem camada (`@layer`) de propósito: as utilities do Tailwind moram numa

@@ -5,9 +5,12 @@
  * com um teto duro. Se a animação travar, o teto vence, a cortina sai do DOM e
  * o scroll volta. Roda uma vez por sessão, só no primeiro carregamento.
  *
- * O elemento já vem de Preloader.astro com `hidden`. Quem não vai ver
- * (movimento negado, ou sessão que já viu) nunca tira esse `hidden` — assim o
- * caminho sem JS e o caminho com o gate fechado são exatamente o mesmo.
+ * Quem decide se a cortina aparece é o snippet do <head>, que marca
+ * `html.preloading` antes da primeira pintura — este módulo chega tarde demais
+ * para essa decisão e, quando a tomava, a página piscava: conteúdo, cortina
+ * por cima, conteúdo de novo. Aqui só se anima o que já está na tela, e se
+ * tira a classe no fim. Quem não vai ver (movimento negado, sessão que já viu)
+ * nunca ganha a classe — o caminho sem JS e o do gate fechado são o mesmo.
  */
 import gsap from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
@@ -16,6 +19,7 @@ import type { MotionGate } from './gate';
 
 gsap.registerPlugin(MotionPathPlugin);
 
+/** A mesma chave que o snippet do <head> lê para decidir a classe. */
 const SEEN_KEY = 'ga:preloaded';
 /**
  * Teto total, do primeiro quadro até o elemento sair do DOM.
@@ -25,16 +29,6 @@ const SEEN_KEY = 'ga:preloaded';
  * a timeline não terminar, ele termina por ela.
  */
 const MAX_MS = 2600;
-
-function wasSeen(): boolean {
-  try {
-    return sessionStorage.getItem(SEEN_KEY) !== null;
-  } catch {
-    // Janela privativa lança no acesso. Sem marca, a cortina roda de novo —
-    // um enfeite repetido é menos grave que uma exceção no boot do motion.
-    return false;
-  }
-}
 
 function markSeen(): void {
   try {
@@ -71,7 +65,10 @@ function sweep(curtain: HTMLElement): GSAPTimeline {
     return tl.to(curtain, { autoAlpha: 0, duration: 0.3, ease: 'power2.inOut' });
   }
 
-  if (mark) tl.fromTo(mark, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.3 }, 0);
+  // Só a escala. Animar a opacidade daqui apagaria o papel que já está na
+  // tela desde o primeiro quadro, para reacendê-lo — um piscar no lugar de
+  // uma entrada.
+  if (mark) tl.fromTo(mark, { scale: 0.94 }, { scale: 1, duration: 0.3 }, 0);
 
   strokes.forEach((path, index) => {
     let length = 0;
@@ -128,23 +125,25 @@ function sweep(curtain: HTMLElement): GSAPTimeline {
 export async function initPreloader(gate: MotionGate): Promise<void> {
   if (typeof document === 'undefined') return;
 
+  const root = document.documentElement;
   const curtain = document.querySelector<HTMLElement>('[data-preloader-curtain]');
   if (!curtain) return;
-  if (!gate.motion || wasSeen()) return;
 
-  const root = document.documentElement;
-  const previousOverflow = root.style.overflow;
+  // A cortina não está na tela: ou o gate negou, ou a sessão já viu a abertura.
+  // O markup fica no DOM sem fazer nada; tirá-lo daqui é só limpeza.
+  if (!gate.motion || !root.classList.contains('preloading')) {
+    curtain.remove();
+    return;
+  }
 
   let timeline: gsap.core.Timeline | null = null;
   let timer = 0;
 
-  // Tudo o que trava a página entra DENTRO do try. Antes, `sweep()` era
-  // chamado depois de `overflow: hidden` e antes do `try`: se ele estourasse,
-  // o `finally` nunca rodava e a pessoa ficava com uma cortina opaca por cima
-  // e sem scroll — a falha mais cara possível, logo no primeiro quadro.
+  // Tudo o que trava a página entra DENTRO do try: se `sweep()` estourar, o
+  // `finally` ainda tira a classe. Sem isso a pessoa ficaria com uma cortina
+  // opaca por cima e sem scroll — a falha mais cara possível, logo no primeiro
+  // quadro.
   try {
-    curtain.hidden = false;
-    root.style.overflow = 'hidden';
     timeline = sweep(curtain);
 
     const settled = timeline;
@@ -158,10 +157,11 @@ export async function initPreloader(gate: MotionGate): Promise<void> {
     ]);
   } finally {
     // Roda mesmo se a animação estourar: a página nunca fica sem scroll nem
-    // com uma cortina esquecida por cima.
+    // com uma cortina esquecida por cima. A classe destrava o scroll e esconde
+    // a cortina no mesmo quadro — não há estado de `style` para restaurar.
     window.clearTimeout(timer);
     timeline?.kill();
-    root.style.overflow = previousOverflow;
+    root.classList.remove('preloading');
     curtain.remove();
     markSeen();
   }

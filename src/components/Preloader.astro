@@ -14,9 +14,12 @@
  * que um pincel de fato faz. O nariz do pincel corre pelo mesmo esqueleto, via
  * MotionPath, então ele está sempre exatamente na ponta do traço.
  *
- * Nada aqui é conteúdo: a marcação inteira nasce com `hidden` e só sai dele se
- * `src/motion/preloader.ts` decidir que há movimento liberado e que a sessão
- * ainda não viu a abertura. Sem JS, é markup morto de ~1 KB.
+ * Nada aqui é conteúdo. Quem decide se a cortina aparece é o snippet inline do
+ * <head> do Base.astro, que marca `html.preloading` antes da primeira pintura;
+ * o CSS de global.css mantém isto em `display: none` enquanto a classe não
+ * existir. Sem JS, com reduced-motion ou em sessão que já viu a abertura, é
+ * markup morto de ~1 KB — e nunca um piscar, porque a decisão não espera o
+ * bundle chegar.
  */
 const GLYPH = [
   // Perna esquerda.
@@ -44,7 +47,6 @@ const STROKES = [
   data-preloader-curtain
   aria-hidden="true"
   class="pointer-events-none fixed inset-0 z-150 grid place-items-center bg-ink-950"
-  hidden
 >
   <svg
     data-preloader-mark
@@ -65,13 +67,22 @@ const STROKES = [
       {GLYPH.map((d) => <path d={d} fill="currentColor" opacity="0.5" />)}
     </g>
 
-    {/* A tinta. O traço é grosso e a máscara é que lhe dá a forma da letra. */}
+    {/*
+      A tinta. O traço é grosso e a máscara é que lhe dá a forma da letra.
+
+      Cada traço nasce em `opacity: 0`. A cortina aparece no primeiro quadro,
+      mas o bundle que a anima chega depois: sem isto, a letra ficaria inteira
+      escrita na espera e a animação a apagaria para reescrever. Apagados, o
+      que se vê enquanto o GSAP não chega é só o papel — o repouso do gesto.
+      `sweep()` acende cada um no quadro em que a tinta começa a correr.
+    */}
     <g mask="url(#ga-glyph)">
       {
         STROKES.map((stroke, index) => (
           <path
             data-preloader-stroke
             data-stroke-index={index}
+            opacity="0"
             d={stroke.d}
             stroke="currentColor"
             stroke-width={stroke.width}

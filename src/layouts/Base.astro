@@ -105,8 +105,13 @@ const noiseUrl = `url("data:image/svg+xml,${encodeURIComponent(noise)}")`;
       continuam em `src/motion/gate.ts`, que lê esta classe em vez de refazer a
       conta. `?motion=1` derruba até o reduced-motion: é flag de depuração
       digitada à mão, e some no próximo carregamento sem a query.
+
+      A cortina de abertura é decidida aqui pelo mesmo motivo, e é o caso mais
+      visível de todos: enquanto ela dependia de `preloader.ts` para sair do
+      `hidden`, a pessoa via a página, ENTÃO a cortina caía por cima, e só
+      então a hero entrava. Marcada no <head>, ela já está no primeiro quadro.
     */}
-    <script is:inline>
+    <script is:inline define:vars={{ hasCurtain: preloader }}>
       (() => {
         const root = document.documentElement;
         const flag = new URLSearchParams(location.search).get('motion');
@@ -118,15 +123,25 @@ const noiseUrl = `url("data:image/svg+xml,${encodeURIComponent(noise)}")`;
 
         root.classList.add('motion-ready');
 
+        // A abertura roda uma vez por sessão. Janela privativa lança no acesso
+        // ao sessionStorage: sem marca, a cortina roda de novo — enfeite
+        // repetido é menos grave que uma exceção antes da primeira pintura.
+        let seen = false;
+        try {
+          seen = sessionStorage.getItem('ga:preloaded') !== null;
+        } catch {}
+        if (hasCurtain && !seen) root.classList.add('preloading');
+
         /*
          * E o desarme. Esconder é uma promessa de revelar depois; quem revela é
          * o bundle. Se ele não chegar — proxy, extensão, rede caindo, deploy com
          * 404 — a classe ficaria de pé sozinha e a página inteira permaneceria
-         * em opacity 0. O relógio devolve a versão estática, que é completa.
-         * `startMotion()` cancela isto na primeira linha.
+         * em opacity 0, agora atrás de uma cortina opaca e sem scroll. O relógio
+         * devolve a versão estática, que é completa. `startMotion()` cancela
+         * isto na primeira linha.
          */
         window.__motionDisarm = setTimeout(() => {
-          root.classList.remove('motion-ready');
+          root.classList.remove('motion-ready', 'preloading');
           root.dataset.motionGate = 'timeout';
         }, 4000);
       })();
