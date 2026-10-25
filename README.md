@@ -113,3 +113,37 @@ The AI Engineering iteration, source boundaries and behavioral checks are record
 The portrait, graphite and cobalt iteration is documented in
 [the visual validation report](docs/portrait-validation.md), with a navigable local comparison at
 `reports/design-review/portrait-comparison.html` after running the capture commands above.
+
+## Security checks
+
+With Node.js 24, Bash, curl and tar (Linux, macOS or WSL):
+
+```sh
+npm ci
+npm run security:setup
+npm run security
+```
+
+The setup installs Gitleaks 8.30.1 locally in `.tools/` after checking a pinned
+SHA-256 checksum. No global installation is needed. Run checks separately with
+`npm run security:secrets` (working tree, including uncommitted files),
+`npm run security:history` (all local Git refs), and `npm run security:audit`.
+Fetch remote refs first if you want to include newly published history.
+Gitleaks uses its default rules and redacts detected values in logs. Only dependency
+and generated-output directories are excluded; there is no baseline hiding findings.
+
+[Security CI](.github/workflows/security.yml) runs on pull requests, pushes to main,
+weekly, and manually. Its independent jobs check secrets and audit all npm dependencies,
+including development dependencies. Moderate, high and critical vulnerabilities fail
+the audit; findings must be fixed rather than bypassed. A failed check does not by itself
+block an external deployment: require both `Gitleaks` and `npm audit` checks in branch
+protection or the deployment provider before treating them as deployment gates.
+
+[Dependabot](.github/dependabot.yml) proposes weekly npm and GitHub Actions updates.
+Compatible npm updates are grouped; major versions remain separate. Pull requests are
+not auto-merged. Dependabot alert/security-update settings are managed separately in
+GitHub repository settings.
+
+References: [Gitleaks](https://github.com/gitleaks/gitleaks),
+[npm audit](https://docs.npmjs.com/cli/v11/commands/npm-audit),
+[Dependabot configuration](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference).

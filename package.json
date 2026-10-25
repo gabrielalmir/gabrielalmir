@@ -19,7 +19,12 @@
     "generate:brand": "node scripts/generate-social.mjs",
     "format:check": "prettier --check src astro.config.mjs playwright.config.ts tests/e2e/*.ts scripts/*.mjs package.json .prettierrc.json",
     "test:links": "node scripts/check-links.mjs",
-    "review:design": "npm run build && node scripts/review-design.mjs"
+    "review:design": "npm run build && node scripts/review-design.mjs",
+    "security:setup": "bash scripts/install-gitleaks.sh",
+    "security:secrets": ".tools/gitleaks dir --config .gitleaks.toml --redact .",
+    "security:history": ".tools/gitleaks git --config .gitleaks.toml --redact --log-opts=\"--all\" .",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security": "npm run security:secrets && npm run security:history && npm run security:audit"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

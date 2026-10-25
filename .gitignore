@@ -34,3 +34,6 @@ test-results
 reports/lighthouse/
 reports/external-links.json
 reports/design-review/
+
+# Local security tooling
+.tools/
