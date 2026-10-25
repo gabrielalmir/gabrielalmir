@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import { notFound } from '../lib/content';
+---
+
+<Base title="Página não encontrada — Gabriel Almir" path="/404" noindex>
+  <section class="not-found shell">
+    <p class="label">Erro 404</p>
+    <div class="not-found-grid">
+      <p class="error-code" aria-hidden="true">
+        404<span>.</span>
+      </p>
+      <div>
+        <h1>{notFound.title}</h1>
+        <p>{notFound.lead}</p>
+        <a href="/" class="button button-primary">
+          {notFound.cta}
+          <Arrow />
+        </a>
+        <a class="text-link" href="/#sistemas">
+          Explorar os projetos <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

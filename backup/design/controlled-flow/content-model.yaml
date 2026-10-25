@@ -1,0 +1,266 @@
+schema_version: 1
+content_status: approval_required
+default_locale: pt-BR
+locales:
+  - pt-BR
+  - en
+routes:
+  pt-BR:
+    home: /
+    work: /trabalhos/
+    writing: /artigos/
+    resume: /curriculo/
+  en:
+    home: /en/
+    work: /en/work/
+    writing: /en/writing/
+    resume: /en/resume/
+
+shared:
+  identity:
+    name: Gabriel Almir
+    role:
+      pt-BR: Analista de sistemas e desenvolvedor backend
+      en: Systems analyst and backend developer
+  language_switch:
+    pt-BR: English
+    en: Português
+    behavior: Preserve the equivalent route when it exists; otherwise use the other locale's home.
+  skip_link:
+    pt-BR: Ir para o conteúdo
+    en: Skip to content
+  navigation:
+    pt-BR:
+      work: Trabalhos
+      principles: Princípios
+      writing: Artigos
+      about: Sobre
+      contact: Contato
+      resume: Currículo
+    en:
+      work: Work
+      principles: Principles
+      writing: Writing
+      about: About
+      contact: Contact
+      resume: Résumé
+  state_labels:
+    pt-BR:
+      constraint: Restrição
+      decision: Decisão
+      result: Resultado
+      verified: Verificado
+      public: Público
+      confidential: Confidencial
+      exploration: Em exploração
+    en:
+      constraint: Constraint
+      decision: Decision
+      result: Result
+      verified: Verified
+      public: Public
+      confidential: Confidential
+      exploration: Exploring
+
+home:
+  metadata:
+    pt-BR:
+      title: Gabriel Almir — complexidade em fluxos confiáveis
+      description: Analista de sistemas e desenvolvedor backend que transforma integrações, regras e falhas invisíveis em fluxos confiáveis.
+    en:
+      title: Gabriel Almir — complexity into reliable flows
+      description: Systems analyst and backend developer turning invisible integrations, rules, and failure modes into reliable flows.
+
+  hero:
+    eyebrow:
+      pt-BR: Sistemas que precisam continuar funcionando
+      en: Systems that need to keep working
+    title:
+      pt-BR: Gabriel transforma complexidade invisível em fluxos confiáveis.
+      en: Gabriel turns invisible complexity into reliable flows.
+    body:
+      pt-BR: Analiso restrições, conecto sistemas e desenho caminhos de recuperação para que dados e operações cheguem ao estado certo — inclusive em ambientes regulados.
+      en: I examine constraints, connect systems, and design recovery paths so data and operations reach the right state — including in regulated environments.
+    primary_cta:
+      pt-BR: Ver trabalhos selecionados
+      en: View selected work
+      target: flagship_stories
+    secondary_cta:
+      pt-BR: Falar com Gabriel
+      en: Contact Gabriel
+      target: contact
+
+  immediate_proof:
+    heading:
+      pt-BR: Evidência antes de inventário
+      en: Evidence before inventory
+    items:
+      - id: loading_reduction
+        value: 90%
+        label:
+          pt-BR: menos tempo de carregamento em um sistema crítico
+          en: reduction in loading time for a critical system
+        qualifier:
+          pt-BR: Resultado verificado; contexto e detalhes preservados por confidencialidade.
+          en: Verified result; context and implementation details withheld for confidentiality.
+        evidence: claim-90-loading
+      - id: regulated_context
+        value:
+          pt-BR: Ambiente regulado
+          en: Regulated environment
+        label:
+          pt-BR: integrações e aplicações onde consistência de dados faz parte da conformidade
+          en: integrations and applications where data consistency is part of compliance
+        evidence: claim-regulated-context
+      - id: photogimp_stewardship
+        value: PhotoGIMP
+        label:
+          pt-BR: contribuição relevante em período anterior; hoje, colaboração em organização de issues e revisão de mudanças
+          en: major contribution during an earlier period; now collaborating on issue organization and change review
+        evidence: claim-photogimp-role
+
+  flagship_stories:
+    heading:
+      pt-BR: Três formas de tornar um fluxo confiável
+      en: Three ways to make a flow reliable
+    introduction:
+      pt-BR: Cada história explicita uma restrição, a decisão tomada e o resultado observável. Os diagramas são modelos editoriais, não arquiteturas de empregadores.
+      en: Each story makes a constraint, a decision, and an observable result explicit. Diagrams are editorial models, not employer architectures.
+    stories:
+      - id: critical-loading
+        visibility: anonymized
+        title:
+          pt-BR: O caminho até uma resposta 90% mais rápida
+          en: The path to a 90% faster response
+        summary:
+          pt-BR: Em um sistema crítico, Gabriel investigou um carregamento lento, isolou o trabalho que mais pesava no fluxo e conduziu uma mudança que reduziu o tempo em 90%.
+          en: In a critical system, Gabriel investigated a slow loading path, isolated the work carrying most of the cost, and led a change that reduced loading time by 90%.
+        constraint:
+          pt-BR: O tempo de espera comprometia a operação, mas o contexto exigia preservar regras, integrações e dados internos.
+          en: Waiting time hindered the operation, while the context required internal rules, integrations, and data to remain protected.
+        decision:
+          pt-BR: Medir o caminho completo, priorizar o gargalo dominante e validar a melhoria sem ampliar a superfície de risco.
+          en: Measure the full path, prioritize the dominant bottleneck, and validate the improvement without expanding the risk surface.
+        result:
+          pt-BR: Redução verificada de 90% no tempo de carregamento.
+          en: Verified 90% reduction in loading time.
+        cta:
+          pt-BR: Ler relato anonimizado
+          en: Read the anonymized story
+        evidence: claim-90-loading
+
+      - id: photogimp
+        visibility: public
+        title: { pt-BR: PhotoGIMP, en: PhotoGIMP }
+        summary:
+          pt-BR: "Um projeto comunitário exige mais do que código: pedidos precisam virar decisões compreensíveis, revisáveis e seguras para usuários em plataformas diferentes."
+          en: "A community project needs more than code: requests must become decisions that are understandable, reviewable, and safe for users across platforms."
+        constraint:
+          pt-BR: Evoluir uma experiência familiar para usuários do GIMP sem apagar a autoria coletiva nem fragmentar a compatibilidade.
+          en: Evolve a familiar experience for GIMP users without erasing collective authorship or fragmenting compatibility.
+        decision:
+          pt-BR: Durante seu principal período de contribuição, Gabriel atuou diretamente na evolução do projeto. Hoje, como colaborador, ajuda a organizar issues e participa da revisão e aprovação de mudanças.
+          en: During his main contribution period, Gabriel worked directly on the project's evolution. Today, as a collaborator, he helps organize issues and participates in reviewing and approving changes.
+        result:
+          pt-BR: Continuidade de um projeto público e comunitário, com decisões rastreáveis no repositório oficial.
+          en: Continuity for a public, community-driven project, with decisions traceable in the official repository.
+        cta:
+          pt-BR: Ver caso e evidências públicas
+          en: View case and public evidence
+        evidence: claim-photogimp-role
+
+      - id: distributed-public-project
+        visibility: public_pending_selection
+        title:
+          pt-BR: Mensagens que sobrevivem a interrupções
+          en: Messages that survive interruptions
+        summary:
+          pt-BR: Um projeto público de sistemas distribuídos mostrará como Gabriel raciocina sobre APIs, mensageria, repetição segura e recuperação.
+          en: A public distributed-systems project will show how Gabriel reasons about APIs, messaging, safe retries, and recovery.
+        constraint:
+          pt-BR: Partes independentes falham em momentos diferentes; uma entrega não pode depender de disponibilidade simultânea.
+          en: Independent parts fail at different times; delivery cannot depend on simultaneous availability.
+        decision:
+          pt-BR: Separar aceitação de processamento, definir estados explícitos e tornar repetição e falha observáveis.
+          en: Separate acceptance from processing, define explicit states, and make retries and failures observable.
+        result:
+          pt-BR: A preencher somente após Gabriel selecionar o repositório e aprovar evidências reproduzíveis.
+          en: To be completed only after Gabriel selects the repository and approves reproducible evidence.
+        cta:
+          pt-BR: Em validação
+          en: Under validation
+        evidence: claim-public-distributed-project
+
+  principles:
+    heading:
+      pt-BR: Como Gabriel trabalha
+      en: How Gabriel works
+    items:
+      - title:
+          pt-BR: Tornar estados explícitos
+          en: Make states explicit
+        body:
+          pt-BR: Um fluxo confiável deixa claro o que entrou, o que foi validado, onde parou e como pode continuar.
+          en: A reliable flow makes clear what entered, what was validated, where it stopped, and how it can continue.
+      - title:
+          pt-BR: Desenhar a recuperação
+          en: Design the recovery path
+        body:
+          pt-BR: Falhas acontecem. O trabalho está em limitar impacto, preservar contexto e facilitar uma retomada segura.
+          en: Failures happen. The work is to limit impact, preserve context, and make safe recovery straightforward.
+      - title:
+          pt-BR: Provar antes de afirmar
+          en: Prove before claiming
+        body:
+          pt-BR: Métricas, testes e rastros públicos sustentam a narrativa; detalhes confidenciais permanecem confidenciais.
+          en: Metrics, tests, and public traces support the narrative; confidential details remain confidential.
+      - title:
+          pt-BR: Aplicar IA com supervisão
+          en: Apply AI with oversight
+        body:
+          pt-BR: Gabriel explora IA em triagem, automação e apoio à análise, com validação humana e limites explícitos.
+          en: Gabriel explores AI for triage, automation, and analytical support, with human validation and explicit boundaries.
+        state: exploration
+
+  human_layer:
+    heading:
+      pt-BR: Sistemas são feitos para pessoas
+      en: Systems are built for people
+    body:
+      pt-BR: Gabriel combina análise técnica, documentação e conversa entre áreas para transformar requisitos incompletos em decisões que outras pessoas conseguem entender, operar e manter.
+      en: Gabriel combines technical analysis, documentation, and cross-functional conversation to turn incomplete requirements into decisions other people can understand, operate, and maintain.
+    artifact_caption:
+      pt-BR: Um artefato pessoal aprovado entra aqui para mostrar processo, curiosidade ou vida fora da tela — sem material de trabalho.
+      en: An approved personal artifact goes here to show process, curiosity, or life beyond the screen — never workplace material.
+
+  selected_writing:
+    heading:
+      pt-BR: Escrita selecionada
+      en: Selected writing
+    introduction:
+      pt-BR: Notas sobre decisões técnicas, confiabilidade e aprendizado — publicadas somente quando as evidências e os limites estão claros.
+      en: Notes on technical decisions, reliability, and learning — published only when evidence and boundaries are clear.
+    items:
+      - id: anonymized-loading-story
+        pt-BR: Como uma mudança reduziu em 90% o carregamento de um sistema crítico
+        en: How one change cut a critical system's loading time by 90%
+      - id: choosing-backend-technology
+        pt-BR: Escolhendo tecnologia backend sem paralisia
+        en: Choosing backend technology without paralysis
+      - id: engineering-tradeoffs
+        pt-BR: Desenvolvimento não é 8 ou 80
+        en: Software decisions are rarely all or nothing
+
+  contact:
+    heading:
+      pt-BR: Há um fluxo difícil para tornar confiável?
+      en: Is there a difficult flow that needs to become reliable?
+    body:
+      pt-BR: Gabriel está aberto a conversar com times que precisam conectar sistemas, reduzir risco operacional e tornar decisões técnicas mais claras.
+      en: Gabriel is open to conversations with teams that need to connect systems, reduce operational risk, and make technical decisions clearer.
+    primary_cta:
+      pt-BR: Enviar e-mail
+      en: Send an email
+    secondary_cta:
+      pt-BR: Ver LinkedIn
+      en: View LinkedIn

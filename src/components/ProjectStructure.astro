@@ -1,0 +1,205 @@
+---
+interface Props {
+  slug: 'mcp-animaginexl' | 'pimbas' | 'maybe';
+}
+const { slug } = Astro.props;
+const descriptions = {
+  'mcp-animaginexl':
+    'O agente chama ferramentas MCP; o pipeline Diffusers gera a imagem e grava PNG e JSON.',
+  pimbas:
+    'A camada HTTP migrou de Fastify para Next.js, preservando o domínio de partidas, rankings e torneios.',
+  maybe:
+    'Schema e DTO estruturam a entrada. Result representa sucesso ou erro; Option representa presença ou ausência.',
+};
+---
+
+<figure class="structure" aria-label={descriptions[slug]}>
+  <div class="structure-heading">
+    <span>Estrutura</span>
+    <span aria-hidden="true">
+      {slug === 'mcp-animaginexl'
+        ? '01 / fluxo'
+        : slug === 'pimbas'
+          ? '02 / migração'
+          : '03 / contratos'}
+    </span>
+  </div>
+  <div class="structure-body" aria-hidden="true">
+    {slug === 'mcp-animaginexl' ? (
+      <div class="pipeline">
+        <span class="node">Agente</span>
+        <span class="connection">↓</span>
+        <span class="node emphasis">Ferramentas MCP</span>
+        <span class="connection">↓</span>
+        <span class="node">Diffusers + modelo</span>
+        <span class="connection">↓</span>
+        <span class="output">PNG + JSON</span>
+      </div>
+    ) : slug === 'pimbas' ? (
+      <div class="migration">
+        <div class="structure-migration-web">
+          <span class="node previous">Fastify</span>
+          <span class="connection">→</span>
+          <span class="node emphasis">Next.js</span>
+        </div>
+        <span class="connection vertical">↓</span>
+        <div class="domain">
+          <span class="domain-label">Domínio preservado</span>
+          <strong>
+            Partidas · Rankings
+            <br />
+            Torneios
+          </strong>
+        </div>
+        <span class="output">Acesso delimitado por grupo</span>
+      </div>
+    ) : (
+      <div class="contracts">
+        <span class="node">Schema + DTO</span>
+        <div class="branches">
+          <div>
+            <span class="contract-label">Result</span>
+            <span class="node emphasis">Ok / Err</span>
+            <span class="contract-note">Sucesso / erro</span>
+          </div>
+          <div>
+            <span class="contract-label">Option</span>
+            <span class="node emphasis">Some / None</span>
+            <span class="contract-note">Presença / ausência</span>
+          </div>
+        </div>
+        <span class="output">Dois contratos explícitos</span>
+      </div>
+    )}
+  </div>
+</figure>
+<style>
+  .structure {
+    background: var(--work);
+    border-block: 1px solid var(--line);
+    margin: 0 0 24px;
+  }
+  .structure-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .structure-body {
+    min-height: 242px;
+    padding: 20px 16px;
+    display: grid;
+    align-items: center;
+  }
+  .node {
+    display: block;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    border-radius: 3px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .emphasis {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .connection {
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--accent);
+  }
+  .pipeline {
+    width: 100%;
+    max-width: 210px;
+    margin: auto;
+  }
+  .output {
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .structure-migration-web {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr;
+    align-items: center;
+  }
+  .previous {
+    border-style: dashed;
+    color: var(--muted);
+  }
+  .vertical {
+    line-height: 28px;
+  }
+  .domain {
+    border: 1px solid var(--line);
+    border-radius: 50% / 18%;
+    text-align: center;
+    padding: 17px 8px;
+  }
+  .domain-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .domain strong {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .migration .output,
+  .contracts .output {
+    margin-top: 16px;
+  }
+  .contracts > .node {
+    width: 70%;
+    margin: auto;
+  }
+  .branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 32px;
+    position: relative;
+  }
+  .branches::before {
+    content: '';
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: -16px;
+    height: 16px;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+  }
+  .branches::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -32px;
+    height: 16px;
+    border-left: 1px solid var(--line);
+  }
+  .contract-label,
+  .contract-note {
+    display: block;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin: 8px 0;
+  }
+</style>

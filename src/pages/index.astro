@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import OpportunityHome from '../components/OpportunityHome.astro';
+import Contact from '../components/Contact.astro';
+import { site, contact } from '../lib/content';
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.author,
+  url: site.url,
+  jobTitle: 'Analista de Sistemas Pleno',
+  description: site.description,
+  email: `mailto:${contact.email}`,
+  sameAs: [contact.linkedin, contact.github],
+};
+---
+
+<Base>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
+  <OpportunityHome />
+  <Contact />
+</Base>

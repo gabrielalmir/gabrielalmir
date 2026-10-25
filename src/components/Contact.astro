@@ -1,0 +1,34 @@
+---
+import { contact, contactSection } from '../lib/content';
+import Arrow from './Arrow.astro';
+---
+
+<section id="contato" class="contact-section section" aria-labelledby="contact-title">
+  <div class="shell">
+    <div class="contact-layout">
+      <h2 id="contact-title">{contactSection.title}</h2>
+      <div class="contact-copy">
+        <p>{contactSection.lead}</p>
+        <a class="button button-paper" href={`mailto:${contact.email}`}>
+          {contactSection.cta}
+          <Arrow direction="up" />
+        </a>
+        <a class="contact-email" href={`mailto:${contact.email}`}>
+          {contact.email}
+        </a>
+        <div class="contact-links">
+          <a href={contact.linkedin}>
+            LinkedIn <Arrow direction="up" />
+          </a>
+          <a href={contact.github}>
+            GitHub <Arrow direction="up" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-end label">
+      <span>Itapira, São Paulo · Brasil</span>
+      <a href="#inicio">Voltar ao início ↑</a>
+    </div>
+  </div>
+</section>

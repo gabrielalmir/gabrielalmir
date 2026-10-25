@@ -1,0 +1,82 @@
+---
+import { architectureStages, mcpSource } from '../lib/mcp';
+interface Props {
+  instance: string;
+}
+const { instance } = Astro.props;
+---
+
+<div class="architecture-explorer" data-architecture>
+  <p class="label explorer-instruction">Explore o caminho de uma geração</p>
+  <svg class="architecture-flow" viewBox="0 0 540 94" aria-hidden="true" focusable="false">
+    {architectureStages.map((stage, index) => (
+      <g data-node={stage.id}>
+        {index < 3 && (
+          <path
+            class="architecture-connection"
+            data-connection-to={architectureStages[index + 1]!.id}
+            d={`M${index * 138 + 112} 32h26`}
+          />
+        )}
+        <rect x={index * 138} y="4" width="112" height="56" rx="2" />
+        <text x={index * 138 + 56} y="39" text-anchor="middle">
+          0{index + 1}
+        </text>
+        <text class="flow-label" x={index * 138 + 56} y="85" text-anchor="middle">
+          {['Agente', 'Ferramentas', 'Pipeline', 'Arquivos'][index]}
+        </text>
+      </g>
+    ))}
+  </svg>
+  <div class="architecture-controls" role="group" aria-label="Etapas da arquitetura" hidden>
+    {architectureStages.map((stage, index) => (
+      <button
+        type="button"
+        id={`${instance}-${stage.id}-button`}
+        data-stage={stage.id}
+        aria-pressed={index === 0 ? 'true' : 'false'}
+        aria-controls={`${instance}-${stage.id}`}
+      >
+        <span aria-hidden="true">0{index + 1}</span>
+        {stage.label}
+      </button>
+    ))}
+  </div>
+  <div class="architecture-panels">
+    {architectureStages.map((stage) => (
+      <section
+        id={`${instance}-${stage.id}`}
+        class="architecture-panel"
+        data-panel={stage.id}
+        aria-label={stage.label}
+      >
+        <p class="stage-identifier">{stage.identifier}</p>
+        <dl>
+          <div>
+            <dt>Entrada</dt>
+            <dd>{stage.input}</dd>
+          </div>
+          <div>
+            <dt>Responsabilidade</dt>
+            <dd>{stage.responsibility}</dd>
+          </div>
+          <div>
+            <dt>Saída</dt>
+            <dd>{stage.output}</dd>
+          </div>
+          <div>
+            <dt>Restrição</dt>
+            <dd>{stage.constraint}</dd>
+          </div>
+        </dl>
+        <a class="source-link" href={`${mcpSource}${stage.source}`}>
+          {stage.sourceLabel} · 7ffbf7f
+        </a>
+      </section>
+    ))}
+  </div>
+  <p class="sr-only" role="status" data-stage-status></p>
+</div>
+<script>
+  import '../scripts/architecture';
+</script>

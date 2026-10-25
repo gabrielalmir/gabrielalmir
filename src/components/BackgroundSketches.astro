@@ -1,0 +1,155 @@
+---
+// Decorative rails stay outside the same content width used by .shell.
+interface Props {
+  extended?: boolean;
+}
+const { extended = false } = Astro.props;
+const baseMotifs = ['saturn', 'network', 'compiler', 'jupiter', 'terminal', 'galaxy'] as const;
+const motifs = extended
+  ? [...baseMotifs, 'network', 'saturn', 'terminal', 'compiler', 'jupiter', 'galaxy']
+  : baseMotifs;
+---
+
+<div class="background-sketches" aria-hidden="true" inert>
+  {motifs.map((motif, index) => (
+    <div
+      class:list={['sketch', `sketch-${motif}`, index % 2 ? 'right' : 'left']}
+      style={`--position: ${index / (motifs.length - 1)}; --angle: ${index > 5 ? -8 : 0}deg;`}
+    >
+      <svg
+        viewBox="0 0 160 190"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+        focusable="false"
+      >
+        {motif === 'saturn' && (
+          <>
+            <circle cx="80" cy="90" r="36" />
+            <path d="M49 72q30-12 61 0M45 86q35-12 70 0M48 102q32-10 63 0" opacity=".5" />
+            <ellipse cx="80" cy="90" rx="74" ry="17" transform="rotate(-32 80 90)" />
+            <ellipse cx="80" cy="90" rx="64" ry="12" transform="rotate(-32 80 90)" opacity=".5" />
+            <path d="M27 25v8m-4-4h8M130 150v8m-4-4h8" />
+          </>
+        )}
+        {motif === 'network' && (
+          <>
+            <path
+              d="M25 45 80 25 135 45M25 45 80 90 135 45M25 95 80 25M25 95 80 90 135 135M25 145 80 90M25 145 80 155 135 135M80 25 135 95M80 155 135 95M25 95 135 95"
+              opacity=".6"
+            />
+            {[
+              [25, 45],
+              [25, 95],
+              [25, 145],
+              [80, 25],
+              [80, 90],
+              [80, 155],
+              [135, 45],
+              [135, 95],
+              [135, 135],
+            ].map(([cx, cy]) => (
+              <circle cx={cx} cy={cy} r="6" fill="var(--paper)" />
+            ))}
+          </>
+        )}
+        {motif === 'compiler' && (
+          <>
+            <path d="M80 42v25M35 96V67h90v29M35 116v24M16 155v-15h38v15M125 116v24M106 155v-15h38v15" />
+            <rect x="56" y="18" width="48" height="24" rx="3" />
+            <rect x="16" y="96" width="38" height="20" rx="3" />
+            <rect x="106" y="96" width="38" height="20" rx="3" />
+            {[16, 54, 106, 144].map((cx) => (
+              <circle cx={cx} cy="160" r="5" />
+            ))}
+            <path d="m73 25-6 5 6 5m14-10 6 5-6 5" />
+          </>
+        )}
+        {motif === 'jupiter' && (
+          <>
+            <circle cx="80" cy="95" r="53" />
+            <path d="M42 58q38 14 76 0M33 72q47 18 94 0M28 89q52 15 104 0M28 105q29 10 46 7m28-2 30-5M33 121q47 14 94 0M43 135q37 8 74 0" />
+            <ellipse cx="88" cy="111" rx="13" ry="6" />
+            <circle cx="139" cy="28" r="5" />
+            <path d="M14 164q66 20 132-3" stroke-dasharray="2 7" />
+          </>
+        )}
+        {motif === 'terminal' && (
+          <>
+            <rect x="12" y="40" width="136" height="102" rx="6" />
+            <path d="M12 61h136" />
+            <circle cx="24" cy="51" r="1.5" />
+            <circle cx="33" cy="51" r="1.5" />
+            <circle cx="42" cy="51" r="1.5" />
+            <path d="m29 82 12 10-12 10m22 0h20M29 119h44m8 0h22" />
+            <path d="M43 164h74" opacity=".5" />
+          </>
+        )}
+        {motif === 'galaxy' && (
+          <>
+            <g transform="rotate(-30 80 95)">
+              <ellipse cx="80" cy="95" rx="73" ry="31" stroke-dasharray="2 5" />
+              <ellipse cx="80" cy="95" rx="57" ry="22" />
+              <ellipse cx="80" cy="95" rx="37" ry="13" />
+              <path d="M11 95c23-30 82-27 106-7s-6 36-37 27-24-27 0-26" />
+              <circle cx="80" cy="95" r="5" />
+            </g>
+            <path d="M27 33v8m-4-4h8M139 154v8m-4-4h8" />
+            <circle cx="117" cy="28" r="1" />
+            <circle cx="22" cy="147" r="1" />
+          </>
+        )}
+      </svg>
+    </div>
+  ))}
+</div>
+<style>
+  .background-sketches {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    color: var(--accent);
+    z-index: 1;
+  }
+  .sketch {
+    position: absolute;
+    top: calc(200px + (100% - 440px) * var(--position));
+    transform: rotate(var(--angle));
+    width: calc((100% - min(1280px, 100% - 128px)) / 2 - 16px);
+    max-width: 180px;
+    opacity: 0.32;
+  }
+  .sketch svg {
+    width: 100%;
+    height: auto;
+  }
+  .left {
+    left: 4px;
+  }
+  .right {
+    right: 4px;
+  }
+  @media (max-width: 1100px) {
+    .sketch {
+      width: 24px;
+      opacity: 0.24;
+    }
+    .left {
+      left: 3px;
+    }
+    .right {
+      right: 3px;
+    }
+  }
+  @media (max-width: 767px) {
+    .background-sketches {
+      display: none;
+    }
+  }
+  @media print {
+    .background-sketches {
+      display: none;
+    }
+  }
+</style>

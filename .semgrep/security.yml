@@ -1,0 +1,29 @@
+rules:
+  - id: no-dynamic-eval
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Avoid dynamic code execution; use explicit parsing and dispatch.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+  - id: no-html-assignment
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Use textContent or safe DOM construction instead of HTML string insertion.
+    pattern-either:
+      - pattern: $EL.innerHTML = $VALUE
+      - pattern: $EL.outerHTML = $VALUE
+      - pattern: $EL.insertAdjacentHTML(...)
+  - id: no-shell-process
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Use execFile/spawn with an argument array and shell disabled.
+    pattern-either:
+      - pattern: child_process.exec(...)
+      - pattern: child_process.execSync(...)
+      - pattern: 'child_process.spawn($CMD, $ARGS, { ..., shell: true, ... })'
+  - id: no-disabled-tls-validation
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Keep TLS certificate validation enabled.
+    pattern: '{ ..., rejectUnauthorized: false, ... }'

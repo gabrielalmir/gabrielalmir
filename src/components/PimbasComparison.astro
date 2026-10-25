@@ -1,0 +1,81 @@
+---
+interface Props {
+  instance?: string;
+}
+const { instance = 'home' } = Astro.props;
+---
+
+<figure class="migration-figure" data-migration>
+  <figcaption>O que mudou na arquitetura</figcaption>
+  <div class="migration-controls" role="group" aria-label="Comparar arquitetura do Pimbas" hidden>
+    <button
+      type="button"
+      data-version="before"
+      aria-pressed="false"
+      aria-controls={`${instance}-pimbas-before`}
+    >
+      Antes · Fastify
+    </button>
+    <button
+      type="button"
+      data-version="after"
+      aria-pressed="true"
+      aria-controls={`${instance}-pimbas-after`}
+    >
+      Atual · Next.js
+    </button>
+  </div>
+  <div class="migration-web">
+    <div id={`${instance}-pimbas-before`} data-runtime="before">
+      <span>Camada web anterior</span>
+      <strong>Fastify + web</strong>
+      <p>API e interface em aplicações separadas.</p>
+    </div>
+    <div id={`${instance}-pimbas-after`} data-runtime="after">
+      <span>Camada web atual</span>
+      <strong>Next.js</strong>
+      <p>Fronteira HTTP consolidada na aplicação.</p>
+    </div>
+  </div>
+  <div class="migration-domain">
+    <span>Domínio preservado</span>
+    <p>Partidas, ranking e torneios</p>
+    <small>Autorização e dados delimitados por grupo.</small>
+  </div>
+  <p class="sr-only" role="status" data-migration-status></p>
+</figure>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-migration]').forEach((figure) => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    function select(version: string, animate = true) {
+      figure
+        .querySelectorAll<HTMLButtonElement>('[data-version]')
+        .forEach((button) =>
+          button.setAttribute('aria-pressed', String(button.dataset.version === version)),
+        );
+      figure.querySelectorAll<HTMLElement>('[data-runtime]').forEach((runtime) => {
+        runtime.getAnimations().forEach((animation) => animation.cancel());
+        runtime.hidden = runtime.dataset.runtime !== version;
+        if (!runtime.hidden && animate && !reduced.matches)
+          runtime.animate(
+            [
+              { opacity: 0, transform: 'translateX(-12px)' },
+              { opacity: 1, transform: 'translateX(0)' },
+            ],
+            { duration: 360 },
+          );
+      });
+      if (animate)
+        figure.querySelector<HTMLElement>('[data-migration-status]')!.textContent =
+          version === 'before'
+            ? 'Arquitetura anterior: Fastify e web separados. Domínio preservado.'
+            : 'Arquitetura atual: Next.js. Domínio preservado.';
+    }
+    figure.dataset.enhanced = '';
+    select('after', false);
+    figure.querySelector<HTMLElement>('.migration-controls')!.hidden = false;
+    figure
+      .querySelectorAll<HTMLButtonElement>('[data-version]')
+      .forEach((button) => button.addEventListener('click', () => select(button.dataset.version!)));
+  });
+</script>

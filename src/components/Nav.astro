@@ -1,0 +1,114 @@
+---
+import BrandMark from './BrandMark.astro';
+import { nav, themeControl } from '../lib/content';
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="/">
+      <span class="sr-only">Gabriel Almir — início.</span>
+      <BrandMark class="monogram" />
+      <span class="wordmark-note">
+        Engenharia
+        <br />& IA aplicada
+      </span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      {nav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        data-light-action={themeControl.lightAction}
+        data-dark-action={themeControl.darkAction}
+        aria-label={themeControl.label}
+        aria-pressed="false"
+        aria-describedby="theme-help"
+        hidden
+      >
+        <svg
+          class="theme-moon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+        </svg>
+        <svg
+          class="theme-sun"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+        </svg>
+      </button>
+      <span id="theme-help" class="sr-only">
+        {themeControl.darkAction}
+      </span>
+      <details class="mobile-menu">
+        <summary>
+          Menu <span aria-hidden="true">+</span>
+        </summary>
+        <nav aria-label="Navegação móvel">
+          {nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  const summary = menu?.querySelector('summary');
+  menu?.addEventListener('click', (event) => {
+    const link = (event.target as Element).closest<HTMLAnchorElement>('a');
+    if (!link) return;
+    menu.open = false;
+    const url = new URL(link.href);
+    if (url.pathname === location.pathname && url.hash) {
+      const target = document.getElementById(url.hash.slice(1));
+      if (target) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+        target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+      }
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      summary?.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (menu?.open && !menu.contains(event.target as Node)) {
+      const hadFocus = menu.contains(document.activeElement);
+      menu.open = false;
+      if (hadFocus) summary?.focus();
+    }
+  });
+  matchMedia('(min-width: 48rem)').addEventListener('change', (event) => {
+    if (event.matches && menu?.open) {
+      const hadFocus = menu.contains(document.activeElement);
+      menu.open = false;
+      if (hadFocus) document.querySelector<HTMLAnchorElement>('.desktop-nav a')?.focus();
+    }
+  });
+</script>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
+  <title id="title">Marca de Gabriel Almir</title>
+  <desc id="desc">Um A caligráfico inspirado na forma da letra grega lambda</desc>
+  <path fill="#181915" d="M6 43c4-.8 5.8-3.3 7.7-7.7L22 15.1l3.3 6.8-8.2 17.2c-.8 1.8.2 3 3.5 3.9H6Z"/>
+  <path fill="#181915" d="M18.2 7.7c4.8-1.8 8.1 1.2 10.4 6.8l8.7 21c1.8 4.2 4.5 6.3 8.7 7.2-3.8 2.6-8.7 2.7-12-.5-2.9-2.8-4.6-7.7-6.7-12.8L21.6 15c-1.3-3.5-1.5-5.8-3.4-7.3Z"/>
+  <path fill="#ef9e2f" d="M15.4 31.8c4.2-3.5 8.4-5.6 13.3-7l1 2.3c-5.6 1-10.2 2.6-15.7 7.1l1.4-2.4Z"/>
+</svg>

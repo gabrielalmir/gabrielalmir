@@ -1,0 +1,194 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Arrow from '../../components/Arrow.astro';
+import CaseDiagram from '../../components/CaseDiagram.astro';
+import ArchitectureExplorer from '../../components/ArchitectureExplorer.astro';
+import PimbasComparison from '../../components/PimbasComparison.astro';
+import ArgumentBuilder from '../../components/ArgumentBuilder.astro';
+import { systemsSection, contact, casePage } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await getCollection('systems')).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const all = await getCollection('systems');
+const ids: readonly string[] = [...systemsSection.featured, ...systemsSection.complementary];
+const ordered = [...all].sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+const position = ordered.findIndex((item) => item.id === entry.id);
+const next = ordered[(position + 1) % ordered.length]!;
+const sections = [
+  ...(entry.id === 'mcp-animaginexl' ? [{ id: 'experimentar', label: 'Experimentar' }] : []),
+  { id: 'contexto', label: 'Contexto' },
+  { id: 'forcas', label: 'Restrições' },
+  { id: 'decisoes', label: 'Decisões' },
+  ...(entry.data.qualities ? [{ id: 'qualidades', label: 'Qualidade' }] : []),
+  { id: 'evidencias', label: 'Evidências' },
+  { id: 'limites', label: 'Limites' },
+];
+---
+
+<Base
+  title={`${entry.data.title} — Gabriel Almir`}
+  description={entry.data.summary}
+  path={`/projects/${entry.id}`}
+>
+  <article class="case shell">
+    <header class="case-header">
+      <a class="text-link" href="/#sistemas">
+        <Arrow direction="left" />
+        {casePage.back}
+      </a>
+      <p class="label case-category">{entry.data.category}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="case-summary">{entry.data.summary}</p>
+      <div class="case-metadata">
+        <dl>
+          <div>
+            <dt>Status</dt>
+            <dd>{entry.data.status === 'experimental' ? 'Experimental' : 'Implementado'}</dd>
+          </div>
+          <div>
+            <dt>Referência-fonte</dt>
+            <dd>
+              <a href={`${entry.data.repo}/tree/${entry.data.commit}`}>{entry.data.commit}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Licença</dt>
+            <dd>{entry.data.license}</dd>
+          </div>
+        </dl>
+        <a class="button button-primary" href={entry.data.repo}>
+          Acessar o código <Arrow direction="up" />
+        </a>
+      </div>
+    </header>
+    <div class="case-premise">
+      <div>
+        <p class="label">Restrição principal</p>
+        <p>{entry.data.constraints[0]}</p>
+      </div>
+      <div>
+        <p class="label">Decisão central</p>
+        <p>{entry.data.decisions[0].body}</p>
+      </div>
+    </div>
+    <div id="mapa">
+      <h2 class="sr-only">{casePage.diagram}</h2>
+      {entry.id === 'mcp-animaginexl' ? (
+        <ArchitectureExplorer instance="case" />
+      ) : entry.id === 'pimbas' ? (
+        <PimbasComparison instance="case" />
+      ) : (
+        <CaseDiagram slug={entry.id} />
+      )}
+    </div>
+    {entry.id === 'mcp-animaginexl' && <ArgumentBuilder />}
+    <div class="case-layout">
+      <aside class="case-sidebar">
+        <nav aria-label="Neste estudo de caso">
+          <p class="label">{casePage.contents}</p>
+          {sections.map((section) => (
+            <a href={`#${section.id}`}>{section.label}</a>
+          ))}
+        </nav>
+      </aside>
+      <div class="case-content">
+        <section id="contexto" aria-labelledby="contexto-h">
+          <h2 id="contexto-h">Contexto</h2>
+          <div class="prose">
+            <Content />
+          </div>
+        </section>
+        <section id="forcas" aria-labelledby="forcas-h">
+          <h2 id="forcas-h">Forças e restrições</h2>
+          <ul class="constraint-list">
+            {entry.data.constraints.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section id="decisoes" aria-labelledby="decisoes-h">
+          <h2 id="decisoes-h">Decisões</h2>
+          <ol class="decision-list">
+            {entry.data.decisions.map((item) => (
+              <li>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+        {entry.data.qualities && (
+          <section id="qualidades" aria-labelledby="qualidades-h">
+            <h2 id="qualidades-h">Atributos de qualidade</h2>
+            <div class="qualities">
+              {entry.data.qualities.map((item) => (
+                <article>
+                  <h3>{item.attribute}</h3>
+                  <p>{item.approach}</p>
+                  <p class="quality-evidence">
+                    <span class="label">Evidência</span>
+                    {item.evidence}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+        <section id="evidencias" aria-labelledby="evidencias-h">
+          <h2 id="evidencias-h">Evidências</h2>
+          <ul class="evidence-list">
+            {entry.data.evidence.map((item) => (
+              <li>
+                <h3>
+                  {item.href ? (
+                    <a href={item.href}>
+                      {item.title}
+                      <Arrow direction="up" />
+                    </a>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
+                <p>{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section id="limites" class="limits-section" aria-labelledby="limites-h">
+          <h2 id="limites-h">Limites conhecidos</h2>
+          <ul class="constraint-list">
+            {entry.data.limits.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+    <nav aria-label="Continuar explorando" class="case-next">
+      <a href="/#sistemas" class="text-link">
+        <Arrow direction="left" />
+        Todos os projetos
+      </a>
+      <a href={`/projects/${next.id}`}>
+        <span class="label">Próximo estudo</span>
+        <strong>
+          {next.data.title} <Arrow />
+        </strong>
+      </a>
+    </nav>
+    <div class="case-contact">
+      <p>{casePage.contact}</p>
+      <a class="text-link" href={`mailto:${contact.email}`}>
+        Vamos conversar <Arrow direction="up" />
+      </a>
+    </div>
+  </article>
+</Base>

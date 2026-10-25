@@ -1,0 +1,9 @@
+.git/
+.tools/
+node_modules/
+dist/
+.astro/
+backup/
+reports/
+playwright-report/
+test-results/
