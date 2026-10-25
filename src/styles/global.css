@@ -328,13 +328,10 @@ main[id] {
   min-height: 44px;
 }
 .monogram {
-  font-size: 42px;
-  font-weight: 650;
-  letter-spacing: -5px;
-  line-height: 1;
-}
-.monogram > span {
-  color: var(--accent);
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  color: var(--ink);
 }
 .wordmark-note {
   font-size: 11px;

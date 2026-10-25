@@ -2,6 +2,7 @@
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import '../styles/global.css';
 import '../styles/interactions.css';
+import Preloader from '../components/Preloader.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import BackgroundSketches from '../components/BackgroundSketches.astro';
@@ -74,6 +75,18 @@ const canonical = new URL(path === '/' ? '/' : path.replace(/\/$/, ''), site.url
         });
       })();
     </script>
+    <script is:inline>
+      (() => {
+        if (location.pathname !== '/' || matchMedia('(prefers-reduced-motion: reduce)').matches)
+          return;
+        try {
+          if (sessionStorage.getItem('brand-intro-seen')) return;
+          sessionStorage.setItem('brand-intro-seen', '1');
+          document.documentElement.classList.add('brand-intro');
+          setTimeout(() => document.documentElement.classList.remove('brand-intro'), 1600);
+        } catch {}
+      })();
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content={site.author} />
@@ -97,6 +110,7 @@ const canonical = new URL(path === '/' ? '/' : path.replace(/\/$/, ''), site.url
     <a class="skip-link" href="#conteudo">
       Pular para o conteúdo
     </a>
+    {path === '/' && !noindex && <Preloader />}
     <Nav />
     <main id="conteudo" tabindex="-1">
       <slot />

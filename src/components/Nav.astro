@@ -1,4 +1,5 @@
 ---
+import BrandMark from './BrandMark.astro';
 import { nav, themeControl } from '../lib/content';
 ---
 
@@ -6,9 +7,7 @@ import { nav, themeControl } from '../lib/content';
   <div class="shell header-inner">
     <a class="wordmark" href="/">
       <span class="sr-only">Gabriel Almir — início.</span>
-      <span class="monogram" aria-hidden="true">
-        ga<span>.</span>
-      </span>
+      <BrandMark class="monogram" />
       <span class="wordmark-note">
         Engenharia
         <br />& IA aplicada

@@ -1,0 +1,54 @@
+---
+import BrandMark from './BrandMark.astro';
+---
+
+<div class="brand-opening" aria-hidden="true" inert>
+  <BrandMark class="opening-mark" />
+</div>
+<style>
+  .brand-opening {
+    display: none;
+  }
+  :global(.brand-intro) .brand-opening {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--paper);
+    color: var(--ink);
+    pointer-events: none;
+    animation: opening-out 1.1s ease both;
+  }
+  .brand-opening :global(.opening-mark) {
+    width: 96px;
+    height: 96px;
+    animation: mark-in 650ms ease both;
+  }
+  @keyframes mark-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes opening-out {
+    0%,
+    65% {
+      opacity: 1;
+      visibility: visible;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.brand-intro) .brand-opening {
+      display: none;
+    }
+  }
+</style>
