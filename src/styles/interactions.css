@@ -1,0 +1,346 @@
+/* Layout and progressive enhancement for the engineering studies. */
+.mcp-feature {
+  background: var(--work);
+  border-top: 1px solid var(--line);
+  padding-block: 40px 56px;
+}
+.feature-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 36px;
+}
+.feature-heading h2 {
+  font-size: clamp(34px, 3.8vw, 54px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  margin-top: 12px;
+  line-height: 1.12;
+}
+.feature-heading .lead {
+  color: var(--muted);
+  max-width: 30ch;
+}
+.feature-heading .lead em {
+  color: var(--accent);
+  font-size: 1.3em;
+}
+.feature-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 7%;
+  align-items: start;
+}
+.feature-layout > * {
+  min-width: 0;
+}
+.feature-copy .study-question {
+  margin-top: 0;
+  max-width: 21ch;
+}
+.feature-copy > p:not(.study-question):not(.study-limit) {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 51ch;
+  margin-top: 18px;
+}
+.feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-block: 24px 12px;
+}
+.feature-actions .button {
+  font-size: 16px;
+}
+.feature-copy .study-limit {
+  margin-top: 18px;
+}
+.source-link {
+  display: inline-block;
+  padding-block: 12px;
+  color: var(--accent);
+  font: 14px/1.6 var(--sans);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.source-link:hover {
+  color: var(--accent);
+}
+.architecture-explorer {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: 24px;
+  min-width: 0;
+}
+.explorer-instruction {
+  color: var(--muted);
+  font-size: 14px;
+}
+.architecture-flow {
+  width: 100%;
+  margin-block: 24px;
+  overflow: visible;
+}
+.architecture-flow rect {
+  fill: var(--wash);
+  stroke: var(--line);
+  transition:
+    stroke 180ms,
+    fill 180ms;
+}
+.architecture-flow text {
+  fill: var(--muted);
+  font: 18px var(--mono);
+}
+.architecture-flow .flow-label {
+  font: 14px var(--sans);
+}
+.architecture-flow path {
+  stroke: var(--line);
+  fill: none;
+  stroke-width: 2;
+}
+.architecture-flow .is-selected rect {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.architecture-flow .is-selected text:not(.flow-label) {
+  fill: var(--paper);
+}
+.architecture-flow .is-selected path,
+.architecture-flow path.is-related {
+  stroke: var(--accent);
+}
+.migration-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 20px;
+}
+.architecture-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-block: 20px;
+}
+.architecture-controls button {
+  text-align: left;
+}
+.architecture-controls[hidden],
+.migration-controls[hidden] {
+  display: none;
+}
+.architecture-controls button,
+.migration-controls button {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--muted);
+  padding: 10px 12px;
+  min-height: 44px;
+  font: 16px/1.5 var(--sans);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.architecture-controls button span {
+  font: 12px var(--mono);
+  margin-right: 8px;
+}
+.architecture-controls button[aria-pressed='true'],
+.migration-controls button[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+.architecture-controls button:hover,
+.migration-controls button:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.architecture-panel {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.architecture-panel + .architecture-panel {
+  margin-top: 24px;
+}
+.stage-identifier {
+  font: 13px/1.6 var(--mono);
+  color: var(--accent);
+  margin-bottom: 18px;
+  overflow-wrap: anywhere;
+}
+.architecture-panel dl {
+  display: grid;
+  gap: 16px;
+}
+.architecture-panel dt {
+  font: 14px/1.5 var(--sans);
+  color: var(--accent);
+  font-weight: 550;
+  margin-bottom: 4px;
+}
+.architecture-panel dd {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.architecture-panel .source-link {
+  margin-top: 10px;
+}
+.architecture-explorer[data-enhanced] .architecture-panels {
+  display: grid;
+}
+.architecture-explorer[data-enhanced] .architecture-panel {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+/* Keep all panels in layout so switching never moves the next section. */
+.architecture-explorer[data-enhanced] .architecture-panel[hidden] {
+  display: block;
+  visibility: hidden;
+}
+.migration-web {
+  display: grid;
+  gap: 24px;
+  margin-block: 24px;
+}
+.migration-web > div > span {
+  color: var(--muted);
+  font-size: 14px;
+}
+.migration-web strong {
+  display: block;
+  margin-block: 12px;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 450;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  color: var(--accent);
+}
+.migration-web p {
+  color: var(--muted);
+  font-size: 16px;
+}
+.migration-figure[data-enhanced] .migration-web > div {
+  grid-area: 1 / 1;
+}
+.migration-figure[data-enhanced] [data-runtime][hidden] {
+  display: block;
+  visibility: hidden;
+}
+.case #mapa > .architecture-explorer,
+.case #mapa > .migration-figure {
+  max-width: 850px;
+  margin-inline: auto;
+  padding: 28px;
+}
+.proof > p:not(.proof-mark),
+.study-implementation,
+.skill-row dd p,
+.career-list li > p:last-child,
+.presence-link > span > span,
+.case-content p,
+.constraint-list li {
+  font-size: 16px;
+}
+.proof h3 {
+  font-size: 16px;
+}
+
+.study-limit,
+.contract-study .contract-note,
+.project-row .project-row-limit,
+.about-intro > div > p + p,
+.formation > p:last-child,
+.formation-note,
+.qualities .quality-evidence,
+.case-contact p,
+.not-found-grid > div > p,
+.migration-domain small,
+.contract-definitions dd span,
+.ai-heading > div > p + p {
+  font-size: 16px;
+}
+.button,
+.text-link,
+.proof .text-link,
+.project-row .text-link {
+  font-size: 16px;
+}
+.study-intro .source-link + .text-link {
+  display: flex;
+  width: fit-content;
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .feature-layout {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 28px;
+  }
+  .feature-heading {
+    align-items: start;
+  }
+  .feature-heading .lead {
+    max-width: 24ch;
+  }
+  .architecture-explorer {
+    padding: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .mcp-feature {
+    padding-block: 32px 40px;
+  }
+  .feature-heading {
+    display: block;
+    margin-bottom: 30px;
+  }
+  .feature-heading .lead {
+    margin-top: 18px;
+    max-width: 36ch;
+  }
+  .feature-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .feature-copy .study-question {
+    max-width: 26ch;
+  }
+  .architecture-explorer {
+    padding: 20px 16px;
+  }
+  .architecture-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .architecture-controls button {
+    padding-inline: 8px;
+    text-align: left;
+  }
+  .architecture-controls button span {
+    margin-right: 5px;
+  }
+  .case #mapa > .architecture-explorer,
+  .case #mapa > .migration-figure {
+    padding: 20px 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .architecture-flow rect {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .architecture-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .architecture-controls button {
+    text-align: left;
+  }
+}

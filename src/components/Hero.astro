@@ -1,284 +1,79 @@
 ---
-/**
- * Hero — a primeira tela.
- *
- * Quatro camadas, do fundo para a frente: o campo de luz (o palco fixo, ou a
- * chapa em `--plate` sem JS), o retrato ocupando a altura inteira à direita, o
- * véu que segura o contraste entre os dois, e o texto por cima de tudo.
- *
- * A composição é de plano cinematográfico, não de grade: a headline atravessa
- * o retrato em vez de dividir a tela com ele. Só a última camada importa —
- * sem JS a cena nunca chega e o texto já está inteiro no lugar.
- */
 import { Image } from 'astro:assets';
-import Icon from './Icon.astro';
-import { hero } from '../lib/content';
+import Arrow from './Arrow.astro';
+import { hero, trajectory } from '../lib/content';
 import { figureImages } from '../lib/images';
-
-// A ênfase do lead é recortada do próprio texto: a copy continua vindo inteira
-// de content.ts e a marcação desaparece sozinha se a frase mudar de lugar.
-const ACCENT = 'com controle';
-const accentAt = hero.lead.indexOf(ACCENT);
-const leadBefore = accentAt < 0 ? hero.lead : hero.lead.slice(0, accentAt);
-const leadAccent = accentAt < 0 ? '' : ACCENT;
-const leadAfter = accentAt < 0 ? '' : hero.lead.slice(accentAt + ACCENT.length);
-
-/*
- * O retrato é uma CHAPA, não um recorte.
- *
- * A primeira versão mascarava a foto com uma mancha de pincel: sobre um hero
- * quase preto aquilo virava uma cabeça escura flutuando, sem corpo e sem
- * moldura — lia como ameaça, não como retrato. A chapa resolve os dois
- * problemas de uma vez. Ela é clara, então o hero deixa de ser uma tela escura
- * com texto; e ela tem borda, então a figura está *dentro* de alguma coisa.
- */
-const portraitAlt =
-  'Desenho a grafite de Gabriel Almir, de frente, com meio sorriso, sobre um fundo de papel claro com blocos geométricos ao lado.';
+const current = trajectory.career.find((entry) => 'now' in entry && entry.now)!;
 ---
 
-<section
-  id="inicio"
-  data-hero
-  data-chapter
-  data-chapter-title="Início"
-  data-steps="1"
-  style="--steps: 1; --plate: var(--plate-1)"
-  aria-labelledby="hero-title"
-  class="relative isolate flex min-h-[calc(100svh-var(--nav-height))] flex-col overflow-hidden bg-ink-900"
->
-  {/*
-    O fundo do hero é o palco (Stage.astro) no modo capítulos e a chapa em
-    `--plate` fora dele — a seção não tem mais canvas próprio.
-  */}
-  {/*
-    O retrato é a matéria do plano, não uma ilustração ao lado do texto: ele
-    ocupa a altura inteira do hero, encostado na direita, e a headline passa
-    por cima dele. Fica FORA do palco e da grade de propósito — preso a uma
-    coluna ele voltaria a ser um card com foto.
-
-    Some abaixo de `md`. Ele é claro, e atrás de um parágrafo num telefone o
-    contraste do texto passaria a variar linha a linha. Num telefone o hero é
-    a frase.
-
-    Decorativo na composição, não no conteúdo: é o rosto de quem escreve a
-    página, então mantém o `alt` de verdade e continua anunciado. O
-    `pointer-events-none` existe só para o texto por cima receber o clique.
-  */}
-  <div
-    data-hero-portrait
-    class="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[56%] md:block lg:w-[48%]"
-  >
-    <Image
-      src={figureImages.portrait}
-      alt={portraitAlt}
-      widths={[570, 760, 1100]}
-      sizes="60vw"
-      format="avif"
-      quality={70}
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      class="h-full w-full object-cover object-[center_30%]"
-    />
+<section id="inicio" class="hero shell" aria-labelledby="hero-title">
+  <div class="hero-top label">
+    <span>{hero.kicker}</span>
+    <span class="edition">Portfólio / 2026</span>
   </div>
-
-  {/*
-    O véu entre o retrato e o texto. A headline cruza a foto agora, e o desenho
-    está sobre papel claro: sem isto a última palavra de cada linha cairia num
-    fundo quase branco. O gradiente é opaco onde o texto começa e desaparece
-    antes da borda direita, para o retrato não ficar chapado.
-  */}
-  <div aria-hidden="true" class="hero-scrim pointer-events-none absolute inset-0 z-10 hidden md:block"></div>
-
-  <div data-chapter-stage class="relative z-20 flex flex-1 flex-col">
-  <div data-step class="flex flex-1 flex-col justify-between pt-8 pb-6 md:pt-10 md:pb-8">
-  <div class="u-shell relative flex flex-1 items-center">
-    <div class="grid w-full items-center gap-y-10 md:grid-cols-12 md:gap-x-10 lg:gap-x-16">
-      <div class="relative z-20 col-start-1 row-start-1 md:col-span-8">
-        <p data-hero-kicker class="u-label text-blue">{hero.kicker}</p>
-
-        <h1 id="hero-title" data-hero-headline class="u-display mt-5 text-hero-fit text-paper italic">
-          {
-            /*
-              Cada linha é o container de overflow do SplitText. O padding salva
-              a descida das serifas itálicas do `overflow: hidden` e a margem
-              negativa devolve o espaço ao ritmo vertical; o espaço no fim da
-              linha mantém a frase inteira ao ser lida em voz alta ou copiada.
-            */
-            hero.headlineLines.map((line, index) => (
-              <span data-split-line class="block pr-[0.06em] pb-[0.12em] -mb-[0.12em]">{line}{index < hero.headlineLines.length - 1 ? ' ' : ''}</span>
-            ))
-          }
-        </h1>
-
-        {/* Numa linha só: qualquer quebra aqui viraria espaço antes do ponto final. */}
-        <p data-hero-lead class="mt-6 max-w-2xl text-ink-300">{leadBefore}<em class="u-display text-blue-bright italic">{leadAccent}</em>{leadAfter}</p>
-
-        <div data-hero-actions class="mt-8 flex flex-wrap items-center gap-4">
-          {
-            hero.actions.map((action) => (
-              <a
-                href={action.href}
-                class:list={[
-                  'inline-flex items-center gap-2.5 px-6 py-4 u-label transition-colors duration-300',
-                  action.primary
-                    ? 'hero-cta-ring bg-paper text-ink-950 hover:bg-blue-bright'
-                    : 'border u-hairline text-paper hover:border-blue hover:text-blue-bright',
-                ]}
-              >
-                {action.label}
-                <Icon name="arrow-down-right" size={14} />
-              </a>
-            ))
-          }
-        </div>
-
-        <p data-hero-status class="mt-8 flex items-center gap-3 u-label text-ink-400">
-          <span
-            aria-hidden="true"
-            class="hero-status-dot relative inline-block size-1.5 shrink-0 rounded-full bg-blue"
-          ></span>
-          {hero.status}
-        </p>
-      </div>
-
+  <div class="hero-copy">
+    <h1 id="hero-title">
+      {hero.title}
+      <span class="name-dot" aria-hidden="true">
+        .
+      </span>
+    </h1>
+    <p class="hero-heading">
+      {hero.headline} <span>{hero.focus}</span>
+    </p>
+    <div class="hero-actions">
+      {hero.actions.map((action) => (
+        <a
+          class:list={['button', action.primary ? 'button-primary' : 'button-text']}
+          href={action.href}
+        >
+          {action.label}
+          {action.primary && <Arrow />}
+        </a>
+      ))}
     </div>
   </div>
-
-  <div class="u-shell relative z-10 mt-6 flex items-center gap-5">
-    <p data-reveal class="u-label inline-flex items-center gap-2 text-ink-400">
-      role
-      <Icon name="chevron-down" size={14} />
+  <div class="hero-grid">
+    <div class="hero-intro">
+      <p class="label">01 / Apresentação</p>
+      <p class="hero-lead">{hero.lead}</p>
+    </div>
+    <figure class="portrait-figure">
+      <div class="portrait-frame">
+        <div class="portrait-paper">
+          <Image
+            src={figureImages.portrait}
+            alt="Retrato ilustrado de Gabriel Almir a grafite, de frente, com moletom."
+            widths={[288, 320, 420, 640, 840]}
+            sizes="(min-width: 768px) 420px, (min-width: 408px) 320px, calc(100vw - 88px)"
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+      <figcaption class="label">Retrato ilustrado a partir de fotografia</figcaption>
+    </figure>
+    <div class="hero-professional">
+      <p class="label">Atuação atual</p>
+      <strong>{current.role}</strong>
+      <p>
+        {current.org}
+        <br />
+        {current.period}
+      </p>
+      <a class="text-link" href="#trajetoria">
+        Conhecer a trajetória <Arrow />
+      </a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <p class="status">
+      <span aria-hidden="true"></span>
+      {hero.status}
     </p>
-    <span aria-hidden="true" class="h-px flex-1 bg-ink-700"></span>
-  </div>
-  </div>
+    <a href="#sistemas">
+      Projetos selecionados <span class="sr-only">— ir ao MCP AnimagineXL</span>
+    </a>
   </div>
 </section>
-
-<style is:global>
-  /*
-   * O tamanho do H1 do hero tem um teto em ALTURA de viewport, não só em
-   * largura. `text-hero` sozinho (9vw) devolve 130px numa tela de 1440x900:
-   * três linhas viram 342px e o hero passa de uma tela, empurrando o CTA e o
-   * status para fora. Com o `min()` a tipografia cede quando a tela é baixa,
-   * que é a variável que o `vw` ignora. O token global segue intacto para o
-   * H2 do contato, que não disputa altura com nada.
-   */
-  .text-hero-fit {
-    font-size: clamp(3rem, min(9.4vw, 12.6svh), 10.5rem);
-    line-height: 0.86;
-  }
-
-  /*
-   * O véu do hero. Dois gradientes: o horizontal segura o contraste onde a
-   * headline cruza o papel claro do retrato; o vertical fecha topo e base,
-   * onde ficam a barra de navegação e a régua do rodapé.
-   */
-  .hero-scrim {
-    background:
-      linear-gradient(
-        90deg,
-        var(--color-ink-950) 0%,
-        color-mix(in oklab, var(--color-ink-950) 92%, transparent) 34%,
-        color-mix(in oklab, var(--color-ink-950) 62%, transparent) 62%,
-        color-mix(in oklab, var(--color-ink-950) 24%, transparent) 88%,
-        transparent 100%
-      ),
-      linear-gradient(
-        180deg,
-        color-mix(in oklab, var(--color-ink-950) 70%, transparent) 0%,
-        transparent 22%,
-        transparent 74%,
-        color-mix(in oklab, var(--color-ink-950) 80%, transparent) 100%
-      );
-  }
-
-  /* Global e não escopado de propósito: estas regras dependem de
-     `.motion-ready`, que o gate escreve no <html> — fora do componente, o
-     escopo do Astro nunca casaria com o seletor. Os alvos são os data-* do
-     hero, que não existem em nenhuma outra seção. */
-
-  /* O CTA primário vira um anel — o único lugar do site onde o botão é
-     redondo, e é o gesto que a referência cinematográfica pede na abertura. */
-  [data-hero-actions] .hero-cta-ring {
-    border-radius: 9999px;
-    padding-inline: 1.75rem;
-  }
-
-  /* Registrado para o motion poder interpolar o número em vez de trocá-lo de
-     uma vez; o valor inicial é 1, ou seja, retrato inteiro.
-
-     `inherits: true` importa: o GSAP anima a propriedade no wrapper, mas quem
-     a lê é o <img> dentro dele. Com herança desligada o filho enxergaria
-     sempre o valor inicial e a revelação simplesmente não aconteceria. */
-  @property --mask-progress {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 1;
-  }
-
-  [data-hero-portrait] {
-    --mask-progress: 1;
-  }
-
-  /*
-   * Duas máscaras compostas, uma por eixo.
-   *
-   * A vertical é a revelação: `--mask-progress` sobe de 0 a 1 e o retrato
-   * emerge de baixo para cima. A horizontal é permanente — sem ela o retrato
-   * full-bleed terminaria numa aresta reta no meio da tela, que é exatamente a
-   * cara de "imagem colada" que a composição está tentando perder. Com ela, o
-   * papel se dissolve no campo de luz.
-   *
-   * `mask-composite: intersect` (`-webkit-mask-composite: source-in` no
-   * prefixado) é o que faz as duas valerem ao mesmo tempo; sem isso a segunda
-   * simplesmente substitui a primeira.
-   */
-  [data-hero-portrait] img {
-    -webkit-mask-image:
-      linear-gradient(
-        to top,
-        #000 calc(var(--mask-progress) * 100%),
-        transparent calc(var(--mask-progress) * 100% + 12%)
-      ),
-      linear-gradient(to right, transparent 0%, #000 42%, #000 100%);
-    mask-image:
-      linear-gradient(
-        to top,
-        #000 calc(var(--mask-progress) * 100%),
-        transparent calc(var(--mask-progress) * 100% + 12%)
-      ),
-      linear-gradient(to right, transparent 0%, #000 42%, #000 100%);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-  }
-
-  /* Só aqui o retrato começa apagado — e só depois que o gate liberou. */
-  .motion-ready [data-hero-portrait] {
-    --mask-progress: 0;
-  }
-
-  /* Pulso do ponto de status. Parado sem movimento liberado: um halo que não
-     anima só empataria com o próprio ponto. */
-  .motion-ready [data-hero-status] .hero-status-dot::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background-color: var(--color-blue);
-    animation: hero-status-ping 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes hero-status-ping {
-    70%,
-    100% {
-      transform: scale(2.6);
-      opacity: 0;
-    }
-  }
-</style>

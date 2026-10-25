@@ -115,22 +115,8 @@ const RULES = [
 
 const TEXT_EXT = /\.(html|xml|txt|json|js|css|svg)$/i;
 
-/**
- * O que fica de fora, e por quê.
- *
- * Antes o `_astro/` inteiro era pulado — e é lá que moram o CSS construído e
- * qualquer string que acabe num bundle. Pular o maior diretório da saída
- * deixava o gate cego por conveniência.
- *
- * O que continua fora é só o JS de biblioteca minificado: `deltaY:0,event:e`
- * do Lenis casa com a regra de volume ("0, event"), e um gate que grita sobre
- * o interior do GSAP é um gate que alguém desliga na segunda-feira. A copy
- * deste site é renderizada no servidor: ela está no HTML, não no bundle. Se um
- * dia passar a haver texto em JS de aplicação, esta é a linha a rever.
- */
-function skip(relPath) {
-  return /(^|[\\/])_astro[\\/].*\.js$/i.test(relPath);
-}
+// O build atual não inclui bibliotecas de animação. Todos os bundles de texto
+// entram na verificação, inclusive JavaScript próprio e CSS de aplicação.
 
 /**
  * O texto que uma pessoa lê, mais o que ela ouve.
@@ -146,7 +132,9 @@ function skip(relPath) {
  *     lugar do site onde um cargo aparece fora do corpo da página.
  */
 function visibleText(html) {
-  const ldjson = [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+  const ldjson = [
+    ...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi),
+  ]
     .map((match) => match[1])
     .join(' ');
 
@@ -180,7 +168,10 @@ async function* walk(dir) {
 
 /** Um slug vira URL, então o caminho do arquivo também é copy publicada. */
 function pathAsText(rel) {
-  return rel.split(sep).join(' ').replace(/[-_/.]/g, ' ');
+  return rel
+    .split(sep)
+    .join(' ')
+    .replace(/[-_/.]/g, ' ');
 }
 
 async function check(root) {
@@ -189,7 +180,6 @@ async function check(root) {
 
   for await (const file of walk(root)) {
     const rel = relative(root, file);
-    if (skip(rel)) continue;
     files += 1;
     const raw = await readFile(file, 'utf8');
     const haystacks = [
@@ -226,7 +216,7 @@ const SELF_TEST_CASES = [
   ['photogimp-maintainer-pt', 'Mantenho o PhotoGIMP sozinho.'],
   ['photogimp-authorship-en', 'Gabriel is the sole maintainer of the project.'],
   ['photogimp-authorship-en', 'Gabriel is the PhotoGIMP maintainer.'],
-  ["photogimp-authorship-en", "PhotoGIMP's creator, Gabriel Almir, keeps it alive."],
+  ['photogimp-authorship-en', "PhotoGIMP's creator, Gabriel Almir, keeps it alive."],
   ['photogimp-authorship-en', 'Gabriel maintains PhotoGIMP.'],
   ['absolute-volume', 'A plataforma processa 1M+ eventos.'],
   // A forma natural em português, que a regra antiga não via.

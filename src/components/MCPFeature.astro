@@ -1,0 +1,53 @@
+---
+import ArchitectureExplorer from './ArchitectureExplorer.astro';
+import Arrow from './Arrow.astro';
+import { mcpSource } from '../lib/mcp';
+---
+
+<section class="mcp-feature section" aria-labelledby="mcp-title">
+  <div class="shell">
+    <div class="feature-heading">
+      <div>
+        <p class="project-category">Projeto experimental · Python / MCP / Diffusers</p>
+        <h2 id="mcp-title">MCP AnimagineXL</h2>
+      </div>
+      <p class="lead">
+        Backend entre o agente e o modelo.
+        <br />
+        <em>Da chamada aos artefatos.</em>
+      </p>
+    </div>
+    <div class="feature-layout">
+      <div class="feature-copy">
+        <p class="study-question">Entre o agente e a imagem, um contrato.</p>
+        <p>
+          Integro agentes à geração local de imagens com Animagine XL 4.0. Ferramentas MCP preparam
+          prompts, verificam regras e expõem o pipeline Diffusers.
+        </p>
+        <p>
+          A execução grava a imagem e seus parâmetros em PNG e JSON. O contrato deixa visíveis as
+          entradas, as responsabilidades e os limites do hardware.
+        </p>
+        <div class="feature-actions">
+          <a class="button button-primary" href="/projects/mcp-animaginexl#experimentar">
+            Montar argumentos <Arrow />
+          </a>
+          <a
+            class="text-link"
+            href="/projects/mcp-animaginexl"
+            aria-label="Ler estudo de caso: MCP AnimagineXL"
+          >
+            Ler estudo de caso <Arrow />
+          </a>
+        </div>
+        <a class="source-link" href={`${mcpSource}/src/anime_diffusion_mcp/server.py`}>
+          Fonte: contratos no commit 7ffbf7f
+        </a>
+        <p class="study-limit">
+          Laboratório experimental. Sem benchmarks publicados ou validação de operação em produção.
+        </p>
+      </div>
+      <ArchitectureExplorer instance="home" />
+    </div>
+  </div>
+</section>

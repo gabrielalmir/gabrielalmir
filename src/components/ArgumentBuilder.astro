@@ -1,0 +1,324 @@
+---
+import { generationExample, mcpCommit, mcpSource } from '../lib/mcp';
+const numericFields = [
+  { name: 'width', label: 'Largura', help: 'Inteiro positivo em pixels. Padrão: 832.', step: '1' },
+  { name: 'height', label: 'Altura', help: 'Inteiro positivo em pixels. Padrão: 1216.', step: '1' },
+  {
+    name: 'steps',
+    label: 'Steps',
+    help: 'Inteiro positivo. Padrão: 28; LCM usa outra configuração.',
+    step: '1',
+  },
+  {
+    name: 'guidance_scale',
+    label: 'Guidance',
+    help: 'Número finito não negativo. Padrão: 5.',
+    step: 'any',
+  },
+  {
+    name: 'seed',
+    label: 'Seed (opcional)',
+    help: 'Inteiro seguro no navegador. Vazio: seed aleatória no servidor.',
+    step: '1',
+  },
+] as const;
+---
+
+<section id="experimentar" class="argument-builder" aria-labelledby="experimentar-title">
+  <p class="label">Experimento no navegador / generate_image</p>
+  <h2 id="experimentar-title">Do prompt ao contrato</h2>
+  <p class="builder-boundary">
+    Monta e verifica argumentos no navegador. A geração acontece no servidor MCP.
+  </p>
+  <p>
+    Edite os campos para preparar uma chamada de texto para imagem. A verificação estrutural é
+    local: exige dimensões e steps positivos, guidance não negativo e inteiros representáveis com
+    segurança em JavaScript. Não equivale ao validador Python.
+  </p>
+  <p class="builder-reference">
+    Referência:{' '}
+    <a href={`${mcpSource}/src/anime_diffusion_mcp/server.py#L110`}>assinatura de generate_image</a>{' '}
+    e <a href={`${mcpSource}/README.md#prompt-rules-short-version`}>regras documentadas</a>, commit{' '}
+    <code>{mcpCommit.slice(0, 7)}</code>.
+  </p>
+  <p class="builder-boundary" data-builder-fallback>
+    Ative JavaScript para editar, verificar, copiar e baixar os argumentos. O exemplo e as regras
+    permanecem disponíveis abaixo.
+  </p>
+  <form data-argument-builder novalidate>
+    <fieldset disabled data-builder-fields>
+      <legend class="sr-only">Argumentos de generate_image</legend>
+      <div class="builder-form-actions">
+        <button class="button button-text" type="button" data-load-example>
+          Carregar exemplo documentado
+        </button>
+      </div>
+      <div class="builder-field">
+        <label for="argument-prompt">Prompt</label>
+        <p id="prompt-help">Tags separadas por vírgula, conforme as convenções do Animagine XL.</p>
+        <textarea
+          id="argument-prompt"
+          name="prompt"
+          rows="5"
+          aria-describedby="prompt-help prompt-error"
+        >{generationExample.prompt}</textarea>
+        <p id="prompt-error" class="field-error" hidden></p>
+      </div>
+      <div class="builder-numbers">
+        {numericFields.map((field) => (
+          <div class="builder-field">
+            <label for={`argument-${field.name}`}>{field.label}</label>
+            <p id={`${field.name}-help`}>{field.help}</p>
+            <input
+              id={`argument-${field.name}`}
+              type="number"
+              inputmode={field.step === 'any' ? 'decimal' : 'numeric'}
+              name={field.name}
+              value={generationExample[field.name]}
+              step={field.step}
+              aria-describedby={`${field.name}-help ${field.name}-error`}
+            />
+            <p id={`${field.name}-error`} class="field-error" hidden></p>
+          </div>
+        ))}
+      </div>
+    </fieldset>
+    <p class="builder-status" role="status" aria-live="polite" data-builder-status>
+      Exemplo documentado. Ative JavaScript para verificar suas alterações.
+    </p>
+    <div class="builder-review">
+      <div>
+        <h3>Checklist das regras</h3>
+        <ul class="builder-checklist" data-checklist>
+          <li>Começar pela contagem de sujeitos.</li>
+          <li>Usar pelo menos oito tags.</li>
+          <li>Terminar com masterpiece, best quality, very aesthetic, absurdres.</li>
+          <li>Conferir personagem e série manualmente.</li>
+          <li>Considerar a resolução e a memória disponível.</li>
+        </ul>
+        <p class="builder-manual">
+          O checklist cobre regras simples do README. Consistência entre personagem e série,
+          classificação completa de tags e recursos do hardware exigem revisão no servidor. O
+          negative prompt padrão será usado porque este formulário o omite.
+        </p>
+        <a class="source-link" href={`${mcpSource}/src/anime_diffusion_mcp/prompt/validator.py`}>
+          Fonte: validador Python e resoluções recomendadas
+        </a>
+      </div>
+      <div class="builder-output">
+        <h3>Argumentos JSON</h3>
+        <p id="json-help">
+          Copie o objeto de argumentos para seu cliente MCP. Nenhuma chamada é enviada por esta
+          página.
+        </p>
+        <pre
+          tabindex="0"
+          aria-label="Argumentos JSON"
+          aria-describedby="json-help"
+        ><code data-arguments-json>{JSON.stringify(generationExample, null, 2)}</code></pre>
+        <div class="builder-export">
+          <button type="button" class="button button-primary" data-copy-arguments disabled>
+            Copiar JSON
+          </button>
+          <button type="button" class="button button-text" data-download-arguments disabled>
+            Baixar JSON
+          </button>
+        </div>
+        <p class="export-status" role="status" data-export-status></p>
+      </div>
+    </div>
+  </form>
+</section>
+<script>
+  import '../scripts/argument-builder';
+</script>
+<style is:global>
+  .argument-builder {
+    border-block: 1px solid var(--line);
+    padding-block: 40px;
+    margin-top: 48px;
+  }
+  .argument-builder > .label {
+    color: var(--accent);
+  }
+  .argument-builder h2 {
+    font-size: clamp(30px, 4vw, 48px);
+    letter-spacing: -0.045em;
+    font-weight: 450;
+    margin-block: 16px 24px;
+  }
+  .argument-builder > p {
+    max-width: 65ch;
+    margin-block: 16px;
+  }
+  .builder-boundary {
+    border-left: 3px solid var(--accent);
+    padding: 14px 20px;
+    background: var(--wash);
+    font-weight: 500;
+  }
+  .builder-reference {
+    color: var(--muted);
+  }
+  .builder-reference a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .builder-reference code {
+    font-family: var(--mono);
+  }
+  .argument-builder fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .builder-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-block: 24px 10px;
+  }
+  .builder-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .builder-numbers .builder-field > p:not(.field-error) {
+    min-height: 3em;
+  }
+  .builder-field label {
+    display: block;
+    font-weight: 550;
+    font-size: 16px;
+  }
+  .builder-field > p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+    margin-block: 8px;
+  }
+  .builder-field input,
+  .builder-field textarea {
+    width: 100%;
+    border: 1px solid var(--muted);
+    border-radius: 2px;
+    padding: 12px;
+    color: var(--ink);
+    background: var(--paper);
+    font: 16px/1.6 var(--sans);
+  }
+  .builder-field textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  .builder-field input:focus-visible,
+  .builder-field textarea:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .builder-field [aria-invalid='true'] {
+    border: 2px solid var(--error);
+  }
+  .builder-field .field-error {
+    color: var(--error);
+    font-weight: 500;
+  }
+  .builder-status {
+    margin-block: 28px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .builder-status[data-invalid] {
+    color: var(--error);
+  }
+  .builder-review {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .builder-review > div {
+    min-width: 0;
+  }
+  .builder-review h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
+  }
+  .builder-checklist li {
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .builder-checklist strong {
+    display: block;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .builder-checklist [data-recommendation] strong {
+    color: var(--recommendation);
+  }
+  .builder-manual,
+  .builder-output > p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .builder-manual {
+    margin-block: 20px;
+  }
+  .builder-output pre {
+    max-height: 460px;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    border: 1px solid var(--line);
+    background: var(--wash);
+    color: var(--ink);
+    padding: 20px;
+    margin-block: 18px;
+    font: 14px/1.8 var(--mono);
+  }
+  .builder-export {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .argument-builder button {
+    cursor: pointer;
+  }
+  .argument-builder .button-text {
+    background: transparent;
+    border-color: var(--line);
+    padding-inline: 16px;
+  }
+  .argument-builder .button-text:hover {
+    background: var(--wash);
+  }
+  .argument-builder button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  .export-status {
+    min-height: 3.2em;
+    margin-top: 14px;
+    font-size: 16px;
+    color: var(--accent);
+  }
+  @media (max-width: 767px) {
+    .builder-numbers {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .builder-review {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .builder-form-actions {
+      justify-content: start;
+    }
+  }
+</style>

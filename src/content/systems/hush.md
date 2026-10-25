@@ -3,7 +3,7 @@ title: Hush
 kind: lab
 status: implemented
 category: Laboratório de armazenamento
-summary: O que um servidor compatível com RESP precisa tornar explícito sobre memória e concorrência?
+summary: Implementei um servidor em memória com protocolo RESP, filas concorrentes, descarte LRU e expiração por TTL.
 repo: https://github.com/gabrielalmir/hush
 commit: main
 license: Consultar repositório
@@ -15,15 +15,16 @@ constraints:
 decisions:
   - title: Estado limitado
     body: LRU e TTL tornam descarte e expiração parte do comportamento.
-  - title: Protocolo antes de produto
-    body: RESP define a fronteira; persistência e cluster não são insinuados.
+  - title: Protocolo RESP
+    body: Usei RESP para receber comandos e uma fila concorrente para acessar o estado em memória.
 evidence:
   - title: Código público
     body: RESP, LRU, TTL, filas e concorrência implementados.
     href: https://github.com/gabrielalmir/hush
 limits:
   - Sem persistência, autenticação ou clustering.
-  - Laboratório, não substituto de Redis em produção.
+  - Não validei o laboratório como substituto de Redis em produção.
+  - Ainda preciso confirmar a licença. A referência main é móvel e não fixa uma versão do código.
 map:
   - label: RESP
     kind: boundary
@@ -39,6 +40,5 @@ map:
     note: Limite conhecido.
 ---
 
-Uma implementação compacta para investigar protocolo, expiração, filas e políticas de memória — o
-suficiente para que descarte e concorrência deixem de ser detalhe interno e passem a ser
-comportamento declarado.
+Implementei o Hush para estudar protocolo RESP e armazenamento em memória. O servidor usa uma fila
+concorrente para acessar o estado e combina LRU e TTL para descarte e expiração de dados.

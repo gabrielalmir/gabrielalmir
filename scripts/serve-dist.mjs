@@ -134,9 +134,11 @@ const server = createServer(async (req, res) => {
   const accept = String(req.headers['accept-encoding'] ?? '');
   const file = await resolveFile(pathname);
 
-  if (file) return send(res, 200, file, accept);
+  // A página de erro mantém o status também em /404, /404/ e /404.html.
+  const errorPage = await resolveFile('/404');
+  if (file) return send(res, file === errorPage ? 404 : 200, file, accept);
 
-  const notFound = await resolveFile('/404');
+  const notFound = errorPage;
   if (notFound) return send(res, 404, notFound, accept);
 
   res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });

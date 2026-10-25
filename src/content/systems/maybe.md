@@ -3,7 +3,7 @@ title: Maybe
 kind: dossier
 status: implemented
 category: Arquitetura para PHP legado
-summary: Erros e ausência viram estados explícitos, adotados gradualmente nas bordas de sistemas PHP 7.4.
+summary: Desenvolvo tipos Result e Option, Schema e DTO para tratar erros, ausência e dados externos em sistemas PHP 7.4.
 repo: https://github.com/gabrielalmir/maybe
 commit: main
 license: Verificar no repositório antes de reutilizar
@@ -15,9 +15,9 @@ constraints:
   - Concorrência por processos com fronteiras de segurança claras.
 decisions:
   - title: Erros explícitos
-    body: Result e Option tornam falha e ausência parte do contrato.
+    body: Usei Result para representar sucesso ou erro e Option para representar presença ou ausência.
   - title: Adoção nas bordas
-    body: Schema e DTO entram primeiro onde dados externos atravessam o sistema.
+    body: Organizei Schema e DTO para validar dados externos e permitir adoção gradual.
   - title: Async como processo
     body: O núcleo continua síncrono; concorrência, timeout e serialização pertencem a uma fronteira própria.
 qualities:
@@ -39,7 +39,7 @@ evidence:
 limits:
   - Async não substitui filas duráveis nem supervisão operacional.
   - A aplicação continua responsável por idempotência, recursos e recuperação.
-  - Licença e commit-fonte aguardam fixação após auditoria.
+  - Ainda preciso verificar a licença e concluir a auditoria. A referência main é móvel; falta fixar o commit-fonte.
 map:
   - label: null / false / throw
     kind: risk
@@ -55,6 +55,8 @@ map:
     note: Processos com timeout e serialização explícitos.
 ---
 
-Sistemas legados misturam `null`, `false`, exceções e validações no mesmo fluxo. Maybe explora uma
-transição incremental que não exige reescrita: cada camada pode entrar sozinha, começando pela borda
-onde dados externos atravessam o sistema.
+Desenvolvo o Maybe para tratar erros, ausência e validação em sistemas PHP 7.4. Usei Result e Option
+para representar estados que costumam aparecer como `null`, `false` ou exceções.
+
+Organizei Schema e DTO para a entrada de dados externos. As camadas podem ser adotadas aos poucos,
+sem exigir a reescrita da aplicação.

@@ -1,113 +1,122 @@
-/**
- * Copy da home, tipada.
- *
- * Fonte: backup/textos/home.md, backup/textos/trajetoria.md e backup/perfil.md
- * (reconciliado pelo backup/Profile.pdf em 2026-09-07). O Profile.pdf é o gate
- * de claims: nada aqui pode afirmar mais do que ele sustenta.
- *
- * Duas formulações são deliberadamente conservadoras e não devem ser
- * "melhoradas":
- *  - PhotoGIMP: "contribuí na evolução e hoje participo da organização e
- *    revisão" — nunca "criador", "dono" ou "mantenedor principal".
- *  - O −90% é o único dado público daquele trabalho. Sem números absolutos de
- *    volume, tempo, disponibilidade ou headcount em lugar nenhum do site.
- */
-
+/** Conteúdo público. Preservar atribuições, datas e limites dos casos. */
 export const site = {
   url: 'https://gabrielalmir.com.br',
-  title: 'Gabriel Almir — backend, integrações e sistemas de IA',
+  title: 'Gabriel Almir — analista de sistemas e IA aplicada',
   description:
-    'Investigo limites, dependências e falhas para transformar decisões técnicas em sistemas que outras pessoas conseguem operar e evoluir.',
+    'Gabriel Almir: backend e integrações para sistemas de IA. Analista de Sistemas Pleno, com experiência corporativa e projetos experimentais com agentes e modelos locais.',
   locale: 'pt-BR',
   author: 'Gabriel Almir',
 } as const;
-
 export const contact = {
   email: 'gabr.almir@gmail.com',
   linkedin: 'https://linkedin.com/in/gabrielalmir',
   github: 'https://github.com/gabrielalmir',
 } as const;
-
 export const nav = [
-  { label: 'Sistemas', href: '/#sistemas' },
-  { label: 'Trajetória', href: '/#trajetoria' },
-  { label: 'IA', href: '/#ia' },
+  { label: 'Experiência', href: '/#trajetoria' },
+  { label: 'Projetos', href: '/#sistemas' },
+  { label: 'Sobre', href: '/#sobre' },
   { label: 'Contato', href: '/#contato' },
 ] as const;
-
-/**
- * Os capítulos da home, na ordem do documento.
- *
- * Fonte única para três coisas que precisam concordar: o `id` de cada seção,
- * os pontos da navegação lateral e o marcador "Capítulo 03 / Sistemas". O
- * `plate` é a chapa de luz que fica atrás do capítulo (src/lib/plates.ts);
- * Processo e Contato dividem a mesma, porque o arco de cor já fechou nos dois.
- */
-export const chapters = [
-  { id: 'inicio', title: 'Início', plate: 1 },
-  { id: 'provas', title: 'Provas', plate: 2 },
-  { id: 'sistemas', title: 'Sistemas', plate: 3 },
-  { id: 'trajetoria', title: 'Trajetória', plate: 4 },
-  { id: 'ia', title: 'IA', plate: 5 },
-  { id: 'processo', title: 'Processo', plate: 6 },
-  { id: 'contato', title: 'Contato', plate: 6 },
-] as const;
-
-export type ChapterId = (typeof chapters)[number]['id'];
-
-export function chapterIndex(id: ChapterId): number {
-  return chapters.findIndex((chapter) => chapter.id === id);
-}
-
 export const hero = {
-  kicker: 'Backend · AI Systems · Itapira/SP',
-  /** Dividido em linhas para o SplitText. Junto, é uma frase só. */
-  headlineLines: ['Eu transformo', 'restrições em', 'caminhos confiáveis.'],
-  headline: 'Eu transformo restrições em caminhos confiáveis.',
-  lead: 'Investigo limites, dependências e falhas para transformar decisões técnicas em sistemas que outras pessoas conseguem operar e evoluir — integrações corporativas, migrações para cloud e as plataformas que deixam a IA ser usada com controle.',
-  status: 'Analista de Sistemas Pleno · aberto a conversas',
+  kicker: 'Analista de sistemas · Itapira, SP',
+  title: 'Gabriel Almir',
+  headline: 'Backend e integrações',
+  focus: 'para sistemas de IA.',
+  lead: 'Sou Analista de Sistemas Pleno. Trago experiência em APIs, sistemas legados e integrações corporativas para projetos experimentais com agentes e modelos locais.',
+  status: 'Aberto a oportunidades em AI Engineering',
   actions: [
-    { label: 'Explorar sistemas e decisões', href: '#sistemas', primary: true },
-    { label: 'Ver trajetória', href: '#trajetoria', primary: false },
+    { label: 'Explorar o projeto de IA', href: '#sistemas', primary: true },
+    { label: 'Conversar', href: '#contato', primary: false },
   ],
 } as const;
-
 export const proofs = {
-  kicker: '00 / provas',
-  title: 'O que você precisa saber em 30 segundos',
+  title: 'Experiência profissional',
   items: [
     {
       mark: '−90%',
-      /** `count` alimenta o contador; `null` mantém a marca estática. */
-      count: { from: 0, to: 90, prefix: '−', suffix: '%' },
-      claim: 'Eu reduzi o carregamento de um sistema crítico',
-      backing: 'Resultado medido e aprovado para divulgação, na CTC.',
+      title: 'no tempo de carregamento',
+      body: 'Reduzi o tempo de carregamento de um sistema crítico na CTC. Relato profissional anonimizado; única métrica autorizada para publicação.',
+      href: '/#trajetoria',
+      linkLabel: 'Ver relato na trajetória',
     },
     {
-      mark: 'RIGOR',
-      count: null,
-      claim: 'Eu trabalho com limites reais',
-      backing:
-        'Tenho experiência em integrações e aplicações que exigem rastreabilidade e conformidade.',
+      mark: 'Rastreabilidade',
+      title: 'em sistemas corporativos',
+      body: 'Trabalho com integrações que exigem rastreabilidade, consistência e conformidade.',
+      href: '/#trajetoria',
+      linkLabel: 'Ver experiência profissional',
     },
     {
-      mark: 'COMUNIDADE',
-      count: null,
-      claim: 'Eu colaboro com o PhotoGIMP',
-      backing: 'Contribuí na evolução e hoje participo da organização e revisão do projeto.',
+      mark: 'PhotoGIMP',
+      title: 'colaboração aberta',
+      body: 'Contribuí na evolução e hoje participo da organização e revisão do projeto comunitário da Diolinux.',
+      href: 'https://github.com/Diolinux/PhotoGIMP',
+      linkLabel: 'Conhecer o projeto',
     },
   ],
 } as const;
-
-export const systemsSection = {
-  kicker: '01 / sistemas',
-  title: 'Trabalhos que me ensinaram alguma coisa.',
-  lead: 'Eu conto cada trabalho pela restrição, pela decisão e pelo que consigo provar — sem reconstruir contextos confidenciais.',
-  labsTitle: 'Laboratórios',
-  labsLead:
-    'Perguntas menores, investigadas até virarem código público. São laboratórios, não produtos: capacidade e latência dependem de modelo e hardware.',
+export const aiSection = {
+  kicker: 'IA aplicada',
+  title: 'Desenvolvimento atual',
+  lead: 'Uso minha experiência em backend para integrar agentes e modelos. No MCP AnimagineXL, exploro a geração local de imagens com ferramentas MCP.',
+  body: 'A experiência profissional é em sistemas corporativos. A integração de agentes e modelos aparece nos projetos experimentais; avaliação, observabilidade e operação de modelos seguem como estudos.',
+  skills: [
+    {
+      title: 'IA aplicada',
+      demonstrated:
+        'Trabalho no MCP AnimagineXL com preparação de prompts e geração local de imagens.',
+      learning: 'Avaliação, guardrails, observabilidade e operação de integrações com modelos.',
+    },
+    {
+      title: 'Backend e integrações',
+      demonstrated:
+        'Uso Node.js, TypeScript e Python em APIs e integrações. Também trabalho na evolução de sistemas legados.',
+      learning: 'Aplicar essa base a serviços e plataformas de IA.',
+    },
+    {
+      title: 'Entrega e operação',
+      demonstrated: 'Já conduzi migração para cloud. Uso Docker e documento os projetos públicos.',
+      learning: 'Medição de custo, latência e estratégias de recuperação em sistemas de IA.',
+    },
+  ],
 } as const;
-
+export const systemsSection = {
+  kicker: 'Projetos pessoais',
+  title: 'Projetos',
+  lead: 'Reuni seis projetos pessoais. Em cada caso, descrevo o que construí, as decisões e o que ainda precisa ser verificado.',
+  featured: ['mcp-animaginexl', 'pimbas', 'maybe'],
+  complementary: ['saturno', 'hush', 'resulta'],
+  labels: {
+    'mcp-animaginexl': 'Geração local de imagens via MCP',
+    pimbas: 'Partidas e torneios de pimbolim',
+    maybe: 'Result e Option para PHP 7.4',
+  },
+} as const;
+/** Sínteses editoriais dos casos Markdown, sem novas medições. */
+export const projectReadings = {
+  'mcp-animaginexl': {
+    question: 'Entre o agente e a imagem, um contrato.',
+    problem:
+      'Conectar agentes à geração local, respeitando as convenções de prompt e os recursos do hardware.',
+    outcome: 'Imagem e parâmetros salvos juntos, em PNG e JSON.',
+    limit:
+      'Laboratório experimental. Sem benchmarks publicados ou validação de operação em produção.',
+  },
+  pimbas: {
+    question: 'Mudar a aplicação. Preservar as regras do jogo.',
+    problem:
+      'Organizar partidas entre conhecidos, com rankings, torneios e acesso delimitado por grupo.',
+    outcome: 'Camada web consolidada em Next.js; regras de domínio separadas do framework.',
+    limit: 'O projeto não teve adoção; faltou tempo para continuar sua manutenção.',
+  },
+  maybe: {
+    question: 'Erro e ausência merecem nomes diferentes.',
+    problem: 'Tratar dados externos em PHP 7.4, sem exigir a reescrita da aplicação.',
+    outcome: 'Schema e DTO na entrada; Result e Option para representar estados explícitos.',
+    limit: 'A adoção é gradual. A auditoria e a licença ainda precisam de verificação.',
+  },
+} as const;
 export type TrajectoryEntry = {
   readonly year: string;
   readonly period: string;
@@ -121,10 +130,10 @@ export type TrajectoryEntry = {
 };
 
 export const trajectory = {
-  kicker: '02 / trajetória',
-  title: 'O caminho também explica o trabalho.',
-  lead: 'Carreira, formação e comunidade não aconteceram em linhas separadas. Cada etapa acrescentou uma forma nova de observar, decidir e construir.',
-  note: 'Nas maratonas de programação, equipes resolvem problemas algorítmicos sob limite de tempo. É uma prática de raciocínio colaborativo, estratégia e clareza sob pressão — não uma corrida física.',
+  kicker: 'Trajetória',
+  title: 'Trajetória',
+  lead: 'Sou analista de sistemas em Itapira, SP. Comecei no desenvolvimento com Linux e projetos de comunidade. Hoje trabalho com sistemas corporativos e integrações.',
+  note: 'Em 2025, participei de três competições de programação, resolvendo problemas de algoritmos em equipe e com tempo limitado.',
   career: [
     {
       year: '2013',
@@ -132,7 +141,7 @@ export const trajectory = {
       org: 'Diolinux',
       role: 'Desenvolvedor full-stack',
       summary:
-        'O primeiro capítulo profissional nasceu perto de Linux, comunicação e comunidade. O projeto principal foi o PhotoGIMP: manutenção, compatibilidade entre versões e contato direto com quem usa.',
+        'Trabalhei com desenvolvimento full-stack e contribuí no PhotoGIMP, projeto comunitário da Diolinux, com manutenção e compatibilidade entre versões.',
       image: 'photogimp',
       imageAlt: 'Ícone do PhotoGIMP',
     },
@@ -141,8 +150,7 @@ export const trajectory = {
       period: '2016 — 2023',
       org: 'Atuação independente',
       role: 'Desenvolvimento e suporte',
-      summary:
-        'Projetos e demandas diversas ampliaram autonomia, escuta e responsabilidade de ponta a ponta.',
+      summary: 'Trabalhei de forma independente com desenvolvimento e suporte.',
     },
     {
       year: '2023',
@@ -150,7 +158,7 @@ export const trajectory = {
       org: 'CTC',
       role: 'Desenvolvedor backend Node.js',
       summary:
-        'APIs, integrações e evolução de aplicações corporativas. Em um fluxo crítico, reduzi o carregamento em 90% — resultado medido e autorizado. Fui responsável técnico pela migração de um sistema legado e auditado para o TOTVS Cloud, e pelas integrações entre SAP e TOTVS via OData.',
+        'Desenvolvi APIs e integrações corporativas. Reduzi o carregamento de um sistema crítico em 90%. Fui responsável técnico pela migração de um sistema legado e auditado para o TOTVS Cloud e pelas integrações entre SAP e TOTVS via OData.',
     },
     {
       year: '2026',
@@ -158,7 +166,7 @@ export const trajectory = {
       org: 'Laboratório Cristália',
       role: 'Analista de Sistemas Pleno',
       summary:
-        'Análise e evolução de sistemas corporativos em um ambiente regulado, junto a Qualidade, RH, Compras, Jurídico e TI. Integrações com o ERP sob requisitos de rastreabilidade e conformidade; tecnologias e sistemas internos permanecem confidenciais.',
+        'Analiso e desenvolvo sistemas corporativos em um ambiente regulado, junto a Qualidade, RH, Compras, Jurídico e TI. Trabalho com integrações com o ERP e requisitos de rastreabilidade e conformidade.',
       now: true,
     },
   ] satisfies readonly TrajectoryEntry[],
@@ -168,7 +176,7 @@ export const trajectory = {
       period: '2014 — 2016',
       org: 'Senac',
       role: 'Técnico em Tecnologia da Informação',
-      summary: 'Formação técnica que transformou curiosidade por computadores em método e prática.',
+      summary: 'Concluí o curso técnico em Tecnologia da Informação.',
     },
     {
       year: '2022',
@@ -195,7 +203,8 @@ export const trajectory = {
       summary:
         'Competição entre FATECs: equipes conectam fundamentos de algoritmos, divisão de trabalho e decisões sob pressão.',
       image: 'interfatecs',
-      imageAlt: 'InterFatecs · participação e local do evento · 16 ago 2025 (ilustração gerada por IA)',
+      imageAlt:
+        'InterFatecs · participação e local do evento · 16 ago 2025 (ilustração gerada por IA)',
     },
     {
       year: '2025',
@@ -214,7 +223,8 @@ export const trajectory = {
       period: 'contínuo',
       org: 'PhotoGIMP',
       role: 'Open source',
-      summary: 'Contribuição, organização de issues e revisão no projeto comunitário da Diolinux.',
+      summary:
+        'Contribuo com a organização de issues e a revisão no projeto comunitário da Diolinux.',
       href: 'https://github.com/Diolinux/PhotoGIMP',
     },
     {
@@ -222,7 +232,7 @@ export const trajectory = {
       period: 'em público',
       org: '@momentoalmir',
       role: 'Instagram',
-      summary: 'Fotografia e diário visual, com processo e fragmentos do cotidiano.',
+      summary: 'Compartilho fotografias e registros do cotidiano.',
       href: 'https://instagram.com/momentoalmir',
       image: 'instagram',
       imageAlt: '@momentoalmir · presença pública',
@@ -232,7 +242,7 @@ export const trajectory = {
       period: 'em público',
       org: '@avlye',
       role: 'YouTube · Instagram',
-      summary: 'Vídeos sobre tecnologia, ideias e aprendizado.',
+      summary: 'Produzo vídeos sobre tecnologia e aprendizado.',
       href: 'https://youtube.com/@avlye',
       image: 'youtube',
       imageAlt: '@avlye · criação em vídeo',
@@ -240,70 +250,99 @@ export const trajectory = {
   ] satisfies readonly TrajectoryEntry[],
 } as const;
 
-/**
- * Seção de IA. Nada aqui pode virar alegação de produção: o texto do perfil é
- * explícito que os laboratórios servem para *praticar* integração.
- */
-export const aiSection = {
-  kicker: '03 / ia',
-  title: 'IA é um componente de sistema, não mágica.',
-  lead: 'A direção que sigo é AI Platform Engineering: aplicar o que aprendi em backend, integrações e sistemas distribuídos na base que permite outras pessoas usarem recursos de IA com mais confiabilidade e controle.',
-  body: 'Nos projetos pessoais isso vira serviço MCP, API compatível com OpenAI, inferência local em GPU e pipelines de voz e imagem. Eles existem para praticar o que a plataforma precisa resolver: integração entre runtimes, roteamento de modelos, streaming, filas, retries, segurança, observabilidade, medição de latência e a decisão entre execução local e cloud.',
-  /** Nós do diagrama de pipeline, desenhados em stroke na ordem. */
-  pipeline: [
-    { id: 'client', label: 'Cliente', note: 'Agente MCP ou chamada REST' },
-    { id: 'router', label: 'Roteador', note: 'Contrato, validação, fila' },
-    { id: 'local', label: 'Modelo local', note: 'GPU · latência medida' },
-    { id: 'cloud', label: 'Modelo cloud', note: 'Custo · limite de taxa' },
-    { id: 'stream', label: 'Stream', note: 'Retry, timeout, observabilidade' },
-  ],
-  practices: [
-    {
-      title: 'Fronteira explícita',
-      body: 'MCP e REST descrevem a mesma capacidade. A dependência de GPU aparece no contrato, não numa nota de rodapé.',
-    },
-    {
-      title: 'Custo visível',
-      body: 'Batching muda latência e consumo. O laboratório de voz existe para medir esse trade-off, não para escondê-lo.',
-    },
-    {
-      title: 'Limite declarado',
-      body: 'Caching e operação continuam planejados. Nenhum destes serviços é apresentado como produção.',
-    },
-  ],
-} as const;
-
-export const process = {
-  kicker: '04 / processo',
-  title: 'Meu processo deixa marcas.',
-  lead: 'Começo perguntando e medindo. Desenho estados, anoto riscos e procuro a menor decisão que faça o sistema avançar. Depois volto: testo, documento e compartilho o que aprendi.',
-  steps: [
-    { n: '01', title: 'Observar', body: 'Eu sigo o fluxo inteiro antes de escolher uma ferramenta.' },
-    { n: '02', title: 'Decidir', body: 'Eu torno restrições e trade-offs visíveis.' },
-    { n: '03', title: 'Verificar', body: 'Eu comparo evidências e desenho recuperação.' },
-    { n: '04', title: 'Compartilhar', body: 'Eu escrevo para que o trabalho não dependa só de mim.' },
-  ],
-} as const;
-
 export const contactSection = {
-  kicker: '05 / contato',
-  title: 'Vamos entender um problema juntos?',
-  lead: 'Se você tem um sistema difícil, uma integração delicada ou só quer trocar ideias sobre trabalho e aprendizado, pode me escrever.',
-  cta: 'Enviar e-mail',
+  kicker: 'Contato',
+  title: 'Vamos conversar?',
+  lead: 'Estou aberto a oportunidades em IA aplicada. Você pode me escrever para conversar sobre IA, backend e integrações.',
+  cta: 'Escrever um e-mail',
 } as const;
-
 export const footer = {
-  signature: 'Feito por Gabriel, entre sistemas e margens.',
+  signature: 'Gabriel Almir',
   links: [
-    { label: 'GitHub', href: contact.github, icon: 'github' },
-    { label: 'LinkedIn', href: contact.linkedin, icon: 'linkedin' },
-    { label: 'E-mail', href: `mailto:${contact.email}`, icon: 'mail' },
+    { label: 'GitHub', href: contact.github },
+    { label: 'LinkedIn', href: contact.linkedin },
+    { label: 'E-mail', href: `mailto:${contact.email}` },
   ],
 } as const;
-
 export const notFound = {
   code: '404',
-  title: 'Este caminho não chegou a lugar nenhum.',
-  lead: 'Às vezes uma rota termina no papel rasgado. A home e os dossiês continuam por aqui.',
-  cta: 'Voltar para a home',
+  title: 'Página não encontrada',
+  lead: 'Este endereço não existe. Você pode voltar ao início para ver meus projetos e contatos.',
+  cta: 'Voltar ao início',
+} as const;
+
+/** Esboços narrativos dos casos, com leitura equivalente sem depender do SVG. */
+export const caseDiagrams = {
+  'mcp-animaginexl': {
+    description:
+      'Um agente chama ferramentas MCP para otimizar e validar prompts e gerar imagens. O pipeline Diffusers usa o modelo, checkpoints e LoRAs locais. A imagem e seus parâmetros são gravados em arquivos.',
+    nodes: [
+      { label: 'Agente MCP', note: 'Contrato de ferramenta' },
+      { label: 'Preparar + validar prompt', note: 'optimize / validate' },
+      { label: 'Diffusers + modelo local', note: 'generate_image / hardware' },
+      { label: 'Imagem + parâmetros', note: 'Arquivo PNG e JSON' },
+    ],
+  },
+  pimbas: {
+    description:
+      'A migração consolida a fronteira HTTP de Fastify em Next.js. O domínio de partidas, rankings e torneios permanece separado, com acesso delimitado por grupo.',
+    nodes: [
+      { label: 'Fastify + web', note: 'Preservar contratos' },
+      { label: 'Next.js consolidado', note: 'Menos superfícies de operação' },
+      { label: 'Domínio independente', note: 'Partidas / ranking / grupos' },
+    ],
+  },
+  maybe: {
+    description:
+      'Dados externos atravessam Schema e DTO. Result representa sucesso ou erro e Option representa presença ou ausência. A adoção acontece gradualmente.',
+    nodes: [
+      { label: 'Dados externos', note: 'Começar pelas bordas' },
+      { label: 'Schema + DTO', note: 'Dar forma e validar' },
+      { label: 'Result + Option', note: 'Erro e ausência explícitos' },
+    ],
+  },
+  saturno: {
+    description:
+      'Usuários e equipes pertencem a organizações. A autorização delimita casos de uso do módulo WorkManagement, dentro do monólito Laravel e Inertia.',
+    nodes: [
+      { label: 'Organização + usuários', note: 'Escopo de cada caso de uso' },
+      { label: 'Autorização', note: 'Acesso como fronteira' },
+      { label: 'WorkManagement', note: 'Módulo em Laravel / Inertia' },
+    ],
+  },
+  hush: {
+    description:
+      'Comandos RESP chegam a uma fila concorrente e acessam o estado em memória. LRU e TTL controlam descarte e expiração. Não há persistência.',
+    nodes: [
+      { label: 'Comandos RESP', note: 'Fronteira de protocolo' },
+      { label: 'Fila + estado em memória', note: 'Acesso concorrente' },
+      { label: 'LRU + TTL', note: 'Descarte / sem persistência' },
+    ],
+  },
+  resulta: {
+    description:
+      'Uma operação retorna Result com sucesso ou erro explícito. O contrato é distribuído nos formatos ESM e CJS.',
+    nodes: [
+      { label: 'Operação', note: 'Retorno explícito' },
+      { label: 'Result: Ok / Err', note: 'Sucesso ou erro' },
+      { label: 'ESM + CJS', note: 'O mesmo contrato' },
+    ],
+  },
+} as const;
+export const aboutSection = {
+  kicker: 'Sobre mim',
+  title: 'Sobre mim',
+  body: 'Me formei em Desenvolvimento de Software Multiplataforma na FATEC Itapira em 2025. Fora do trabalho, contribuo com o PhotoGIMP, fotografo e produzo vídeos.',
+} as const;
+
+export const themeControl = {
+  label: 'Tema escuro',
+  lightAction: 'Ativar tema claro',
+  darkAction: 'Ativar tema escuro',
+} as const;
+export const casePage = {
+  back: 'Voltar aos projetos',
+  contents: 'Nesta página',
+  contact: 'Contato',
+  diagram: 'Fluxo do projeto',
 } as const;

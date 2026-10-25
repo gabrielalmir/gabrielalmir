@@ -3,7 +3,7 @@ title: Saturno
 kind: dossier
 status: implemented
 category: Arquitetura de produto
-summary: Um monólito moderno Laravel/Inertia com fronteira modular para gestão do trabalho.
+summary: Estudo gestão de trabalho em um monólito Laravel e Inertia, com organizações, autorização e o módulo WorkManagement.
 repo: https://github.com/gabrielalmir/saturno
 commit: main
 license: Verificar no repositório antes de reutilizar
@@ -12,18 +12,17 @@ atlas: saturno
 constraints:
   - Multi-organização e autorização coerentes.
   - Evoluir um produto sem complexidade distribuída prematura.
-  - Distinguir intenção arquitetural de capacidade comprovada.
 decisions:
   - title: Monólito moderno
-    body: Laravel e Inertia mantêm entrega, domínio e operação próximos.
+    body: Escolhi Laravel e Inertia para manter a aplicação em uma unidade de deploy.
   - title: DDD seletivo
-    body: WorkManagement recebe uma fronteira modular onde o vocabulário exige clareza.
+    body: Separei a gestão de trabalho no módulo WorkManagement.
   - title: Isolamento organizacional
-    body: Organização e autorização atravessam cada caso de uso, não apenas a interface.
+    body: Organizei o acesso por organização e a autorização em cada caso de uso.
 qualities:
   - attribute: Segurança
     approach: Escopo organizacional e autorização por caso de uso.
-    evidence: Fronteiras a verificar no código.
+    evidence: Organização e autorização representadas no código; verificação pendente.
   - attribute: Modificabilidade
     approach: WorkManagement como módulo explícito.
     evidence: Estrutura versionada no repositório.
@@ -34,12 +33,10 @@ evidence:
   - title: Repositório
     body: Código Laravel/Inertia e organização modular.
     href: https://github.com/gabrielalmir/saturno
-  - title: Escopo honesto
-    body: Filas, auditoria e portabilidade só são afirmadas quando comprovadas.
 limits:
-  - Não há alegação de adoção, escala ou produção.
-  - Filas, auditoria e portabilidade permanecem fora da narrativa até existir evidência.
-  - Licença e commit-fonte aguardam auditoria.
+  - Não tenho adoção, escala ou uso em produção documentados.
+  - Filas, auditoria, portabilidade e isolamento por organização ainda precisam de verificação.
+  - Ainda preciso verificar a licença e concluir a auditoria. A referência main é móvel; falta fixar o commit-fonte.
 map:
   - label: Usuários e equipes
     kind: boundary
@@ -55,7 +52,7 @@ map:
     note: Capacidades verificáveis no repositório.
 ---
 
-Saturno explora organização de trabalho para usuários, equipes e integrações sem antecipar uma
-arquitetura distribuída. É um laboratório público: eu queria estudar gestão de trabalho sem
-apresentar hipótese como produto comprovado, então registrei escolhas, limites e próximos passos no
-próprio repositório.
+Uso o Saturno para estudar gestão de trabalho com usuários e equipes organizados por empresa.
+Escolhi Laravel e Inertia e separei o módulo WorkManagement dentro do monólito.
+
+O projeto reúne organização, autorização e gestão do trabalho em uma unidade de deploy.

@@ -3,7 +3,7 @@ title: Pimbas
 kind: dossier
 status: implemented
 category: Evolução arquitetural
-summary: Partidas amistosas e torneios de pimbolim viram um domínio claro enquanto a arquitetura reduz runtimes e preserva contratos.
+summary: Construí uma plataforma para organizar partidas e torneios de pimbolim e migrei a aplicação de Fastify para Next.js.
 repo: https://github.com/gabrielalmir/pimbas
 commit: main
 license: Verificar no repositório antes de reutilizar
@@ -12,14 +12,14 @@ atlas: pimbas
 constraints:
   - Preservar contratos durante a migração.
   - Isolar dados e permissões por grupo.
-  - Reduzir drift sem acoplar o domínio ao framework.
+  - Manter as regras de partidas e torneios independentes do framework.
 decisions:
   - title: Consolidar o runtime
-    body: Mover a fronteira HTTP para Next.js reduz superfícies de deploy e configuração.
+    body: Migrei a camada HTTP para Next.js para reduzir a configuração e os serviços de deploy.
   - title: Proteger o domínio
-    body: Partidas, ranking e torneios permanecem organizados como regras independentes da entrega.
+    body: Separei as regras de partidas, ranking e torneios da camada web.
   - title: Tratar acesso como fronteira
-    body: Autenticação, autorização e pertencimento ao grupo são decisões separadas.
+    body: Separei autenticação, autorização e pertencimento ao grupo.
 qualities:
   - attribute: Modificabilidade
     approach: Domínio separado da entrega web.
@@ -34,13 +34,11 @@ evidence:
   - title: Código-fonte
     body: Implementação pública e histórico de migração.
     href: https://github.com/gabrielalmir/pimbas
-  - title: Estado de verificação
-    body: Lint, tipos, testes, build, licença e divergências de contrato devem ser confirmados no repositório antes de promover este caso a verificado.
 limits:
   - O projeto não teve adoção porque faltou tempo para continuar sua manutenção.
   - A licença ainda precisa ser confirmada no repositório de origem.
-  - O commit-fonte será fixado após a auditoria pré-publicação.
-  - Dívidas e decisões reversíveis permanecem explícitas, não resolvidas por narrativa.
+  - Ainda preciso confirmar lint, tipos, testes, build e divergências de contrato no repositório.
+  - A referência main é móvel. Falta concluir a auditoria e fixar o commit-fonte.
 map:
   - label: Necessidade real
     kind: boundary
@@ -56,7 +54,6 @@ map:
     note: Evidência versionada da transição.
 ---
 
-Construí o Pimbas a partir das necessidades reais de pessoas conhecidas que jogam pimbolim e
-precisavam organizar partidas amistosas e torneios. O projeto não chegou a ser adotado porque eu
-deixei de ter tempo para mantê-lo. A plataforma registra uma evolução arquitetural de Fastify para
-Next.js, sem transformar intenção em resultado de uso.
+Construí o Pimbas para pessoas conhecidas que jogam pimbolim e precisavam organizar partidas
+amistosas e torneios. Migrei a aplicação de Fastify para Next.js, mantendo as regras de partidas,
+ranking e torneios separadas da camada web.

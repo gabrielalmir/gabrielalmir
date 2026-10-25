@@ -1,225 +1,131 @@
 ---
-/**
- * Sistemas — dossiês em painéis e laboratórios em grade.
- *
- * Decisões que valem registro:
- *  1. Cada dossiê é um passo do capítulo (ver global.css): no modo capítulos
- *     ele ocupa o palco sozinho e o crossfade entre passos substitui o antigo
- *     trilho horizontal pinado. Sem JS ou com reduced-motion sobra uma pilha
- *     vertical legível, com hairline entre os painéis.
- *  2. Nada aqui usa `data-reveal` dentro dos painéis: um elemento com opacity
- *     0 esperando um trigger próprio, dentro de um palco sticky, é o jeito
- *     mais fácil de sumir com texto para sempre. Quem anima o painel é o passo.
- *  3. Vermelho. Os únicos são o badge "experimental" e o nó `risk` do mapa, e
- *     eles nunca dividem viewport: dossiê tem mapa e não tem badge, lab tem
- *     badge e não tem mapa. Por isso o nó `risk` mantém o vermelho do contrato
- *     em vez de cair para ink-500 — se um painel um dia ganhar badge, é a
- *     tabela `KIND` do ArchMap que muda, num lugar só.
- *  4. O mapa é o `ArchMap` em `orientation="horizontal"`, o mesmo componente do
- *     dossiê. Duas implementações do mesmo diagrama discordariam em silêncio no
- *     dia em que a natureza de um nó mudasse de cor.
- */
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
-import ArchMap from './ArchMap.astro';
-import Icon from './Icon.astro';
-import { atlasImage } from '../lib/images';
-import { systemsSection } from '../lib/content';
-
+import { systemsSection, projectReadings } from '../lib/content';
+import Arrow from './Arrow.astro';
+import PimbasComparison from './PimbasComparison.astro';
 interface Props {
-  /** Já filtrados por `kind` e ordenados por `order` pela página. */
-  dossiers: CollectionEntry<'systems'>[];
-  labs: CollectionEntry<'systems'>[];
+  entries: CollectionEntry<'systems'>[];
 }
-
-const { dossiers, labs } = Astro.props;
-
-type SystemEntry = CollectionEntry<'systems'>;
-
-const STATUS_LABEL: Record<SystemEntry['data']['status'], string> = {
-  implemented: 'implementado',
-  experimental: 'experimental',
-};
-
-// Cabeçalho, um dossiê por passo e a grade de laboratórios no fim.
-const steps = 1 + dossiers.length + 1;
-
+const { entries } = Astro.props;
+const find = (id: string) => entries.find((entry) => entry.id === id)!;
+const pimbas = find('pimbas');
+const maybe = find('maybe');
+const complementary = systemsSection.complementary.map(find);
 ---
 
-<section
-  id="sistemas"
-  data-systems
-  data-chapter
-  data-chapter-title="Sistemas"
-  data-steps={String(steps)}
-  style={`--steps: ${steps}; --plate: var(--plate-3)`}
-  aria-labelledby="sistemas-titulo"
-  class="relative bg-ink-950 py-24 md:py-32"
->
-  <div data-chapter-stage>
-  <header data-step class="u-shell flex flex-col gap-6" data-reveal-group>
-    <p class="u-label text-blue" data-reveal>{systemsSection.kicker}</p>
-    <h2 id="sistemas-titulo" class="u-display text-section max-w-[16ch]" data-reveal>
-      {systemsSection.title}
-    </h2>
-    <p class="max-w-[58ch] text-ink-300" data-reveal>{systemsSection.lead}</p>
-  </header>
+<section id="projetos-backend" class="work-section section" aria-labelledby="work-title">
+  <div class="shell">
+    <div class="section-heading work-heading">
+      <h2 id="work-title">
+        Arquitetura que sustenta integrações
+        <span class="section-count" aria-hidden="true">
+          02
+        </span>
+      </h2>
+      <p class="lead">
+        Evolução de aplicações e contratos explícitos: competências de backend que aplico à
+        integração de sistemas de IA.
+      </p>
+    </div>
 
-  <div class="mt-16 overflow-x-clip md:mt-20">
-    <div class="flex flex-col gap-20">
-      {
-        dossiers.map((entry, index) => {
-          const atlas = atlasImage(entry.data.atlas);
-          // O schema garante pelo menos um de cada (min(1) na collection).
-          const constraint = entry.data.constraints[0];
-          const decision = entry.data.decisions[0];
-          const limit = entry.data.limits[0];
+    <article class="project-study study-pimbas" aria-labelledby="pimbas-title">
+      <div class="study-intro">
+        <p class="project-category">{pimbas.data.category}</p>
+        <h3 id="pimbas-title">
+          <a href={`/projects/${pimbas.id}`}>{pimbas.data.title}</a>
+        </h3>
+        <p class="study-question">{projectReadings.pimbas.question}</p>
+        <p class="study-problem">{projectReadings.pimbas.problem}</p>
+        <p class="study-implementation">{projectReadings.pimbas.outcome}</p>
+        <p class="study-implementation">
+          Em integrações com IA, essa separação permite evoluir a entrega sem acoplar as regras ao
+          serviço de modelo.
+        </p>
+        <a class="source-link" href={`${pimbas.data.repo}/tree/${pimbas.data.commit}`}>
+          Fonte: código e histórico do Pimbas
+        </a>
+        <a
+          class="text-link"
+          href={`/projects/${pimbas.id}`}
+          aria-label={`Ler estudo de caso: ${pimbas.data.title}`}
+        >
+          Ler estudo de caso <Arrow />
+        </a>
+      </div>
+      <PimbasComparison />
+      <p class="study-limit">{projectReadings.pimbas.limit}</p>
+    </article>
 
-          return (
-            <article
-              data-system-panel
-              data-step
-              class:list={['shrink-0', index > 0 && 'border-t u-hairline pt-20']}
-            >
-              {/* `min-w-0` porque no modo faixa o shell vira item de flex-row:
-                  sem isso o conteúdo mais largo poderia esticar o painel. */}
-              <div class="u-shell flex min-w-0 flex-col gap-12 md:gap-16">
-                <div class="grid gap-10 md:grid-cols-12 md:items-end md:gap-12">
-                  <div class="flex min-w-0 flex-col gap-5 md:col-span-7">
-                    <p class="flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span class="u-label text-ink-400">
-                        {String(index + 1).padStart(2, '0')} —
-                      </span>
-                      <span class="u-label text-blue">{entry.data.category}</span>
-                    </p>
+    <article class="project-study study-maybe" aria-labelledby="maybe-title">
+      <div class="study-intro">
+        <p class="project-category">{maybe.data.category}</p>
+        <h3 id="maybe-title">
+          <a href={`/projects/${maybe.id}`}>{maybe.data.title}</a>
+        </h3>
+        <p class="study-question">{projectReadings.maybe.question}</p>
+        <p class="study-problem">{projectReadings.maybe.problem}</p>
+        <p class="study-implementation">{projectReadings.maybe.outcome}</p>
+        <p class="study-implementation">
+          Na integração de ferramentas, contratos explícitos ajudam a distinguir falha, ausência e
+          resposta válida.
+        </p>
+        <a class="source-link" href={`${maybe.data.repo}/tree/${maybe.data.commit}`}>
+          Fonte: API pública do Maybe
+        </a>
+        <a
+          class="text-link"
+          href={`/projects/${maybe.id}`}
+          aria-label={`Ler estudo de caso: ${maybe.data.title}`}
+        >
+          Ler estudo de caso <Arrow />
+        </a>
+      </div>
+      <div class="contract-study">
+        <p>Dois contratos, duas responsabilidades</p>
+        <dl class="contract-definitions">
+          <div>
+            <dt>Result</dt>
+            <dd>
+              <strong>Ok / Err</strong>
+              <span>Sucesso ou erro</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Option</dt>
+            <dd>
+              <strong>Some / None</strong>
+              <span>Presença ou ausência</span>
+            </dd>
+          </div>
+        </dl>
+        <p class="contract-note">A entrada passa por Schema e DTO. O núcleo permanece síncrono.</p>
+      </div>
+      <p class="study-limit">{projectReadings.maybe.limit}</p>
+    </article>
 
-                    <h3 class="u-display text-4xl md:text-6xl">{entry.data.title}</h3>
-
-                    <p class="max-w-[52ch] text-ink-300">{entry.data.summary}</p>
-                  </div>
-
-                  {atlas && (
-                    <div
-                      data-atlas-image
-                      class="isolate overflow-hidden bg-ink-900 md:col-span-5"
-                    >
-                      <Image
-                        src={atlas}
-                        alt={`Imagem de abertura do dossiê ${entry.data.title} — ${entry.data.category}`}
-                        widths={[480, 720, 960]}
-                        sizes="(min-width: 768px) 38vw, 92vw"
-                        format="avif"
-                        loading="lazy"
-                        decoding="async"
-                        class="u-inked h-auto w-full"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <dl class="grid gap-8 border-t u-hairline pt-8 md:grid-cols-3 md:gap-10">
-                  <div class="flex flex-col gap-2">
-                    <dt class="u-label text-ink-400">Restrição</dt>
-                    <dd class="text-base leading-relaxed text-ink-300">{constraint}</dd>
-                  </div>
-
-                  <div class="flex flex-col gap-2">
-                    <dt class="u-label text-ink-400">Decisão</dt>
-                    <dd class="flex flex-col gap-1">
-                      <span class="text-base leading-relaxed text-paper">{decision.title}</span>
-                      <span class="text-base leading-relaxed text-ink-300">{decision.body}</span>
-                    </dd>
-                  </div>
-
-                  <div class="flex flex-col gap-2">
-                    <dt class="u-label text-ink-400">Limite</dt>
-                    <dd class="text-base leading-relaxed text-ink-300">{limit}</dd>
-                  </div>
-                </dl>
-
-                <ArchMap
-                  nodes={entry.data.map}
-                  title={`Mapa arquitetural de ${entry.data.title}`}
-                  orientation="horizontal"
-                  class="flex flex-col gap-4"
-                />
-
-                <a
-                  href={`/projects/${entry.id}`}
-                  class="link-ink u-label inline-flex items-center gap-2 self-start"
-                >
-                  Abrir dossiê<span class="sr-only">: {entry.data.title}</span>
-                  <Icon name="arrow-up-right" size={14} />
-                </a>
-              </div>
-            </article>
-          );
-        })
-      }
+    <div class="more-work">
+      <h3>Outras investigações</h3>
+      {complementary.map((entry) => (
+        <article class="project-row">
+          <div>
+            <p class="project-category">{entry.data.category}</p>
+            <h4>
+              <a href={`/projects/${entry.id}`}>{entry.data.title}</a>
+            </h4>
+          </div>
+          <div>
+            <p>{entry.data.summary}</p>
+            <p class="project-row-limit">{entry.data.limits[0]}</p>
+          </div>
+          <a
+            class="text-link"
+            href={`/projects/${entry.id}`}
+            aria-label={`Ler estudo de caso: ${entry.data.title}`}
+          >
+            Ler estudo <Arrow />
+          </a>
+        </article>
+      ))}
     </div>
   </div>
-
-  <div data-step class="u-shell mt-24 md:mt-32">
-    <header class="flex flex-col gap-5" data-reveal-group>
-      <h3 class="u-display text-3xl md:text-5xl" data-reveal>{systemsSection.labsTitle}</h3>
-      <p class="max-w-[62ch] text-ink-300" data-reveal>{systemsSection.labsLead}</p>
-    </header>
-
-    <ul class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {
-        labs.map((lab) => (
-          <li class="h-full">
-            <article
-              data-lab-card
-              class="group relative flex h-full flex-col gap-4 border u-hairline bg-ink-900 p-6 transition-colors duration-300 focus-within:border-blue hover:border-blue md:p-8"
-            >
-              <div class="flex items-start justify-between gap-4">
-                <p class="u-label text-ink-300">{lab.data.category}</p>
-                <p
-                  class:list={[
-                    'u-label shrink-0',
-                    lab.data.status === 'experimental' ? 'text-red' : 'text-blue',
-                  ]}
-                >
-                  {STATUS_LABEL[lab.data.status]}
-                </p>
-              </div>
-
-              <h4 class="u-display text-2xl transition-colors duration-300 group-hover:text-blue-bright md:text-3xl">
-                {lab.data.title}
-              </h4>
-
-              <p class="text-base leading-relaxed text-ink-300">{lab.data.summary}</p>
-
-              {/* Stretched link: o ::after cobre o card, o texto continua real. */}
-              <a
-                href={`/projects/${lab.id}`}
-                class="u-label mt-auto inline-flex items-center gap-2 text-blue-bright after:absolute after:inset-0 after:content-['']"
-              >
-                Abrir laboratório<span class="sr-only">: {lab.data.title}</span>
-                <Icon name="arrow-up-right" size={14} />
-              </a>
-            </article>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-  </div>
 </section>
-
-<style>
-  /* No modo capítulos o dossiê tem uma tela para caber inteiro: o atlas
-     perde altura e os blocos ficam mais juntos. Fora dele, o empilhado
-     respira como antes. `:global()` porque a classe mora no <html>. */
-  @media (min-width: 768px) {
-    :global(html.motion-ready.chapters) [data-system-panel] > .u-shell {
-      gap: 2rem;
-    }
-
-    :global(html.motion-ready.chapters) [data-system-panel] [data-atlas-image] img {
-      max-height: 34svh;
-      object-fit: cover;
-    }
-  }
-</style>
